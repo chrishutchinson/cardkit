@@ -90,16 +90,9 @@ angular.module('cardkitApp')
 		textAnchor: 'left',
 	});
 
-	$scope.renderRoundel = function() {
-		// Add roundel
-		roundel = s.circle($scope.config.roundel.x, $scope.config.roundel.y, $scope.config.roundel.radius);
-		roundel.attr({
-			fill: $scope.config.roundel.fill
-		});
-
-		var words = $scope.config.roundel.text.split(' ');
+	$scope.generateLines = function(text, width) {
+		var words = text.split(' ');
 		var line  = '';
-		var maxWidth = $scope.config.roundel.width;
 		var lines = [];
 		var wordCap = words.length;
 		wordCap--;
@@ -110,7 +103,7 @@ angular.module('cardkitApp')
 		  var lineElem = s.text(0, 0, testLine);
 	      var testWidth = lineElem.getBBox().width;
 
-	      if (testWidth > maxWidth && n > 0) {
+	      if (testWidth > width && n > 0) {
 	        line = words[n] + ' ';
 	        lines.push(prevLine.trim());
 	   	  } else if (n === wordCap) {
@@ -121,6 +114,17 @@ angular.module('cardkitApp')
 
 		  lineElem.remove();
 	    }
+		return lines;
+	};
+
+	$scope.renderRoundel = function() {
+		// Add roundel
+		roundel = s.circle($scope.config.roundel.x, $scope.config.roundel.y, $scope.config.roundel.radius);
+		roundel.attr({
+			fill: $scope.config.roundel.fill
+		});
+
+		var lines = $scope.generateLines($scope.config.roundel.text, $scope.config.roundel.width);
 
 		roundelGroup = s.group(roundel);
 

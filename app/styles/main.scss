@@ -14,9 +14,13 @@ body {
   margin: 20px;
 }
 
-#svg {
+#svg, #snap-svg {
   height: 335px;
   width: 600px;
+
+  *[draggable="true"]{
+  	cursor: move;
+  }
 }
 
 @media screen and (min-width: 768px) {

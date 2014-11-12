@@ -15,7 +15,8 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'colorpicker.module'
   ])
   .config(function ($routeProvider) {
     $routeProvider

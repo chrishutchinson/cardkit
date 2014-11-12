@@ -8,7 +8,182 @@
  * Controller of the cardkitApp
  */
 angular.module('cardkitApp')
-  .controller('MainCtrl', function ($scope, snapSVG) {
+  .controller('MainCtrl', function ($scope) {
+  	$scope.config = {
+  		canvas: {
+  			height: 335,
+  			width: 600,
+  			fill: '#eaeaea',
+  		},
+  		elements: [
+  			{
+  				name: 'Headline',
+  				type: 'text',
+  				text: 'This is my headline',
+  				fill: '#6B6B6B',
+  				fontSize: '26',
+  				fontFamily: 'TimesModern-Regular',
+  				textAnchor: 'left',
+  				x: 30,
+  				y: 250,
+  				editable: {
+  					'text': {},
+  					'fill': {
+  						opts: {
+  							'Black': '#000000',
+  							'Grey': '#6B6B6B',
+  							'White': '#FFFFFF',
+  						},
+  					},
+  					'fontSize': {
+  						opts: {
+  							'22px': '22',
+  							'26px': '26',
+  							'36px': '36',
+  							'44px': '44',
+  						},
+  					},
+  					'fontFamily': {
+  						opts: {
+  							'Times Modern - Regular': 'TimesModern-Regular',
+  							'Georgia': 'Georgia',
+  						},
+  					}
+  				},
+  			},
+  			{
+  				name: 'Byline',
+  				type: 'text',
+  				text: 'This is my byline',
+  				fill: '#000000',
+  				fontSize: '16',
+  				fontFamily: 'TimesModern-Regular',
+  				textAnchor: 'left',
+  				x: 30,
+  				y: 280,
+  				editable: {
+  					'text': {},
+  					'fill': {
+  						opts: {
+  							'Black': '#000000',
+  							'Grey': '#6B6B6B',
+  							'White': '#FFFFFF',
+  						},
+  					},
+  					'fontSize': {
+  						opts: {
+  							'16px': '16',
+  							'22px': '22',
+  							'26px': '26',
+  							'36px': '36',
+  						},
+  					},
+  					'fontFamily': {
+  						opts: {
+  							'Times Modern - Regular': 'TimesModern-Regular',
+  							'Georgia': 'Georgia',
+  						},
+  					}
+  				},
+  			},
+  			{
+  				name: 'Credit',
+  				type: 'text',
+  				text: 'This is my credit',
+  				fill: '#000000',
+  				fontSize: '12',
+  				fontFamily: 'TimesModern-Regular',
+  				textAnchor: 'left',
+  				x: 30,
+  				y: 300,
+  				editable: {
+  					'text': {},
+  					'fill': {
+  						opts: {
+  							'Black': '#000000',
+  							'Grey': '#6B6B6B',
+  							'White': '#FFFFFF',
+  						},
+  					},
+  					'fontSize': {
+  						opts: {
+  							'12px': '12',
+  							'16px': '16',
+  						},
+  					},
+  					'fontFamily': {
+  						opts: {
+  							'Times Modern - Regular': 'TimesModern-Regular',
+  							'Georgia': 'Georgia',
+  						},
+  					}
+  				},
+  			},
+  			{
+  				type: 'group',
+  				name: 'Roundel',
+  				x: 470,
+  				y: 220,
+  				draggable: true,
+  				elements: [
+  					{
+  						type: 'circle',
+		  				radius: 45,
+		  				fill: '#8a8a8a',
+		  				editable: {
+		  					'fill': {
+		  						opts: {
+		  							'Black': '#000000',
+		  							'Dark Grey': '#8a8a8a',
+		  							'White': '#FFFFFF',
+		  						}
+		  					}
+		  				}
+	  				},
+	  				{
+		  				type: 'text',
+		  				lineBreaks: true,
+		  				text: '£1 for 30 days free trial',
+		  				fill: '#FFFFFF',
+		  				fontSize: '15',
+		  				fontFamily: 'TimesModern-Regular',
+		  				textAnchor: 'middle',
+		  				editable: {
+		  					'fill': {
+		  						opts: {
+		  							'Black': '#000000',
+		  							'Grey': '#6B6B6B',
+		  							'White': '#FFFFFF',
+		  						},
+		  					},
+		  				},
+		  			},
+  				],
+  			},
+
+  			/*{
+  				type: 'image',
+				width: 200,
+				height: 1000,
+  				src: 'images/Yosemite.jpg',
+  				opacity: 1,
+  				x: '50%',
+  				y: '50%',
+  				preserveAspectRatio: 'xMinYMin meet',
+  				draggable: true
+  			},*/
+  			/*{
+  				type: 'rect',
+  				height: 100,
+  				width: 100,
+  				x: 10,
+  				y: 100,
+  				fill: '#bababa',
+  				draggable: true,
+  			},*/
+  		],
+  	};
+/*
   	$scope.config = {
   		canvas: {
   			height: 335,
@@ -186,5 +361,5 @@ angular.module('cardkitApp')
 				display: 'none',
 			});
 		}
-	}, true);
+	}, true);*/
   });

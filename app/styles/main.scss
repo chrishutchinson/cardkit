@@ -1,6 +1,6 @@
 $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
 // bower:scss
-@import "bootstrap-sass-official/assets/stylesheets/bootstrap.scss";
+@import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
 // endbower
 
 .browsehappy {
@@ -20,6 +20,27 @@ body {
 
   *[draggable="true"]{
   	cursor: move;
+  }
+}
+
+.dropzone {
+  border: 2px dashed #9a9a9a;
+  width: 100%;
+  height: 200px;
+  position: relative;
+  border-radius: 10px;
+
+  &:before {
+    content: 'Dropzone';
+    position: absolute;
+    top: 20px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+  }
+
+  &.drag-over-accept {
+    background: #eaeaea;
   }
 }
 

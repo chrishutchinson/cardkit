@@ -12,11 +12,12 @@ angular.module('cardkitApp')
       template: '<svg id="snap-svg"></svg>',
       restrict: 'E',
       scope: {
-      	svgConfig: '='
+        svgConfig: '=',
+        svgTheme: '='
       },
       link: function postLink(scope, element) {
       	// Destringify the JSON object
-      	var data = angular.fromJson(scope.svgConfig);
+        var data = angular.fromJson(scope.svgConfig);
 
       	// Setup element
       	var s = snapSVG(element[0].children[0]);
@@ -86,6 +87,21 @@ angular.module('cardkitApp')
 	      		if(typeof elements[key] !== 'undefined') {
 	      			// The element already exists
 	      			el = elements[key];
+
+              // If the type is image
+              if(el.type === 'image') {
+                // Destroy and recreate
+                el.remove();
+                elements.splice(key, 1);
+                
+                el = setupElement(element);
+                if(el === false) {
+                  return;
+                }
+
+                // Add the created element to a list of elements
+                elements[key] = el;
+              }
 	      		} else {
 	      			el = setupElement(element);
 	      			if(el === false) {
@@ -101,21 +117,21 @@ angular.module('cardkitApp')
 	      		delete elementData.$$hashKey;
 
 	      		// Update the element!
-  				el.attr(element);
+           	el.attr(element);
 
-  				// Check if we're to enable dragging
-  				if(element.draggable === true) {
-  					// We have to 'undrag' the element here, because they can get choppy after a few redraws otherwise
-					el.undrag();
+    				// Check if we're to enable dragging
+    				if(element.draggable === true) {
+    					// We have to 'undrag' the element here, because they can get choppy after a few redraws otherwise
+    					el.undrag();
 
-					// Drag dat
-					el.drag();
-				}
-			});
+    					// Drag dat
+    					el.drag();
+    				}
+    			});
       	}
 
       	// Watch for changes on the scope, and redraw
-      	scope.$watch('svgConfig', drawElements, true);
+        scope.$watch('svgConfig', drawElements, true);
       }
     };
   });

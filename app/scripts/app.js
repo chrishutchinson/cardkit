@@ -16,7 +16,8 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'colorpicker.module'
+    'colorpicker.module',
+    'draganddrop'
   ])
   .config(function ($routeProvider) {
     $routeProvider

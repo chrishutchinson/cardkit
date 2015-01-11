@@ -9,23 +9,64 @@
  */
 angular.module('cardkitApp')
   .controller('MainCtrl', function ($scope) {
-  	$scope.config = {
+    $scope.themes = [
+      {
+        name: 'Red Box',
+        backgroundColor: '#000000',
+        foregroundColor: '#000000',
+      },{
+        name: 'Times Sport',
+        backgroundColor: '#660000',
+        foregroundColor: '#FFFFFF',
+      },
+    ]; 
+
+    $scope.theme = {
+      backgroundColor: '#FFFFFF',
+      foregroundColor: '#FFFFFF',
+    };
+
+    $scope.$watch('theme', function() {
+      $scope.$broadcast('changeTheme');
+    });
+
+    $scope.config = {
   		canvas: {
   			height: 335,
   			width: 600,
-  			fill: '#eaeaea',
+  			fill: function() {
+          return $scope.theme.backgroundColor;
+        },
   		},
   		elements: [
+        {
+          name: 'Image',
+          type: 'image',
+          width: 200,
+          height: 1000,
+          src: 'images/Yosemite.jpg',
+          opacity: 1,
+          x: '50%',
+          y: '50%',
+          preserveAspectRatio: 'xMinYMin meet',
+          draggable: true,
+          editable: {
+            src: {}
+          }
+        },
   			{
   				name: 'Headline',
   				type: 'text',
   				text: 'This is my headline',
-  				fill: '#6B6B6B',
+  				fill: function() {
+            return $scope.theme.foregroundColor;
+          },
   				fontSize: '26',
   				fontFamily: 'TimesModern-Regular',
   				textAnchor: 'left',
   				x: 30,
   				y: 250,
+          draggable: true,
   				editable: {
   					'text': {},
   					'fill': {
@@ -160,18 +201,6 @@ angular.module('cardkitApp')
 		  			},
   				],
   			},
-
-  			/*{
-  				type: 'image',
-				width: 200,
-				height: 1000,
-  				src: 'images/Yosemite.jpg',
-  				opacity: 1,
-  				x: '50%',
-  				y: '50%',
-  				preserveAspectRatio: 'xMinYMin meet',
-  				draggable: true
-  			},*/
   			/*{
   				type: 'rect',
   				height: 100,
@@ -183,6 +212,31 @@ angular.module('cardkitApp')
   			},*/
   		],
   	};
+
+    // Drop handler.
+    $scope.onDrop = function (data, event, key) {
+      var dataTransfer = getDataTransfer(event);
+      readFile(dataTransfer.files[0], key);
+    };
+
+    // Read the supplied file (from DataTransfer API)
+    function readFile(file, key) {
+      var reader = new FileReader();
+
+      reader.onload = function() { 
+        $scope.config.elements[key].src = reader.result;
+        $scope.$apply();
+      };
+
+      reader.readAsDataURL(file);
+    }
+
+    // Get the data transfer
+    function getDataTransfer(event) {
+      event.stopPropagation();
+      event.preventDefault();
+      return event.dataTransfer || null;
+    }
 /*
   	$scope.config = {
   		canvas: {

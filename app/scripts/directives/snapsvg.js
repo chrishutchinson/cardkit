@@ -91,7 +91,9 @@ angular.module('cardkitApp')
         // Setup our atrribtes on the specific element
         function setAttributes(el, element) {
           var attrs = functionise(element);
-          el.attr(attrs);
+          var elementData = attrs;
+          delete elementData.$$hashKey;
+          el.attr(elementData);
           return el;
         }
 
@@ -124,6 +126,21 @@ angular.module('cardkitApp')
 
                 // Apply matrix transformation from previous element
                 el.transform(matrix);
+
+                // Add the created element to a list of elements
+                elements[key] = el;
+              }
+
+              if(el.type === 'g') {
+                // Destroy and recreate
+                el.remove();
+                
+                // Create new element based on config
+                el = setupElement(scope.svgConfig.elements[key]);
+
+                if(el === false) {
+                  return;
+                }
 
                 // Add the created element to a list of elements
                 elements[key] = el;

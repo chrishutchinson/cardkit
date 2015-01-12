@@ -6,7 +6,10 @@
 
 <div class="row">
   <div class="col-md-7">
-    <snap-svg svg-config="config" svg-theme="theme" ng-if="(themes.length > 0 && theme) || themes.length == 0"></snap-svg>
+    <div class="svg-wrapper">
+      <snap-svg svg-config="config" svg-theme="theme" ng-if="(themes.length > 0 && theme) || themes.length == 0"></snap-svg>
+      <button class="btn btn-primary" ng-click="downloadSvg()">Download Image</button>
+    </div>
   </div>
   <div class="col-md-5">
     <form role="form">

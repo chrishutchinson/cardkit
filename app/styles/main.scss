@@ -3,6 +3,32 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 @import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
 // endbower
 
+@font-face {
+  font-family: 'TimesModern-Regular';
+  src: url('http://www.thetimes.co.uk/fonts/TimesModern-Regular.eot');
+  src: local('☺'),
+       url('http://www.thetimes.co.uk/fonts/TimesModern-Regular.eot?iefix') format('eot'),
+       url('http://www.thetimes.co.uk/fonts/TimesModern-Regular.woff') format('woff'),
+       url('http://www.thetimes.co.uk/fonts/TimesModern-Regular.ttf') format('truetype'),
+       url('http://www.thetimes.co.uk/fonts/TimesModern-Regular.svg#webfont') format('svg'),
+       local('☺');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TimesModernCondensed-Regular';
+  src: url('http://www.thetimes.co.uk/fonts/TimesModernCondensed-Regular.eot');
+  src: local('☺'),
+       url('http://www.thetimes.co.uk/fonts/TimesModernCondensed-Regular.eot?iefix') format('eot'),
+       url('http://www.thetimes.co.uk/fonts/TimesModernCondensed-Regular.woff') format('woff'),
+       url('http://www.thetimes.co.uk/fonts/TimesModernCondensed-Regular.ttf') format('truetype'),
+       url('http://www.thetimes.co.uk/fonts/TimesModernCondensed-Regular.svg#webfont') format('svg'),
+       local('☺');
+  font-weight: normal;
+  font-style: normal;
+}
+
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;
@@ -17,11 +43,18 @@ body {
 #svg, #snap-svg {
   height: 335px;
   width: 600px;
-  position: fixed;
-  top: 160px;
 
   *[draggable="true"]{
   	cursor: move;
+  }
+}
+
+.svg-wrapper {
+  position: fixed;
+  top: 160px;
+
+  .btn {
+    display: block;
   }
 }
 

@@ -8,7 +8,7 @@
  * Controller of the cardkitApp
  */
 angular.module('cardkitApp')
-  .controller('MainCtrl', function ($scope) {
+  .controller('MainCtrl', function ($scope, saveSvgAsPng) {
     $scope.themes = [
       {
         name: 'Red Box',
@@ -288,6 +288,11 @@ angular.module('cardkitApp')
 
     $scope.removeImage = function(key) {
       $scope.config.elements[key].src = '';
+    };
+
+
+    $scope.downloadSvg = function() {
+      saveSvgAsPng(document.getElementById('snap-svg'), 'image.png');
     };
 /*
   	$scope.config = {

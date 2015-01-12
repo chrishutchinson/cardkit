@@ -117,6 +117,7 @@ angular.module('cardkitApp')
                 
                 // Create new element based on config
                 el = setupElement(scope.svgConfig.elements[key]);
+
                 if(el === false) {
                   return;
                 }
@@ -129,7 +130,8 @@ angular.module('cardkitApp')
               }
 	      		} else {
               // Create new element based on config
-	      			el = setupElement(element);
+      			  el = setupElement(element);
+
 	      			if(el === false) {
 	      				return;
 	      			}

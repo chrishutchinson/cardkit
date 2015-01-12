@@ -103,18 +103,26 @@ angular.module('cardkitApp')
 
               // If the type is image
               if(el.type === 'image') {
+                // Store matrix transformation, we'll need it later to prevent the image moving around the SVG when replaced 
+                var matrix = el.matrix;
+
                 // Destroy and recreate
                 el.remove();
                 
+                // Create new element based on config
                 el = setupElement(element);
                 if(el === false) {
                   return;
                 }
 
+                // Apply matrix transformation from previous element
+                el.transform(matrix);
+
                 // Add the created element to a list of elements
                 elements[key] = el;
               }
 	      		} else {
+              // Create new element based on config
 	      			el = setupElement(element);
 	      			if(el === false) {
 	      				return;

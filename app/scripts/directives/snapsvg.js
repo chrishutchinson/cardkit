@@ -16,6 +16,23 @@ angular.module('cardkitApp')
         svgTheme: '='
       },
       link: function postLink(scope, element) {
+        // Check for functions in the config, and resolve them
+        function functionise(element) {
+          var attrs = {};
+          for(var item in element) {
+            switch(typeof element[item]) {
+              case 'function':
+                attrs[item] = element[item]();
+                break;
+              default:
+                attrs[item] = element[item];
+                break;
+            }
+          }
+
+          return attrs;
+        }
+
       	// Destringify the JSON object
         var data = angular.fromJson(scope.svgConfig);
 
@@ -23,18 +40,20 @@ angular.module('cardkitApp')
       	var s = snapSVG(element[0].children[0]);
 
       	// Setup canvas background
-      	var background = s.rect(0, 0, data.canvas.width, data.canvas.height, 0, 0).attr(data.canvas);
-      	if(data.canvas.draggable === true) {
+        var canvasData = functionise(data.canvas);
+      	var background = s.rect(0, 0, canvasData.width, canvasData.height, 0, 0).attr(canvasData);
+      	if(canvasData.draggable === true) {
       		background.drag();
       	}
 
       	// Setup some element variables
       	var elements = [],
-      		el;
+      		  el;
 
       	// The function that sets up the element with the required settings
       	function setupElement(element) {
       		var el;
+          element = functionise(element);
 
       		switch(element.type) {
       			case 'text':
@@ -69,35 +88,17 @@ angular.module('cardkitApp')
       		return el;
       	}
 
+        // Setup our atrribtes on the specific element
         function setAttributes(el, element) {
-          var attrs = {};
-          for(var item in element) {
-            switch(typeof element[item]) {
-              case 'function':
-                attrs[item] = element[item]();
-                break;
-              default:
-                attrs[item] = element[item];
-                break;
-            }
-          }
+          var attrs = functionise(element);
           el.attr(attrs);
+          return el;
         }
 
       	// Draw the elements on the SVG
       	function drawElements() {
-          var canvasAttrs = {};
-          for(var item in scope.svgConfig.canvas) {
-            switch(typeof scope.svgConfig.canvas[item]) {
-              case 'function':
-                canvasAttrs[item] = scope.svgConfig.canvas[item]();
-                break;
-              default:
-                canvasAttrs[item] = scope.svgConfig.canvas[item];
-                break;
-            }
-          }
-          background.attr(canvasAttrs);
+          // Make changes to the canvas
+          setAttributes(background, scope.svgConfig.canvas);
 
           // Loop through all elements
 	      	angular.forEach(scope.svgConfig.elements, function(element, key) {
@@ -115,7 +116,7 @@ angular.module('cardkitApp')
                 el.remove();
                 
                 // Create new element based on config
-                el = setupElement(element);
+                el = setupElement(scope.svgConfig.elements[key]);
                 if(el === false) {
                   return;
                 }
@@ -155,7 +156,7 @@ angular.module('cardkitApp')
     			});
       	}
 
-      	// Watch for changes on the scope, and redraw
+      	// Watch for changes on the scope and the theme, and redraw
         scope.$watch('svgConfig', drawElements, true);
         scope.$on('changeTheme', drawElements);
       }

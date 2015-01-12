@@ -38,7 +38,7 @@ angular.module('cardkitApp')
 
       		switch(element.type) {
       			case 'text':
-					el = s.text(element.x, element.y);
+					    el = s.text(element.x, element.y);
       				break;
       			case 'image':
       				el = s.image(element.src, element.x, element.y, element.width, element.height);
@@ -52,24 +52,14 @@ angular.module('cardkitApp')
       				var gEl;
       				el = '';
       				angular.forEach(element.elements, function(e, k) {
-      					switch(e.type) {
-  							case 'text':
-								gEl = s.text(element.x, element.y);
-								break;
-      						case 'circle':
-      							gEl = s.circle(element.x, element.y, e.radius);
-      							break;
-      						default:
-      							return false;
+      					gEl = setupElement(e);
+                setAttributes(gEl, e);
+      				
+        			  if(k === 0) {
+      						el = s.group(gEl);
+    						} else {
+      						el.group(gEl);
       					}
-
-      					gEl.attr(e);
-
-      					if(k === 0) {
-							el = s.group(gEl);
-						} else {
-							el.group(gEl);
-						}
       				});
       				break;
       			default: 
@@ -78,6 +68,21 @@ angular.module('cardkitApp')
 
       		return el;
       	}
+
+        function setAttributes(el, element) {
+          var attrs = {};
+          for(var item in element) {
+            switch(typeof element[item]) {
+              case 'function':
+                attrs[item] = element[item]();
+                break;
+              default:
+                attrs[item] = element[item];
+                break;
+            }
+          }
+          el.attr(attrs);
+        }
 
       	// Draw the elements on the SVG
       	function drawElements() {
@@ -137,19 +142,7 @@ angular.module('cardkitApp')
 	      		delete elementData.$$hashKey;
 
 	      		// Update the element!
-            var attrs = {};
-            for(var item in element) {
-              switch(typeof element[item]) {
-                case 'function':
-                  attrs[item] = element[item]();
-                  break;
-                default:
-                  attrs[item] = element[item];
-                  break;
-              }
-            }
-
-    				el.attr(attrs);
+            setAttributes(el, element);
 
     				// Check if we're to enable dragging
     				if(element.draggable === true) {

@@ -17,6 +17,8 @@ body {
 #svg, #snap-svg {
   height: 335px;
   width: 600px;
+  position: fixed;
+  top: 160px;
 
   *[draggable="true"]{
   	cursor: move;

@@ -12,20 +12,25 @@ angular.module('cardkitApp')
     $scope.themes = [
       {
         name: 'Red Box',
-        backgroundColor: '#000000',
-        foregroundColor: '#000000',
-      },{
+        background: '#aec1d0',
+        headline: '#183a54',
+        byline: '#ffffff',
+        quote: '#183a54',
+        credit: '#000000',
+        headlineFont: '"TimesModernCondensed-Regular"',
+        nameFont: '"TimesModernCondensed-Regular"',
+        font: '"TimesModernCondensed-Regular"',
+        roundelBackground: '#000000',
+        roundelColor: '#FFFFFF',
+      },
+      {
         name: 'Times Sport',
         backgroundColor: '#660000',
         foregroundColor: '#FFFFFF',
       },
     ]; 
 
-    $scope.theme = {
-      name: 'Default Theme',
-      backgroundColor: '#FFFFFF',
-      foregroundColor: '#660000',
-    };
+    $scope.theme = $scope.themes[0];
 
     $scope.$watch('theme', function() {
       $scope.$broadcast('changeTheme');
@@ -36,7 +41,7 @@ angular.module('cardkitApp')
   			height: 335,
   			width: 600,
   			fill: function() {
-          return $scope.theme.backgroundColor;
+          return $scope.theme.background;
         },
   		},
   		elements: [
@@ -44,74 +49,116 @@ angular.module('cardkitApp')
           name: 'Image',
           type: 'image',
           width: 200,
-          height: 1000,
-          src: 'images/Yosemite.jpg',
+          height: 500,
+          src: '',
           opacity: 1,
           x: '50%',
           y: '50%',
           preserveAspectRatio: 'xMinYMin meet',
           draggable: true,
           editable: {
-            src: {}
+            src: true,
+            width: true,
           }
         },
-  			{
-  				name: 'Headline',
-  				type: 'text',
-  				text: 'This is my headline',
-  				fill: function() {
-            return $scope.theme.foregroundColor;
-          },
-  				fontSize: '26',
-  				fontFamily: 'TimesModern-Regular',
-  				textAnchor: 'left',
-  				x: 30,
-  				y: 250,
+        {
+          type: 'group',
+          name: 'Headline',
+          x: 30,
+          y: 90,
+          elements: [
+            {
+              name: 'Quote',
+              type: 'text',
+              text: '“',
+              fill: function() {
+                return $scope.theme.quote;
+              },
+              fontSize: '76',
+              fontFamily: function() {
+                return $scope.theme.headlineFont;
+              },
+              textAnchor: 'left',
+              x: 30,
+              y: 90,
+              editable: {},
+            },
+            {
+              name: 'Headline',
+              type: 'text',
+              text: 'This is my headline',
+              fill: function() {
+                return $scope.theme.quote;
+              },
+              fontSize: '26',
+              fontFamily: function() {
+                return $scope.theme.headlineFont;
+              },
+              textAnchor: 'left',
+              x: 55,
+              y: 55,
+              editable: {
+                'text': {},
+                /*'fill': {
+                  opts: {
+                    'Black': '#000000',
+                    'Grey': '#6B6B6B',
+                    'White': '#FFFFFF',
+                  },
+                },*/
+                /*'fontSize': {
+                  opts: {
+                    '22px': '22',
+                    '26px': '26',
+                    '36px': '36',
+                    '44px': '44',
+                  },
+                },*/
+              },
+            },
+          ],
+        },
+        /*{
+          type: 'rect',
+          height: 100,
+          width: 100,
+          x: 10,
+          y: 100,
+          fill: '#bababa',
           draggable: true,
-  				editable: {
-  					'text': {},
-  					'fill': {
-  						opts: {
-  							'Black': '#000000',
-  							'Grey': '#6B6B6B',
-  							'White': '#FFFFFF',
-  						},
-  					},
-  					'fontSize': {
-  						opts: {
-  							'22px': '22',
-  							'26px': '26',
-  							'36px': '36',
-  							'44px': '44',
-  						},
-  					},
-  					'fontFamily': {
-  						opts: {
-  							'Times Modern - Regular': 'TimesModern-Regular',
-  							'Georgia': 'Georgia',
-  						},
-  					}
-  				},
-  			},
+        },*/
+        /*{
+          name: 'Quote',
+          type: 'text',
+          text: '“',
+          fill: function() {
+            return $scope.theme.quote;
+          },
+          fontSize: '76',
+          fontFamily: function() {
+            return $scope.theme.headlineFont;
+          },
+          textAnchor: 'left',
+          x: 30,
+          y: 90,
+          editable: {},
+        },*/
   			{
   				name: 'Byline',
   				type: 'text',
   				text: 'This is my byline',
-  				fill: '#000000',
-  				fontSize: '16',
-  				fontFamily: 'TimesModern-Regular',
+  				fill: function() {
+            return $scope.theme.byline;
+          },
+  				fontSize: '22',
+  				fontFamily: function() {
+            return $scope.theme.nameFont;
+          },
   				textAnchor: 'left',
-  				x: 30,
-  				y: 280,
+  				x: 55,
+          y: 90,
   				editable: {
   					'text': {},
-  					'fill': {
-  						opts: {
-  							'Black': '#000000',
-  							'Grey': '#6B6B6B',
-  							'White': '#FFFFFF',
-  						},
-  					},
   					'fontSize': {
   						opts: {
   							'16px': '16',
@@ -120,48 +167,33 @@ angular.module('cardkitApp')
   							'36px': '36',
   						},
   					},
-  					'fontFamily': {
-  						opts: {
-  							'Times Modern - Regular': 'TimesModern-Regular',
-  							'Georgia': 'Georgia',
-  						},
-  					}
   				},
   			},
   			{
   				name: 'Credit',
   				type: 'text',
   				text: 'This is my credit',
-  				fill: '#000000',
-  				fontSize: '12',
-  				fontFamily: 'TimesModern-Regular',
+  				fill: function() {
+            return $scope.theme.credit;
+          },
+  				fontSize: '18',
+  				fontFamily: function() {
+            return $scope.theme.nameFont;
+          },
   				textAnchor: 'left',
-  				x: 30,
-  				y: 300,
+          x: 55,
+          y: 120,
   				editable: {
-  					'text': {},
-  					'fill': {
-  						opts: {
-  							'Black': '#000000',
-  							'Grey': '#6B6B6B',
-  							'White': '#FFFFFF',
-  						},
-  					},
+  					'text': true,
   					'fontSize': {
   						opts: {
-  							'12px': '12',
-  							'16px': '16',
+  							'18px': '18',
+  							'22px': '22',
   						},
   					},
-  					'fontFamily': {
-  						opts: {
-  							'Times Modern - Regular': 'TimesModern-Regular',
-  							'Georgia': 'Georgia',
-  						},
-  					}
   				},
   			},
-  			{
+  			/*{
   				type: 'group',
   				name: 'Roundel',
   				x: 470,
@@ -171,7 +203,9 @@ angular.module('cardkitApp')
   					{
   						type: 'circle',
 		  				radius: 45,
-		  				fill: '#8a8a8a',
+		  				fill: function() {
+                return $scope.theme.roundelBackground;
+              },
 		  				editable: {
 		  					'fill': {
 		  						opts: {
@@ -186,7 +220,9 @@ angular.module('cardkitApp')
 		  				type: 'text',
 		  				lineBreaks: true,
 		  				text: '£1 for 30 days free trial',
-		  				fill: '#FFFFFF',
+		  				fill: function() {
+                return $scope.theme.roundelColor;
+              },
 		  				fontSize: '15',
 		  				fontFamily: 'TimesModern-Regular',
 		  				textAnchor: 'middle',
@@ -201,7 +237,7 @@ angular.module('cardkitApp')
 		  				},
 		  			},
   				],
-  			},
+  			},*/
   			/*{
   				type: 'rect',
   				height: 100,

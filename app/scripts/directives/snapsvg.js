@@ -80,10 +80,23 @@ angular.module('cardkitApp')
       	}
 
       	// Draw the elements on the SVG
-      	function drawElements(data) {
-      		// Loop through all elements
-	      	angular.forEach(data.elements, function(element, key) {
-	      		// Check if we have setup the element already
+      	function drawElements() {
+          var canvasAttrs = {};
+          for(var item in scope.svgConfig.canvas) {
+            switch(typeof scope.svgConfig.canvas[item]) {
+              case 'function':
+                canvasAttrs[item] = scope.svgConfig.canvas[item]();
+                break;
+              default:
+                canvasAttrs[item] = scope.svgConfig.canvas[item];
+                break;
+            }
+          }
+          background.attr(canvasAttrs);
+
+          // Loop through all elements
+	      	angular.forEach(scope.svgConfig.elements, function(element, key) {
+          	// Check if we have setup the element already
 	      		if(typeof elements[key] !== 'undefined') {
 	      			// The element already exists
 	      			el = elements[key];
@@ -92,7 +105,6 @@ angular.module('cardkitApp')
               if(el.type === 'image') {
                 // Destroy and recreate
                 el.remove();
-                elements.splice(key, 1);
                 
                 el = setupElement(element);
                 if(el === false) {
@@ -117,7 +129,19 @@ angular.module('cardkitApp')
 	      		delete elementData.$$hashKey;
 
 	      		// Update the element!
-           	el.attr(element);
+            var attrs = {};
+            for(var item in element) {
+              switch(typeof element[item]) {
+                case 'function':
+                  attrs[item] = element[item]();
+                  break;
+                default:
+                  attrs[item] = element[item];
+                  break;
+              }
+            }
+
+    				el.attr(attrs);
 
     				// Check if we're to enable dragging
     				if(element.draggable === true) {
@@ -132,6 +156,7 @@ angular.module('cardkitApp')
 
       	// Watch for changes on the scope, and redraw
         scope.$watch('svgConfig', drawElements, true);
+        scope.$on('changeTheme', drawElements);
       }
     };
   });

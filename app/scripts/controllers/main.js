@@ -22,8 +22,9 @@ angular.module('cardkitApp')
     ]; 
 
     $scope.theme = {
+      name: 'Default Theme',
       backgroundColor: '#FFFFFF',
-      foregroundColor: '#FFFFFF',
+      foregroundColor: '#660000',
     };
 
     $scope.$watch('theme', function() {

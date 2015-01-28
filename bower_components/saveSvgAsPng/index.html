@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<meta http-equiv="content-type" content="text/html; charset=UTF8">
+<title>saveSvgAsPng</title>
+
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,600' rel='stylesheet' type='text/css' />
+<link rel=stylesheet href=bootstrap.min.css />
+<style>
+  h2, h3 {
+    margin-top: 0;
+  }
+
+  h3 .btn {
+    margin-top: -8px;
+  }
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  ul li {
+    padding: 30px 20px;
+    border-bottom: 1px dashed gray;
+  }
+
+  svg, img {
+    border: 1px solid lightgray;
+  }
+
+  textarea {
+    width: 100%;
+    height: 100px;
+  }
+
+  .error {
+    border: 1px solid red;
+    border-radius: 10px;
+    color: red;
+    padding: 8px 10px;
+  }
+
+  #sized-with-css svg {
+    width: 200px;
+    height: 200px;
+  }
+
+  #selectors-prefixed svg rect {
+    fill: blue;
+  }
+
+  rect.css-styled {
+    fill: green !important;
+  }
+</style>
+
+<script type=text/template id=inline-template>
+  <div class=row>
+    <div class=col-md-6>
+      <h2></h2>
+    </div>
+
+    <div class=col-md-6>
+      <h3>Preview <button class="save btn">Save as PNG</button></h3>
+    </div>
+  </div>
+
+  <div class=row>
+    <div class="canvas col-md-6">
+    </div>
+
+    <div class=col-md-6>
+      <div class=preview></div>
+    </div>
+  </div>
+</script>
+
+<div class=container>
+  <h1>saveSvgAsPng</h1>
+  <p>This page tests various features of saveSvgAsPng.</p>
+  <p>You can test your own SVG code in the Sandbox. If something doesn't work as expected, you can <a href="https://github.com/exupero/saveSvgAsPng/issues">file an issue on GitHub</a>.</p>
+
+  <ul>
+    <li id=sandbox>
+      <h2>Sandbox</h2>
+      <p>Paste you SVG below to see how it renders.</p>
+
+      <textarea><svg></svg></textarea>
+      <br/>
+      <button class="render btn">Preview</button>
+      <div class=load-target style="margin-top:20px;"></div>
+
+      <br/>
+      <h3>Preview <button class="save btn">Save as PNG</button></h3>
+      <span class=error style="display:none;"></span>
+      <div class=preview></div>
+    </li>
+
+    <li id=filereader>
+      <div class=row>
+        <div class=col-md-6>
+          <h2>Load from your hard drive</h2>
+        </div>
+
+        <div class=col-md-6>
+          <h3>Preview <button class="save btn">Save as PNG</button></h3>
+        </div>
+      </div>
+
+      <div class=row>
+        <div class=col-md-6>
+          <input type=file id=file name="files[]" />
+          <div class=load-target></div>
+        </div>
+
+        <div class=col-md-6>
+          <div class=preview>No file selected.</div>
+        </div>
+      </div>
+    </li>
+
+    <li id=inline>
+      <svg width=200 height=200>
+        <rect x=50 y=50 width=100 height=100></rect>
+      </svg>
+    </li>
+
+    <li id=embedded-png>
+      <svg width=200 height=200>
+        <image xlink:href=image.png x=50 y=50 width=100 height=100></image>
+      </svg>
+    </li>
+
+    <li id=embedded-svg>
+      <svg width=200 height=200>
+        <image xlink:href=test.svg x=50 y=50 width=100 height=100></image>
+      </svg>
+    </li>
+
+    <li id=sized-with-pixels>
+      <svg width="200px" height="200px">
+        <rect x=50 y=50 width=100 height=100></rect>
+      </svg>
+    </li>
+
+    <li id=sized-with-style>
+      <svg style="width:200px;height:200px;">
+        <rect x=50 y=50 width=100 height=100></rect>
+      </svg>
+    </li>
+
+    <li id=sized-with-css>
+      <svg>
+        <rect x=50 y=50 width=100 height=100></rect>
+      </svg>
+    </li>
+
+    <li id=scaling>
+      <svg width=200 height=200>
+        <rect width=100 height=100></rect>
+        <image xlink:href=image.png x=50 y=50 width=100 height=100></image>
+      </svg>
+    </li>
+
+    <li id=selectors-prefixed>
+      <svg width=200 height=200>
+        <rect x=0 y=50 width=100 height=100></rect>
+        <rect class=css-styled x=100 y=50 width=100 height=100></rect>
+      </svg>
+    </li>
+
+    <li id=group>
+      <svg width=200 height=200>
+        <g id=sub-group transform="translate(40,40)">
+          <rect x=10 y=10 width=100 height=100></rect>
+        </g>
+      </svg>
+    </li>
+  </ul>
+</div>
+
+<script src=http://code.jquery.com/jquery-latest.js></script>
+<script src=saveSvgAsPng.js></script>
+<script>
+  function handleFileSelect(evt) {
+    var $el = $('#filereader');
+    var files = evt.target.files;
+    for (var i = 0, f; f = files[i]; i++) {
+      var reader = new FileReader();
+      reader.onload = (function(file) {
+        return function(e) {
+          $el.find('.load-target').html(e.target.result);
+          svgAsDataUri($el.find('.load-target svg')[0], null, function(uri) {
+            $el.find('input').hide()
+            $el.find('.preview').html('<img src="' + uri + '" />');
+          });
+          $el.find('.save').click(function() {
+            saveSvgAsPng($el.find('.load-target svg')[0], 'test.png');
+          });
+        }
+      })(f);
+      reader.readAsText(f);
+    }
+  }
+
+  if (window.File && window.FileReader && window.FileList && window.Blob) {
+    document.getElementById('file').addEventListener('change', handleFileSelect, false);
+  }
+
+  function inlineTest(title, $el, saveOptions, testOptions) {
+    var svg = $el.html();
+    var template = $('#inline-template').html();
+    var row = $el.html(template);
+    row.find('h2').text(title);
+    row.find('.canvas').html(svg);
+
+    var canvas = row.find(testOptions && testOptions.selector || 'svg')[0];
+    svgAsDataUri(canvas, saveOptions, function(uri) {
+      row.find('.preview').html('<img src="' + uri + '" />');
+    });
+
+    row.find('.save').click(function() {
+      saveSvgAsPng(canvas, 'test.png', saveOptions);
+    });
+  }
+
+  inlineTest('Directly in the HTML', $('#inline'));
+  inlineTest('With linked PNG image', $('#embedded-png'));
+  inlineTest('With linked SVG image', $('#embedded-svg'));
+  inlineTest('Sized with pixels', $('#sized-with-pixels'));
+  inlineTest('Sized with style', $('#sized-with-style'));
+  inlineTest('Sized with CSS', $('#sized-with-css'));
+  inlineTest('At a higher resolution', $('#scaling'), {scale: 2});
+  inlineTest('When CSS styling selectors are prefixed', $('#selectors-prefixed'), {
+    selectorRemap: function(s) {return s.replace('#selectors-prefixed ', '')}
+  });
+  inlineTest('Exporting a group within an SVG', $('#group'), null, {
+    selector: '#sub-group'
+  });
+
+  var $sandbox = $('#sandbox');
+  $sandbox.find('.render').click(function() {
+    $sandbox.find('.error').hide().text('');
+    $sandbox.find('.load-target').html($('#sandbox textarea').val());
+    var canvas = $sandbox.find('.load-target svg')[0];
+    try {
+      svgAsDataUri(canvas, null, function(uri) {
+        $sandbox.find('.preview').html('<img src="' + uri + '" />');
+      });
+      $sandbox.find('.save').unbind('click').click(function() {
+        saveSvgAsPng(canvas, 'test.png');
+      });
+    } catch(err) {
+      $sandbox.find('.error').show().text(err.message);
+      $sandbox.find('.preview').html('');
+    }
+  });
+</script>

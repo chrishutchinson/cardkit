@@ -93,7 +93,17 @@ angular.module('cardkitApp')
           var attrs = functionise(element);
           var elementData = attrs;
           delete elementData.$$hashKey;
+          if(elementData.type === 'text') {
+            elementData.text = elementData.text.split('\n');
+          }
+          
           el.attr(elementData);
+
+          if(elementData.type === 'text') {
+            el.selectAll("tspan").forEach(function(tspan, i){
+              tspan.attr({x: elementData.x, y: elementData.y + (elementData.fontSize*i)});
+            });
+          }
           return el;
         }
 

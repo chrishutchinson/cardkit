@@ -17,3 +17,7 @@ This is a rebuild of the current CardKit, available on [GitHub](http://www.githu
 ## Build
 
 - Run `grunt build` to build the application into the `/dist` directory.
+
+## Push to `gh-pages`
+
+Use this: https://gist.github.com/cobyism/4730490

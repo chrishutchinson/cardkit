@@ -179,7 +179,7 @@ angular.module('cardkitApp')
     }
 
     $scope.removeImage = function(key) {
-      $scope.config.elements[key].src = '';
+      $scope.config.svg.elements[key].src = '';
     };
 
 

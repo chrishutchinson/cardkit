@@ -6,25 +6,25 @@
 
 <div class="row">
   <div class="col-md-7">
-    <div class="svg-wrapper">
-      <snap-svg svg-config="config" svg-theme="theme" ng-if="(themes.length > 0 && theme) || themes.length == 0"></snap-svg>
+    <div class="svg-wrapper" ng-if="(config.themes.length > 0 && theme) || config.themes.length == 0">
+      <snap-svg svg-config="config.svg" svg-theme="config.theme"></snap-svg>
       <button class="btn btn-primary" ng-click="downloadSvg()">Download Image</button>
     </div>
   </div>
   <div class="col-md-5">
     <form role="form">
-      <div class="panel panel-default" ng-show="themes">
+      <div class="panel panel-default" ng-show="config.themes">
         <div class="panel-heading"><strong>Theme</strong></div>
         <div class="panel-body">
           <div class="form-group">
-            <select ng-model="theme" ng-options="theme.name for theme in themes">
+            <select ng-model="theme" ng-options="theme.name for theme in config.themes">
               <option value="">-- choose theme --</option>
             </select>
           </div>
         </div>
       </div>
-      <div ng-if="(themes.length > 0 && theme) || themes.length == 0">
-        <div ng-repeat="(key, element) in config.elements" ng-if="element.editable">
+      <div ng-if="(config.themes.length > 0 && theme) || config.themes.length == 0">
+        <div ng-repeat="(key, element) in config.svg.elements" ng-if="element.editable">
           <div class="panel panel-default">
             <div class="panel-heading"><strong>{{element.name}}</strong></div>
             <div class="panel-body">
@@ -41,13 +41,13 @@
                 </div>
                 <div ng-switch-when="fontSize">
                   <label>Font Size</label>
-                  <select ng-model="element.fontSize" ng-options="name for (name, value) in field.opts" class="form-control">
+                  <select ng-model="element.fontSize" ng-options="name for (name, value) in field" class="form-control">
                     <option value="">-- Select a Font Size --</option>
                   </select>
                 </div>
                 <div ng-switch-when="fontFamily">
                   <label>Font Family</label>
-                  <select ng-model="element.fontFamily" ng-options="name for (name, value) in field.opts" class="form-control">
+                  <select ng-model="element.fontFamily" ng-options="name for (name, value) in field" class="form-control">
                     <option value="">-- Select a Font Family --</option>
                   </select>
                 </div>
@@ -59,6 +59,10 @@
                 <div ng-switch-when="width">
                   <label>Size</label>
                   <input type="range" min="10" max="1000" ng-model="element.width" />
+                </div>
+                <div ng-switch-when="opacity">
+                  <label>Opacity</label>
+                  <input type="range" min="0" max="1" ng-model="element.opacity" step="0.1" />
                 </div>
               </div>
               <div class="form-group" ng-if="element.type === 'group' && element.elements[k].editable" ng-repeat="(k, e) in element.elements" ng-switch="e.type">

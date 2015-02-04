@@ -100,7 +100,7 @@ angular.module('cardkitApp')
           el.attr(elementData);
 
           if(elementData.type === 'text') {
-            el.selectAll("tspan").forEach(function(tspan, i){
+            el.selectAll('tspan').forEach(function(tspan, i){
               tspan.attr({x: elementData.x, y: elementData.y + (elementData.fontSize*i)});
             });
           }
@@ -142,6 +142,9 @@ angular.module('cardkitApp')
               }
 
               if(el.type === 'g') {
+                // Store matrix transformation, we'll need it later to prevent the group moving around the SVG when replaced 
+                var matrix = el.matrix;
+
                 // Destroy and recreate
                 el.remove();
                 
@@ -151,6 +154,9 @@ angular.module('cardkitApp')
                 if(el === false) {
                   return;
                 }
+
+                // Apply matrix transformation from previous element
+                el.transform(matrix);
 
                 // Add the created element to a list of elements
                 elements[key] = el;

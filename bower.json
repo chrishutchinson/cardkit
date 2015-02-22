@@ -13,7 +13,7 @@
     "angular-touch": "~1.2.0",
     "angular-route": "~1.2.0",
     "snap.svg": "~0.3.0",
-    "angular-bootstrap-colorpicker": "~3.0.8",
+    "angular-bootstrap-colorpicker": "~3.0.11",
     "angular-draganddrop": "~0.2.1",
     "saveSvgAsPng": "exupero/saveSvgAsPng#gh-pages"
   },

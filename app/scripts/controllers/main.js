@@ -114,7 +114,8 @@ angular.module('cardkitApp')
                 'Medium': 18,
                 'Large': 22,
                 'Extra Large': 36,
-              }
+              },
+              fill: 'picker',
             },
           },
           {

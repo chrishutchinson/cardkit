@@ -36,14 +36,42 @@ angular.module('cardkitApp')
       	// Destringify the JSON object
         var data = angular.fromJson(scope.svgConfig);
 
+        // Custom SVG Drag function, given that we scale the SVG
+        snapSVG.plugin(function(Snap, Element, Paper, global) {
+            Element.prototype.altDrag = function() {
+                this.drag( dragMove, dragStart, dragEnd );
+                return this;
+            }
+                
+            var dragStart = function ( x,y,ev ) {
+                    this.data('ot', this.transform().local );
+            }
+         
+            var dragMove = function(dx, dy, ev, x, y) {
+                    var tdx, tdy;
+                    var snapInvMatrix = this.transform().diffMatrix.invert();
+                    snapInvMatrix.e = snapInvMatrix.f = 0; 
+                    tdx = snapInvMatrix.x( dx,dy ); tdy = snapInvMatrix.y( dx,dy );
+                    this.transform( this.data('ot') + "t" + [ tdx, tdy ]  );
+
+            }
+
+            var dragEnd = function() {
+            }
+        });
+
       	// Setup element
       	var s = snapSVG(element[0].children[0]);
+        s.attr({
+          height: '100%',
+          width: '100%',
+        });
 
       	// Setup canvas background
         var canvasData = functionise(data.canvas);
       	var background = s.rect(0, 0, canvasData.width, canvasData.height, 0, 0).attr(canvasData);
       	if(canvasData.draggable === true) {
-      		background.drag();
+      		background.altDrag();
       	}
 
       	// Setup some element variables
@@ -110,7 +138,16 @@ angular.module('cardkitApp')
       	// Draw the elements on the SVG
       	function drawElements() {
           // Make changes to the canvas
+          var canvasData = functionise(scope.svgConfig.canvas);
+
+          s.attr({
+            viewBox: '0, 0, ' + canvasData.width + ', ' + canvasData.height,
+            'data-width': canvasData.width,
+            'data-height': canvasData.height
+          });
           setAttributes(background, scope.svgConfig.canvas);
+
+          var matrix;
 
           // Loop through all elements
 	      	angular.forEach(scope.svgConfig.elements, function(element, key) {
@@ -122,7 +159,7 @@ angular.module('cardkitApp')
               // If the type is image
               if(el.type === 'image') {
                 // Store matrix transformation, we'll need it later to prevent the image moving around the SVG when replaced 
-                var matrix = el.matrix;
+                matrix = el.matrix;
                 
                 // Create new element based on config
                 var newEl = setupElement(scope.svgConfig.elements[key]);
@@ -148,7 +185,7 @@ angular.module('cardkitApp')
 
               if(el.type === 'g') {
                 // Store matrix transformation, we'll need it later to prevent the group moving around the SVG when replaced 
-                var matrix = el.matrix;
+                matrix = el.matrix;
 
                 // Destroy and recreate
                 el.remove();
@@ -191,7 +228,7 @@ angular.module('cardkitApp')
     					el.undrag();
 
     					// Drag dat
-    					el.drag();
+    					el.altDrag();
     				}
     			});
       	}
@@ -199,6 +236,7 @@ angular.module('cardkitApp')
       	// Watch for changes on the scope and the theme, and redraw
         scope.$watch('svgConfig', drawElements, true);
         scope.$on('changeTheme', drawElements);
+        scope.$on('changeSize', drawElements);
       }
     };
   });

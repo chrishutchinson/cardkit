@@ -23,18 +23,12 @@ body {
 }
 
 #svg, #snap-svg {
-  height: 335px;
-  width: 600px;
-
   *[draggable="true"]{
   	cursor: move;
   }
 }
 
 .svg-wrapper {
-  position: fixed;
-  top: 160px;
-
   .btn {
     display: block;
   }

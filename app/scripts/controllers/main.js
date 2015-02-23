@@ -10,6 +10,18 @@
 angular.module('cardkitApp')
   .controller('MainCtrl', function ($scope, saveSvgAsPng) {
     $scope.config = {
+      sizes: [
+        {
+          name: 'Facebook',
+          width: 800,
+          height: 370,
+        },
+        {
+          name: 'Twitter',
+          width: 650,
+          height: 320,
+        },
+      ],
       themes: [
         {
           name: 'Theme 1',
@@ -32,8 +44,12 @@ angular.module('cardkitApp')
       ],
       svg: {
     		canvas: {
-    			height: 335,
-    			width: 600,
+    			height: function() {
+            return $scope.size.height;
+          },
+    			width: function() {
+            return $scope.size.width;
+          },
     			fill: function() {
             return $scope.theme.background;
           },
@@ -69,10 +85,12 @@ angular.module('cardkitApp')
               return $scope.theme.logoSrc;
             },
             opacity: 1,
-            x: '300',
-            y: '260',
+            x: '330',
+            y: '300',
+            textAnchor: 'end',
             preserveAspectRatio: 'xMinYMin meet',
-            editable: false
+            editable: false,
+            draggable: true
           },
           {
             name: 'Credit',
@@ -85,8 +103,8 @@ angular.module('cardkitApp')
             fontFamily: function() {
               return $scope.theme.headlineFont;
             },
-            textAnchor: 'right',
-            x: 430,
+            textAnchor: 'end',
+            x: 580,
             y: 250,
             draggable: true,
             editable: {
@@ -96,7 +114,8 @@ angular.module('cardkitApp')
                 'Medium': 18,
                 'Large': 22,
                 'Extra Large': 36,
-              }
+              },
+              fill: 'picker',
             },
           },
           {
@@ -149,8 +168,14 @@ angular.module('cardkitApp')
 
     $scope.theme = null;
 
+    $scope.size = null;
+
     $scope.$watch('theme', function() {
       $scope.$broadcast('changeTheme');
+    });
+
+    $scope.$watch('size', function() {
+      $scope.$broadcast('changeSize');
     });
 
     // Drop handler.

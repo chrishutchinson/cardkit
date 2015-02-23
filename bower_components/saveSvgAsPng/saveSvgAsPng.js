@@ -98,8 +98,8 @@
       var clone = el.cloneNode(true);
       var width, height;
       if(el.tagName == 'svg') {
-        width = parseInt(clone.getAttribute('width') || clone.style.width || out$.getComputedStyle(el).getPropertyValue('width'));
-        height = parseInt(clone.getAttribute('height') || clone.style.height || out$.getComputedStyle(el).getPropertyValue('height'));
+        width = parseInt(clone.getAttribute('data-width') || clone.style.width || out$.getComputedStyle(el).getPropertyValue('width'));
+        height = parseInt(clone.getAttribute('data-height') || clone.style.height || out$.getComputedStyle(el).getPropertyValue('height'));
       } else {
         var box = el.getBBox();
         width = box.x + box.width;
@@ -109,7 +109,10 @@
         var svg = document.createElementNS('http://www.w3.org/2000/svg','svg')
         svg.appendChild(clone)
         clone = svg;
+
       }
+
+console.log(width, height);
 
       clone.setAttribute("version", "1.1");
       clone.setAttributeNS(xmlns, "xmlns", "http://www.w3.org/2000/svg");

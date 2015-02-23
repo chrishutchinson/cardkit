@@ -148,7 +148,9 @@ angular.module('cardkitApp')
       }
   	};
 
-    $scope.theme = ($scope.config.themes.length > 1) ? null : $scope.config.themes[0];
+    if(typeof $scope.config.themes !== 'undefined') {
+      $scope.theme = ($scope.config.themes.length > 1) ? null : $scope.config.themes[0];
+    }
 
     $scope.size = ($scope.config.sizes.length > 1) ? null : $scope.config.sizes[0];
 

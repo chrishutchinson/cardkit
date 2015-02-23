@@ -6,9 +6,11 @@
 
 <div class="row">
   <div class="col-md-7">
-    <div class="svg-wrapper" ng-if="((config.themes.length > 0 && theme) || config.themes.length == 0) && ((config.sizes.length > 0 && size) || config.sizes.length == 0)">
-      <snap-svg svg-config="config.svg" svg-theme="config.theme"></snap-svg>
-      <button class="btn btn-primary" ng-click="downloadSvg()">Download Image</button>
+    <div fixed-scroll>
+      <div class="svg-wrapper" ng-if="((config.themes.length > 0 && theme) || config.themes.length == 0) && ((config.sizes.length > 0 && size) || config.sizes.length == 0)">
+        <snap-svg svg-config="config.svg" svg-theme="config.theme"></snap-svg>
+        <button class="btn btn-primary" ng-click="downloadSvg()">Download Image</button>
+      </div>
     </div>
   </div>
   <div class="col-md-5">

@@ -22,6 +22,19 @@ body {
   margin: 20px;
 }
 
+.fixed {
+	position: fixed;
+	top: 20px;
+	width: 47.2%;
+}
+
+@media screen and (max-width: 992px) {
+	.fixed {
+		position: relative;
+		top: 0; width: 100%;
+	}
+} 
+
 #svg, #snap-svg {
   *[draggable="true"]{
   	cursor: move;

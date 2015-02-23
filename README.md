@@ -13,6 +13,13 @@ This is a rebuild of the current CardKit, available on [GitHub](http://www.githu
 - Clone this repo.
 - Run `npm install` and `bower install`.
 - Run `grunt serve` to run the application.
+- See the `Themes` section below to set up themes
+
+## Themes
+
+- Rename `app/demo.themes.config.json` to `app/themes.config.json` to provide the demo themes
+- You can edit `app/themes.config.json` to include your own theme configuration (@TODO: theme and config documentation)
+- `app/themes.config.json` is not version controlled by default
 
 ## Build
 

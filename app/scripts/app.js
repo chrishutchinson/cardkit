@@ -18,15 +18,39 @@ angular
     'ngTouch',
     'colorpicker.module',
     'draganddrop',
-    'colorpicker.module'
+    'colorpicker.module',
+    'ui.router'
   ])
-  .config(function ($routeProvider) {
-    $routeProvider
+  .config(function ($stateProvider, $urlRouterProvider) {
+    /*$routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
+        controller: 'MainCtrl',
+        resolve: {
+          'configData': function(themeConfigProvider){
+            var data = themeConfigProvider();
+            console.log(data);
+          }
+        }
       })
       .otherwise({
         redirectTo: '/'
+      });*/
+    //
+
+    // For any unmatched url, redirect to /
+    $urlRouterProvider.otherwise('/');
+
+    // Now set up the states
+    $stateProvider
+      .state('index', {
+        url: '/',
+        controller: 'MainCtrl',
+        templateUrl: 'views/main.html',
+        resolve: {
+          themeConfig: function(themeConfigProvider) {
+            return themeConfigProvider;
+          }
+        }
       });
   });

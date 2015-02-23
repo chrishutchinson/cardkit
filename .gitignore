@@ -6,3 +6,5 @@ bower_components/*
 
 
 !bower_components/saveSvgAsPng
+
+app/themes.config.json

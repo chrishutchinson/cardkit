@@ -7,7 +7,7 @@
 <div class="row">
   <div class="col-md-7">
     <div fixed-scroll>
-      <div class="svg-wrapper" ng-if="((config.themes.length > 0 && theme) || config.themes.length == 0) && ((config.sizes.length > 0 && size) || config.sizes.length == 0)">
+      <div class="svg-wrapper" ng-if="((config.themes.length > 0 && theme) || !config.themes) && ((config.sizes.length > 0 && size) || !config.sizes)">
         <snap-svg svg-config="config.svg" svg-theme="config.theme"></snap-svg>
         <button class="btn btn-primary" ng-click="downloadSvg()">Download Image</button>
       </div>
@@ -32,7 +32,7 @@
           </div>
         </div>
       </div>
-      <div ng-if="(config.themes.length > 0 && theme) || config.themes.length == 0">
+      <div ng-if="(config.themes.length > 0 && theme) || !config.themes">
         <div ng-repeat="(key, element) in config.svg.elements" ng-if="element.editable">
           <div class="panel panel-default">
             <div class="panel-heading"><strong>{{element.name}}</strong></div>

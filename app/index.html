@@ -28,7 +28,7 @@
       <h1>CardKit v2.0.0-alpha</h1>
       <p>A flexible, customisable SVG-based card editor for newsrooms, from <a href="http://www.github.com/times">The Times &amp; The Sunday Times</a></p>
 
-      <div ng-view=""></div>
+      <div ui-view></div>
     </div>
 
 
@@ -76,6 +76,7 @@
     <script src="bower_components/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.js"></script>
     <script src="bower_components/angular-draganddrop/angular-draganddrop.js"></script>
     <script src="bower_components/saveSvgAsPng/saveSvgAsPng.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -86,6 +87,7 @@
         <script src="scripts/directives/snapsvg.js"></script>
         <script src="scripts/services/savesvgaspng.js"></script>
         <script src="scripts/directives/fixedscroll.js"></script>
+        <script src="scripts/services/themeconfigprovider.js"></script>
         <!-- endbuild -->
 </body>
 </html>

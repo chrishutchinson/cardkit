@@ -10,6 +10,7 @@ CardKit is aimed at newsrooms, however has many potential uses that extend beyon
 
 - Coupon and offer images
 - Templated asset generation
+- Video preview images (e.g. 16:9)
 - Marketing and promotion
 - Personal branding
 

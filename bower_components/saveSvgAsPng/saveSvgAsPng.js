@@ -112,8 +112,6 @@
 
       }
 
-console.log(width, height);
-
       clone.setAttribute("version", "1.1");
       clone.setAttributeNS(xmlns, "xmlns", "http://www.w3.org/2000/svg");
       clone.setAttributeNS(xmlns, "xmlns:xlink", "http://www.w3.org/1999/xlink");
@@ -149,7 +147,8 @@ console.log(width, height);
         canvas.width = image.width;
         canvas.height = image.height;
         var context = canvas.getContext('2d');
-        context.drawImage(image, 0, 0);
+        context.drawImage(image, 0, 0, image.width, image.height, 0, 0, canvas.width, canvas.height);
+        document.body.appendChild(canvas);
 
         var a = document.createElement('a');
         a.download = name;

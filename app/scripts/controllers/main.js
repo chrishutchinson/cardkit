@@ -29,6 +29,12 @@ angular.module('cardkitApp')
         },
       ],
       themes: themeConfig,
+      output: {
+        scale: 2,
+        editable: {
+          scale: true
+        }
+      },
       svg: {
     		canvas: {
     			height: function() {
@@ -198,6 +204,8 @@ angular.module('cardkitApp')
 
 
     $scope.downloadSvg = function() {
-      saveSvgAsPng(document.getElementById('snap-svg'), 'image.png');
+      saveSvgAsPng(document.getElementById('snap-svg'), 'image.png', {
+        scale: $scope.config.output.scale
+      });
     };
   });

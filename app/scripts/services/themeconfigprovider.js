@@ -22,5 +22,4 @@ angular.module('cardkitApp')
 			});
 		}
 	}
-
   });

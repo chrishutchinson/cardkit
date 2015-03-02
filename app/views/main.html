@@ -30,6 +30,10 @@
               <option value="">-- Choose theme --</option>
             </select>
           </div>
+          <div class="form-group" ng-show="config.output.editable.scale">
+            <label for="scale">Output Scale ({{config.output.scale}}x)</label>
+            <input id="scale" type="range" max="3" min="1" step="1" ng-model="config.output.scale" />
+          </div>
         </div>
       </div>
       <div ng-if="(config.themes.length > 0 && theme) || !config.themes">

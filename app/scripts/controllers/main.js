@@ -22,6 +22,11 @@ angular.module('cardkitApp')
           width: 650,
           height: 320,
         },
+        {
+          name: 'Video',
+          width: 1280,
+          height: 720,
+        },
       ],
       themes: themeConfig,
       svg: {

@@ -61,6 +61,7 @@ angular.module('cardkitApp')
             y: '50%',
             preserveAspectRatio: 'xMinYMin meet',
             draggable: true,
+            filter: 'sepia',
             editable: {
               src: true,
               width: true,

@@ -113,6 +113,18 @@ angular.module('cardkitApp')
       				return false;
       		}
 
+          /** Filters **/
+          if(typeof element.filter !== 'undefined') {
+            switch(element.filter) {
+              case 'sepia':
+                var f = s.paper.filter(snapSVG.filter.sepia(1));
+                el.attr({
+                  filter: f
+                });
+                break;
+            }
+          }
+
       		return el;
       	}
 

@@ -1,0 +1,27 @@
+#nav {
+	float: right;
+	padding: 4px 0;
+
+	ul {
+		@include inline-list;
+
+		li {
+			margin: 0 10px 0 0;
+
+			&.link {
+				a {
+					@include button($nav-button-background-color, $nav-button-color);
+				}
+			}
+
+			&.text {
+				font-size: 1.2em;
+				font-weight: 300;
+			}
+
+			&:last-of-type {
+				margin: 0;
+			}
+		}
+	}
+}

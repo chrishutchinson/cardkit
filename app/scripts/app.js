@@ -22,22 +22,6 @@ angular
     'ui.router'
   ])
   .config(function ($stateProvider, $urlRouterProvider) {
-    /*$routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
-        resolve: {
-          'configData': function(themeConfigProvider){
-            var data = themeConfigProvider();
-            console.log(data);
-          }
-        }
-      })
-      .otherwise({
-        redirectTo: '/'
-      });*/
-    //
-
     // For any unmatched url, redirect to /
     $urlRouterProvider.otherwise('/');
 

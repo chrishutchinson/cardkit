@@ -1,0 +1,13 @@
+div.svg {
+	width: 50%;
+	max-width: 580px;
+
+	&.fixed {
+		position: fixed;
+		top: 20px;
+	}
+
+	@import "card";
+
+	@import "config";
+}

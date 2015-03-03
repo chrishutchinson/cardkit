@@ -1,0 +1,19 @@
+#header {
+	background: $header-background-color;
+	color: $header-color;
+	padding: 10px 12px;
+	height: 50px;
+
+	a.logo {
+		background-image: url($logo-src);
+		width: 115px;
+		height: 30px;
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: center;
+		display: inline-block;
+		float: left;
+	}
+}
+
+@import "nav";

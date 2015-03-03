@@ -24,8 +24,8 @@ angular.module('cardkitApp')
         },
         {
           name: 'Video',
-          width: 1280,
-          height: 720,
+          width: 640,
+          height: 360,
         },
       ],
       themes: themeConfig,
@@ -67,11 +67,11 @@ angular.module('cardkitApp')
               width: true,
               opacity: true,
               filters: [
-                'sepia',
-                'grayscale',
-                'saturate',
-                'invert',
-                'blur'
+                'Sepia',
+                'Grayscale',
+                'Saturate',
+                'Invert',
+                'Blur'
               ],
             }
           },
@@ -159,6 +159,7 @@ angular.module('cardkitApp')
                 y: 55,
                 editable: {
                   text: true,
+                  fill: 'picker'
                 },
               },
             ],

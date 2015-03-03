@@ -74,21 +74,30 @@ angular.module('cardkitApp')
       		background.altDrag();
       	}
 
-        var sFilters,
-            filters;
+        var filters;
         function setupFilters() {
           // Store filters
-          sFilters = snapSVG();
-          sFilters.attr({
-            width: 2*canvasData.width + 'px',
-            height: 2*canvasData.height + 'px',
-          });
           filters = {
-            sepia: sFilters.paper.filter(snapSVG.filter.sepia(1)),
-            grayscale: sFilters.paper.filter(snapSVG.filter.grayscale(1)),
-            saturate: sFilters.paper.filter(snapSVG.filter.saturate(0.5)),
-            invert: sFilters.paper.filter(snapSVG.filter.invert(1)),
-            blur: sFilters.paper.filter(snapSVG.filter.blur(5, 5)),
+            'Sepia': s.paper.filter(snapSVG.filter.sepia(1)).attr({
+              width: canvasData.width*4 + 'px',
+              height: canvasData.height*4 + 'px'
+            }),
+            'Grayscale': s.paper.filter(snapSVG.filter.grayscale(1)).attr({
+              width: canvasData.width*4 + 'px',
+              height: canvasData.height*4 + 'px'
+            }),
+            'Saturate': s.paper.filter(snapSVG.filter.saturate(0.5)).attr({
+              width: canvasData.width*4 + 'px',
+              height: canvasData.height*4 + 'px'
+            }),
+            'Invert': s.paper.filter(snapSVG.filter.invert(1)).attr({
+              width: canvasData.width*4 + 'px',
+              height: canvasData.height*4 + 'px'
+            }),
+            'Blur': s.paper.filter(snapSVG.filter.blur(4, 4)).attr({
+              width: canvasData.width*4 + 'px',
+              height: canvasData.height*4 + 'px'
+            }),
           };   
         }
         setupFilters();

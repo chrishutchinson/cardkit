@@ -8,7 +8,7 @@
   <div class="col-md-7">
     <div fixed-scroll>
       <div class="svg-wrapper" ng-if="((config.themes.length > 0 && theme) || !config.themes) && ((config.sizes.length > 0 && size) || !config.sizes)">
-        <snap-svg svg-config="config.svg" svg-theme="config.theme"></snap-svg>
+        <snap-svg svg-config="config.svg" svg-theme="config.theme" filters="filters"></snap-svg>
         <button class="btn btn-primary" ng-click="downloadSvg()">Download Image</button>
       </div>
     </div>
@@ -78,6 +78,13 @@
                   <label>Opacity</label>
                   <input type="range" min="0" max="1" ng-model="element.opacity" step="0.1" />
                 </div>
+                <div ng-switch-when="filters">
+                  <label>Filter</label>
+                  <select ng-model="element.defaultFilter" ng-options="filter for filter in element.editable.filters" class="form-control">
+                    <option value="">-- Select a Filter --</option>
+                  </select>
+                </div>
+
               </div>
               <div class="form-group" ng-if="element.type === 'group' && element.elements[k].editable" ng-repeat="(k, e) in element.elements" ng-switch="e.type">
                 <div ng-switch-when="text">

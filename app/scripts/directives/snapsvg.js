@@ -13,7 +13,7 @@ angular.module('cardkitApp')
       restrict: 'E',
       scope: {
         svgConfig: '=',
-        svgTheme: '='
+        svgTheme: '=',
       },
       link: function postLink(scope, element) {
         // Check for functions in the config, and resolve them
@@ -74,6 +74,25 @@ angular.module('cardkitApp')
       		background.altDrag();
       	}
 
+        var sFilters,
+            filters;
+        function setupFilters() {
+          // Store filters
+          sFilters = snapSVG();
+          sFilters.attr({
+            width: 2*canvasData.width + 'px',
+            height: 2*canvasData.height + 'px',
+          });
+          filters = {
+            sepia: sFilters.paper.filter(snapSVG.filter.sepia(1)),
+            grayscale: sFilters.paper.filter(snapSVG.filter.grayscale(1)),
+            saturate: sFilters.paper.filter(snapSVG.filter.saturate(0.5)),
+            invert: sFilters.paper.filter(snapSVG.filter.invert(1)),
+            blur: sFilters.paper.filter(snapSVG.filter.blur(5, 5)),
+          };   
+        }
+        setupFilters();
+
       	// Setup some element variables
       	var elements = [],
       		  el;
@@ -114,19 +133,21 @@ angular.module('cardkitApp')
       		}
 
           /** Filters **/
-          if(typeof element.filter !== 'undefined') {
-            switch(element.filter) {
-              case 'sepia':
-                var f = s.paper.filter(snapSVG.filter.sepia(1));
-                el.attr({
-                  filter: f
-                });
-                break;
+          if(typeof element.defaultFilter !== 'undefined') {
+            if(element.defaultFilter !== '') {
+              el.attr({
+                filter: filters[element.defaultFilter]
+              });
+            } else {
+              el.attr({
+                filter: ''
+              });
             }
-          }
+        	}
 
-      		return el;
-      	}
+          return el;
+
+        }
 
         // Setup our atrribtes on the specific element
         function setAttributes(el, element) {
@@ -144,6 +165,7 @@ angular.module('cardkitApp')
               tspan.attr({x: elementData.x, y: elementData.y + (elementData.fontSize*i)});
             });
           }
+
           return el;
         }
 
@@ -249,6 +271,7 @@ angular.module('cardkitApp')
         scope.$watch('svgConfig', drawElements, true);
         scope.$on('changeTheme', drawElements);
         scope.$on('changeSize', drawElements);
+        scope.$on('changeSize', setupFilters);
       }
     };
   });

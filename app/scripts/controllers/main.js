@@ -61,11 +61,18 @@ angular.module('cardkitApp')
             y: '50%',
             preserveAspectRatio: 'xMinYMin meet',
             draggable: true,
-            filter: 'sepia',
+            defaultFilter: '',
             editable: {
               src: true,
               width: true,
-              opacity: true
+              opacity: true,
+              filters: [
+                'sepia',
+                'grayscale',
+                'saturate',
+                'invert',
+                'blur'
+              ],
             }
           },
           {

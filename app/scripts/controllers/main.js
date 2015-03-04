@@ -86,9 +86,8 @@ angular.module('cardkitApp')
               return $scope.theme.logoSrc;
             },
             opacity: 1,
-            x: '330',
-            y: '300',
-            textAnchor: 'end',
+            x: 50,
+            y: 120,
             preserveAspectRatio: 'xMinYMin meet',
             editable: false,
             draggable: true
@@ -104,9 +103,9 @@ angular.module('cardkitApp')
             fontFamily: function() {
               return $scope.theme.headlineFont;
             },
-            textAnchor: 'end',
-            x: 580,
-            y: 250,
+            textAnchor: 'start',
+            x: 50,
+            y: 170,
             draggable: true,
             editable: {
               text: true,
@@ -117,6 +116,7 @@ angular.module('cardkitApp')
                 'Extra Large': 36,
               },
               fill: 'picker',
+              textAnchor: true
             },
           },
           {

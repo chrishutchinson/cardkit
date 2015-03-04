@@ -52,6 +52,17 @@
             <input type="range" min="10" max="1000" ng-model="element.width" />
           </div>
 
+          <!-- Text Anchor -->
+          <div ng-switch-when="textAnchor">
+            <label>Text Anchor</label>
+            <select ng-model="element.textAnchor" class="form-control">
+              <option value="">-- Select a Text Anchor --</option>
+              <option value="start">Start</option>
+              <option value="middle">Middle</option>
+              <option value="end">End</option>
+            </select>
+          </div>
+
           <!-- Opacity -->
           <div ng-switch-when="opacity">
             <label>Opacity</label>
@@ -62,7 +73,7 @@
           <div ng-switch-when="filters">
             <label>Filter</label>
             <select ng-model="element.defaultFilter" ng-options="filter for filter in element.editable.filters" class="form-control">
-              <option value="">-- Select a Filter --</option>
+              <option value="">No filter</option>
             </select>
           </div>
         </div>

@@ -14,6 +14,17 @@
 		display: inline-block;
 		float: left;
 	}
+
+	@media screen and (max-width: 828px) {
+		padding: 0;
+		height: auto;
+		overflow: hidden;
+
+		a.logo {
+			float: none;
+			margin: 10px 0 5px 12px;
+		}
+	}
 }
 
 @import "nav";

@@ -24,4 +24,34 @@
 			}
 		}
 	}
+
+	@media screen and (max-width: 828px) {
+		float: none;
+		padding: 0;
+
+		ul {
+			display: block;
+			width: 100%;
+			background: lighten($header-background-color, 20%);
+			padding: 5px 0;
+
+			li {
+				display: block;
+				padding: 5px 10px;
+				margin: 0;
+
+				&.link {
+					a {
+						@include button($nav-button-background-color, $nav-button-color);
+						display: block;
+						margin: 0;
+					}
+				}
+
+				&.text {
+					font-size: 1em;
+				}
+			}
+		}
+	}
 }

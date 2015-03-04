@@ -1,7 +1,9 @@
 aside.elements {
-	width: 48%;
+	width: 45%;
 	float: right;
-	padding: 0 0 40px;
+	padding: 0 0 0 5%;
+	margin-bottom: 40px;
+	border-left: 1px solid lighten($primary-color, 30%);
 
 	.panel {
 		h3 {
@@ -30,5 +32,13 @@ aside.elements {
 		&:last-of-type {
 			border-bottom: 0px;
 		}
+	}
+
+	@media screen and (max-width: 828px) {
+		width: 100%;
+		float: none;
+		padding: 0;
+		border-left: 0px;
+		margin: 0 0 20px;
 	}
 }

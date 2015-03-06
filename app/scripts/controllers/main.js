@@ -43,22 +43,35 @@ angular.module('cardkitApp')
     			width: function() {
             return $scope.size.width;
           },
-    			fill: function() {
-            return $scope.theme.background;
-          },
     		},
     		elements: [
           {
+            name: 'Background Colour',
+            type: 'rect',
+            height: function() {
+              return $scope.size.height;
+            },
+            width: function() {
+              return $scope.size.width;
+            },
+            fill: function() {
+              return $scope.theme.background;
+            },
+            editable: {
+              fill: 'picker'
+            }
+          },
+          {
             name: 'Image',
             type: 'image',
-            width: 200,
+            width: 600,
             height: function() {
               return this.width;
             },
             src: '',
             opacity: 1,
-            x: '50%',
-            y: '50%',
+            x: '0%',
+            y: '0%',
             preserveAspectRatio: 'xMinYMin meet',
             draggable: true,
             defaultFilter: '',
@@ -87,9 +100,12 @@ angular.module('cardkitApp')
             },
             opacity: 1,
             x: 50,
-            y: 120,
+            y: 270,
             preserveAspectRatio: 'xMinYMin meet',
-            editable: false,
+            editable: {
+              src: true,
+              width: true,
+            },
             draggable: true
           },
           {
@@ -105,7 +121,7 @@ angular.module('cardkitApp')
             },
             textAnchor: 'start',
             x: 50,
-            y: 170,
+            y: 250,
             draggable: true,
             editable: {
               text: true,
@@ -120,49 +136,31 @@ angular.module('cardkitApp')
             },
           },
           {
-            type: 'group',
-            name: 'Title',
-            x: 30,
-            y: 90,
-            editable: true,
+            name: 'Headline',
+            type: 'text',
+            text: 'Edit this text, and drag it around.\n\nYou can upload your own background image,\nlogo, and change the colour of the text too.',
+            fill: function() {
+              return $scope.theme.quote;
+            },
+            fontSize: 26,
+            fontFamily: function() {
+              return $scope.theme.headlineFont;
+            },
+            textAnchor: 'start',
+            x: 50,
+            y: 55,
             draggable: true,
-            elements: [
-              {
-                name: 'Logo',
-                type: 'image',
-                width: 30,
-                height: function() {
-                  return this.width;
-                },
-                src: function() {
-                  return $scope.theme.logoSecondarySrc;
-                },
-                opacity: 1,
-                x: 20,
-                y: 37,
-                preserveAspectRatio: 'xMinYMin meet',
-                editable: false
+            editable: {
+              text: true,
+              fill: 'picker',
+              textAnchor: true,
+              fontSize: {
+                'Small (18px)': 18,
+                'Medium (26px)': 26,
+                'Large (32px)': 32,
+                'Extra Large (32px)': 40,
               },
-              {
-                name: 'Headline',
-                type: 'text',
-                text: 'I\'m attached to the image on the left. \nEdit me and drag me around',
-                fill: function() {
-                  return $scope.theme.quote;
-                },
-                fontSize: '26',
-                fontFamily: function() {
-                  return $scope.theme.headlineFont;
-                },
-                textAnchor: 'left',
-                x: 55,
-                y: 55,
-                editable: {
-                  text: true,
-                  fill: 'picker'
-                },
-              },
-            ],
+            },
           },
     		],
       }

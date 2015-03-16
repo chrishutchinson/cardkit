@@ -47,10 +47,7 @@ angular.module('cardkitApp')
               for (var j = 0; j < rules.length; j++) {
                 var rule = rules[j];
                 if (typeof(rule.style) !== 'undefined') {
-                  if(
-                      rule.selectorText !== '[ng:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak, .ng-hide' &&
-                      rule.selectorText !== 'ng:form'
-                    ) {
+                  try {
                     var matches = el.querySelectorAll(rule.selectorText);
                     if (matches.length > 0) {
                       var selector = selectorRemap ? selectorRemap(rule.selectorText) : rule.selectorText;
@@ -58,6 +55,8 @@ angular.module('cardkitApp')
                     } else if(rule.cssText.match(/^@font-face/)) {
                       css += rule.cssText + '\n';
                     }
+                  } catch (e) {
+                    // Do nothing
                   }
                 }
               }

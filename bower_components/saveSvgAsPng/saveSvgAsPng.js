@@ -89,7 +89,6 @@
 
       var svg = doctype + outer.innerHTML;
       var uri = 'data:image/svg+xml;base64,' + window.btoa(unescape(encodeURIComponent(svg)));
-      
       if (cb) {
         cb(uri);
       }

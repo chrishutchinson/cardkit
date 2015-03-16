@@ -12,7 +12,9 @@ angular.module('cardkitApp')
   	return {
 	    $get: function($http, $q) {
 			var defaultConfig = $http.get('themes.config.json').catch(function(err) {
-				if(err.status === 404) return [];
+				if(err.status === 404) {
+					return [];
+				}
 
 				return $q.reject(err);
 			});
@@ -21,5 +23,5 @@ angular.module('cardkitApp')
 				return values[0].data;
 			});
 		}
-	}
+	};
   });

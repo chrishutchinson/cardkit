@@ -18,6 +18,9 @@ angular.module('cardkitApp')
           height: 330,
         }
       ],
+      output: {
+        scale: 2
+      },
       themes: themeConfig,
       svg: {
         canvas: {
@@ -76,7 +79,7 @@ angular.module('cardkitApp')
               return $scope.theme.color;
             },
             fontSize: 100,
-            fontFamily: '"TimesModern-Bold-Italic"',
+            fontFamily: '"TimesModern-Regular-Italic"',
             x: 30,
             y: 115,
             draggable: false,
@@ -85,11 +88,11 @@ angular.module('cardkitApp')
           {
             name: 'Title',
             type: 'text',
-            text: 'This week: ',
+            text: 'Enter your text here',
             fill: function() {
               return $scope.theme.color;
             },
-            fontSize: 50,
+            fontSize: 60,
             fontFamily: '"TimesModern-Regular-Italic"',
             x: 30,
             y: 190,

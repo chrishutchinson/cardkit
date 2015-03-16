@@ -14,7 +14,6 @@
     "snap.svg": "~0.3.0",
     "angular-bootstrap-colorpicker": "~3.0.11",
     "angular-draganddrop": "~0.2.1",
-    "saveSvgAsPng": "exupero/saveSvgAsPng#gh-pages",
     "angular-ui-router": "~0.2.13",
     "awesome-form": "*",
     "jquery": "~2.1.3",

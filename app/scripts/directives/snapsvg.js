@@ -33,31 +33,69 @@ angular.module('cardkitApp')
           return attrs;
         }
 
+        // Inlines all styles
+        function styles(el, selectorRemap) {
+          var css = '';
+          var sheets = document.styleSheets;
+          for (var i = 0; i < sheets.length; i++) {
+            if (isExternal(sheets[i].href)) {
+              console.warn('Cannot include styles from other hosts: ' + sheets[i].href);
+              continue;
+            }
+            var rules = sheets[i].cssRules;
+            if (rules !== null) {
+              for (var j = 0; j < rules.length; j++) {
+                var rule = rules[j];
+                if (typeof(rule.style) !== 'undefined') {
+                  if(
+                      rule.selectorText !== '[ng:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak, .ng-hide' &&
+                      rule.selectorText !== 'ng:form'
+                    ) {
+                    var matches = el.querySelectorAll(rule.selectorText);
+                    if (matches.length > 0) {
+                      var selector = selectorRemap ? selectorRemap(rule.selectorText) : rule.selectorText;
+                      css += selector + ' { ' + rule.style.cssText + ' }\n';
+                    } else if(rule.cssText.match(/^@font-face/)) {
+                      css += rule.cssText + '\n';
+                    }
+                  }
+                }
+              }
+            }
+          }
+          return css;
+        }
+
+        // Checks for external files and ignores them
+        function isExternal(url) {
+          return url && url.lastIndexOf('http',0) === 0 && url.lastIndexOf(window.location.host) === -1;
+        }
+
       	// Destringify the JSON object
         var data = angular.fromJson(scope.svgConfig);
 
         // Custom SVG Drag function, given that we scale the SVG
-        snapSVG.plugin(function(Snap, Element, Paper, global) {
-            Element.prototype.altDrag = function() {
-                this.drag( dragMove, dragStart, dragEnd );
-                return this;
-            }
-                
-            var dragStart = function ( x,y,ev ) {
-                    this.data('ot', this.transform().local );
-            }
-         
-            var dragMove = function(dx, dy, ev, x, y) {
-                    var tdx, tdy;
-                    var snapInvMatrix = this.transform().diffMatrix.invert();
-                    snapInvMatrix.e = snapInvMatrix.f = 0; 
-                    tdx = snapInvMatrix.x( dx,dy ); tdy = snapInvMatrix.y( dx,dy );
-                    this.transform( this.data('ot') + "t" + [ tdx, tdy ]  );
+        snapSVG.plugin(function(Snap, Element) {
+          Element.prototype.altDrag = function() {
+            this.drag(dragMove, dragStart, dragEnd);
+            return this;
+          };
+              
+          var dragStart = function () {
+            this.data('ot', this.transform().local);
+          };
+       
+          var dragMove = function(dx, dy) {
+            var tdx, tdy;
+            var snapInvMatrix = this.transform().diffMatrix.invert();
+            snapInvMatrix.e = snapInvMatrix.f = 0; 
+            tdx = snapInvMatrix.x(dx, dy);
+            tdy = snapInvMatrix.y(dx, dy);
+            this.transform(this.data('ot') + 't' + [tdx, tdy]);
+          };
 
-            }
-
-            var dragEnd = function() {
-            }
+          var dragEnd = function() {
+          };
         });
 
       	// Setup element
@@ -67,6 +105,16 @@ angular.module('cardkitApp')
           width: '100%',
         });
 
+        // Generate all our styles and put them inside the <defs> attribute of the SVG
+        // This is done as early as possible to ensure all webfonts declared via @font-face are included appropriately
+        // @TODO: Find a smarter way of defining any external fonts via config, and process them here
+        var stylesElement = s.paper.el('style', {
+          type: 'text/css'
+        });
+        var css = styles(s.node);
+        stylesElement.node.innerHTML = css;
+        stylesElement.toDefs();
+
       	// Setup canvas background
         var canvasData = functionise(data.canvas);
       	var background = s.rect(0, 0, canvasData.width, canvasData.height, 0, 0).attr(canvasData);
@@ -74,6 +122,7 @@ angular.module('cardkitApp')
       		background.altDrag();
       	}
 
+        // Create us some filters for later use
         var filters;
         function setupFilters() {
           // Store filters

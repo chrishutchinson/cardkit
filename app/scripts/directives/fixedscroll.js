@@ -8,7 +8,7 @@
  */
 angular.module('cardkitApp')
   .directive('fixedScroll', function ($window) {
-    return function(scope, element, attrs) {
+    return function(scope, element) {
     	var offset = element.offset().top-20;
     	angular.element($window).bind('scroll', function() {
     		if(angular.element($window).scrollTop() >= offset) {

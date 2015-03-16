@@ -56,38 +56,6 @@
     }
   }
 
-  function styles(el, selectorRemap) {
-    var css = "";
-    var sheets = document.styleSheets;
-    for (var i = 0; i < sheets.length; i++) {
-      if (isExternal(sheets[i].href)) {
-        console.warn("Cannot include styles from other hosts: "+sheets[i].href);
-        continue;
-      }
-      var rules = sheets[i].cssRules;
-      if (rules != null) {
-        for (var j = 0; j < rules.length; j++) {
-          var rule = rules[j];
-          if (typeof(rule.style) != "undefined") {
-            if(
-                rule.selectorText !== '[ng:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak, .ng-hide' &&
-                rule.selectorText !== 'ng:form'
-              ) {
-              var matches = el.querySelectorAll(rule.selectorText);
-              if (matches.length > 0) {
-                var selector = selectorRemap ? selectorRemap(rule.selectorText) : rule.selectorText;
-                css += selector + " { " + rule.style.cssText + " }\n";
-              } else if(rule.cssText.match(/^@font-face/)) {
-                css += rule.cssText + '\n';
-              }
-            }
-          }
-        }
-      }
-    }
-    return css;
-  }
-
   out$.svgAsDataUri = function(el, options, cb) {
     options = options || {};
     options.scale = options.scale || 1;
@@ -109,7 +77,6 @@
         var svg = document.createElementNS('http://www.w3.org/2000/svg','svg')
         svg.appendChild(clone)
         clone = svg;
-
       }
 
       clone.setAttribute("version", "1.1");
@@ -119,14 +86,6 @@
       clone.setAttribute("height", height * options.scale);
       clone.setAttribute("viewBox", "0 0 " + width + " " + height);
       outer.appendChild(clone);
-
-      var css = styles(el, options.selectorRemap);
-      var s = document.createElement('style');
-      s.setAttribute('type', 'text/css');
-      s.innerHTML = "<![CDATA[\n" + css + "\n]]>";
-      var defs = document.createElement('defs');
-      defs.appendChild(s);
-      clone.insertBefore(defs, clone.firstChild);
 
       var svg = doctype + outer.innerHTML;
       var uri = 'data:image/svg+xml;base64,' + window.btoa(unescape(encodeURIComponent(svg)));
@@ -148,12 +107,13 @@
         canvas.height = image.height;
         var context = canvas.getContext('2d');
         context.drawImage(image, 0, 0, image.width, image.height, 0, 0, canvas.width, canvas.height);
-        
+
         var a = document.createElement('a');
         a.download = name;
         a.href = canvas.toDataURL('image/png');
         document.body.appendChild(a);
         a.click();
+        
       }
     });
   }

@@ -13,15 +13,28 @@ angular.module('cardkitApp')
     $scope.config = {
       sizes: [
         {
-          name: 'Email',
-          width: 1000,
-          height: 330,
-        }
+          name: 'Facebook',
+          width: 800,
+          height: 370,
+        },
+        {
+          name: 'Twitter',
+          width: 650,
+          height: 320,
+        },
+        {
+          name: 'Video',
+          width: 640,
+          height: 360,
+        },
       ],
-      output: {
-        scale: 2
-      },
       themes: themeConfig,
+      output: {
+        scale: 2,
+        editable: {
+          scale: true
+        }
+      },
       svg: {
         canvas: {
           height: function() {
@@ -30,75 +43,123 @@ angular.module('cardkitApp')
           width: function() {
             return $scope.size.width;
           },
-          fill: '#FFFFFF'
         },
         elements: [
           {
-            name: 'Background',
-            type: 'image',
-            width: function() {
-              return $scope.size.width;
-            },
+            name: 'Background Colour',
+            type: 'rect',
             height: function() {
               return $scope.size.height;
             },
-            src: function() {
-              return $scope.theme.backgroundSrc;
+            width: function() {
+              return $scope.size.width;
             },
-            opacity: 1,
-            x: '0%',
-            y: '0%',
-            draggable: false,
-            editable: false
+            fill: function() {
+              return $scope.theme.background;
+            },
+            editable: {
+              fill: 'picker'
+            }
           },
           {
             name: 'Image',
             type: 'image',
-            width: 200,
+            width: 600,
             height: function() {
               return this.width;
             },
             src: '',
             opacity: 1,
-            x: '50%',
-            y: '50%',
+            x: '0%',
+            y: '0%',
             preserveAspectRatio: 'xMinYMin meet',
             draggable: true,
+            defaultFilter: '',
             editable: {
               src: true,
               width: true,
+              opacity: true,
+              filters: [
+                'Sepia',
+                'Grayscale',
+                'Saturate',
+                'Invert',
+                'Blur'
+              ],
             }
           },
           {
-            name: 'Title',
-            type: 'text',
-            text: function() {
-              return $scope.theme.title;
+            name: 'Logo',
+            type: 'image',
+            width: 250,
+            height: function() {
+              return this.width;
             },
-            fill: function() {
-              return $scope.theme.color;
+            src: function() {
+              return $scope.theme.logoSrc;
             },
-            fontSize: 100,
-            fontFamily: '"TimesModern-Regular-Italic"',
-            x: 30,
-            y: 115,
-            draggable: false,
-            editable: false,
+            opacity: 1,
+            x: 50,
+            y: 270,
+            preserveAspectRatio: 'xMinYMin meet',
+            editable: {
+              src: true,
+              width: true,
+            },
+            draggable: true
           },
           {
-            name: 'Title',
+            name: 'Credit',
             type: 'text',
-            text: 'Enter your text here',
+            text: 'Credit: Insert name here',
             fill: function() {
-              return $scope.theme.color;
+              return $scope.theme.quote;
             },
-            fontSize: 60,
-            fontFamily: '"TimesModern-Regular-Italic"',
-            x: 30,
-            y: 190,
-            draggable: false,
+            fontSize: 12,
+            fontFamily: function() {
+              return $scope.theme.headlineFont;
+            },
+            textAnchor: 'start',
+            x: 50,
+            y: 250,
+            draggable: true,
             editable: {
-              text: true
+              text: true,
+              fontSize: {
+                'Small': 12,
+                'Medium': 18,
+                'Large': 22,
+                'Extra Large': 36,
+              },
+              fill: 'picker',
+              textAnchor: true
+            },
+          },
+          {
+            name: 'Headline',
+            type: 'text',
+            text: 'Edit this text, and drag it around.\n\nYou can upload your own background image,\nlogo, and change the colour of the text too.',
+            fill: function() {
+              return $scope.theme.quote;
+            },
+            fontSize: 26,
+            fontFamily: function() {
+              return $scope.theme.headlineFont;
+            },
+            textAnchor: 'start',
+            x: 50,
+            y: 55,
+            draggable: true,
+            editable: {
+              text: true,
+              fill: 'picker',
+              textAnchor: true,
+              fontSize: {
+                'Small (18px)': 18,
+                'Medium (26px)': 26,
+                'Large (32px)': 32,
+                'Extra Large (32px)': 40,
+              },
             },
           },
         ],

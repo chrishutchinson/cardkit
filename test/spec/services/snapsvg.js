@@ -11,8 +11,4 @@ describe('Service: snapSVG', function () {
     snapSVG = _snapSVG_;
   }));
 
-  it('should do something', function () {
-    expect(!!snapSVG).toBe(true);
-  });
-
 });

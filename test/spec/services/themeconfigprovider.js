@@ -11,8 +11,4 @@ describe('Service: themeConfigProvider', function () {
     themeConfigProvider = _themeConfigProvider_;
   }));
 
-  it('should do something', function () {
-    expect(!!themeConfigProvider).toBe(true);
-  });
-
 });

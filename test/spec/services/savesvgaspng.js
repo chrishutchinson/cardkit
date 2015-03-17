@@ -11,8 +11,4 @@ describe('Service: saveSvgAsPng', function () {
     saveSvgAsPng = _saveSvgAsPng_;
   }));
 
-  it('should do something', function () {
-    expect(!!saveSvgAsPng).toBe(true);
-  });
-
 });

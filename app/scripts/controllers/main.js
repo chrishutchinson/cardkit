@@ -126,10 +126,10 @@ angular.module('cardkitApp')
             editable: {
               text: true,
               fontSize: {
-                'Small': 12,
-                'Medium': 18,
-                'Large': 22,
-                'Extra Large': 36,
+                'Small (12px)' : 12,
+                'Medium (18px)': 18,
+                'Large (22px)': 22,
+                'Extra Large (36px)': 36,
               },
               fill: 'picker',
               textAnchor: true
@@ -152,13 +152,12 @@ angular.module('cardkitApp')
             draggable: true,
             editable: {
               text: true,
-              fill: 'picker',
               textAnchor: true,
               fontSize: {
                 'Small (18px)': 18,
                 'Medium (26px)': 26,
                 'Large (32px)': 32,
-                'Extra Large (32px)': 40,
+                'Extra Large (40px)': 40,
               },
             },
           },

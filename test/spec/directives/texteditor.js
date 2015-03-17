@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Directive: snapSvg', function () {
+describe('Directive: textEditor', function () {
 
   // load the directive's module
   beforeEach(module('cardkitApp'));

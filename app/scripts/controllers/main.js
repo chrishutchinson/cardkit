@@ -186,6 +186,10 @@ angular.module('cardkitApp')
       readFile(dataTransfer.files[0], key);
     };
 
+    $scope.fileChanged = function(file) {
+      readFile(angular.element(file)[0].files[0], angular.element(file).data('key'));
+    };
+
     // Read the supplied file (from DataTransfer API)
     function readFile(file, key) {
       var reader = new FileReader();

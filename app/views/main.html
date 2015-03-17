@@ -73,6 +73,7 @@
     <div class="svg-wrapper" ng-if="((config.themes.length > 0 && theme) || !config.themes) && ((config.sizes.length > 0 && size) || !config.sizes)">
       <snap-svg svg-config="config.svg" svg-theme="config.theme" filters="filters"></snap-svg>
       <button class="button" ng-click="downloadSvg()"><i class="fa fa-save"></i> Download Image</button>
+      <button class="button button-danger pull-right" ng-click="resetSvg()"><i class="fa fa-times"></i> Reset</button>
     </div>
 
     <div class="config-wrapper">

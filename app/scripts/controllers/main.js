@@ -166,6 +166,11 @@ angular.module('cardkitApp')
       }
     };
 
+    function createConfigCopy() {
+      $scope.defaultConfig = angular.copy($scope.config);
+      $scope.$broadcast('resetSvg');
+    }
+
     if(typeof $scope.config.themes !== 'undefined') {
       $scope.theme = ($scope.config.themes.length > 1) ? null : $scope.config.themes[0];
     }
@@ -174,11 +179,18 @@ angular.module('cardkitApp')
 
     $scope.$watch('theme', function() {
       $scope.$broadcast('changeTheme');
+      createConfigCopy();
     });
 
     $scope.$watch('size', function() {
       $scope.$broadcast('changeSize');
+      createConfigCopy();
     });
+
+    $scope.resetSvg = function() {
+      $scope.config.svg = $scope.defaultConfig.svg
+      createConfigCopy();
+    };
 
     // Drop handler.
     $scope.onDrop = function (data, event, key) {

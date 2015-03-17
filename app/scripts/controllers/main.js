@@ -152,6 +152,7 @@ angular.module('cardkitApp')
             draggable: true,
             editable: {
               text: true,
+              fill: 'picker',
               textAnchor: true,
               fontSize: {
                 'Small (18px)': 18,

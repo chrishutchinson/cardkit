@@ -23,7 +23,8 @@ angular.module('cardkitApp')
           '</div>',
       restrict: 'E',
       scope: {
-        key: '='
+        key: '=',
+        onDrop: '='
       }
     };
   });

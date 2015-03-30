@@ -26,22 +26,9 @@ You can find out more about the origins of CardKit [here](https://medium.com/dig
 
 See `ROADMAP.md`.
 
-## To setup and run locally
+## Setup, configuration and deployment
 
-- Clone this repo.
-- Run `npm install` and `bower install`.
-- Run `grunt serve` to run the application.
-- See the `To configure themes` section below to set up themes
-
-## To configure themes
-
-- Rename `app/demo.themes.config.json` to `app/themes.config.json` to provide the demo themes
-- You can edit `app/themes.config.json` to include your own theme configuration (@TODO: theme and config documentation)
-- `app/themes.config.json` is not version controlled by default
-
-## To build and deploy
-
-Run `grunt build` to build the application into the `/dist` directory.
+See the [CardKit Wiki](https://github.com/times/cardkit-v2/wiki) for guides on how to build with CardKit
 
 #### Push to `gh-pages`
 

@@ -6,6 +6,8 @@
 
 CardKit v2 is flexible, SVG image / card creation tool, with simple configuration options, which is easy to extend.
 
+![CardKit Usage](http://fat.gfycat.com/FoolhardyGaseousCockroach.gif)
+
 CardKit is aimed at newsrooms, however has many potential uses that extend beyond that:
 
 - Coupon and offer images

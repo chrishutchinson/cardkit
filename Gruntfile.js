@@ -402,7 +402,7 @@ module.exports = function (grunt) {
       },
       pages: {
         options: {
-          remote: 'git@github.com:times/cardkit-v2.git',
+          remote: 'git@github.com:times/cardkit.git',
           branch: 'gh-pages'
         }
       },

@@ -1,10 +1,10 @@
-# CardKit v2
+# CardKit
 
-## Version 2.0.0-alpha
+## Version 1.0.0
 
 ### 2015 [Chris Hutchinson](http://www.github.com/chrishutchinson) for The [Times and Sunday Times](http://www.github.com/times)
 
-CardKit v2 is flexible, SVG image / card creation tool, with simple configuration options, which is easy to extend.
+CardKit is flexible, SVG image / card creation tool, with simple configuration options, which is easy to extend.
 
 ![CardKit Usage](http://fat.gfycat.com/FoolhardyGaseousCockroach.gif)
 
@@ -28,7 +28,7 @@ See `ROADMAP.md`.
 
 ## Setup, configuration and deployment
 
-See the [CardKit Wiki](https://github.com/times/cardkit-v2/wiki) for guides on how to build with CardKit
+See the [CardKit Wiki](https://github.com/times/cardkit/wiki) for guides on how to build with CardKit
 
 #### Push to `gh-pages`
 

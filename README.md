@@ -13,10 +13,13 @@ CardKit is aimed at newsrooms, however has many potential uses that extend beyon
 - Coupon and offer images
 - Templated asset generation
 - Video preview images (e.g. 16:9)
+- Educational resources
 - Marketing and promotion
 - Personal branding
 
-_This is a rebuild of the current CardKit, available on [GitHub](http://www.github.com/times/cardkit) (forked from [voxmedia/meme](http://www.github.com/voxmedia/meme)), using Angular JS and SVG (rather than canvas)._
+## Twitter
+
+Follow [@CardKit](http://www.twitter.com/cardkit) on Twitter for the latest news, updates and tutorials.
 
 ## Project origins
 

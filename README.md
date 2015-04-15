@@ -1,5 +1,7 @@
 # CardKit
 
+[![Join the chat at https://gitter.im/times/cardkit](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/times/cardkit?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 ## Version 1.0.0
 
 ### 2015 [Chris Hutchinson](http://www.github.com/chrishutchinson) for The [Times and Sunday Times](http://www.github.com/times)

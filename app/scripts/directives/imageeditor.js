@@ -24,7 +24,8 @@ angular.module('cardkitApp')
       restrict: 'E',
       scope: {
         key: '=',
-        onDrop: '='
-      }
+        onDrop: '=',
+        removeImage: '=',
+      },
     };
   });

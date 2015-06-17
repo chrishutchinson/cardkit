@@ -4,5 +4,4 @@ node_modules
 bower_components/*
 .DS_Store
 
-
 !bower_components/saveSvgAsPng

@@ -10,5 +10,6 @@ describe('Directive: fixedScroll', function () {
 
   beforeEach(inject(function ($rootScope) {
     scope = $rootScope.$new();
+    element = '';
   }));
 });

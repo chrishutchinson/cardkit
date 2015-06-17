@@ -12,9 +12,10 @@ describe('Directive: filterEditor', function () {
     scope = $rootScope.$new();
   }));
 
-  it('should make hidden element visible', inject(function ($compile) {
+  it('Should render the filterEditor correctly', inject(function ($compile) {
     element = angular.element('<filter-editor></filter-editor>');
     element = $compile(element)(scope);
-    expect(element.text()).toBe('this is the filterEditor directive');
+    var label = element.find('label');
+    expect(label.text()).toBe('Filter');
   }));
 });

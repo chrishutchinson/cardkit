@@ -79,15 +79,15 @@ angular.module('cardkitApp')
             this.drag(dragMove, dragStart, dragEnd);
             return this;
           };
-              
+
           var dragStart = function () {
             this.data('ot', this.transform().local);
           };
-       
+
           var dragMove = function(dx, dy) {
             var tdx, tdy;
             var snapInvMatrix = this.transform().diffMatrix.invert();
-            snapInvMatrix.e = snapInvMatrix.f = 0; 
+            snapInvMatrix.e = snapInvMatrix.f = 0;
             tdx = snapInvMatrix.x(dx, dy);
             tdy = snapInvMatrix.y(dx, dy);
             this.transform(this.data('ot') + 't' + [tdx, tdy]);
@@ -146,7 +146,7 @@ angular.module('cardkitApp')
               width: canvasData.width*4 + 'px',
               height: canvasData.height*4 + 'px'
             }),
-          };   
+          };
         }
         setupFilters();
 
@@ -177,7 +177,7 @@ angular.module('cardkitApp')
       				angular.forEach(element.elements, function(e, k) {
       					gEl = setupElement(e);
                 setAttributes(gEl, e);
-      				
+
         			  if(k === 0) {
       						el = s.group(gEl);
     						} else {
@@ -185,7 +185,7 @@ angular.module('cardkitApp')
       					}
       				});
       				break;
-      			default: 
+      			default:
       				return false;
       		}
 
@@ -214,7 +214,7 @@ angular.module('cardkitApp')
           if(elementData.type === 'text') {
             elementData.text = elementData.text.split('\n');
           }
-          
+
           el.attr(elementData);
 
           if(elementData.type === 'text') {
@@ -249,9 +249,9 @@ angular.module('cardkitApp')
 
               // If the type is image
               if(el.type === 'image') {
-                // Store matrix transformation, we'll need it later to prevent the image moving around the SVG when replaced 
+                // Store matrix transformation, we'll need it later to prevent the image moving around the SVG when replaced
                 matrix = el.matrix;
-                
+
                 // Create new element based on config
                 var newEl = setupElement(scope.svgConfig.elements[key]);
 
@@ -267,7 +267,7 @@ angular.module('cardkitApp')
 
                 // Destroy old element
                 el.remove();
-                
+
                 el = newEl;
 
                 // Add the created element to a list of elements
@@ -275,12 +275,12 @@ angular.module('cardkitApp')
               }
 
               if(el.type === 'g') {
-                // Store matrix transformation, we'll need it later to prevent the group moving around the SVG when replaced 
+                // Store matrix transformation, we'll need it later to prevent the group moving around the SVG when replaced
                 matrix = el.matrix;
 
                 // Destroy and recreate
                 el.remove();
-                
+
                 // Create new element based on config
                 el = setupElement(scope.svgConfig.elements[key]);
 
@@ -326,7 +326,7 @@ angular.module('cardkitApp')
 
         function resetSvg() {
           var els = s.selectAll('*');
-          angular.forEach(els, function(e, i) {
+          angular.forEach(els, function(e) {
             e.transform('');
           });
         }

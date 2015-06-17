@@ -9,7 +9,7 @@
  */
 angular.module('cardkitApp')
   .controller('MainCtrl', function ($scope, saveSvgAsPng, themeConfig) {
-    
+
     $scope.config = {
       sizes: [
         {
@@ -22,11 +22,11 @@ angular.module('cardkitApp')
           width: 650,
           height: 320,
         },
-        {
-          name: 'Video',
-          width: 640,
-          height: 360,
-        },
+        // {
+        //   name: 'Video',
+        //   width: 640,
+        //   height: 360,
+        // },
       ],
       themes: themeConfig,
       output: {
@@ -91,7 +91,7 @@ angular.module('cardkitApp')
           {
             name: 'Logo',
             type: 'image',
-            width: 250,
+            width: 150,
             height: function() {
               return this.width;
             },
@@ -99,12 +99,19 @@ angular.module('cardkitApp')
               return $scope.theme.logoSrc;
             },
             opacity: 1,
-            x: 50,
-            y: 270,
+            x: function() {
+              return $scope.size.width - (this.width);
+            },
+            y: function() {
+              return $scope.size.height - (this.width + 20);
+            },
+            // x: 500,
+            // y: 150,
             preserveAspectRatio: 'xMinYMin meet',
             editable: {
               src: true,
               width: true,
+              opacity: true
             },
             draggable: true
           },
@@ -149,7 +156,7 @@ angular.module('cardkitApp')
             textAnchor: 'start',
             x: 50,
             y: 55,
-            draggable: true,
+            draggable: false,
             editable: {
               text: true,
               fill: 'picker',
@@ -159,6 +166,7 @@ angular.module('cardkitApp')
                 'Medium (26px)': 26,
                 'Large (32px)': 32,
                 'Extra Large (40px)': 40,
+                'Meme (60px)': 60,
               },
             },
           },
@@ -188,7 +196,7 @@ angular.module('cardkitApp')
     });
 
     $scope.resetSvg = function() {
-      $scope.config.svg = $scope.defaultConfig.svg
+      $scope.config.svg = $scope.defaultConfig.svg;
       createConfigCopy();
     };
 
@@ -206,7 +214,7 @@ angular.module('cardkitApp')
     function readFile(file, key) {
       var reader = new FileReader();
 
-      reader.onload = function() { 
+      reader.onload = function() {
         $scope.config.svg.elements[key].src = reader.result;
         $scope.$apply();
       };

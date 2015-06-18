@@ -12,9 +12,10 @@ describe('Directive: opacityEditor', function () {
     scope = $rootScope.$new();
   }));
 
-  it('should make hidden element visible', inject(function ($compile) {
+  it('Should render the opacity editor correctly', inject(function ($compile) {
     element = angular.element('<opacity-editor></opacity-editor>');
     element = $compile(element)(scope);
-    expect(element.text()).toBe('this is the opacityEditor directive');
+    var label = element.find('label');
+    expect(label.text()).toBe('Opacity');
   }));
 });

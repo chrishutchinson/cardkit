@@ -18,7 +18,6 @@ angular
     'ngTouch',
     'colorpicker.module',
     'draganddrop',
-    'colorpicker.module',
     'ui.router'
   ])
   .config(function ($stateProvider, $urlRouterProvider) {

@@ -12,9 +12,10 @@ describe('Directive: fillEditor', function () {
     scope = $rootScope.$new();
   }));
 
-  it('should make hidden element visible', inject(function ($compile) {
+  it('Should render the fillEditor', inject(function ($compile) {
     element = angular.element('<fill-editor></fill-editor>');
     element = $compile(element)(scope);
-    expect(element.text()).toBe('this is the fillEditor directive');
+    var label = element.find('label');
+    expect(label.text()).toBe('Fill Color');
   }));
 });

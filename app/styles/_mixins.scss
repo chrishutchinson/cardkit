@@ -12,6 +12,7 @@
 @mixin button($background-color, $color) {
 	padding: 5px 10px;
 	background: $background-color;
+	box-shadow: 0px 2px 7px darken($background-color, 20%);
 
 	border: 0px; outline: 0px;
 	-webkit-appearance: none;

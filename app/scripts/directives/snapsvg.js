@@ -90,6 +90,12 @@ angular.module('cardkitApp')
             snapInvMatrix.e = snapInvMatrix.f = 0;
             tdx = snapInvMatrix.x(dx, dy);
             tdy = snapInvMatrix.y(dx, dy);
+
+            // snapping
+            var gridSize = scope.svgConfig.canvas.gridSize();
+            tdx = Math.round(tdx/gridSize) * gridSize;
+            tdy = Math.round(tdy/gridSize) * gridSize;
+
             this.transform(this.data('ot') + 't' + [tdx, tdy]);
           };
 
@@ -214,12 +220,16 @@ angular.module('cardkitApp')
           if(elementData.type === 'text') {
             elementData.text = elementData.text.split('\n');
           }
-
+          if (elementData.textTransform) {
+            el.node.style.textTransform = elementData.textTransform;
+          }
           el.attr(elementData);
 
           if(elementData.type === 'text') {
             el.selectAll('tspan').forEach(function(tspan, i){
-              tspan.attr({x: elementData.x, y: elementData.y + (elementData.fontSize*i)});
+              tspan.attr({
+                x: elementData.x,
+                y: elementData.y + (elementData.fontSize*i)});
             });
           }
 

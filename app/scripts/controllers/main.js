@@ -13,14 +13,16 @@ angular.module('cardkitApp')
     $scope.config = {
       sizes: [
         {
-          name: 'Facebook',
-          width: 800,
-          height: 370,
-        },
-        {
           name: 'Twitter',
           width: 650,
           height: 320,
+          gridSize: 16.25
+        },
+        {
+          name: 'Facebook',
+          width: 800,
+          height: 370,
+          gridSize: 20
         },
         // {
         //   name: 'Video',
@@ -43,6 +45,9 @@ angular.module('cardkitApp')
           width: function() {
             return $scope.size.width;
           },
+          gridSize: function() {
+            return $scope.size.gridSize;
+          }
         },
         elements: [
           {
@@ -89,21 +94,43 @@ angular.module('cardkitApp')
             }
           },
           {
+            name: 'Cross Reference Background',
+            type: 'rect',
+            height: function() {
+              return $scope.size.gridSize*3;
+            },
+            width: function() {
+              return $scope.size.width;
+            },
+            y : function() {
+              return $scope.size.height - this.height();
+            },
+            fill: function() {
+              return $scope.theme.xrefBackground;
+            },
+            editable: {
+              fill: 'picker'
+            }
+          },
+          {
             name: 'Logo',
             type: 'image',
-            width: 150,
+            width: function() {
+              return $scope.size.gridSize*2;
+            },
             height: function() {
-              return this.width;
+              return $scope.size.gridSize*2;
             },
             src: function() {
               return $scope.theme.logoSrc;
             },
             opacity: 1,
             x: function() {
-              return $scope.size.width - (this.width);
+              return $scope.size.width - ($scope.size.gridSize*3);
             },
             y: function() {
-              return $scope.size.height - (this.width + 20);
+              var h = ($scope.size.gridSize)/2;
+              return $scope.size.height - (this.height() + h);
             },
             // x: 500,
             // y: 150,
@@ -113,7 +140,37 @@ angular.module('cardkitApp')
               width: true,
               opacity: true
             },
-            draggable: true
+            draggable: false
+          },
+          {
+            name: 'Cross Reference Text',
+            type: 'text',
+            text: 'Read more at: Insert name here',
+            fill: function() {
+              return $scope.theme.xref;
+            },
+            fontSize: 22,
+            fontFamily: function() {
+              return $scope.theme.xrefFont;
+            },
+            textAnchor: 'start',
+            x: function() {
+              return $scope.size.gridSize;
+            },
+            y: function() {
+              return $scope.size.height - ($scope.size.gridSize);
+            },
+            fontWeight: 500,
+            draggable: true,
+            editable: {
+              text: true,
+              fontSize: {
+                'Small (16px)' : 16,
+                'Large (18px)': 18,
+              },
+              fill: 'picker',
+              textAnchor: true
+            },
           },
           {
             name: 'Credit',
@@ -122,21 +179,21 @@ angular.module('cardkitApp')
             fill: function() {
               return $scope.theme.quote;
             },
-            fontSize: 12,
+            fontSize: 18,
             fontFamily: function() {
-              return $scope.theme.headlineFont;
+              return $scope.theme.creditFont;
             },
             textAnchor: 'start',
-            x: 50,
+            textTransform: 'uppercase',
+            x: 15,
             y: 250,
+            fontWeight: 500,
             draggable: true,
             editable: {
               text: true,
               fontSize: {
-                'Small (12px)' : 12,
-                'Medium (18px)': 18,
-                'Large (22px)': 22,
-                'Extra Large (36px)': 36,
+                'Small (16px)' : 16,
+                'Large (18px)': 18,
               },
               fill: 'picker',
               textAnchor: true
@@ -149,24 +206,24 @@ angular.module('cardkitApp')
             fill: function() {
               return $scope.theme.quote;
             },
-            fontSize: 26,
+            fontSize: 32,
             fontFamily: function() {
               return $scope.theme.headlineFont;
             },
             textAnchor: 'start',
-            x: 50,
-            y: 55,
-            draggable: false,
+            x: 15,
+            y: 45,
+            fontWeight: 600,
+            draggable: true,
             editable: {
               text: true,
               fill: 'picker',
               textAnchor: true,
               fontSize: {
-                'Small (18px)': 18,
-                'Medium (26px)': 26,
-                'Large (32px)': 32,
-                'Extra Large (40px)': 40,
-                'Meme (60px)': 60,
+                'Small (26px)': 26,
+                'Medium (32px)': 32,
+                'Large (40px)': 40,
+                'X-Large (50px)': 50,
               },
             },
           },

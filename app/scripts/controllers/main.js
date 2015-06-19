@@ -53,6 +53,7 @@ angular.module('cardkitApp')
           {
             name: 'Background Colour',
             type: 'rect',
+            controlsOrder: 7,
             height: function() {
               return $scope.size.height;
             },
@@ -70,6 +71,7 @@ angular.module('cardkitApp')
             name: 'Image',
             type: 'image',
             width: 600,
+            controlsOrder: 4,
             height: function() {
               return this.width;
             },
@@ -96,6 +98,7 @@ angular.module('cardkitApp')
           {
             name: 'Cross Reference Background',
             type: 'rect',
+            controlsOrder: 5,
             height: function() {
               return $scope.size.gridSize*3;
             },
@@ -115,6 +118,7 @@ angular.module('cardkitApp')
           {
             name: 'Logo',
             type: 'image',
+            controlsOrder: 6,
             width: function() {
               return $scope.size.gridSize*2;
             },
@@ -146,6 +150,7 @@ angular.module('cardkitApp')
             name: 'Cross Reference Text',
             type: 'text',
             text: 'Read more at: Insert name here',
+            controlsOrder: 3,
             fill: function() {
               return $scope.theme.xref;
             },
@@ -176,6 +181,7 @@ angular.module('cardkitApp')
             name: 'Credit',
             type: 'text',
             text: 'Credit: Insert name here',
+            controlsOrder: 2,
             fill: function() {
               return $scope.theme.quote;
             },
@@ -206,6 +212,7 @@ angular.module('cardkitApp')
             fill: function() {
               return $scope.theme.quote;
             },
+            controlsOrder: 1,
             fontSize: 32,
             fontFamily: function() {
               return $scope.theme.headlineFont;
@@ -258,9 +265,9 @@ angular.module('cardkitApp')
     };
 
     // Drop handler.
-    $scope.onDrop = function (data, event, key) {
+    $scope.onDrop = function (data, event) {
       var dataTransfer = getDataTransfer(event);
-      readFile(dataTransfer.files[0], key);
+      readFile(dataTransfer.files[0], this.element);
     };
 
     $scope.fileChanged = function(file) {
@@ -268,11 +275,11 @@ angular.module('cardkitApp')
     };
 
     // Read the supplied file (from DataTransfer API)
-    function readFile(file, key) {
+    function readFile(file, element) {
       var reader = new FileReader();
 
       reader.onload = function() {
-        $scope.config.svg.elements[key].src = reader.result;
+        element.src = reader.result;
         $scope.$apply();
       };
 

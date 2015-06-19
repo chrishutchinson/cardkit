@@ -1,8 +1,10 @@
 node_modules
 .tmp
 .sass-cache
+.idea
 bower_components/*
 .DS_Store
 dist
+npm-debug.log
 
 !bower_components/saveSvgAsPng

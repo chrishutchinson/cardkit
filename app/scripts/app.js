@@ -18,9 +18,11 @@ angular
     'ngTouch',
     'colorpicker.module',
     'draganddrop',
-    'ui.router'
+    'ui.router',
+    'angular-google-auth'
   ])
   .config(function ($stateProvider, $urlRouterProvider) {
+
     // For any unmatched url, redirect to /
     $urlRouterProvider.otherwise('/');
 
@@ -35,5 +37,9 @@ angular
             return themeConfigProvider;
           }
         }
+      }).state('login', {
+        url: '/login',
+        controller: 'LoginCtrl',
+        templateUrl: 'views/login.html'
       });
   });

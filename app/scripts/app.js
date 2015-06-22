@@ -35,6 +35,9 @@ angular
         resolve: {
           themeConfig: function(themeConfigProvider) {
             return themeConfigProvider;
+          },
+          templateConfig: function(templateConfigProvider) {
+            return templateConfigProvider;
           }
         }
       }).state('login', {

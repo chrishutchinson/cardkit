@@ -3,6 +3,6 @@ node_modules
 .sass-cache
 bower_components/*
 .DS_Store
-
+dist
 
 !bower_components/saveSvgAsPng

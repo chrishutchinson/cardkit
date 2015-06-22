@@ -18,7 +18,6 @@ angular
     'ngTouch',
     'colorpicker.module',
     'draganddrop',
-    'colorpicker.module',
     'ui.router'
   ])
   .config(function ($stateProvider, $urlRouterProvider) {
@@ -34,6 +33,9 @@ angular
         resolve: {
           themeConfig: function(themeConfigProvider) {
             return themeConfigProvider;
+          },
+          templateConfig: function(templateConfigProvider) {
+            return templateConfigProvider;
           }
         }
       });

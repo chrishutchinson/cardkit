@@ -1,0 +1,14 @@
+test:
+  pre:
+    - bower i
+    - gem install compass
+deployment:
+  production:
+    branch: master
+    commands:
+      - git config --global user.name "circleci"
+      - git config --global user.email "{{ git.email }}"
+      - npm run deploy
+machine:
+  node:
+    version: v0.10.33

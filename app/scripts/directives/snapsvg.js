@@ -79,17 +79,23 @@ angular.module('cardkitApp')
             this.drag(dragMove, dragStart, dragEnd);
             return this;
           };
-              
+
           var dragStart = function () {
             this.data('ot', this.transform().local);
           };
-       
+
           var dragMove = function(dx, dy) {
             var tdx, tdy;
             var snapInvMatrix = this.transform().diffMatrix.invert();
-            snapInvMatrix.e = snapInvMatrix.f = 0; 
+            snapInvMatrix.e = snapInvMatrix.f = 0;
             tdx = snapInvMatrix.x(dx, dy);
             tdy = snapInvMatrix.y(dx, dy);
+
+            // snapping
+            var gridSize = scope.svgConfig.canvas.gridSize();
+            tdx = Math.round(tdx/gridSize) * gridSize;
+            tdy = Math.round(tdy/gridSize) * gridSize;
+
             this.transform(this.data('ot') + 't' + [tdx, tdy]);
           };
 
@@ -97,32 +103,44 @@ angular.module('cardkitApp')
           };
         });
 
-      	// Setup element
-      	var s = snapSVG(element[0].children[0]);
-        s.attr({
-          height: '100%',
-          width: '100%',
-        });
-
         // Generate all our styles and put them inside the <defs> attribute of the SVG
         // This is done as early as possible to ensure all webfonts declared via @font-face are included appropriately
         // @TODO: Find a smarter way of defining any external fonts via config, and process them here
-        var stylesElement = s.paper.el('style', {
-          type: 'text/css'
-        });
-        var css = styles(s.node);
-        stylesElement.node.innerHTML = css;
-        stylesElement.toDefs();
+        var stylesElement;
+        var css;
+        var canvasData;
+        var background;
+        var elements;
+        var el;
+      	var s;
+        var filters;
 
-      	// Setup canvas background
-        var canvasData = functionise(data.canvas);
-      	var background = s.rect(0, 0, canvasData.width, canvasData.height, 0, 0).attr(canvasData);
-      	if(canvasData.draggable === true) {
-      		background.altDrag();
-      	}
+          s = snapSVG(element[0].children[0]);
+          s.attr({
+            height: '100%',
+            width: '100%',
+          });
+          stylesElement = s.paper.el('style', {
+            type: 'text/css'
+          });
+          css =styles(s.node);
+          stylesElement.node.innerHTML = css;
+          stylesElement.toDefs();
+
+        function init() {
+          // Setup canvas background
+          canvasData = functionise(data.canvas);
+        	background = s.rect(0, 0, canvasData.width, canvasData.height, 0, 0).attr(canvasData);
+          if(canvasData.draggable === true) {
+            background.altDrag();
+          }
+          elements = [];
+        }
+
+        init();
 
         // Create us some filters for later use
-        var filters;
+
         function setupFilters() {
           // Store filters
           filters = {
@@ -146,16 +164,14 @@ angular.module('cardkitApp')
               width: canvasData.width*4 + 'px',
               height: canvasData.height*4 + 'px'
             }),
-          };   
+          };
         }
+
         setupFilters();
 
-      	// Setup some element variables
-      	var elements = [],
-      		  el;
 
-      	// The function that sets up the element with the required settings
-      	function setupElement(element) {
+        // The function that sets up the element with the required settings
+        function setupElement(element) {
       		var el;
           element = functionise(element);
 
@@ -177,7 +193,7 @@ angular.module('cardkitApp')
       				angular.forEach(element.elements, function(e, k) {
       					gEl = setupElement(e);
                 setAttributes(gEl, e);
-      				
+
         			  if(k === 0) {
       						el = s.group(gEl);
     						} else {
@@ -185,7 +201,7 @@ angular.module('cardkitApp')
       					}
       				});
       				break;
-      			default: 
+      			default:
       				return false;
       		}
 
@@ -214,12 +230,16 @@ angular.module('cardkitApp')
           if(elementData.type === 'text') {
             elementData.text = elementData.text.split('\n');
           }
-          
+          if (elementData.textTransform) {
+            el.node.style.textTransform = elementData.textTransform;
+          }
           el.attr(elementData);
 
           if(elementData.type === 'text') {
             el.selectAll('tspan').forEach(function(tspan, i){
-              tspan.attr({x: elementData.x, y: elementData.y + (elementData.fontSize*i)});
+              tspan.attr({
+                x: elementData.x,
+                y: elementData.y + (elementData.fontSize*i)});
             });
           }
 
@@ -249,9 +269,9 @@ angular.module('cardkitApp')
 
               // If the type is image
               if(el.type === 'image') {
-                // Store matrix transformation, we'll need it later to prevent the image moving around the SVG when replaced 
+                // Store matrix transformation, we'll need it later to prevent the image moving around the SVG when replaced
                 matrix = el.matrix;
-                
+
                 // Create new element based on config
                 var newEl = setupElement(scope.svgConfig.elements[key]);
 
@@ -267,7 +287,7 @@ angular.module('cardkitApp')
 
                 // Destroy old element
                 el.remove();
-                
+
                 el = newEl;
 
                 // Add the created element to a list of elements
@@ -275,12 +295,12 @@ angular.module('cardkitApp')
               }
 
               if(el.type === 'g') {
-                // Store matrix transformation, we'll need it later to prevent the group moving around the SVG when replaced 
+                // Store matrix transformation, we'll need it later to prevent the group moving around the SVG when replaced
                 matrix = el.matrix;
 
                 // Destroy and recreate
                 el.remove();
-                
+
                 // Create new element based on config
                 el = setupElement(scope.svgConfig.elements[key]);
 
@@ -326,7 +346,7 @@ angular.module('cardkitApp')
 
         function resetSvg() {
           var els = s.selectAll('*');
-          angular.forEach(els, function(e, i) {
+          angular.forEach(els, function(e) {
             e.transform('');
           });
         }
@@ -334,6 +354,10 @@ angular.module('cardkitApp')
       	// Watch for changes on the scope and the theme, and redraw
         scope.$watch('svgConfig', drawElements, true);
         scope.$on('changeTheme', drawElements);
+        scope.$on('changeTemplate', function() {
+          init();
+          drawElements();
+        });
         scope.$on('changeSize', drawElements);
         scope.$on('changeSize', setupFilters);
         scope.$on('resetSvg', resetSvg);

@@ -4,8 +4,8 @@
   <aside class="elements">
     <div ng-if="(config.themes.length > 0 && theme) || !config.themes">
 
-      <div ng-repeat="(key, element) in config.svg.elements" ng-if="element.editable" class="panel">
-          
+      <div ng-repeat="(key, element) in config.svg.elements | orderBy: element.controlsOrder" ng-if="element.editable" class="panel">
+
         <h3 ng-click="show[key] = !show[key]"><i class="fa fa-caret-down" ng-hide="show[key]"></i><i class="fa fa-caret-right" ng-hide="!show[key]"></i> {{element.name}}</h3>
         <div ng-if="element.type !== 'group'" ng-repeat="(type, field) in element.editable" ng-switch="type" ng-hide="show[key]">
           <!-- Text -->
@@ -16,19 +16,19 @@
 
           <!-- Font Size -->
           <fontsize-editor ng-switch-when="fontSize" element="element" field="field"></fontsize-editor>
-        
+
           <!-- Font Family -->
           <fontfamily-editor ng-switch-when="fontFamily" element="element" field="field"></fontfamily-editor>
 
           <!-- Source -->
-          <image-editor ng-switch-when="src" key="key" on-drop="onDrop" remove-image="removeImage"></image-editor>
-          
+          <image-editor ng-switch-when="src" key="key" on-drop="onDrop" remove-image="removeImage" element="element"></image-editor>
+
           <!-- Width / Size -->
           <size-editor ng-switch-when="width" element="element"></size-editor>
-          
+
           <!-- Text Anchor -->
           <textanchor-editor ng-switch-when="textAnchor" element="element"></textanchor-editor>
-          
+
           <!-- Opacity -->
           <opacity-editor ng-switch-when="opacity" element="element"></opacity-editor>
 
@@ -47,16 +47,16 @@
 
             <!-- Font Size -->
             <fontsize-editor ng-switch-when="fontSize" element="e" field="f"></fontsize-editor>
-          
+
             <!-- Font Family -->
             <fontfamily-editor ng-switch-when="fontFamily" element="e" field="f"></fontfamily-editor>
-            
+
             <!-- Width / Size -->
             <size-editor ng-switch-when="width" element="e"></size-editor>
-            
+
             <!-- Text Anchor -->
             <textanchor-editor ng-switch-when="textAnchor" element="e"></textanchor-editor>
-            
+
             <!-- Opacity -->
             <opacity-editor ng-switch-when="opacity" element="e"></opacity-editor>
 
@@ -84,6 +84,13 @@
         </select>
       </div>
 
+      <div class="panel" ng-show="config.templates">
+        <h3 ng-click="templates = !templates"><i class="fa fa-caret-down" ng-hide="templates"></i><i class="fa fa-caret-right" ng-hide="!templates"></i> Template <small>Choose a template</small></h3>
+        <select id="template" ng-model="template" ng-options="template.name for template in config.templates" class="form-control" ng-hide="templates">
+          <option value="">-- Choose templates --</option>
+        </select>
+      </div>
+
       <div class="panel" ng-show="config.themes">
         <h3 ng-click="themes = !themes"><i class="fa fa-caret-down" ng-hide="themes"></i><i class="fa fa-caret-right" ng-hide="!themes"></i> Theme <small>Choose the look and feel</small></h3>
         <select id="theme" ng-model="theme" ng-options="theme.name for theme in config.themes" class="form-control" ng-hide="themes">
@@ -97,4 +104,6 @@
       </div>
     </div>
   </div>
+
+  <div class="clearfix"></div>
 </main>

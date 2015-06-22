@@ -12,7 +12,7 @@ angular.module('cardkitApp')
       template: '<div>' +
             '<label>Image</label>' +
             '<div class="dropzone" drop="onDrop($data, $event, key)" drop-effect="copy" drop-accept="\'Files\'" drag-over-class="drag-over-accept">' +
-              
+
               '<div class="fileInputWrapper button">' +
                 '<span>or select an image</span>' +
                 '<input onchange="angular.element(this).scope().$parent.fileChanged(this, event)" data-key="{{key}}" type="file" accept="image/*" />' +
@@ -25,6 +25,7 @@ angular.module('cardkitApp')
       scope: {
         key: '=',
         onDrop: '=',
+        element: '=',
         removeImage: '=',
       },
     };

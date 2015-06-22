@@ -1,0 +1,27 @@
+<main id="body">
+  <div id=login-overlay class="jumbotron">
+    <h1>FT Card Kit</h1>
+
+    <p>requires a login with your FT credentials</p>
+
+    <div id="login-alert" class="alert alert-danger" role="alert">Please re-sign in with your ft.com email address
+    </div>
+    <div id="my-signin2" >
+      Log me in
+    </div>
+    <div id="trouble" class="trouble__container ">
+      <p><a href="#/login" ng-click='trouble()'>Trouble signing in?</a></p>
+
+      <p class="trouble__help alert alert-danger">
+        Please sign out of <a href="https://mail.google.com/mail/logout?hl=en-GB" target="_blank">Google
+        Mail</a> and try again.<br>
+        Once you have Signed-in into Nightingale, you can sign back into <a href="https://mail.google.com/"
+                                                                            target="_blank">Google Mail</a>.<br>
+        Thanks.
+        <a href="#/login" class="trouble__close" ng-click='trouble(0)'>close</a>
+      </p>
+    </div>
+  </div>
+
+  <div class="clearfix"></div>
+</main>

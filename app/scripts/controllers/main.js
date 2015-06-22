@@ -8,8 +8,10 @@
  * Controller of the cardkitApp
  */
 angular.module('cardkitApp')
-  .controller('MainCtrl', function ($scope, saveSvgAsPng, themeConfig) {
-
+  .controller('MainCtrl', function ($scope, $location, saveSvgAsPng, themeConfig) {
+  if (!$scope.googleInfo){ //ooh dirty. ah well. todo: as service
+    $location.path('/login');
+  }
     $scope.config = {
       sizes: [
         {

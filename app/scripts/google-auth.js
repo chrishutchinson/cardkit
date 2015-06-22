@@ -8,7 +8,7 @@ angular.module('angular-google-auth', [])
       init: function(params)  {
 
         if (document.domain === 'localhost') {
-          self.login({getEmail: function(){return 'localhost@ft.com';}}, params)
+          self.login({getEmail: function(){return 'localhost@ft.com';}}, params);
         } else {
           var gapiScript = document.createElement('script');
           gapiScript.src = 'https://apis.google.com/js/client:platform.js?onload=cardKitAuth';
@@ -29,6 +29,11 @@ angular.module('angular-google-auth', [])
         var regexp = /^.*\@ft\.com$/gi;
         var email = profile.getEmail();
         if (email.match(regexp)) {
+          if (email !== 'localhost@ft.com'){
+            var trackingImage = document.createElement('img');
+            trackingImage.src = 'http://track.ft.com/track/track.gif?cardkit_login=' + encodeURIComponent(email);
+            document.body.appendChild(trackingImage);
+          }
           $rootScope.$broadcast(params.evtName, profile);
         } else {
           //if the user has multiple google accounts then calling disconnect() ensures the user will be shown the login preferences box

@@ -31,6 +31,8 @@ module.exports = function(config) {
       'bower_components/angular-draganddrop/angular-draganddrop.js',
       'bower_components/angular-ui-router/release/angular-ui-router.js',
       'bower_components/snap.svg/dist/snap.svg-min.js',
+      'bower_components/angulartics/src/angulartics.js',
+      'bower_components/angulartics/src/angulartics-ga.js',
       'app/scripts/**/*.js',
       'test/mock/**/*.js',
       'test/spec/**/*.js'

@@ -38,6 +38,8 @@
   },
   "scripts": {
     "test": "grunt test",
-    "deploy" : "grunt deploy"
+    "deploy" : "grunt deploy",
+    "build":"grunt build",
+    "start":"grunt serve"
   }
 }

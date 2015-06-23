@@ -246,8 +246,6 @@ angular.module('cardkitApp')
                 var h = ($scope.size.gridSize) / 2;
                 return $scope.size.height - (this.height() + h);
               },
-              // x: 500,
-              // y: 150,
               preserveAspectRatio: 'xMinYMin meet',
               draggable: false
             }, {
@@ -274,10 +272,10 @@ angular.module('cardkitApp')
               editable: {
                 text: true,
                 fontSize: {
-                  'Small (16px)': 16,
-                  'Large (18px)': 18,
+                  'Small (18px)': 18,
+                  'Medium (22px)': 22,
+                  'Large (24px)': 24,
                 },
-                fill: 'picker',
                 textAnchor: true
               },
             }, {
@@ -304,7 +302,8 @@ angular.module('cardkitApp')
                 text: true,
                 fontSize: {
                   'Small (16px)': 16,
-                  'Large (18px)': 18,
+                  'Medium (18px)': 18,
+                  'Large (22px)': 22,
                 }
               },
             }, {
@@ -330,8 +329,6 @@ angular.module('cardkitApp')
               draggable: true,
               editable: {
                 text: true,
-                fill: 'picker',
-                textAnchor: true,
                 fontSize: {
                   'Small (50px)': 50,
                   'Medium (60px)': 60,
@@ -362,14 +359,15 @@ angular.module('cardkitApp')
               width: 300,
               controlsOrder: 4,
               height: function() {
-                return this.width;
+                return +this.width;
               },
               src: function() {
                 return $scope.theme.headshotSrc || '';
               },
               opacity: 1,
               x: function() {
-                return $scope.size.width - (this.width + $scope.size.gridSize);
+                var w = (+this.width);
+                return $scope.size.width - (w + $scope.size.gridSize);
               },
               y: function() {
                 return $scope.size.gridSize;
@@ -476,9 +474,9 @@ angular.module('cardkitApp')
                 text: true,
                 fontSize: {
                   'Small (16px)': 16,
-                  'Large (18px)': 18,
+                  'Medium (18px)': 18,
+                  'Large (22px)': 22,
                 },
-                fill: 'picker',
                 textAnchor: true
               },
             }, {
@@ -500,7 +498,6 @@ angular.module('cardkitApp')
               draggable: true,
               editable: {
                 text: true,
-                fill: 'picker',
                 textAnchor: true,
                 fontSize: {
                   'Small (26px)': 26,
@@ -592,8 +589,9 @@ angular.module('cardkitApp')
               editable: {
                 text: true,
                 fontSize: {
-                  'Small (16px)': 16,
-                  'Large (18px)': 18,
+                  'Small (18px)': 18,
+                  'Medium (22px)': 22,
+                  'Large (24px)': 24,
                 }
               },
             }, {
@@ -640,7 +638,6 @@ angular.module('cardkitApp')
               draggable: true,
               editable: {
                 text: true,
-                fill: 'picker',
                 textAnchor: true,
               },
             }];
@@ -751,7 +748,8 @@ angular.module('cardkitApp')
               editable: {
                 text: true,
                 fontSize: {
-                  'Small (32px)': 32,
+                  'Small (22px)': 22,
+                  'Medium (24px)': 24,
                   'Large (34px)': 34,
                 },
                 textAnchor: true
@@ -818,6 +816,51 @@ angular.module('cardkitApp')
               },
               fill: function() {
                 return $scope.theme.background;
+              }
+            }, {
+              name: 'Graph',
+              type: 'image',
+              width: function() {
+                return $scope.size.width * 0.7;
+              },
+              controlsOrder: 1,
+              height: function() {
+                var h;
+                if (typeof this.width === 'string') {
+                  h = +this.width;
+                } else {
+                  h = this.width();
+                }
+
+                if (h > ($scope.size.height-$scope.size.gridSize*2)) {
+                  h = $scope.size.height-$scope.size.gridSize*2;
+                }
+                return h;
+              },
+              src: function() {
+                return $scope.theme.graphWideSrc;
+              },
+              opacity: 1,
+              x: function() {
+                return $scope.size.gridSize;
+              },
+              y: function() {
+                return $scope.size.gridSize;
+              },
+              preserveAspectRatio: 'xMinYMin meet',
+              draggable: true,
+              defaultFilter: '',
+              editable: {
+                src: true,
+                width: true,
+                opacity: true,
+                filters: [
+                  'Sepia',
+                  'Grayscale',
+                  'Saturate',
+                  'Invert',
+                  'Blur'
+                ],
               }
             }, {
               name: 'Side Explanation Background',
@@ -909,56 +952,11 @@ angular.module('cardkitApp')
               editable: {
                 text: true,
                 fontSize: {
-                  'Small (18px)': 18,
+                  'Small (16px)': 16,
+                  'Medium (18px)': 18,
                   'Large (22px)': 22,
-                },
-                textAnchor: true
-              },
-            }, {
-              name: 'Graph',
-              type: 'image',
-              width: function() {
-                return $scope.size.width * 0.7;
-              },
-              controlsOrder: 4,
-              height: function() {
-                var h;
-                if (typeof this.width === 'string') {
-                  h = +this.width;
-                } else {
-                  h = this.width();
                 }
-
-                if (h > ($scope.size.height-$scope.size.gridSize*2)) {
-                  h = $scope.size.height-$scope.size.gridSize*2;
-                }
-                return h;
               },
-              src: function() {
-                return $scope.theme.graphWideSrc;
-              },
-              opacity: 1,
-              x: function() {
-                return $scope.size.gridSize;
-              },
-              y: function() {
-                return $scope.size.gridSize;
-              },
-              preserveAspectRatio: 'xMinYMin meet',
-              draggable: true,
-              defaultFilter: '',
-              editable: {
-                src: true,
-                width: true,
-                opacity: true,
-                filters: [
-                  'Sepia',
-                  'Grayscale',
-                  'Saturate',
-                  'Invert',
-                  'Blur'
-                ],
-              }
             }];
           }
         }, {
@@ -1079,8 +1077,9 @@ angular.module('cardkitApp')
               editable: {
                 text: true,
                 fontSize: {
-                  'Small (16px)': 16,
-                  'Large (18px)': 18,
+                  'Small (18px)': 18,
+                  'Medium (22px)': 22,
+                  'Large (24px)': 24,
                 }
               },
             }];
@@ -1207,7 +1206,8 @@ angular.module('cardkitApp')
                 text: true,
                 fontSize: {
                   'Small (22px)': 22,
-                  'Large (24px)': 24,
+                  'Medium (24px)': 24,
+                  'Large (28px)': 28,
                 },
                 textAnchor: true
               },
@@ -1264,8 +1264,6 @@ angular.module('cardkitApp')
                 var h = ($scope.size.gridSize);
                 return $scope.size.height - (this.height() + h);
               },
-              // x: 500,
-              // y: 150,
               preserveAspectRatio: 'xMinYMin meet',
               draggable: false
             }, {
@@ -1288,8 +1286,6 @@ angular.module('cardkitApp')
               y: function() {
                 return (($scope.size.gridSize*3.5) - this.height())/2;
               },
-              // x: 500,
-              // y: 150,
               preserveAspectRatio: 'xMinYMin meet',
               draggable: false
             }, {
@@ -1301,7 +1297,7 @@ angular.module('cardkitApp')
               fill: function() {
                 return $scope.theme.xref;
               },
-              fontSize: 22,
+              fontSize: 24,
               fontFamily: function() {
                 return $scope.theme.xrefFont;
               },
@@ -1317,11 +1313,10 @@ angular.module('cardkitApp')
               editable: {
                 text: true,
                 fontSize: {
-                  'Small (18px)': 18,
-                  'Large (22px)': 22,
+                  'Small (22px)': 22,
+                  'Medium (24px)': 24,
+                  'Large (28px)': 28,
                 },
-                fill: 'picker',
-                textAnchor: true
               },
             }, {
               name: 'Credit',
@@ -1347,7 +1342,8 @@ angular.module('cardkitApp')
                 text: true,
                 fontSize: {
                   'Small (16px)': 16,
-                  'Large (18px)': 18,
+                  'Medium (18px)': 18,
+                  'Large (18px)': 22,
                 }
               },
             }, {
@@ -1374,7 +1370,8 @@ angular.module('cardkitApp')
                 text: true,
                 fontSize: {
                   'Small (16px)': 16,
-                  'Large (18px)': 18,
+                  'Medium (18px)': 18,
+                  'Large (18px)': 22,
                 }
               },
             }, {

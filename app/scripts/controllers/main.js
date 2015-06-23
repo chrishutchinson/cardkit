@@ -9,7 +9,7 @@
  */
 angular.module('cardkitApp')
   .controller('MainCtrl', function ($scope, saveSvgAsPng, themeConfig) {
-    
+
     $scope.config = {
       sizes: [
         {
@@ -206,7 +206,7 @@ angular.module('cardkitApp')
     function readFile(file, key) {
       var reader = new FileReader();
 
-      reader.onload = function() { 
+      reader.onload = function() {
         $scope.config.svg.elements[key].src = reader.result;
         $scope.$apply();
       };
@@ -227,8 +227,33 @@ angular.module('cardkitApp')
 
 
     $scope.downloadSvg = function() {
-      saveSvgAsPng(document.getElementById('snap-svg'), 'image.png', {
+      saveSvgAsPng(document.getElementById('snap-svg'), 'card-'+ $scope.getFilename() +'.png', {
         scale: $scope.config.output.scale
       });
+    };
+
+    $scope.getFilename = function() {
+      var elements = $scope.config.svg.elements;
+      var quote;
+      if(elements[4].name === "Headline" ){
+        quote = elements[4].text;
+      }else{
+        for (var x in elements){
+          if(elements[x].name === "Headline" ){
+            quote = elements[x].text;
+            break;
+          }
+        }
+      }
+      quote = quote.split(' ', 5);
+      var filename = $scope.slugify( quote.join(' ') );
+      return filename;
+    };
+
+    $scope.slugify = function(text) {
+      return text
+        .toLowerCase()
+        .replace(/[^\w ]+/g,'')
+        .replace(/ +/g,'-');
     };
   });

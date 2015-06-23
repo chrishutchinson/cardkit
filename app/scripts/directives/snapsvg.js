@@ -103,32 +103,44 @@ angular.module('cardkitApp')
           };
         });
 
-      	// Setup element
-      	var s = snapSVG(element[0].children[0]);
-        s.attr({
-          height: '100%',
-          width: '100%',
-        });
-
         // Generate all our styles and put them inside the <defs> attribute of the SVG
         // This is done as early as possible to ensure all webfonts declared via @font-face are included appropriately
         // @TODO: Find a smarter way of defining any external fonts via config, and process them here
-        var stylesElement = s.paper.el('style', {
-          type: 'text/css'
-        });
-        var css = styles(s.node);
-        stylesElement.node.innerHTML = css;
-        stylesElement.toDefs();
+        var stylesElement;
+        var css;
+        var canvasData;
+        var background;
+        var elements;
+        var el;
+      	var s;
+        var filters;
 
-      	// Setup canvas background
-        var canvasData = functionise(data.canvas);
-      	var background = s.rect(0, 0, canvasData.width, canvasData.height, 0, 0).attr(canvasData);
-      	if(canvasData.draggable === true) {
-      		background.altDrag();
-      	}
+          s = snapSVG(element[0].children[0]);
+          s.attr({
+            height: '100%',
+            width: '100%',
+          });
+          stylesElement = s.paper.el('style', {
+            type: 'text/css'
+          });
+          css =styles(s.node);
+          stylesElement.node.innerHTML = css;
+          stylesElement.toDefs();
+
+        function init() {
+          // Setup canvas background
+          canvasData = functionise(data.canvas);
+        	background = s.rect(0, 0, canvasData.width, canvasData.height, 0, 0).attr(canvasData);
+          if(canvasData.draggable === true) {
+            background.altDrag();
+          }
+          elements = [];
+        }
+
+        init();
 
         // Create us some filters for later use
-        var filters;
+
         function setupFilters() {
           // Store filters
           filters = {
@@ -154,14 +166,12 @@ angular.module('cardkitApp')
             }),
           };
         }
+
         setupFilters();
 
-      	// Setup some element variables
-      	var elements = [],
-      		  el;
 
-      	// The function that sets up the element with the required settings
-      	function setupElement(element) {
+        // The function that sets up the element with the required settings
+        function setupElement(element) {
       		var el;
           element = functionise(element);
 
@@ -344,6 +354,10 @@ angular.module('cardkitApp')
       	// Watch for changes on the scope and the theme, and redraw
         scope.$watch('svgConfig', drawElements, true);
         scope.$on('changeTheme', drawElements);
+        scope.$on('changeTemplate', function() {
+          init();
+          drawElements();
+        });
         scope.$on('changeSize', drawElements);
         scope.$on('changeSize', setupFilters);
         scope.$on('resetSvg', resetSvg);

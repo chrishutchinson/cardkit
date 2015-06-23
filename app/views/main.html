@@ -84,6 +84,13 @@
         </select>
       </div>
 
+      <div class="panel" ng-show="config.templates">
+        <h3 ng-click="templates = !templates"><i class="fa fa-caret-down" ng-hide="templates"></i><i class="fa fa-caret-right" ng-hide="!templates"></i> Template <small>Choose a template</small></h3>
+        <select id="template" ng-model="template" ng-options="template.name for template in config.templates" class="form-control" ng-hide="templates">
+          <option value="">-- Choose templates --</option>
+        </select>
+      </div>
+
       <div class="panel" ng-show="config.themes">
         <h3 ng-click="themes = !themes"><i class="fa fa-caret-down" ng-hide="themes"></i><i class="fa fa-caret-right" ng-hide="!themes"></i> Theme <small>Choose the look and feel</small></h3>
         <select id="theme" ng-model="theme" ng-options="theme.name for theme in config.themes" class="form-control" ng-hide="themes">

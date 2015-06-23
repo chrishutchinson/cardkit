@@ -11,14 +11,14 @@ angular.module('cardkitApp')
       var evtGoogleLogin ='evtGoogleLogin';
 
       $scope.trouble = function(setHeight) {
-        var help = document.querySelector('.trouble__help')
-        setHeight = setHeight || help.style.height =='100px' ? 0 : '100px';
+        var help = document.querySelector('.trouble__help');
+        setHeight = setHeight || help.style.height === '100px' ? 0 : '100px';
         help.style.height = setHeight;
       };
 
       $scope.$on(evtGoogleLogin, function(evt, googleInfo) {
         $rootScope.googleInfo =googleInfo;
-        $location.path('/home')
+        $location.path('/home');
       });
 
       jrgGoogleAuth.init({'client_id':googleClientId, 'evtName':evtGoogleLogin});

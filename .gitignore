@@ -8,3 +8,4 @@ dist
 npm-debug.log
 
 !bower_components/saveSvgAsPng
+!bower_components/angulartics

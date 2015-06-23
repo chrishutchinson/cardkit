@@ -8,10 +8,12 @@
  * Controller of the cardkitApp
  */
 angular.module('cardkitApp')
-  .controller('MainCtrl', function ($scope, $location, saveSvgAsPng, themeConfig, templateConfig) {
-    if (!$scope.googleInfo){ //ooh dirty. ah well. todo: as service
-      $location.path('/login');
-    }
+  .controller('MainCtrl', function ($scope, $location, $analytics, saveSvgAsPng, themeConfig, templateConfig) {
+  if (!$scope.googleInfo){ //ooh dirty. ah well. todo: as service
+    $location.path('/login');
+  }
+  $analytics.pageTrack('/homepage');
+
     $scope.config = {
       sizes: [
         {
@@ -127,8 +129,13 @@ angular.module('cardkitApp')
       $scope.config.svg.elements[key].src = '';
     };
 
-
     $scope.downloadSvg = function() {
+      $analytics.eventTrack('save', {
+        size: $scope.size.name,
+        theme: $scope.theme.name,
+        template: $scope.template.name,
+        user: $scope.googleInfo.getEmail()
+      });
       saveSvgAsPng(document.getElementById('snap-svg'), 'image.png', {
         scale: $scope.config.output.scale
       });

@@ -130,11 +130,9 @@ angular.module('cardkitApp')
     };
 
     $scope.downloadSvg = function() {
-      $analytics.eventTrack('save', {
-        size: $scope.size.name,
-        theme: $scope.theme.name,
-        template: $scope.template.name,
-        user: $scope.googleInfo.getEmail()
+      $analytics.eventTrack($scope.template.name, {
+        category: 'save',
+        label:  $scope.size.name
       });
       saveSvgAsPng(document.getElementById('snap-svg'), 'image.png', {
         scale: $scope.config.output.scale

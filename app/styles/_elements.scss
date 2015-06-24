@@ -25,6 +25,19 @@ aside.elements {
 			color: $secondary-color;
 		}
 
+		.warning {
+			font-weight: 300;
+			border: 1px solid $danger-color;
+			padding: 5px;
+			color: white;
+			border-radius: 5px;
+			margin-bottom: 5px;
+			background-color: lighten($danger-color, 20%);
+			em {
+				font-weight: 500;
+			}
+		}
+
 		.fileInputWrapper {
 			position: relative;
 			overflow: hidden;

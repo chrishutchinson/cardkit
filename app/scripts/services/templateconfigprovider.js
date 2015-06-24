@@ -596,6 +596,159 @@ angular.module('cardkitApp')
             }];
           }
         }, {
+          name: 'Illustration',
+          elements: function($scope) {
+            return [{
+              name: 'Background Colour',
+              type: 'rect',
+              controlsOrder: 10,
+              height: function() {
+                return $scope.size.height;
+              },
+              width: function() {
+                return $scope.size.width;
+              },
+              fill: function() {
+                return $scope.theme.background;
+              }
+            }, {
+              name: 'Illustration',
+              type: 'image',
+              width: function() {
+                return $scope.size.width * 0.7 ;
+              },
+              controlsOrder: 1,
+              height: function() {
+                var h;
+                if (typeof this.width === 'string') {
+                  h = +this.width;
+                } else {
+                  h = this.width();
+                }
+
+                return h;
+              },
+              src: function() {
+                return $scope.theme.illustrationSrc;
+              },
+              opacity: 1,
+              x: 0,
+              y: function() {
+                return $scope.size.gridSize*2;
+              },
+              preserveAspectRatio: 'xMinYMin meet',
+              draggable: true,
+              defaultFilter: '',
+              editable: {
+                src: true,
+                width: true,
+                opacity: true,
+                filters: [
+                  'Sepia',
+                  'Grayscale',
+                  'Saturate',
+                  'Invert',
+                  'Blur'
+                ],
+              }
+            }, {
+              name: 'Side Explanation Background',
+              type: 'rect',
+              controlsOrder: 10,
+              height: function() {
+                return $scope.size.height;
+              },
+              width: function() {
+                return $scope.size.width * 0.3;
+              },
+              y: '0%',
+              x: function() {
+                return $scope.size.width - this.width();
+              },
+              fill: function() {
+                return $scope.theme.xrefBackground;
+              }
+            }, {
+              name: 'Logo',
+              type: 'image',
+              controlsOrder: 10,
+              width: function() {
+                return $scope.size.gridSize * 2;
+              },
+              height: function() {
+                return $scope.size.gridSize * 2;
+              },
+              src: function() {
+                return $scope.theme.logoSrc;
+              },
+              opacity: 1,
+              x: function() {
+                return $scope.size.width - ($scope.size.gridSize * 3);
+              },
+              y: function() {
+                var h = ($scope.size.gridSize);
+                return $scope.size.height - (this.height() + h);
+              },
+              preserveAspectRatio: 'xMinYMin meet',
+              draggable: false
+            }, {
+              name: 'Ref Text',
+              type: 'text',
+              text: 'FT.COM/\nCOMPANIES',
+              controlsOrder: 3,
+              fill: function() {
+                return $scope.theme.xref;
+              },
+              fontSize: 18,
+              fontFamily: function() {
+                return $scope.theme.xrefFont;
+              },
+              textAnchor: 'start',
+              x: function() {
+                var w = $scope.size.width;
+                return (w - w*0.3) + $scope.size.gridSize;
+              },
+              y: function() {
+                return $scope.size.height - ($scope.size.gridSize*2);
+              },
+              fontWeight: 500,
+              draggable: false,
+            }, {
+              name: 'Explanatory Text',
+              type: 'text',
+              text: 'This is 180px\nwide explanation\ntext for the chart.\nShould run short\nbut max depth on\nthis grid for text\nis 225px box, with\n15px padding',
+              controlsOrder: 2,
+              fill: function() {
+                return $scope.theme.xref;
+              },
+              fontSize: 24,
+              fontFamily: function() {
+                return $scope.theme.creditFont;
+              },
+              textAnchor: 'start',
+              width: function () {
+                return $scope.size.width * 0.3;
+              },
+              x: function() {
+                var w = $scope.size.width;
+                return (w - w*0.3) + $scope.size.gridSize;
+              },
+              y: function() {
+                return $scope.size.gridSize*2;
+              },
+              fontWeight: 500,
+              draggable: true,
+              editable: {
+                text: true,
+                fontSize: {
+                  'Small (22px)': 22,
+                  'Medium (24px)': 24,
+                  'Large (34px)': 34,
+                }
+              },
+            }];
+          }
+        }, {
           name: 'Graph with Explanation',
           elements: function($scope) {
             return [{

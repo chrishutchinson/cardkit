@@ -11,8 +11,8 @@ angular.module('cardkitApp')
     return {
       template: '<div>' +
             '<label>Image</label>' +
+            '<div class="warning label"><em>Heads Up!</em> Only Images from <em>Getty, Reuters, Dreamstime</em> and <em>Bloomberg</em> as well as <em>FT-owned</em> images are allowed for legal reasons</div>' +
             '<div class="dropzone" drop="onDrop($data, $event, key)" drop-effect="copy" drop-accept="\'Files\'" drag-over-class="drag-over-accept">' +
-
               '<div class="fileInputWrapper button">' +
                 '<span>or select an image</span>' +
                 '<input onchange="angular.element(this).scope().$parent.fileChanged(this, event)" data-key="{{key}}" type="file" accept="image/*" />' +

@@ -103,7 +103,7 @@ angular.module('cardkitApp')
     };
 
     $scope.fileChanged = function(file) {
-      readFile(angular.element(file)[0].files[0], angular.element(file).data('key'));
+      readFile(angular.element(file)[0].files[0], this.element);
     };
 
     // Read the supplied file (from DataTransfer API)
@@ -126,7 +126,7 @@ angular.module('cardkitApp')
     }
 
     $scope.removeImage = function(key) {
-      $scope.config.svg.elements[key].src = '';
+      this.element.src = '';
     };
 
     $scope.downloadSvg = function() {

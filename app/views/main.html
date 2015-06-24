@@ -4,7 +4,7 @@
   <aside class="elements">
     <div ng-if="(config.themes.length > 0 && theme) || !config.themes">
 
-      <div ng-repeat="(key, element) in config.svg.elements | orderBy: element.controlsOrder" ng-if="element.editable" class="panel">
+      <div ng-repeat="(key, element) in config.svg.elements | orderBy:'controlsOrder'" ng-if="element.editable" class="panel">
 
         <h3 ng-click="show[key] = !show[key]"><i class="fa fa-caret-down" ng-hide="show[key]"></i><i class="fa fa-caret-right" ng-hide="!show[key]"></i> {{element.name}}</h3>
         <div ng-if="element.type !== 'group'" ng-repeat="(type, field) in element.editable" ng-switch="type" ng-hide="show[key]">

@@ -26,36 +26,6 @@ angular.module('cardkitApp')
               },
               fill: function() {
                 return $scope.theme.background;
-              },
-              editable: {
-                fill: 'picker'
-              }
-            }, {
-              name: 'Image',
-              type: 'image',
-              width: 600,
-              controlsOrder: 4,
-              height: function() {
-                return this.width;
-              },
-              src: '',
-              opacity: 1,
-              x: '0%',
-              y: '0%',
-              preserveAspectRatio: 'xMinYMin meet',
-              draggable: true,
-              defaultFilter: '',
-              editable: {
-                src: true,
-                width: true,
-                opacity: true,
-                filters: [
-                  'Sepia',
-                  'Grayscale',
-                  'Saturate',
-                  'Invert',
-                  'Blur'
-                ],
               }
             }, {
               name: 'Cross Reference Background',
@@ -72,9 +42,6 @@ angular.module('cardkitApp')
               },
               fill: function() {
                 return $scope.theme.xrefBackground;
-              },
-              editable: {
-                fill: 'picker'
               }
             }, {
               name: 'Logo',
@@ -100,11 +67,6 @@ angular.module('cardkitApp')
               // x: 500,
               // y: 150,
               preserveAspectRatio: 'xMinYMin meet',
-              editable: {
-                src: true,
-                width: true,
-                opacity: true
-              },
               draggable: false
             }, {
               name: 'Cross Reference Text',
@@ -130,11 +92,10 @@ angular.module('cardkitApp')
               editable: {
                 text: true,
                 fontSize: {
-                  'Small (16px)': 16,
-                  'Large (18px)': 18,
-                },
-                fill: 'picker',
-                textAnchor: true
+                  'Small (18px)': 18,
+                  'Medium (22px)': 22,
+                  'Large (24px)': 24,
+                }
               },
             }, {
               name: 'Credit',
@@ -158,10 +119,9 @@ angular.module('cardkitApp')
                 text: true,
                 fontSize: {
                   'Small (16px)': 16,
-                  'Large (18px)': 18,
-                },
-                fill: 'picker',
-                textAnchor: true
+                  'Medium (18px)': 18,
+                  'Large (22px)': 22,
+                }
               },
             }, {
               name: 'Headline',
@@ -182,8 +142,6 @@ angular.module('cardkitApp')
               draggable: true,
               editable: {
                 text: true,
-                fill: 'picker',
-                textAnchor: true,
                 fontSize: {
                   'Small (26px)': 26,
                   'Medium (32px)': 32,
@@ -275,8 +233,7 @@ angular.module('cardkitApp')
                   'Small (18px)': 18,
                   'Medium (22px)': 22,
                   'Large (24px)': 24,
-                },
-                textAnchor: true
+                }
               },
             }, {
               name: 'Credit',
@@ -357,7 +314,7 @@ angular.module('cardkitApp')
               name: 'Image',
               type: 'image',
               width: 300,
-              controlsOrder: 4,
+              controlsOrder: 2,
               height: function() {
                 return +this.width;
               },
@@ -432,7 +389,7 @@ angular.module('cardkitApp')
               name: 'Cross Reference Text',
               type: 'text',
               text: 'Read more at: Insert name here',
-              controlsOrder: 3,
+              controlsOrder: 4,
               fill: function() {
                 return $scope.theme.xref;
               },
@@ -456,7 +413,7 @@ angular.module('cardkitApp')
               name: 'Credit',
               type: 'text',
               text: 'Janan Ganesh on why\nLabour is Terrible',
-              controlsOrder: 2,
+              controlsOrder: 3,
               fill: function() {
                 return $scope.theme.quote;
               },
@@ -476,8 +433,7 @@ angular.module('cardkitApp')
                   'Small (16px)': 16,
                   'Medium (18px)': 18,
                   'Large (22px)': 22,
-                },
-                textAnchor: true
+                }
               },
             }, {
               name: 'Headline',
@@ -498,7 +454,6 @@ angular.module('cardkitApp')
               draggable: true,
               editable: {
                 text: true,
-                textAnchor: true,
                 fontSize: {
                   'Small (26px)': 26,
                   'Medium (32px)': 32,
@@ -616,8 +571,7 @@ angular.module('cardkitApp')
                 fontSize: {
                   'Small (32px)': 32,
                   'Large (34px)': 34,
-                },
-                textAnchor: true
+                }
               },
             }, {
               name: 'Big Number',
@@ -637,8 +591,7 @@ angular.module('cardkitApp')
               fontWeight: 600,
               draggable: true,
               editable: {
-                text: true,
-                textAnchor: true,
+                text: true
               },
             }];
           }
@@ -648,7 +601,7 @@ angular.module('cardkitApp')
             return [{
               name: 'Background Colour',
               type: 'rect',
-              controlsOrder: 7,
+              controlsOrder: 10,
               height: function() {
                 return $scope.size.height;
               },
@@ -659,9 +612,54 @@ angular.module('cardkitApp')
                 return $scope.theme.background;
               }
             }, {
+              name: 'Graph',
+              type: 'image',
+              width: function() {
+                return $scope.size.width * 0.6;
+              },
+              controlsOrder: 1,
+              height: function() {
+                var h;
+                if (typeof this.width === 'string') {
+                  h = +this.width;
+                } else {
+                  h = this.width();
+                }
+
+                if (h > ($scope.size.height-$scope.size.gridSize*2)) {
+                  h = $scope.size.height-$scope.size.gridSize*2;
+                }
+                return h;
+              },
+              src: function() {
+                return $scope.theme.graphSrc;
+              },
+              opacity: 1,
+              x: function() {
+                return $scope.size.gridSize;
+              },
+              y: function() {
+                return $scope.size.gridSize;
+              },
+              preserveAspectRatio: 'xMinYMin meet',
+              draggable: true,
+              defaultFilter: '',
+              editable: {
+                src: true,
+                width: true,
+                opacity: true,
+                filters: [
+                  'Sepia',
+                  'Grayscale',
+                  'Saturate',
+                  'Invert',
+                  'Blur'
+                ],
+              }
+            }, {
               name: 'Side Explanation Background',
               type: 'rect',
-              controlsOrder: 5,
+              controlsOrder: 10,
               height: function() {
                 return $scope.size.height;
               },
@@ -678,7 +676,7 @@ angular.module('cardkitApp')
             }, {
               name: 'Logo',
               type: 'image',
-              controlsOrder: 6,
+              controlsOrder: 10,
               width: function() {
                 return $scope.size.gridSize * 2;
               },
@@ -751,54 +749,8 @@ angular.module('cardkitApp')
                   'Small (22px)': 22,
                   'Medium (24px)': 24,
                   'Large (34px)': 34,
-                },
-                textAnchor: true
-              },
-            }, {
-              name: 'Graph',
-              type: 'image',
-              width: function() {
-                return $scope.size.width * 0.6;
-              },
-              controlsOrder: 4,
-              height: function() {
-                var h;
-                if (typeof this.width === 'string') {
-                  h = +this.width;
-                } else {
-                  h = this.width();
                 }
-
-                if (h > ($scope.size.height-$scope.size.gridSize*2)) {
-                  h = $scope.size.height-$scope.size.gridSize*2;
-                }
-                return h;
               },
-              src: function() {
-                return $scope.theme.graphSrc;
-              },
-              opacity: 1,
-              x: function() {
-                return $scope.size.gridSize;
-              },
-              y: function() {
-                return $scope.size.gridSize;
-              },
-              preserveAspectRatio: 'xMinYMin meet',
-              draggable: true,
-              defaultFilter: '',
-              editable: {
-                src: true,
-                width: true,
-                opacity: true,
-                filters: [
-                  'Sepia',
-                  'Grayscale',
-                  'Saturate',
-                  'Invert',
-                  'Blur'
-                ],
-              }
             }];
           }
         }, {
@@ -981,7 +933,7 @@ angular.module('cardkitApp')
               width: function() {
                 return $scope.size.width;
               },
-              controlsOrder: 4,
+              controlsOrder: 1,
               height: function() {
                 var h;
                 if (typeof this.width === 'string') {
@@ -1057,7 +1009,7 @@ angular.module('cardkitApp')
               name: 'Cross Reference Text',
               type: 'text',
               text: 'Promo A please go to ft.com/something-interesting',
-              controlsOrder: 3,
+              controlsOrder: 2,
               fill: function() {
                 return $scope.theme.xref;
               },
@@ -1106,7 +1058,7 @@ angular.module('cardkitApp')
               width: function() {
                 return $scope.size.width * 0.75;
               },
-              controlsOrder: 4,
+              controlsOrder: 1,
               height: function() {
                 var h;
                 if (typeof this.width === 'string') {
@@ -1208,8 +1160,7 @@ angular.module('cardkitApp')
                   'Small (22px)': 22,
                   'Medium (24px)': 24,
                   'Large (28px)': 28,
-                },
-                textAnchor: true
+                }
               },
             }];
           }
@@ -1219,7 +1170,7 @@ angular.module('cardkitApp')
             return [{
               name: 'Background Colour',
               type: 'rect',
-              controlsOrder: 7,
+              controlsOrder: 17,
               height: function() {
                 return $scope.size.height;
               },
@@ -1232,7 +1183,7 @@ angular.module('cardkitApp')
             }, {
               name: 'Header Background',
               type: 'rect',
-              controlsOrder: 5,
+              controlsOrder: 15,
               height: function() {
                 return $scope.size.gridSize * 3;
               },
@@ -1246,7 +1197,7 @@ angular.module('cardkitApp')
             }, {
               name: 'Logo',
               type: 'image',
-              controlsOrder: 6,
+              controlsOrder: 16,
               width: function() {
                 return $scope.size.gridSize * 2;
               },
@@ -1269,7 +1220,7 @@ angular.module('cardkitApp')
             }, {
               name: 'Bookmark',
               type: 'image',
-              controlsOrder: 6,
+              controlsOrder: 16,
               width: function() {
                 return $scope.size.gridSize;
               },
@@ -1293,7 +1244,7 @@ angular.module('cardkitApp')
               type: 'text',
               text: 'Forex Scandal',
               textTransform: 'uppercase',
-              controlsOrder: 3,
+              controlsOrder: 1,
               fill: function() {
                 return $scope.theme.xref;
               },
@@ -1322,7 +1273,7 @@ angular.module('cardkitApp')
               name: 'Credit',
               type: 'text',
               text: 'Name here in caps',
-              controlsOrder: 2,
+              controlsOrder: 3,
               fill: function() {
                 return $scope.theme.quote;
               },
@@ -1350,7 +1301,7 @@ angular.module('cardkitApp')
               name: 'Read more',
               type: 'text',
               text: 'Read more about the case on ft.com/xxxxx',
-              controlsOrder: 2,
+              controlsOrder: 4,
               fill: function() {
                 return $scope.theme.highlightColor;
               },
@@ -1381,7 +1332,7 @@ angular.module('cardkitApp')
               fill: function() {
                 return $scope.theme.quote;
               },
-              controlsOrder: 1,
+              controlsOrder: 2,
               fontSize: 44,
               fontFamily: function() {
                 return $scope.theme.headlineFont;

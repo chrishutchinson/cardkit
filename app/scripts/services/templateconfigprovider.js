@@ -93,7 +93,7 @@ angular.module('cardkitApp')
                 text: true,
                 fontSize: {
                   'Small (18px)': 18,
-                  'Medium (22px)': 22,
+                  'Standard (22px)': 22,
                   'Large (24px)': 24,
                 }
               },
@@ -105,7 +105,7 @@ angular.module('cardkitApp')
               fill: function() {
                 return $scope.theme.quote;
               },
-              fontSize: 18,
+              fontSize: 22,
               fontFamily: function() {
                 return $scope.theme.creditFont;
               },
@@ -119,7 +119,6 @@ angular.module('cardkitApp')
                 text: true,
                 fontSize: {
                   'Small (16px)': 16,
-                  'Medium (18px)': 18,
                   'Large (22px)': 22,
                 }
               },
@@ -144,7 +143,7 @@ angular.module('cardkitApp')
                 text: true,
                 fontSize: {
                   'Small (26px)': 26,
-                  'Medium (32px)': 32,
+                  'Standard (32px)': 32,
                   'Large (40px)': 40,
                   'X-Large (50px)': 50,
                 },
@@ -231,7 +230,7 @@ angular.module('cardkitApp')
                 text: true,
                 fontSize: {
                   'Small (18px)': 18,
-                  'Medium (22px)': 22,
+                  'Standard (22px)': 22,
                   'Large (24px)': 24,
                 }
               },
@@ -243,7 +242,7 @@ angular.module('cardkitApp')
               fill: function() {
                 return $scope.theme.quote;
               },
-              fontSize: 18,
+              fontSize: 22,
               fontFamily: function() {
                 return $scope.theme.creditFont;
               },
@@ -259,7 +258,6 @@ angular.module('cardkitApp')
                 text: true,
                 fontSize: {
                   'Small (16px)': 16,
-                  'Medium (18px)': 18,
                   'Large (22px)': 22,
                 }
               },
@@ -288,7 +286,7 @@ angular.module('cardkitApp')
                 text: true,
                 fontSize: {
                   'Small (50px)': 50,
-                  'Medium (60px)': 60,
+                  'Standard (60px)': 60,
                   'Large (72px)': 72,
                 },
               },
@@ -335,13 +333,8 @@ angular.module('cardkitApp')
               editable: {
                 src: true,
                 width: true,
-                opacity: true,
                 filters: [
-                  'Sepia',
-                  'Grayscale',
-                  'Saturate',
-                  'Invert',
-                  'Blur'
+                  'Grayscale'
                 ],
               }
             }, {
@@ -417,7 +410,7 @@ angular.module('cardkitApp')
               fill: function() {
                 return $scope.theme.quote;
               },
-              fontSize: 18,
+              fontSize: 22,
               fontFamily: function() {
                 return $scope.theme.creditFont;
               },
@@ -431,7 +424,6 @@ angular.module('cardkitApp')
                 text: true,
                 fontSize: {
                   'Small (16px)': 16,
-                  'Medium (18px)': 18,
                   'Large (22px)': 22,
                 }
               },
@@ -456,7 +448,7 @@ angular.module('cardkitApp')
                 text: true,
                 fontSize: {
                   'Small (26px)': 26,
-                  'Medium (32px)': 32,
+                  'Standard (32px)': 32,
                   'Large (40px)': 40,
                   'X-Large (50px)': 50,
                 },
@@ -545,7 +537,7 @@ angular.module('cardkitApp')
                 text: true,
                 fontSize: {
                   'Small (18px)': 18,
-                  'Medium (22px)': 22,
+                  'Standard (22px)': 22,
                   'Large (24px)': 24,
                 }
               },
@@ -608,9 +600,7 @@ angular.module('cardkitApp')
               width: function() {
                 return $scope.size.width;
               },
-              fill: function() {
-                return $scope.theme.background;
-              }
+              fill: '#ffffff'
             }, {
               name: 'Illustration',
               type: 'image',
@@ -642,13 +632,8 @@ angular.module('cardkitApp')
               editable: {
                 src: true,
                 width: true,
-                opacity: true,
                 filters: [
-                  'Sepia',
-                  'Grayscale',
-                  'Saturate',
-                  'Invert',
-                  'Blur'
+                  'Grayscale'
                 ],
               }
             }, {
@@ -709,10 +694,13 @@ angular.module('cardkitApp')
                 return (w - w*0.3) + $scope.size.gridSize;
               },
               y: function() {
-                return $scope.size.height - ($scope.size.gridSize*2);
+                return $scope.size.height - ($scope.size.gridSize*2 + 2);
               },
               fontWeight: 500,
               draggable: false,
+              editable: {
+                text: true
+              }
             }, {
               name: 'Explanatory Text',
               type: 'text',
@@ -742,14 +730,14 @@ angular.module('cardkitApp')
                 text: true,
                 fontSize: {
                   'Small (22px)': 22,
-                  'Medium (24px)': 24,
+                  'Standard (24px)': 24,
                   'Large (34px)': 34,
                 }
               },
             }];
           }
         }, {
-          name: 'Graph with Explanation',
+          name: 'Chart: 1 Column',
           elements: function($scope) {
             return [{
               name: 'Background Colour',
@@ -789,7 +777,12 @@ angular.module('cardkitApp')
               },
               opacity: 1,
               x: function() {
-                return $scope.size.gridSize;
+
+                var areaW = $scope.size.width * 0.7;
+                var picW = $scope.size.width * 0.45;
+                var x = areaW/2 - picW/2
+
+                return x;
               },
               y: function() {
                 return $scope.size.gridSize;
@@ -800,13 +793,8 @@ angular.module('cardkitApp')
               editable: {
                 src: true,
                 width: true,
-                opacity: true,
                 filters: [
-                  'Sepia',
-                  'Grayscale',
-                  'Saturate',
-                  'Invert',
-                  'Blur'
+                  'Grayscale'
                 ],
               }
             }, {
@@ -850,7 +838,7 @@ angular.module('cardkitApp')
               preserveAspectRatio: 'xMinYMin meet',
               draggable: false
             }, {
-              name: 'Ref Text',
+              name: 'Reference Text',
               type: 'text',
               text: 'FT.COM/\nCOMPANIES',
               controlsOrder: 3,
@@ -867,10 +855,13 @@ angular.module('cardkitApp')
                 return (w - w*0.3) + $scope.size.gridSize;
               },
               y: function() {
-                return $scope.size.height - ($scope.size.gridSize*2);
+                return $scope.size.height - ($scope.size.gridSize*2 + 2);
               },
               fontWeight: 500,
               draggable: false,
+              editable: {
+                text: true
+              }
             }, {
               name: 'Explanatory Text',
               type: 'text',
@@ -900,14 +891,14 @@ angular.module('cardkitApp')
                 text: true,
                 fontSize: {
                   'Small (22px)': 22,
-                  'Medium (24px)': 24,
+                  'Standard (24px)': 24,
                   'Large (34px)': 34,
                 }
               },
             }];
           }
         }, {
-          name: 'Graph with Explanation (narrow)',
+          name: 'Chart: 2 Column',
           elements: function($scope) {
             return [{
               name: 'Background Colour',
@@ -958,13 +949,8 @@ angular.module('cardkitApp')
               editable: {
                 src: true,
                 width: true,
-                opacity: true,
                 filters: [
-                  'Sepia',
-                  'Grayscale',
-                  'Saturate',
-                  'Invert',
-                  'Blur'
+                  'Grayscale'
                 ],
               }
             }, {
@@ -1008,7 +994,7 @@ angular.module('cardkitApp')
               preserveAspectRatio: 'xMinYMin meet',
               draggable: false
             }, {
-              name: 'Ref Text',
+              name: 'Reference Text',
               type: 'text',
               text: 'FT.COM/\nCOMPANIES',
               controlsOrder: 3,
@@ -1025,10 +1011,13 @@ angular.module('cardkitApp')
                 return (w - w*0.25) + $scope.size.gridSize;
               },
               y: function() {
-                return $scope.size.height - ($scope.size.gridSize*2);
+                return $scope.size.height - ($scope.size.gridSize*2 + 2);
               },
               fontWeight: 500,
               draggable: false,
+              editable: {
+                text: true
+              }
             }, {
               name: 'Explanatory Text',
               type: 'text',
@@ -1058,7 +1047,7 @@ angular.module('cardkitApp')
                 text: true,
                 fontSize: {
                   'Small (16px)': 16,
-                  'Medium (18px)': 18,
+                  'Standard (18px)': 18,
                   'Large (22px)': 22,
                 }
               },
@@ -1108,13 +1097,8 @@ angular.module('cardkitApp')
               editable: {
                 src: true,
                 width: true,
-                opacity: true,
                 filters: [
-                  'Sepia',
-                  'Grayscale',
-                  'Saturate',
-                  'Invert',
-                  'Blur'
+                  'Grayscale'
                 ],
               }
             }, {
@@ -1183,7 +1167,7 @@ angular.module('cardkitApp')
                 text: true,
                 fontSize: {
                   'Small (18px)': 18,
-                  'Medium (22px)': 22,
+                  'Standard (22px)': 22,
                   'Large (24px)': 24,
                 }
               },
@@ -1233,13 +1217,8 @@ angular.module('cardkitApp')
               editable: {
                 src: true,
                 width: true,
-                opacity: true,
                 filters: [
-                  'Sepia',
-                  'Grayscale',
-                  'Saturate',
-                  'Invert',
-                  'Blur'
+                  'Grayscale'
                 ],
               }
             }, {
@@ -1311,7 +1290,7 @@ angular.module('cardkitApp')
                 text: true,
                 fontSize: {
                   'Small (22px)': 22,
-                  'Medium (24px)': 24,
+                  'Standard (24px)': 24,
                   'Large (28px)': 28,
                 }
               },
@@ -1418,7 +1397,7 @@ angular.module('cardkitApp')
                 text: true,
                 fontSize: {
                   'Small (22px)': 22,
-                  'Medium (24px)': 24,
+                  'Standard (24px)': 24,
                   'Large (28px)': 28,
                 },
               },
@@ -1430,7 +1409,7 @@ angular.module('cardkitApp')
               fill: function() {
                 return $scope.theme.quote;
               },
-              fontSize: 18,
+              fontSize: 22,
               fontFamily: function() {
                 return $scope.theme.creditFont;
               },
@@ -1446,7 +1425,6 @@ angular.module('cardkitApp')
                 text: true,
                 fontSize: {
                   'Small (16px)': 16,
-                  'Medium (18px)': 18,
                   'Large (18px)': 22,
                 }
               },
@@ -1474,7 +1452,7 @@ angular.module('cardkitApp')
                 text: true,
                 fontSize: {
                   'Small (16px)': 16,
-                  'Medium (18px)': 18,
+                  'Standard (18px)': 18,
                   'Large (18px)': 22,
                 }
               },
@@ -1503,7 +1481,7 @@ angular.module('cardkitApp')
                 text: true,
                 fontSize: {
                   'Small (32px)': 32,
-                  'Medium (44px)': 44,
+                  'Standard (44px)': 44,
                   'Large (50px)': 50,
                 },
               },

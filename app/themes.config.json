@@ -1,5 +1,5 @@
 [{
-  "name": "FT.com",
+  "name": "FT.com light blue",
   "background": "#fff1e0",
   "headline": "#333333",
   "xrefBackground": "#75a5c2",
@@ -19,8 +19,28 @@
     "promoSrc" :  "promoSrc",
     "illustrationSrc": "illustrationSrc"
     }
-},
-{
+},{
+  "name": "FT.com dark blue",
+  "background": "#fff1e0",
+  "headline": "#333333",
+  "xrefBackground": "#275e86",
+  "quote": "#333333",
+  "highlightColor" : "#cc0033",
+  "xref": "#ffffff",
+  "headlineFont": "financierdisplayweb",
+  "creditFont" : "metricweb",
+  "xrefFont" : "metricweb",
+  "images" : {
+    "logoSrc":  "logoSrc",
+    "logoAltSrc": "logoAltSrc",
+    "headshotSrc": "headshotSrc",
+    "bookmark":  "bookmark",
+    "graphSrc" :  "graphSrc",
+    "graphWideSrc":  "graphWideSrc",
+    "promoSrc" :  "promoSrc",
+    "illustrationSrc": "illustrationSrc"
+    }
+},{
   "name": "FT Weekend Life & Arts",
   "background": "#fff1e0",
   "headline": "#333333",
@@ -41,8 +61,7 @@
     "promoSrc" :  "promoSrc",
     "illustrationSrc": "illustrationSrc"
     }
-  },
-{
+},{
   "name": "FT Weekend House & Home",
   "background": "#fff1e0",
   "headline": "#333333",
@@ -63,8 +82,28 @@
     "promoSrc" :  "promoSrc",
     "illustrationSrc": "illustrationSrc"
     }
-  },
-{
+},{
+  "name": "FT Weekend Money",
+  "background": "#fff1e0",
+  "headline": "#333333",
+  "xrefBackground": "#cc0033",
+  "quote": "#333333",
+  "highlightColor" : "#cc0033",
+  "xref": "#ffffff",
+  "headlineFont": "financierdisplayweb",
+  "creditFont" : "metricweb",
+  "xrefFont" : "metricweb",
+  "images" : {
+    "logoSrc":  "logoSrc",
+    "logoAltSrc": "logoAltSrc",
+    "headshotSrc": "headshotSrc",
+    "bookmark":  "bookmark",
+    "graphSrc" :  "graphSrc",
+    "graphWideSrc":  "graphWideSrc",
+    "promoSrc" :  "promoSrc",
+    "illustrationSrc": "illustrationSrc"
+    }
+},{
   "name": "FT Magazine",
   "background": "#fff1e0",
   "headline": "#333333",
@@ -85,6 +124,4 @@
     "promoSrc" :  "promoSrc",
     "illustrationSrc": "illustrationSrc"
     }
- }]
-
-
+}]

@@ -54,7 +54,7 @@ angular.module('cardkitApp')
                 return $scope.size.gridSize * 2;
               },
               src: function() {
-                return $scope.theme.logoSrc;
+                return $scope.theme.images.logoSrc;
               },
               opacity: 1,
               x: function() {
@@ -194,7 +194,7 @@ angular.module('cardkitApp')
                 return $scope.size.gridSize * 2;
               },
               src: function() {
-                return $scope.theme.logoSrc;
+                return $scope.theme.images.logoSrc;
               },
               opacity: 1,
               x: function() {
@@ -319,7 +319,7 @@ angular.module('cardkitApp')
                 return +this.width;
               },
               src: function() {
-                return $scope.theme.headshotSrc || '';
+                return $scope.theme.images.headshotSrc || '';
               },
               opacity: 1,
               x: function() {
@@ -371,7 +371,7 @@ angular.module('cardkitApp')
                 return $scope.size.gridSize * 2;
               },
               src: function() {
-                return $scope.theme.logoSrc;
+                return $scope.theme.images.logoSrc;
               },
               opacity: 1,
               x: function() {
@@ -506,7 +506,7 @@ angular.module('cardkitApp')
                 return $scope.size.gridSize * 2;
               },
               src: function() {
-                return $scope.theme.logoSrc;
+                return $scope.theme.images.logoSrc;
               },
               opacity: 1,
               x: function() {
@@ -629,7 +629,7 @@ angular.module('cardkitApp')
                 return h;
               },
               src: function() {
-                return $scope.theme.illustrationSrc;
+                return $scope.theme.images.illustrationSrc;
               },
               opacity: 1,
               x: 0,
@@ -679,7 +679,7 @@ angular.module('cardkitApp')
                 return $scope.size.gridSize * 2;
               },
               src: function() {
-                return $scope.theme.logoSrc;
+                return $scope.theme.images.logoSrc;
               },
               opacity: 1,
               x: function() {
@@ -785,7 +785,7 @@ angular.module('cardkitApp')
                 return h;
               },
               src: function() {
-                return $scope.theme.graphSrc;
+                return $scope.theme.images.graphSrc;
               },
               opacity: 1,
               x: function() {
@@ -837,7 +837,7 @@ angular.module('cardkitApp')
                 return $scope.size.gridSize * 2;
               },
               src: function() {
-                return $scope.theme.logoSrc;
+                return $scope.theme.images.logoSrc;
               },
               opacity: 1,
               x: function() {
@@ -943,7 +943,7 @@ angular.module('cardkitApp')
                 return h;
               },
               src: function() {
-                return $scope.theme.graphWideSrc;
+                return $scope.theme.images.graphWideSrc;
               },
               opacity: 1,
               x: function() {
@@ -995,7 +995,7 @@ angular.module('cardkitApp')
                 return $scope.size.gridSize * 2;
               },
               src: function() {
-                return $scope.theme.logoSrc;
+                return $scope.theme.images.logoSrc;
               },
               opacity: 1,
               x: function() {
@@ -1097,7 +1097,7 @@ angular.module('cardkitApp')
                 return h;
               },
               src: function() {
-                return $scope.theme.promoSrc;
+                return $scope.theme.images.promoSrc;
               },
               opacity: 1,
               x: '0%',
@@ -1144,7 +1144,7 @@ angular.module('cardkitApp')
                 return $scope.size.gridSize * 2;
               },
               src: function() {
-                return $scope.theme.logoSrc;
+                return $scope.theme.images.logoSrc;
               },
               opacity: 1,
               x: function() {
@@ -1222,7 +1222,7 @@ angular.module('cardkitApp')
                 return h;
               },
               src: function() {
-                return $scope.theme.promoSrc;
+                return $scope.theme.images.promoSrc;
               },
               opacity: 1,
               x: '0%',
@@ -1270,7 +1270,7 @@ angular.module('cardkitApp')
                 return $scope.size.gridSize * 2;
               },
               src: function() {
-                return $scope.theme.logoSrc;
+                return $scope.theme.images.logoSrc;
               },
               opacity: 1,
               x: function() {
@@ -1358,7 +1358,7 @@ angular.module('cardkitApp')
                 return $scope.size.gridSize * 2;
               },
               src: function() {
-                return $scope.theme.logoAltSrc;
+                return $scope.theme.images.logoAltSrc;
               },
               opacity: 1,
               x: function() {
@@ -1381,7 +1381,7 @@ angular.module('cardkitApp')
                 return $scope.size.gridSize*2;
               },
               src: function() {
-                return $scope.theme.bookmark;
+                return $scope.theme.images.bookmark;
               },
               opacity: 1,
               x: function() {

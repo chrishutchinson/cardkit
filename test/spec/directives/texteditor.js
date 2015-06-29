@@ -10,5 +10,6 @@ describe('Directive: textEditor', function () {
 
   beforeEach(inject(function ($rootScope) {
     scope = $rootScope.$new();
+    element = '';
   }));
 });

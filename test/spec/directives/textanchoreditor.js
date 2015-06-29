@@ -15,6 +15,7 @@ describe('Directive: textanchorEditor', function () {
   it('should make hidden element visible', inject(function ($compile) {
     element = angular.element('<textanchor-editor></textanchor-editor>');
     element = $compile(element)(scope);
-    expect(element.text()).toBe('this is the textanchorEditor directive');
+    var label = element.find('label');
+    expect(label.text()).toBe('Text Anchor');
   }));
 });

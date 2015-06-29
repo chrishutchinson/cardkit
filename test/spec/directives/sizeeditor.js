@@ -12,9 +12,10 @@ describe('Directive: sizeEditor', function () {
     scope = $rootScope.$new();
   }));
 
-  it('should make hidden element visible', inject(function ($compile) {
+  it('Should render the size editor correctly', inject(function ($compile) {
     element = angular.element('<size-editor></size-editor>');
     element = $compile(element)(scope);
-    expect(element.text()).toBe('this is the sizeEditor directive');
+    var label = element.find('label');
+    expect(label.text()).toBe('Size');
   }));
 });

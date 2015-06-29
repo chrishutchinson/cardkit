@@ -2,9 +2,11 @@
 <html class="no-js">
   <head>
     <meta charset="utf-8">
-    <title>CardKit - From The Times and Sunday Times</title>
+    <title>FT CardKit</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-signin-client_id" content="991906554139-pn6gc09ch9jb2iric7tms4jmg7gp8lur.apps.googleusercontent.com">
+
 
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
@@ -22,7 +24,7 @@
 
   <body ng-app="cardkitApp">
     <header id="header">
-        <a class="logo" href="#"></a>   
+        <a class="logo" href="#"></a>
 
         <nav id="nav">
             <ul>
@@ -63,16 +65,21 @@
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <!-- endbower -->
     <script src="bower_components/saveSvgAsPng/saveSvgAsPng.js"></script>
+    <script src="bower_components/angulartics/src/angulartics.js"></script>
+    <script src="bower_components/angulartics/src/angulartics-ga.js"></script>
     <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="scripts/google-auth.js"></script>
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/controllers/login.js"></script>
         <script src="scripts/services/snapsvg.js"></script>
         <script src="scripts/directives/snapsvg.js"></script>
         <script src="scripts/services/savesvgaspng.js"></script>
         <script src="scripts/directives/fixedscroll.js"></script>
         <script src="scripts/services/themeconfigprovider.js"></script>
+        <script src="scripts/services/templateconfigprovider.js"></script>
         <script src="scripts/directives/texteditor.js"></script>
         <script src="scripts/directives/filleditor.js"></script>
         <script src="scripts/directives/fontsizeeditor.js"></script>

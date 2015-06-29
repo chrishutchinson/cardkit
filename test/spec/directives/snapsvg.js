@@ -10,5 +10,6 @@ describe('Directive: snapSvg', function () {
 
   beforeEach(inject(function ($rootScope) {
     scope = $rootScope.$new();
+    element = '';
   }));
 });

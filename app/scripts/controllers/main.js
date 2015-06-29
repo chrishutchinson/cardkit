@@ -8,27 +8,34 @@
  * Controller of the cardkitApp
  */
 angular.module('cardkitApp')
-  .controller('MainCtrl', function ($scope, saveSvgAsPng, themeConfig) {
-    
+  .controller('MainCtrl', function ($scope, $location, $analytics, saveSvgAsPng, themeConfig, templateConfig) {
+  if (!$scope.googleInfo){ //ooh dirty. ah well. todo: as service
+    $location.path('/login');
+  }
+  $analytics.pageTrack('/homepage');
+
     $scope.config = {
       sizes: [
-        {
-          name: 'Facebook',
-          width: 800,
-          height: 370,
-        },
         {
           name: 'Twitter',
           width: 650,
           height: 320,
+          gridSize: 16.25
         },
         {
-          name: 'Video',
-          width: 640,
-          height: 360,
+          name: 'Facebook',
+          width: 800,
+          height: 370,
+          gridSize: 20
         },
+        // {
+        //   name: 'Video',
+        //   width: 640,
+        //   height: 360,
+        // },
       ],
       themes: themeConfig,
+      templates: templateConfig,
       output: {
         scale: 2,
         editable: {
@@ -43,126 +50,10 @@ angular.module('cardkitApp')
           width: function() {
             return $scope.size.width;
           },
+          gridSize: function() {
+            return $scope.size.gridSize;
+          }
         },
-        elements: [
-          {
-            name: 'Background Colour',
-            type: 'rect',
-            height: function() {
-              return $scope.size.height;
-            },
-            width: function() {
-              return $scope.size.width;
-            },
-            fill: function() {
-              return $scope.theme.background;
-            },
-            editable: {
-              fill: 'picker'
-            }
-          },
-          {
-            name: 'Image',
-            type: 'image',
-            width: 600,
-            height: function() {
-              return this.width;
-            },
-            src: '',
-            opacity: 1,
-            x: '0%',
-            y: '0%',
-            preserveAspectRatio: 'xMinYMin meet',
-            draggable: true,
-            defaultFilter: '',
-            editable: {
-              src: true,
-              width: true,
-              opacity: true,
-              filters: [
-                'Sepia',
-                'Grayscale',
-                'Saturate',
-                'Invert',
-                'Blur'
-              ],
-            }
-          },
-          {
-            name: 'Logo',
-            type: 'image',
-            width: 250,
-            height: function() {
-              return this.width;
-            },
-            src: function() {
-              return $scope.theme.logoSrc;
-            },
-            opacity: 1,
-            x: 50,
-            y: 270,
-            preserveAspectRatio: 'xMinYMin meet',
-            editable: {
-              src: true,
-              width: true,
-            },
-            draggable: true
-          },
-          {
-            name: 'Credit',
-            type: 'text',
-            text: 'Credit: Insert name here',
-            fill: function() {
-              return $scope.theme.quote;
-            },
-            fontSize: 12,
-            fontFamily: function() {
-              return $scope.theme.headlineFont;
-            },
-            textAnchor: 'start',
-            x: 50,
-            y: 250,
-            draggable: true,
-            editable: {
-              text: true,
-              fontSize: {
-                'Small (12px)' : 12,
-                'Medium (18px)': 18,
-                'Large (22px)': 22,
-                'Extra Large (36px)': 36,
-              },
-              fill: 'picker',
-              textAnchor: true
-            },
-          },
-          {
-            name: 'Headline',
-            type: 'text',
-            text: 'Edit this text, and drag it around.\n\nYou can upload your own background image,\nlogo, and change the colour of the text too.',
-            fill: function() {
-              return $scope.theme.quote;
-            },
-            fontSize: 26,
-            fontFamily: function() {
-              return $scope.theme.headlineFont;
-            },
-            textAnchor: 'start',
-            x: 50,
-            y: 55,
-            draggable: true,
-            editable: {
-              text: true,
-              fill: 'picker',
-              textAnchor: true,
-              fontSize: {
-                'Small (18px)': 18,
-                'Medium (26px)': 26,
-                'Large (32px)': 32,
-                'Extra Large (40px)': 40,
-              },
-            },
-          },
-        ],
       }
     };
 
@@ -175,10 +66,23 @@ angular.module('cardkitApp')
       $scope.theme = ($scope.config.themes.length > 1) ? null : $scope.config.themes[0];
     }
 
+    if (typeof $scope.config.templates !== 'undefined') {
+      $scope.config.svg.elements = ($scope.config.templates.length > 1) ? null : $scope.config.template[0]($scope);
+    }
+
     $scope.size = ($scope.config.sizes.length > 1) ? null : $scope.config.sizes[0];
 
     $scope.$watch('theme', function() {
       $scope.$broadcast('changeTheme');
+      createConfigCopy();
+    });
+
+    $scope.$watch('template', function(template) {
+      if (!template) {
+        return;
+      }
+      $scope.config.svg.elements = template.elements($scope);
+      $scope.$broadcast('changeTemplate');
       createConfigCopy();
     });
 
@@ -188,26 +92,26 @@ angular.module('cardkitApp')
     });
 
     $scope.resetSvg = function() {
-      $scope.config.svg = $scope.defaultConfig.svg
+      $scope.config.svg = $scope.defaultConfig.svg;
       createConfigCopy();
     };
 
     // Drop handler.
-    $scope.onDrop = function (data, event, key) {
+    $scope.onDrop = function (data, event) {
       var dataTransfer = getDataTransfer(event);
-      readFile(dataTransfer.files[0], key);
+      readFile(dataTransfer.files[0], this.element);
     };
 
     $scope.fileChanged = function(file) {
-      readFile(angular.element(file)[0].files[0], angular.element(file).data('key'));
+      readFile(angular.element(file)[0].files[0], this.element);
     };
 
     // Read the supplied file (from DataTransfer API)
-    function readFile(file, key) {
+    function readFile(file, element) {
       var reader = new FileReader();
 
-      reader.onload = function() { 
-        $scope.config.svg.elements[key].src = reader.result;
+      reader.onload = function() {
+        element.src = reader.result;
         $scope.$apply();
       };
 
@@ -222,11 +126,14 @@ angular.module('cardkitApp')
     }
 
     $scope.removeImage = function(key) {
-      $scope.config.svg.elements[key].src = '';
+      this.element.src = '';
     };
 
-
     $scope.downloadSvg = function() {
+      $analytics.eventTrack($scope.template.name, {
+        category: 'save',
+        label:  $scope.size.name
+      });
       saveSvgAsPng(document.getElementById('snap-svg'), 'image.png', {
         scale: $scope.config.output.scale
       });

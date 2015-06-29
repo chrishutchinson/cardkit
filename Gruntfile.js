@@ -339,10 +339,11 @@ module.exports = function (grunt) {
             '*.{ico,png,txt}',
             '.htaccess',
             '*.html',
+            'CNAME',
             'views/{,*/}*.html',
             'images/{,*/}*.{webp}',
             'fonts/*',
-            'themes.config.json'
+            '*.json'
           ]
         }, {
           expand: true,
@@ -402,7 +403,7 @@ module.exports = function (grunt) {
       },
       pages: {
         options: {
-          remote: 'git@github.com:times/cardkit.git',
+          remote: 'git@github.com:financial-times/cardkit.git',
           branch: 'gh-pages'
         }
       },
@@ -460,4 +461,11 @@ module.exports = function (grunt) {
     'test',
     'build'
   ]);
+
+  grunt.registerTask('deploy', [
+    'test',
+    'build',
+    'buildcontrol:pages'
+  ]);
+
 };

@@ -12,9 +12,10 @@ describe('Directive: fontfamilyEditor', function () {
     scope = $rootScope.$new();
   }));
 
-  it('should make hidden element visible', inject(function ($compile) {
+  it('Should render the font family editor correctly', inject(function ($compile) {
     element = angular.element('<fontfamily-editor></fontfamily-editor>');
     element = $compile(element)(scope);
-    expect(element.text()).toBe('this is the fontfamilyEditor directive');
+    var label = element.find('label');
+    expect(label.text()).toBe('Font Family');
   }));
 });

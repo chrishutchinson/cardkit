@@ -1,0 +1,56 @@
+
+#login-container {
+  z-index: 10000;
+  height: 100%;
+  width: 100%;
+  margin: 0px;
+  padding: 0px;
+  position: absolute;
+  display: block;
+  background: #C8C7C7;
+  display: none;
+}
+
+#login-overlay {
+  height: 85%;
+  width: 90%;
+  margin: 5%;
+  position: relative;
+  z-index: 10000;
+  display: block;
+  background: white;
+  border: 5px solid #cccccc;
+  border-radius: 10px;
+  padding: 50px;
+  background-color: #fff1e0;
+}
+
+#login-alert {
+  display: none;
+}
+
+#trouble,
+#trouble p {
+  font-size: 16px;
+}
+
+.trouble__help {
+  position: relative;
+  border-width: 0;
+  padding: 0px 15px;
+  height: 0em;
+  overflow: hidden;
+  transition: all 1s;
+}
+
+.trouble__container:target .trouble__help {
+  padding: 15px;
+  height: 7em;
+  border-width: 1px;
+}
+
+.trouble__close {
+  position: absolute;
+  top: 5px;
+  right: 15px;
+}

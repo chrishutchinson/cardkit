@@ -17,6 +17,7 @@
     "graphSrc" :  "graphSrc",
     "graphWideSrc":  "graphWideSrc",
     "promoSrc" :  "promoSrc",
+    "weekendSrc" : "weekendSrc",
     "illustrationSrc": "illustrationSrc"
     }
 },{
@@ -38,10 +39,12 @@
     "graphSrc" :  "graphSrc",
     "graphWideSrc":  "graphWideSrc",
     "promoSrc" :  "promoSrc",
+    "weekendSrc" : "weekendSrc",
     "illustrationSrc": "illustrationSrc"
     }
 },{
   "name": "FT Weekend Life & Arts",
+  "xrefText" : "FTWeekend",
   "background": "#fff1e0",
   "headline": "#333333",
   "xrefBackground": "#92288f",
@@ -63,6 +66,7 @@
     }
 },{
   "name": "FT Weekend House & Home",
+  "xrefText" : "FTWeekend",
   "background": "#fff1e0",
   "headline": "#333333",
   "xrefBackground": "#09a25c",
@@ -80,10 +84,12 @@
     "graphSrc" :  "graphSrc",
     "graphWideSrc":  "graphWideSrc",
     "promoSrc" :  "promoSrc",
+    "weekendSrc" : "weekendSrc",
     "illustrationSrc": "illustrationSrc"
     }
 },{
-  "name": "FT Weekend Money",
+  "name": "FT Money",
+  "xrefText" : "FTMoney",
   "background": "#fff1e0",
   "headline": "#333333",
   "xrefBackground": "#cc0033",
@@ -101,10 +107,12 @@
     "graphSrc" :  "graphSrc",
     "graphWideSrc":  "graphWideSrc",
     "promoSrc" :  "promoSrc",
+    "weekendSrc" : "weekendSrc",
     "illustrationSrc": "illustrationSrc"
     }
 },{
-  "name": "FT Magazine",
+  "name": "FT Weekend Magazine",
+  "xrefText" : "FT Weekend Magazine",
   "background": "#fff1e0",
   "headline": "#333333",
   "xrefBackground": "#0e6dcc",
@@ -122,6 +130,7 @@
     "graphSrc" :  "graphSrc",
     "graphWideSrc":  "graphWideSrc",
     "promoSrc" :  "promoSrc",
+    "weekendSrc" : "weekendSrc",
     "illustrationSrc": "illustrationSrc"
     }
 }]

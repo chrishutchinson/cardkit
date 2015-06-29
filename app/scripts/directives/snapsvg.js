@@ -244,7 +244,7 @@ angular.module('cardkitApp')
           var elementData = attrs;
           delete elementData.$$hashKey;
           if(elementData.type === 'text') {
-            elementData.text = smartquotesString(element.text);
+            elementData.text = smartquotesString(elementData.text);
             elementData.text = elementData.text.split('\n');
           }
           if (elementData.textTransform) {

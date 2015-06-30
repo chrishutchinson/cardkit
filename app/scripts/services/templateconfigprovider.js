@@ -455,457 +455,6 @@ angular.module('cardkitApp')
               },
             }];
           }
-        },{
-          name: 'FT Weekend -- Quote With Headshot',
-          elements: function($scope) {
-            return [{
-              name: 'Background Colour',
-              type: 'rect',
-              controlsOrder: 7,
-              height: function() {
-                return $scope.size.height;
-              },
-              width: function() {
-                return $scope.size.width;
-              },
-              fill: function() {
-                return $scope.theme.background;
-              }
-            }, {
-              name: 'Image',
-              type: 'image',
-              width: 300,
-              controlsOrder: 2,
-              height: function() {
-                return +this.width;
-              },
-              src: function() {
-                return $scope.theme.images.headshotSrc || '';
-              },
-              opacity: 1,
-              x: function() {
-                var w = (+this.width);
-                return $scope.size.width - (w + $scope.size.gridSize);
-              },
-              y: function() {
-                return $scope.size.gridSize;
-              },
-              preserveAspectRatio: 'xMinYMin meet',
-              draggable: true,
-              defaultFilter: '',
-              editable: {
-                src: true,
-                width: true,
-                filters: [
-                  'Grayscale'
-                ],
-              }
-            }, {
-              name: 'Cross Reference Background',
-              type: 'rect',
-              controlsOrder: 5,
-              height: function() {
-                return $scope.size.gridSize * 3 + 5;
-              },
-              width: function() {
-                return $scope.size.width + 10;
-              },
-              x: -5,
-              y: function() {
-                return $scope.size.height - this.height() + 5;
-              },
-              fill: function() {
-                return $scope.theme.background;
-              },
-              stroke: function() {
-                return $scope.theme.quote;
-              }
-            }, {
-              name: 'Logo',
-              type: 'text',
-              text: function() {
-                return $scope.theme.xrefText || 'FT Weekend';
-              },
-              controlsOrder: 4,
-              fill: function() {
-                return $scope.theme.xrefBackground;
-              },
-              fontSize: 28,
-              fontFamily: function() {
-                return $scope.theme.headlineFont;
-              },
-              textAnchor: 'start',
-              x: function() {
-                return $scope.size.gridSize;
-              },
-              y: function() {
-                return $scope.size.height - ($scope.size.gridSize);
-              },
-              fontWeight: 600,
-              draggable: false
-            }, {
-              name: 'Credit',
-              type: 'text',
-              text: 'Janan Ganesh on why\nLabour is Terrible',
-              controlsOrder: 3,
-              fill: function() {
-                return $scope.theme.quote;
-              },
-              fontSize: 22,
-              fontFamily: function() {
-                return $scope.theme.creditFont;
-              },
-              textAnchor: 'start',
-              textTransform: 'uppercase',
-              x: 15,
-              y: 235,
-              fontWeight: 500,
-              draggable: true,
-              editable: {
-                text: true,
-                fontSize: {
-                  'Small (16px)': 16,
-                  'Large (22px)': 22,
-                }
-              },
-            }, {
-              name: 'Headline',
-              type: 'text',
-              text: 'Friendship is constant\nin all other things save in\nthe office and affairs of\nlove: Therefore, all hearts\nin love use their own',
-              fill: function() {
-                return $scope.theme.quote;
-              },
-              controlsOrder: 1,
-              fontSize: 32,
-              fontFamily: function() {
-                return $scope.theme.headlineFont;
-              },
-              textAnchor: 'start',
-              x: 15,
-              y: 45,
-              fontWeight: 600,
-              draggable: true,
-              editable: {
-                text: true,
-                fontSize: {
-                  'Small (26px)': 26,
-                  'Standard (32px)': 32,
-                  'Large (40px)': 40,
-                  'X-Large (50px)': 50,
-                },
-              },
-            }];
-          }
-        },{
-          name: 'FT Weekend -- Magazine Sidebar',
-          elements: function($scope) {
-            return [{
-              name: 'Background Colour',
-              type: 'rect',
-              controlsOrder: 10,
-              height: function() {
-                return $scope.size.height;
-              },
-              width: function() {
-                return $scope.size.width;
-              },
-              fill: function() {
-                return $scope.theme.background;
-              }
-            }, {
-              name: 'Image',
-              type: 'image',
-              width: function() {
-                return $scope.size.width * 0.6;
-              },
-              controlsOrder: 1,
-              height: function() {
-                var h;
-                if (typeof this.width === 'string') {
-                  h = +this.width;
-                } else {
-                  h = this.width();
-                }
-                return h;
-              },
-              src: '',
-              opacity: 1,
-              x: '0%',
-              y: '0%',
-              preserveAspectRatio: 'xMinYMin meet',
-              draggable: true,
-              defaultFilter: '',
-              editable: {
-                src: true,
-                width: true,
-                filters: [
-                  'Grayscale'
-                ],
-              }
-            }, {
-              name: 'Side Explanation Background',
-              type: 'rect',
-              controlsOrder: 10,
-              height: function() {
-                return $scope.size.height;
-              },
-              width: function() {
-                return $scope.size.width * 0.3;
-              },
-              y: '0%',
-              x: function() {
-                return $scope.size.width - this.width();
-              },
-              fill: 'rgb(30,75,115)'
-            }, {
-              name: 'Logo',
-              type: 'image',
-              controlsOrder: 10,
-              width: function() {
-                return $scope.size.width * 0.3 - ($scope.size.gridSize * 2);
-              },
-              height: function() {
-                return $scope.size.gridSize * 4;
-              },
-              src: function() {
-                return $scope.theme.images.weekendSrc || $scope.theme.images.logoSrc;
-              },
-              opacity: 1,
-              x: function() {
-                return $scope.size.width - ($scope.size.gridSize * 11);
-              },
-              y: function() {
-                return $scope.size.gridSize;
-              },
-              preserveAspectRatio: 'xMinYMin meet',
-              draggable: false
-            }, {
-              name: 'Reference Text',
-              type: 'text',
-              text: 'READ MORE AT\nFT.COM/XXX',
-              controlsOrder: 3,
-              fill: function() {
-                return $scope.theme.xref;
-              },
-              fontSize: 18,
-              fontFamily: function() {
-                return $scope.theme.xrefFont;
-              },
-              textAnchor: 'start',
-              x: function() {
-                var w = $scope.size.width;
-                return (w - w*0.3) + $scope.size.gridSize;
-              },
-              y: function() {
-                return $scope.size.height - ($scope.size.gridSize*2 + 2);
-              },
-              fontWeight: 500,
-              draggable: true,
-              editable: {
-                text: true
-              }
-            }, {
-              name: 'Explanatory Text',
-              type: 'text',
-              text: 'It would be great\nto get this option\nfor the magazine\njust because it’s\ncloser to the way\nthey do things',
-              controlsOrder: 2,
-              fill: function() {
-                return $scope.theme.xref;
-              },
-              fontSize: 24,
-              fontFamily: 'financierdisplayweb',
-              textAnchor: 'start',
-              width: function () {
-                return $scope.size.gridSize * 12;
-              },
-              x: function() {
-                var w = $scope.size.width;
-                return (w - $scope.size.gridSize * 11);
-              },
-              y: function() {
-                return $scope.size.gridSize*7;
-              },
-              fontWeight: 500,
-              draggable: true,
-              editable: {
-                text: true,
-                fontSize: {
-                  'Small (22px)': 22,
-                  'Standard (24px)': 24,
-                  'Large (34px)': 34,
-                }
-              },
-            }];
-          }
-        },{
-          name: 'FT Weekend -- Recipe Card',
-          elements: function($scope) {
-            return [{
-              name: 'Background Colour',
-              type: 'rect',
-              controlsOrder: 10,
-              height: function() {
-                return $scope.size.height;
-              },
-              width: function() {
-                return $scope.size.width;
-              },
-              fill: function() {
-                return $scope.theme.background;
-              }
-            }, {
-              name: 'Recipe Image',
-              type: 'image',
-              width: function() {
-                return $scope.size.width * 0.6;
-              },
-              controlsOrder: 1,
-              height: function() {
-                var h;
-                if (typeof this.width === 'string') {
-                  h = +this.width;
-                } else {
-                  h = this.width();
-                }
-                return h;
-              },
-              src: '',
-              opacity: 1,
-              x: '0%',
-              y: '0%',
-              preserveAspectRatio: 'xMinYMin meet',
-              draggable: true,
-              defaultFilter: '',
-              editable: {
-                src: true,
-                width: true,
-                filters: [
-                  'Grayscale'
-                ],
-              }
-            }, {
-              name: 'Side Explanation Background',
-              type: 'rect',
-              controlsOrder: 10,
-              height: function() {
-                return $scope.size.height;
-              },
-              width: function() {
-                return $scope.size.width * 0.3;
-              },
-              y: '0%',
-              x: function() {
-                return $scope.size.width - this.width();
-              },
-              fill: 'rgb(67,20,95)'
-            }, {
-              name: 'Logo',
-              type: 'text',
-              text: 'FT Weekend',
-              fill: 'white',
-              fontSize: 28,
-              fontFamily: function() {
-                return $scope.theme.headlineFont;
-              },
-              textAnchor: 'start',
-              x: function() {
-                return $scope.size.width - ($scope.size.gridSize * 11);
-              },
-              y: function() {
-                return ($scope.size.gridSize * 2);
-              },
-              fontWeight: 600,
-              draggable: false
-            }, {
-              name: 'Reference Text',
-              type: 'text',
-              text: 'READ THE RECIPE AT\nFT.COM/XXX',
-              controlsOrder: 3,
-              fill: function() {
-                return $scope.theme.xref;
-              },
-              fontSize: 18,
-              fontFamily: function() {
-                return $scope.theme.xrefFont;
-              },
-              textAnchor: 'start',
-              x: function() {
-                var w = $scope.size.width;
-                return (w - w*0.3) + $scope.size.gridSize;
-              },
-              y: function() {
-                return $scope.size.height - ($scope.size.gridSize*2 + 2);
-              },
-              fontWeight: 500,
-              draggable: true,
-              editable: {
-                text: true
-              }
-            }, {
-              name: 'Recipe Name',
-              type: 'text',
-              text: 'Steak and\nkidney pudding',
-              controlsOrder: 2,
-              fill: function() {
-                return $scope.theme.xref;
-              },
-              fontSize: 24,
-              fontFamily: 'metricweb',
-              textAnchor: 'start',
-              width: function () {
-                return $scope.size.gridSize * 12;
-              },
-              x: function() {
-                var w = $scope.size.width;
-                return (w - $scope.size.gridSize * 11);
-              },
-              y: function() {
-                return $scope.size.gridSize*6.8;
-              },
-              fontWeight: 400,
-              draggable: true,
-              editable: {
-                text: true,
-                fontSize: {
-                  'Small (22px)': 22,
-                  'Standard (24px)': 24,
-                  'Large (34px)': 34,
-                }
-              },
-            }, {
-              name: 'Author Name',
-              type: 'text',
-              text: 'Rowley Leigh',
-              controlsOrder: 2,
-              fill: function() {
-                return $scope.theme.xref;
-              },
-              fontSize: 24,
-              fontFamily: 'financierdisplayweb',
-              fontStyle: 'italic',
-              textAnchor: 'start',
-              width: function () {
-                return $scope.size.gridSize * 12;
-              },
-              x: function() {
-                var w = $scope.size.width;
-                return (w - $scope.size.gridSize * 11);
-              },
-              y: function() {
-                return $scope.size.gridSize*5.25;
-              },
-              fontWeight: 300,
-              draggable: true,
-              editable: {
-                text: true,
-                fontSize: {
-                  'Small (22px)': 22,
-                  'Standard (24px)': 24,
-                  'Large (34px)': 34,
-                }
-              },
-            }];
-          }
         }, {
           name: 'Big Number',
           elements: function($scope) {
@@ -1935,6 +1484,457 @@ angular.module('cardkitApp')
                   'Standard (44px)': 44,
                   'Large (50px)': 50,
                 },
+              },
+            }];
+          }
+        },{
+          name: 'FT Weekend -- Quote With Headshot',
+          elements: function($scope) {
+            return [{
+              name: 'Background Colour',
+              type: 'rect',
+              controlsOrder: 7,
+              height: function() {
+                return $scope.size.height;
+              },
+              width: function() {
+                return $scope.size.width;
+              },
+              fill: function() {
+                return $scope.theme.background;
+              }
+            }, {
+              name: 'Image',
+              type: 'image',
+              width: 300,
+              controlsOrder: 2,
+              height: function() {
+                return +this.width;
+              },
+              src: function() {
+                return $scope.theme.images.headshotSrc || '';
+              },
+              opacity: 1,
+              x: function() {
+                var w = (+this.width);
+                return $scope.size.width - (w + $scope.size.gridSize);
+              },
+              y: function() {
+                return $scope.size.gridSize;
+              },
+              preserveAspectRatio: 'xMinYMin meet',
+              draggable: true,
+              defaultFilter: '',
+              editable: {
+                src: true,
+                width: true,
+                filters: [
+                  'Grayscale'
+                ],
+              }
+            }, {
+              name: 'Cross Reference Background',
+              type: 'rect',
+              controlsOrder: 5,
+              height: function() {
+                return $scope.size.gridSize * 3 + 5;
+              },
+              width: function() {
+                return $scope.size.width + 10;
+              },
+              x: -5,
+              y: function() {
+                return $scope.size.height - this.height() + 5;
+              },
+              fill: function() {
+                return $scope.theme.background;
+              },
+              stroke: function() {
+                return $scope.theme.quote;
+              }
+            }, {
+              name: 'Logo',
+              type: 'text',
+              text: function() {
+                return $scope.theme.xrefText || 'FT Weekend';
+              },
+              controlsOrder: 4,
+              fill: function() {
+                return $scope.theme.xrefBackground;
+              },
+              fontSize: 28,
+              fontFamily: function() {
+                return $scope.theme.headlineFont;
+              },
+              textAnchor: 'start',
+              x: function() {
+                return $scope.size.gridSize;
+              },
+              y: function() {
+                return $scope.size.height - ($scope.size.gridSize);
+              },
+              fontWeight: 600,
+              draggable: false
+            }, {
+              name: 'Credit',
+              type: 'text',
+              text: 'Janan Ganesh on why\nLabour is Terrible',
+              controlsOrder: 3,
+              fill: function() {
+                return $scope.theme.quote;
+              },
+              fontSize: 22,
+              fontFamily: function() {
+                return $scope.theme.creditFont;
+              },
+              textAnchor: 'start',
+              textTransform: 'uppercase',
+              x: 15,
+              y: 235,
+              fontWeight: 500,
+              draggable: true,
+              editable: {
+                text: true,
+                fontSize: {
+                  'Small (16px)': 16,
+                  'Large (22px)': 22,
+                }
+              },
+            }, {
+              name: 'Headline',
+              type: 'text',
+              text: 'Friendship is constant\nin all other things save in\nthe office and affairs of\nlove: Therefore, all hearts\nin love use their own',
+              fill: function() {
+                return $scope.theme.quote;
+              },
+              controlsOrder: 1,
+              fontSize: 32,
+              fontFamily: function() {
+                return $scope.theme.headlineFont;
+              },
+              textAnchor: 'start',
+              x: 15,
+              y: 45,
+              fontWeight: 600,
+              draggable: true,
+              editable: {
+                text: true,
+                fontSize: {
+                  'Small (26px)': 26,
+                  'Standard (32px)': 32,
+                  'Large (40px)': 40,
+                  'X-Large (50px)': 50,
+                },
+              },
+            }];
+          }
+        },{
+          name: 'FT Weekend -- Magazine Sidebar',
+          elements: function($scope) {
+            return [{
+              name: 'Background Colour',
+              type: 'rect',
+              controlsOrder: 10,
+              height: function() {
+                return $scope.size.height;
+              },
+              width: function() {
+                return $scope.size.width;
+              },
+              fill: function() {
+                return $scope.theme.background;
+              }
+            }, {
+              name: 'Image',
+              type: 'image',
+              width: function() {
+                return $scope.size.width * 0.6;
+              },
+              controlsOrder: 1,
+              height: function() {
+                var h;
+                if (typeof this.width === 'string') {
+                  h = +this.width;
+                } else {
+                  h = this.width();
+                }
+                return h;
+              },
+              src: '',
+              opacity: 1,
+              x: '0%',
+              y: '0%',
+              preserveAspectRatio: 'xMinYMin meet',
+              draggable: true,
+              defaultFilter: '',
+              editable: {
+                src: true,
+                width: true,
+                filters: [
+                  'Grayscale'
+                ],
+              }
+            }, {
+              name: 'Side Explanation Background',
+              type: 'rect',
+              controlsOrder: 10,
+              height: function() {
+                return $scope.size.height;
+              },
+              width: function() {
+                return $scope.size.width * 0.3;
+              },
+              y: '0%',
+              x: function() {
+                return $scope.size.width - this.width();
+              },
+              fill: 'rgb(30,75,115)'
+            }, {
+              name: 'Logo',
+              type: 'image',
+              controlsOrder: 10,
+              width: function() {
+                return $scope.size.width * 0.3 - ($scope.size.gridSize * 2);
+              },
+              height: function() {
+                return $scope.size.gridSize * 4;
+              },
+              src: function() {
+                return $scope.theme.images.weekendSrc || $scope.theme.images.logoSrc;
+              },
+              opacity: 1,
+              x: function() {
+                return $scope.size.width - ($scope.size.gridSize * 11);
+              },
+              y: function() {
+                return $scope.size.gridSize;
+              },
+              preserveAspectRatio: 'xMinYMin meet',
+              draggable: false
+            }, {
+              name: 'Reference Text',
+              type: 'text',
+              text: 'READ MORE AT\nFT.COM/XXX',
+              controlsOrder: 3,
+              fill: function() {
+                return $scope.theme.xref;
+              },
+              fontSize: 18,
+              fontFamily: function() {
+                return $scope.theme.xrefFont;
+              },
+              textAnchor: 'start',
+              x: function() {
+                var w = $scope.size.width;
+                return (w - w*0.3) + $scope.size.gridSize;
+              },
+              y: function() {
+                return $scope.size.height - ($scope.size.gridSize*2 + 2);
+              },
+              fontWeight: 500,
+              draggable: true,
+              editable: {
+                text: true
+              }
+            }, {
+              name: 'Explanatory Text',
+              type: 'text',
+              text: 'It would be great\nto get this option\nfor the magazine\njust because it’s\ncloser to the way\nthey do things',
+              controlsOrder: 2,
+              fill: function() {
+                return $scope.theme.xref;
+              },
+              fontSize: 24,
+              fontFamily: 'financierdisplayweb',
+              textAnchor: 'start',
+              width: function () {
+                return $scope.size.gridSize * 12;
+              },
+              x: function() {
+                var w = $scope.size.width;
+                return (w - $scope.size.gridSize * 11);
+              },
+              y: function() {
+                return $scope.size.gridSize*7;
+              },
+              fontWeight: 500,
+              draggable: true,
+              editable: {
+                text: true,
+                fontSize: {
+                  'Small (22px)': 22,
+                  'Standard (24px)': 24,
+                  'Large (34px)': 34,
+                }
+              },
+            }];
+          }
+        },{
+          name: 'FT Weekend -- Recipe Card',
+          elements: function($scope) {
+            return [{
+              name: 'Background Colour',
+              type: 'rect',
+              controlsOrder: 10,
+              height: function() {
+                return $scope.size.height;
+              },
+              width: function() {
+                return $scope.size.width;
+              },
+              fill: function() {
+                return $scope.theme.background;
+              }
+            }, {
+              name: 'Recipe Image',
+              type: 'image',
+              width: function() {
+                return $scope.size.width * 0.6;
+              },
+              controlsOrder: 1,
+              height: function() {
+                var h;
+                if (typeof this.width === 'string') {
+                  h = +this.width;
+                } else {
+                  h = this.width();
+                }
+                return h;
+              },
+              src: '',
+              opacity: 1,
+              x: '0%',
+              y: '0%',
+              preserveAspectRatio: 'xMinYMin meet',
+              draggable: true,
+              defaultFilter: '',
+              editable: {
+                src: true,
+                width: true,
+                filters: [
+                  'Grayscale'
+                ],
+              }
+            }, {
+              name: 'Side Explanation Background',
+              type: 'rect',
+              controlsOrder: 10,
+              height: function() {
+                return $scope.size.height;
+              },
+              width: function() {
+                return $scope.size.width * 0.3;
+              },
+              y: '0%',
+              x: function() {
+                return $scope.size.width - this.width();
+              },
+              fill: 'rgb(67,20,95)'
+            }, {
+              name: 'Logo',
+              type: 'text',
+              text: 'FT Weekend',
+              fill: 'white',
+              fontSize: 28,
+              fontFamily: function() {
+                return $scope.theme.headlineFont;
+              },
+              textAnchor: 'start',
+              x: function() {
+                return $scope.size.width - ($scope.size.gridSize * 11);
+              },
+              y: function() {
+                return ($scope.size.gridSize * 2);
+              },
+              fontWeight: 600,
+              draggable: false
+            }, {
+              name: 'Reference Text',
+              type: 'text',
+              text: 'READ THE RECIPE AT\nFT.COM/XXX',
+              controlsOrder: 3,
+              fill: function() {
+                return $scope.theme.xref;
+              },
+              fontSize: 18,
+              fontFamily: function() {
+                return $scope.theme.xrefFont;
+              },
+              textAnchor: 'start',
+              x: function() {
+                var w = $scope.size.width;
+                return (w - w*0.3) + $scope.size.gridSize;
+              },
+              y: function() {
+                return $scope.size.height - ($scope.size.gridSize*2 + 2);
+              },
+              fontWeight: 500,
+              draggable: true,
+              editable: {
+                text: true
+              }
+            }, {
+              name: 'Recipe Name',
+              type: 'text',
+              text: 'Steak and\nkidney pudding',
+              controlsOrder: 2,
+              fill: function() {
+                return $scope.theme.xref;
+              },
+              fontSize: 24,
+              fontFamily: 'metricweb',
+              textAnchor: 'start',
+              width: function () {
+                return $scope.size.gridSize * 12;
+              },
+              x: function() {
+                var w = $scope.size.width;
+                return (w - $scope.size.gridSize * 11);
+              },
+              y: function() {
+                return $scope.size.gridSize*6.8;
+              },
+              fontWeight: 400,
+              draggable: true,
+              editable: {
+                text: true,
+                fontSize: {
+                  'Small (22px)': 22,
+                  'Standard (24px)': 24,
+                  'Large (34px)': 34,
+                }
+              },
+            }, {
+              name: 'Author Name',
+              type: 'text',
+              text: 'Rowley Leigh',
+              controlsOrder: 2,
+              fill: function() {
+                return $scope.theme.xref;
+              },
+              fontSize: 24,
+              fontFamily: 'financierdisplayweb',
+              fontStyle: 'italic',
+              textAnchor: 'start',
+              width: function () {
+                return $scope.size.gridSize * 12;
+              },
+              x: function() {
+                var w = $scope.size.width;
+                return (w - $scope.size.gridSize * 11);
+              },
+              y: function() {
+                return $scope.size.gridSize*5.25;
+              },
+              fontWeight: 300,
+              draggable: true,
+              editable: {
+                text: true,
+                fontSize: {
+                  'Small (22px)': 22,
+                  'Standard (24px)': 24,
+                  'Large (34px)': 34,
+                }
               },
             }];
           }

@@ -2,7 +2,15 @@
 
   <!-- Elements -->
   <aside class="elements">
-    <div ng-if="(config.themes.length > 0 && theme) || !config.themes">
+
+
+    <div class="config-wrapper" ng-if="(config.themes.length > 0 && theme) || !config.themes">
+      <div class="panel-big">
+        <h3 class="section-title">
+          <span class="step label">4</span> Card Content
+          </h3>
+          <div class="description">The fields below allow you to edit your card's content.</div>
+      </div>
 
       <div ng-repeat="(key, element) in config.svg.elements | orderBy:'controlsOrder'" ng-if="element.editable" class="panel">
 
@@ -78,21 +86,33 @@
 
     <div class="config-wrapper">
       <div class="panel" ng-show="config.sizes">
-        <h3 ng-click="dimensions = !dimensions"><i class="fa fa-caret-down" ng-hide="dimensions"></i><i class="fa fa-caret-right" ng-hide="!dimensions"></i> Dimensions <small>Choose your image output size</small></h3>
+        <h3 ng-click="dimensions = !dimensions"><i class="fa fa-caret-down" ng-hide="dimensions"></i>
+          <i class="fa fa-caret-right" ng-hide="!dimensions"></i>
+          <span class="step label">1</span> Dimensions
+        </h3>
+        <div class="description">Different networks have different card sizes. Choose the one you're sharing to</div>
         <select id="size" ng-model="size" ng-options="size.name for size in config.sizes" class="form-control" ng-hide="dimensions">
           <option value="">-- Choose size --</option>
         </select>
       </div>
 
       <div class="panel" ng-show="config.templates">
-        <h3 ng-click="templates = !templates"><i class="fa fa-caret-down" ng-hide="templates"></i><i class="fa fa-caret-right" ng-hide="!templates"></i> Template <small>Choose a template</small></h3>
+        <h3 ng-click="templates = !templates"><i class="fa fa-caret-down" ng-hide="templates"></i>
+          <i class="fa fa-caret-right" ng-hide="!templates"></i>
+          <span class="step label">2</span> Template
+          </h3>
+          <div class="description">Choose the template layout for your card.<br/><em>Changing the template layout will delete any of your previously entered card content</em></div>
         <select id="template" ng-model="template" ng-options="template.name for template in config.templates" class="form-control" ng-hide="templates">
           <option value="">-- Choose templates --</option>
         </select>
       </div>
 
       <div class="panel" ng-show="config.themes">
-        <h3 ng-click="themes = !themes"><i class="fa fa-caret-down" ng-hide="themes"></i><i class="fa fa-caret-right" ng-hide="!themes"></i> Theme <small>Choose the look and feel</small></h3>
+        <h3 ng-click="themes = !themes"><i class="fa fa-caret-down" ng-hide="themes"></i>
+          <i class="fa fa-caret-right" ng-hide="!themes"></i>
+          <span class="step label">3</span> Theme
+          </h3>
+          <div class="description">Themes control the colour schemes for most of the cards. Choose the one you want to use</div>
         <select id="theme" ng-model="theme" ng-options="theme.name for theme in config.themes" class="form-control" ng-hide="themes">
           <option value="">-- Choose theme --</option>
         </select>
@@ -100,6 +120,9 @@
 
       <div class="panel" ng-show="config.output.editable.scale">
         <h3 ng-click="scale = !scale"><i class="fa fa-caret-down" ng-hide="scale"></i><i class="fa fa-caret-right" ng-hide="!scale"></i> Scale ({{config.output.scale}}x) <small>Choose the scaled output size</small></h3>
+        <div class="description">Scale controls the resolution of the final image. 1x will return the smallest image size. 2x will return an image
+        of double scale, which is the default. 3x is useful if you need a very high resolution card. If you use 3x, please ensure the images you
+        provide are also high resolution</div>
         <input id="scale" type="range" max="3" min="1" step="1" ng-model="config.output.scale" ng-hide="scale" />
       </div>
     </div>

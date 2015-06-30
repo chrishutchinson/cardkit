@@ -22,12 +22,12 @@ body {
   font-family: $font-family;
   font-size: $font-size;
   margin: 0px auto;
-  padding: 0 0 100px;
+  padding: 0 0 0px;
   max-width: 1200px;
   min-height: 100vh;
   box-shadow: 0px 0px 15px $grey-tint2;
   background-color: $white;
-  overflow: hidden;
+  // overflow: hidden;
 }
 
 // Links

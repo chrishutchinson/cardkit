@@ -6,6 +6,44 @@ aside.elements {
 	background-color: white;
 	border-left: 1px solid $grey-tint1;
 
+
+	.panel-big {
+
+		h3 {
+			span.step {
+				font-size: 2em;
+			}
+
+			font-weight: 600;
+			font-size: 1.4em;
+			text-transform: uppercase;
+			margin: -10px 0 0 5px;
+			cursor: pointer;
+			user-select: none;
+
+			small {
+				color: $secondary-color;
+				text-transform: initial;
+			}
+		}
+
+		.description {
+			em {
+				font-weight: 500;
+			}
+		}
+
+		margin-top: 0px;
+		padding: 0 0 5px;
+		border-bottom: 1px solid lighten($primary-color, 30%);
+
+		&:last-of-type {
+			border-bottom: 0px;
+		}
+	}
+
+
+
 	.panel {
 		h3 {
 			text-transform: uppercase;

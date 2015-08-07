@@ -125,7 +125,7 @@ angular.module('cardkitApp')
             }, {
               name: 'Headline',
               type: 'text',
-              text: 'Edit this text, and drag it around.\n\nYou can upload your own background image,\nlogo, and change the colour of the text too.',
+              text: 'Add text or a quote here - you can also drag it\naround.\n\nMore text can go here - it can be one line or\nseveral.',
               fill: function() {
                 return $scope.theme.quote;
               },
@@ -544,7 +544,7 @@ angular.module('cardkitApp')
             }, {
               name: 'Explanatory Text',
               type: 'text',
-              text: 'Explanatory text goes here like this and\nlike this which is 32/34, over two or three\nlines',
+              text: 'Add text here - you can also drag it\naround. It can be one line or several.',
               controlsOrder: 2,
               fill: function() {
                 return $scope.theme.quote;
@@ -568,7 +568,7 @@ angular.module('cardkitApp')
             }, {
               name: 'Big Number',
               type: 'text',
-              text: '100px',
+              text: 'Number',
               fill: function() {
                 return $scope.theme.highlightColor;
               },
@@ -704,7 +704,7 @@ angular.module('cardkitApp')
             }, {
               name: 'Explanatory Text',
               type: 'text',
-              text: 'This is 180px\nwide explanation\ntext for the chart.\nShould run short\nbut max depth on\nthis grid for text\nis 225px box, with\n15px padding',
+              text: 'Add text here.\n\nYou can also\ndrag it around.\n\nIt can be over one\nline or several.',
               controlsOrder: 2,
               fill: function() {
                 return $scope.theme.xref;
@@ -865,7 +865,7 @@ angular.module('cardkitApp')
             }, {
               name: 'Explanatory Text',
               type: 'text',
-              text: 'This is 180px\nwide explanation\ntext for the chart.\nShould run short\nbut max depth on\nthis grid for text\nis 225px box, with\n15px padding',
+              text: 'Add text here.\n\nYou can also drag\nit around.\n\nIt can be over one\nline or several.',
               controlsOrder: 2,
               fill: function() {
                 return $scope.theme.xref;
@@ -1021,7 +1021,7 @@ angular.module('cardkitApp')
             }, {
               name: 'Explanatory Text',
               type: 'text',
-              text: 'This is\nexplanation text\nwhich goes with\nthe chart. Should\nrun short if\npossible. Slightly\nnarrower than\nstandard RH box',
+              text: 'Add text here.\n\nYou can also drag\nit around.\n\nIt can be over one\nline or several.',
               controlsOrder: 2,
               fill: function() {
                 return $scope.theme.xref;
@@ -1739,7 +1739,7 @@ angular.module('cardkitApp')
             }, {
               name: 'Explanatory Text',
               type: 'text',
-              text: 'It would be great\nto get this option\nfor the magazine\njust because it’s\ncloser to the way\nthey do things',
+              text: 'Add text here -\nYou can also drag\nit around.\n\nIt can be over one\nline or several.',
               controlsOrder: 2,
               fill: function() {
                 return $scope.theme.xref;

@@ -76,7 +76,9 @@ angular.module('cardkitApp')
               fill: function() {
                 return $scope.theme.xref;
               },
-              fontSize: 22,
+              fontSize: function() {
+                return ($scope.size.name === 'Facebook') ? 18 : 22;
+              },
               fontFamily: function() {
                 return $scope.theme.xrefFont;
               },
@@ -105,14 +107,20 @@ angular.module('cardkitApp')
               fill: function() {
                 return $scope.theme.quote;
               },
-              fontSize: 22,
+              fontSize: function() {
+                return ($scope.size.name === 'Facebook') ? 16 : 22;
+              },
               fontFamily: function() {
                 return $scope.theme.creditFont;
               },
               textAnchor: 'start',
               textTransform: 'uppercase',
-              x: 15,
-              y: 250,
+              x: function() {
+                return $scope.size.gridSize;
+              },
+              y: function() {
+                return $scope.size.height - $scope.size.gridSize * 5;
+              },
               fontWeight: 500,
               draggable: true,
               editable: {
@@ -130,19 +138,25 @@ angular.module('cardkitApp')
                 return $scope.theme.quote;
               },
               controlsOrder: 1,
-              fontSize: 32,
+              fontSize: function () {
+                return ($scope.size.name === 'Facebook') ? 24 : 32;
+              },
               fontFamily: function() {
                 return $scope.theme.headlineFont;
               },
               textAnchor: 'start',
-              x: 15,
-              y: 45,
+              x: function() {
+                return $scope.size.gridSize;
+              },
+              y: function() {
+                return $scope.size.gridSize * 3;
+              },
               fontWeight: 600,
               draggable: true,
               editable: {
                 text: true,
                 fontSize: {
-                  'Small (26px)': 26,
+                  'Small (24px)': 24,
                   'Standard (32px)': 32,
                   'Large (40px)': 40,
                   'X-Large (50px)': 50,
@@ -213,7 +227,9 @@ angular.module('cardkitApp')
               fill: function() {
                 return $scope.theme.xref;
               },
-              fontSize: 22,
+              fontSize: function() {
+                return ($scope.size.name === 'Facebook') ? 18 : 22;
+              },
               fontFamily: function() {
                 return $scope.theme.xrefFont;
               },
@@ -242,7 +258,9 @@ angular.module('cardkitApp')
               fill: function() {
                 return $scope.theme.quote;
               },
-              fontSize: 22,
+              fontSize: function() {
+                return ($scope.size.name === 'Facebook') ? 16 : 22;
+              },
               fontFamily: function() {
                 return $scope.theme.creditFont;
               },
@@ -251,7 +269,9 @@ angular.module('cardkitApp')
               x: function() {
                 return $scope.size.gridSize;
               },
-              y: 235,
+              y: function() {
+                return $scope.size.height - $scope.size.gridSize*5;
+              },
               fontWeight: 500,
               draggable: true,
               editable: {
@@ -269,7 +289,9 @@ angular.module('cardkitApp')
                 return $scope.theme.quote;
               },
               controlsOrder: 1,
-              fontSize: 60,
+              fontSize: function() {
+                return ($scope.size.name === 'Facebook') ? 50 : 60;
+              },
               fontFamily: function() {
                 return $scope.theme.headlineFont;
               },
@@ -311,18 +333,19 @@ angular.module('cardkitApp')
             }, {
               name: 'Image',
               type: 'image',
-              width: 300,
+              width: function() {
+                return $scope.size.gridSize * 20;
+              },
               controlsOrder: 2,
               height: function() {
-                return +this.width;
+                return this.width();
               },
               src: function() {
                 return $scope.theme.images.headshotSrc || '';
               },
               opacity: 1,
               x: function() {
-                var w = (+this.width);
-                return $scope.size.width - (w + $scope.size.gridSize);
+                return $scope.size.gridSize * 20;
               },
               y: function() {
                 return $scope.size.gridSize;
@@ -374,8 +397,6 @@ angular.module('cardkitApp')
                 var h = ($scope.size.gridSize) / 2;
                 return $scope.size.height - (this.height() + h);
               },
-              // x: 500,
-              // y: 150,
               preserveAspectRatio: 'xMinYMin meet',
               draggable: false
             }, {
@@ -386,7 +407,9 @@ angular.module('cardkitApp')
               fill: function() {
                 return $scope.theme.xref;
               },
-              fontSize: 22,
+              fontSize: function() {
+                return ($scope.size.name === 'Facebook') ? 18 : 22;
+              },
               fontFamily: function() {
                 return $scope.theme.xrefFont;
               },
@@ -410,14 +433,20 @@ angular.module('cardkitApp')
               fill: function() {
                 return $scope.theme.quote;
               },
-              fontSize: 22,
+              fontSize: function() {
+                return ($scope.size.name === 'Facebook') ? 16 : 22;
+              },
               fontFamily: function() {
                 return $scope.theme.creditFont;
               },
               textAnchor: 'start',
               textTransform: 'uppercase',
-              x: 15,
-              y: 235,
+              x: function() {
+                return $scope.size.gridSize;
+              },
+              y: function() {
+                return $scope.size.height - $scope.size.gridSize * 6;
+              },
               fontWeight: 500,
               draggable: true,
               editable: {
@@ -435,13 +464,19 @@ angular.module('cardkitApp')
                 return $scope.theme.quote;
               },
               controlsOrder: 1,
-              fontSize: 32,
+              fontSize: function() {
+                return ($scope.size.name === 'Facebook') ? 26 : 32;
+              },
               fontFamily: function() {
                 return $scope.theme.headlineFont;
               },
               textAnchor: 'start',
-              x: 15,
-              y: 45,
+              x: function() {
+                return $scope.size.gridSize;
+              },
+              y: function() {
+                return $scope.size.gridSize * 3;
+              },
               fontWeight: 600,
               draggable: true,
               editable: {
@@ -508,8 +543,6 @@ angular.module('cardkitApp')
                 var h = ($scope.size.gridSize) / 2;
                 return $scope.size.height - (this.height() + h);
               },
-              // x: 500,
-              // y: 150,
               preserveAspectRatio: 'xMinYMin meet',
               draggable: false
             }, {
@@ -520,7 +553,9 @@ angular.module('cardkitApp')
               fill: function() {
                 return $scope.theme.xref;
               },
-              fontSize: 22,
+              fontSize: function() {
+                return ($scope.size.name === 'Facebook') ? 18 : 22;
+              },
               fontFamily: function() {
                 return $scope.theme.xrefFont;
               },
@@ -549,19 +584,26 @@ angular.module('cardkitApp')
               fill: function() {
                 return $scope.theme.quote;
               },
-              fontSize: 32,
+              fontSize: function() {
+                return ($scope.size.name === 'Facebook') ? 26 : 32;
+              },
               fontFamily: function() {
                 return $scope.theme.creditFont;
               },
               textAnchor: 'start',
-              x: 15,
-              y: 170,
+              x: function() {
+                return $scope.size.gridSize;
+              },
+              y: function() {
+                return $scope.size.gridSize * 13;
+              },
               fontWeight: 500,
               draggable: true,
               editable: {
                 text: true,
                 fontSize: {
-                  'Small (32px)': 32,
+                  'Small (26px)': 26,
+                  'Medium (32px)': 32,
                   'Large (34px)': 34,
                 }
               },
@@ -573,13 +615,19 @@ angular.module('cardkitApp')
                 return $scope.theme.highlightColor;
               },
               controlsOrder: 1,
-              fontSize: 100,
+              fontSize: function() {
+                return ($scope.size.name === 'Facebook') ? 80 : 100;
+              },
               fontFamily: function() {
                 return $scope.theme.headlineFont;
               },
               textAnchor: 'start',
-              x: 15,
-              y: 100,
+              x: function() {
+                return $scope.size.gridSize;
+              },
+              y: function() {
+                return $scope.size.gridSize * 7;
+              },
               fontWeight: 600,
               draggable: true,
               editable: {
@@ -684,7 +732,9 @@ angular.module('cardkitApp')
               fill: function() {
                 return $scope.theme.xref;
               },
-              fontSize: 18,
+              fontSize: function() {
+                return ($scope.size.name === 'Facebook') ? 14 : 18;
+              },
               fontFamily: function() {
                 return $scope.theme.xrefFont;
               },
@@ -709,7 +759,9 @@ angular.module('cardkitApp')
               fill: function() {
                 return $scope.theme.xref;
               },
-              fontSize: 24,
+              fontSize: function() {
+                return ($scope.size.name === 'Facebook') ? 18 : 24;
+              },
               fontFamily: function() {
                 return $scope.theme.creditFont;
               },
@@ -729,7 +781,7 @@ angular.module('cardkitApp')
               editable: {
                 text: true,
                 fontSize: {
-                  'Small (22px)': 22,
+                  'Small (18px)': 18,
                   'Standard (24px)': 24,
                   'Large (34px)': 34,
                 }
@@ -845,7 +897,9 @@ angular.module('cardkitApp')
               fill: function() {
                 return $scope.theme.xref;
               },
-              fontSize: 18,
+              fontSize: function() {
+                return ($scope.size.name === 'Facebook') ? 14 : 18;
+              },
               fontFamily: function() {
                 return $scope.theme.xrefFont;
               },
@@ -870,7 +924,9 @@ angular.module('cardkitApp')
               fill: function() {
                 return $scope.theme.xref;
               },
-              fontSize: 24,
+              fontSize: function() {
+                return ($scope.size.name === 'Facebook') ? 18 : 24;
+              },
               fontFamily: function() {
                 return $scope.theme.creditFont;
               },
@@ -890,7 +946,7 @@ angular.module('cardkitApp')
               editable: {
                 text: true,
                 fontSize: {
-                  'Small (22px)': 22,
+                  'Small (18px)': 18,
                   'Standard (24px)': 24,
                   'Large (34px)': 34,
                 }
@@ -1001,7 +1057,9 @@ angular.module('cardkitApp')
               fill: function() {
                 return $scope.theme.xref;
               },
-              fontSize: 18,
+              fontSize: function() {
+                return ($scope.size.name === 'Facebook') ? 14 : 18;
+              },
               fontFamily: function() {
                 return $scope.theme.xrefFont;
               },
@@ -1026,7 +1084,9 @@ angular.module('cardkitApp')
               fill: function() {
                 return $scope.theme.xref;
               },
-              fontSize: 18,
+              fontSize: function() {
+                return ($scope.size.name === 'Facebook') ? 14 : 18;
+              },
               fontFamily: function() {
                 return $scope.theme.creditFont;
               },
@@ -1046,7 +1106,7 @@ angular.module('cardkitApp')
               editable: {
                 text: true,
                 fontSize: {
-                  'Small (16px)': 16,
+                  'Small (14px)': 14,
                   'Standard (18px)': 18,
                   'Large (22px)': 22,
                 }
@@ -1150,7 +1210,9 @@ angular.module('cardkitApp')
               fill: function() {
                 return $scope.theme.xref;
               },
-              fontSize: 22,
+              fontSize: function() {
+                return ($scope.size.name === 'Facebook') ? 18 : 22;
+              },
               fontFamily: function() {
                 return $scope.theme.xrefFont;
               },
@@ -1269,7 +1331,9 @@ angular.module('cardkitApp')
               fill: function() {
                 return $scope.theme.xref;
               },
-              fontSize: 24,
+              fontSize: function() {
+                return ($scope.size.name === 'Facebook') ? 18 : 24;
+              },
               fontFamily: function() {
                 return $scope.theme.creditFont;
               },
@@ -1289,7 +1353,7 @@ angular.module('cardkitApp')
               editable: {
                 text: true,
                 fontSize: {
-                  'Small (22px)': 22,
+                  'Small (18px)': 18,
                   'Standard (24px)': 24,
                   'Large (28px)': 28,
                 }
@@ -1380,7 +1444,9 @@ angular.module('cardkitApp')
               fill: function() {
                 return $scope.theme.xref;
               },
-              fontSize: 24,
+              fontSize: function() {
+                return ($scope.size.name === 'Facebook') ? 18 : 24;
+              },
               fontFamily: function() {
                 return $scope.theme.xrefFont;
               },
@@ -1396,7 +1462,7 @@ angular.module('cardkitApp')
               editable: {
                 text: true,
                 fontSize: {
-                  'Small (22px)': 22,
+                  'Small (18px)': 18,
                   'Standard (24px)': 24,
                   'Large (28px)': 28,
                 },
@@ -1409,7 +1475,9 @@ angular.module('cardkitApp')
               fill: function() {
                 return $scope.theme.quote;
               },
-              fontSize: 22,
+              fontSize: function() {
+                return ($scope.size.name === 'Facebook') ? 18 : 22;
+              },
               fontFamily: function() {
                 return $scope.theme.creditFont;
               },
@@ -1418,14 +1486,16 @@ angular.module('cardkitApp')
               x: function() {
                 return $scope.size.gridSize;
               },
-              y: 235,
+              y: function() {
+                return $scope.size.height - $scope.size.gridSize*5;
+              },
               fontWeight: 500,
               draggable: true,
               editable: {
                 text: true,
                 fontSize: {
-                  'Small (16px)': 16,
-                  'Large (18px)': 22,
+                  'Small (18px)': 18,
+                  'Large (22px)': 22,
                 }
               },
             }, {
@@ -1436,7 +1506,9 @@ angular.module('cardkitApp')
               fill: function() {
                 return $scope.theme.highlightColor;
               },
-              fontSize: 18,
+              fontSize: function() {
+                return ($scope.size.name === 'Facebook') ? 14 : 18;
+              },
               fontFamily: function() {
                 return $scope.theme.creditFont;
               },
@@ -1445,15 +1517,17 @@ angular.module('cardkitApp')
               x: function() {
                 return $scope.size.gridSize;
               },
-              y: 285,
+              y: function() {
+                return $scope.size.height - $scope.size.gridSize;
+              },
               fontWeight: 500,
               draggable: true,
               editable: {
                 text: true,
                 fontSize: {
-                  'Small (16px)': 16,
+                  'Small (14px)': 14,
                   'Standard (18px)': 18,
-                  'Large (18px)': 22,
+                  'Large (22px)': 22,
                 }
               },
             }, {
@@ -1464,7 +1538,9 @@ angular.module('cardkitApp')
                 return $scope.theme.quote;
               },
               controlsOrder: 2,
-              fontSize: 44,
+              fontSize: function() {
+                return ($scope.size.name === 'Facebook') ? 34 : 44;
+              },
               fontFamily: function() {
                 return $scope.theme.headlineFont;
               },
@@ -1506,17 +1582,19 @@ angular.module('cardkitApp')
             }, {
               name: 'Image',
               type: 'image',
-              width: 300,
+              width: function() {
+                return $scope.size.gridSize * 20;
+              },
               controlsOrder: 2,
               height: function() {
-                return +this.width;
+                return this.width();
               },
               src: function() {
                 return $scope.theme.images.headshotSrc || '';
               },
               opacity: 1,
               x: function() {
-                var w = (+this.width);
+                var w = this.width();
                 return $scope.size.width - (w + $scope.size.gridSize);
               },
               y: function() {
@@ -1562,7 +1640,9 @@ angular.module('cardkitApp')
               fill: function() {
                 return $scope.theme.xrefBackground;
               },
-              fontSize: 28,
+              fontSize: function() {
+                return ($scope.size.name === 'Facebook') ? 24 : 28;
+              },
               fontFamily: function() {
                 return $scope.theme.headlineFont;
               },
@@ -1583,14 +1663,20 @@ angular.module('cardkitApp')
               fill: function() {
                 return $scope.theme.quote;
               },
-              fontSize: 22,
+              fontSize: function() {
+                return ($scope.size.name === 'Facebook') ? 16 : 22;
+              },
               fontFamily: function() {
                 return $scope.theme.creditFont;
               },
               textAnchor: 'start',
               textTransform: 'uppercase',
-              x: 15,
-              y: 235,
+              x: function() {
+                return $scope.size.gridSize;
+              },
+              y: function() {
+                return $scope.size.height - $scope.size.gridSize * 6;
+              },
               fontWeight: 500,
               draggable: true,
               editable: {
@@ -1608,13 +1694,19 @@ angular.module('cardkitApp')
                 return $scope.theme.quote;
               },
               controlsOrder: 1,
-              fontSize: 32,
+              fontSize: function() {
+                return ($scope.size.name === 'Facebook') ? 26 : 32;
+              },
               fontFamily: function() {
                 return $scope.theme.headlineFont;
               },
               textAnchor: 'start',
-              x: 15,
-              y: 45,
+              x: function() {
+                return $scope.size.gridSize;
+              },
+              y: function() {
+                return $scope.size.gridSize * 3;
+              },
               fontWeight: 600,
               draggable: true,
               editable: {
@@ -1719,7 +1811,9 @@ angular.module('cardkitApp')
               fill: function() {
                 return $scope.theme.xref;
               },
-              fontSize: 18,
+              fontSize: function() {
+                return ($scope.size.name === 'Facebook') ? 14 : 18;
+              },
               fontFamily: function() {
                 return $scope.theme.xrefFont;
               },
@@ -1744,7 +1838,9 @@ angular.module('cardkitApp')
               fill: function() {
                 return $scope.theme.xref;
               },
-              fontSize: 24,
+              fontSize: function() {
+                return ($scope.size.name === 'Facebook') ? 18 : 24;
+              },
               fontFamily: 'financierdisplayweb',
               textAnchor: 'start',
               width: function () {
@@ -1762,7 +1858,7 @@ angular.module('cardkitApp')
               editable: {
                 text: true,
                 fontSize: {
-                  'Small (22px)': 22,
+                  'Small (18px)': 18,
                   'Standard (24px)': 24,
                   'Large (34px)': 34,
                 }
@@ -1835,7 +1931,9 @@ angular.module('cardkitApp')
               type: 'text',
               text: 'FT Weekend',
               fill: 'white',
-              fontSize: 28,
+              fontSize: function() {
+                return ($scope.size.name === 'Facebook') ? 22 : 28;
+              },
               fontFamily: function() {
                 return $scope.theme.headlineFont;
               },
@@ -1856,7 +1954,9 @@ angular.module('cardkitApp')
               fill: function() {
                 return $scope.theme.xref;
               },
-              fontSize: 18,
+              fontSize: function() {
+                return ($scope.size.name === 'Facebook') ? 14 : 18;
+              },
               fontFamily: function() {
                 return $scope.theme.xrefFont;
               },
@@ -1881,7 +1981,9 @@ angular.module('cardkitApp')
               fill: function() {
                 return $scope.theme.xref;
               },
-              fontSize: 24,
+              fontSize: function() {
+                return ($scope.size.name === 'Facebook') ? 18 : 24;
+              },
               fontFamily: 'metricweb',
               textAnchor: 'start',
               width: function () {
@@ -1899,7 +2001,7 @@ angular.module('cardkitApp')
               editable: {
                 text: true,
                 fontSize: {
-                  'Small (22px)': 22,
+                  'Small (18px)': 18,
                   'Standard (24px)': 24,
                   'Large (34px)': 34,
                 }
@@ -1912,7 +2014,9 @@ angular.module('cardkitApp')
               fill: function() {
                 return $scope.theme.xref;
               },
-              fontSize: 24,
+              fontSize: function() {
+                return ($scope.size.name === 'Facebook') ? 18 : 24;
+              },
               fontFamily: 'financierdisplayweb',
               fontStyle: 'italic',
               textAnchor: 'start',
@@ -1931,7 +2035,7 @@ angular.module('cardkitApp')
               editable: {
                 text: true,
                 fontSize: {
-                  'Small (22px)': 22,
+                  'Small (18px)': 18,
                   'Standard (24px)': 24,
                   'Large (34px)': 34,
                 }

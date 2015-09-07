@@ -24,15 +24,10 @@ angular.module('cardkitApp')
         },
         {
           name: 'Facebook',
-          width: 800,
-          height: 370,
-          gridSize: 20
-        },
-        // {
-        //   name: 'Video',
-        //   width: 640,
-        //   height: 360,
-        // },
+          width: 486,
+          height: 254,
+          gridSize: 12.15
+        }
       ],
       themes: themeConfig,
       templates: templateConfig,
@@ -125,7 +120,7 @@ angular.module('cardkitApp')
       return event.dataTransfer || null;
     }
 
-    $scope.removeImage = function(key) {
+    $scope.removeImage = function() {
       this.element.src = '';
     };
 

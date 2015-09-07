@@ -375,7 +375,10 @@ angular.module('cardkitApp')
           init();
           drawElements();
         });
-        scope.$on('changeSize', drawElements);
+        scope.$on('changeSize', function() {
+          init();
+          drawElements();
+        });
         scope.$on('changeSize', setupFilters);
         scope.$on('resetSvg', resetSvg);
       }

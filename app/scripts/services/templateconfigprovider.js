@@ -338,7 +338,10 @@ angular.module('cardkitApp')
               },
               controlsOrder: 2,
               height: function() {
-                return this.width();
+                if (typeof this.width === 'function') {
+                  return this.width();
+                }
+                return this.width;
               },
               src: function() {
                 return $scope.theme.images.headshotSrc || '';
@@ -1587,14 +1590,22 @@ angular.module('cardkitApp')
               },
               controlsOrder: 2,
               height: function() {
-                return this.width();
+                if (typeof this.width === 'function') {
+                  return this.width();
+                }
+                return this.width;
               },
               src: function() {
                 return $scope.theme.images.headshotSrc || '';
               },
               opacity: 1,
               x: function() {
-                var w = this.width();
+                var w;
+                if (typeof this.width === 'function') {
+                  w = this.width();
+                } else {
+                  w = +this.width;
+                }
                 return $scope.size.width - (w + $scope.size.gridSize);
               },
               y: function() {

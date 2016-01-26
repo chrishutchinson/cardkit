@@ -77,7 +77,7 @@ angular.module('cardkitApp')
                 return $scope.theme.xref;
               },
               fontSize: function() {
-                return ($scope.size.name === 'Facebook') ? 18 : 22;
+                return ($scope.size.name === 'Twitter') ? 22 : 18;
               },
               fontFamily: function() {
                 return $scope.theme.xrefFont;
@@ -108,7 +108,7 @@ angular.module('cardkitApp')
                 return $scope.theme.quote;
               },
               fontSize: function() {
-                return ($scope.size.name === 'Facebook') ? 16 : 22;
+                return ($scope.size.name === 'Twitter') ? 22 : 16;
               },
               fontFamily: function() {
                 return $scope.theme.creditFont;
@@ -139,7 +139,7 @@ angular.module('cardkitApp')
               },
               controlsOrder: 1,
               fontSize: function () {
-                return ($scope.size.name === 'Facebook') ? 24 : 32;
+                return ($scope.size.name === 'Twitter') ? 32 : 24;
               },
               fontFamily: function() {
                 return $scope.theme.headlineFont;
@@ -228,7 +228,7 @@ angular.module('cardkitApp')
                 return $scope.theme.xref;
               },
               fontSize: function() {
-                return ($scope.size.name === 'Facebook') ? 18 : 22;
+                return ($scope.size.name === 'Twitter') ? 22 : 18;
               },
               fontFamily: function() {
                 return $scope.theme.xrefFont;
@@ -259,7 +259,7 @@ angular.module('cardkitApp')
                 return $scope.theme.quote;
               },
               fontSize: function() {
-                return ($scope.size.name === 'Facebook') ? 16 : 22;
+                return ($scope.size.name === 'Twitter') ? 22 : 16;
               },
               fontFamily: function() {
                 return $scope.theme.creditFont;
@@ -290,7 +290,7 @@ angular.module('cardkitApp')
               },
               controlsOrder: 1,
               fontSize: function() {
-                return ($scope.size.name === 'Facebook') ? 50 : 60;
+                return ($scope.size.name === 'Twitter') ? 60 : 50;
               },
               fontFamily: function() {
                 return $scope.theme.headlineFont;
@@ -411,7 +411,7 @@ angular.module('cardkitApp')
                 return $scope.theme.xref;
               },
               fontSize: function() {
-                return ($scope.size.name === 'Facebook') ? 18 : 22;
+                return ($scope.size.name === 'Twitter') ? 22 : 18;
               },
               fontFamily: function() {
                 return $scope.theme.xrefFont;
@@ -437,7 +437,7 @@ angular.module('cardkitApp')
                 return $scope.theme.quote;
               },
               fontSize: function() {
-                return ($scope.size.name === 'Facebook') ? 16 : 22;
+                return ($scope.size.name === 'Twitter') ? 22 : 16;
               },
               fontFamily: function() {
                 return $scope.theme.creditFont;
@@ -468,7 +468,7 @@ angular.module('cardkitApp')
               },
               controlsOrder: 1,
               fontSize: function() {
-                return ($scope.size.name === 'Facebook') ? 26 : 32;
+                return ($scope.size.name === 'Twitter') ? 32 : 26;
               },
               fontFamily: function() {
                 return $scope.theme.headlineFont;
@@ -557,7 +557,7 @@ angular.module('cardkitApp')
                 return $scope.theme.xref;
               },
               fontSize: function() {
-                return ($scope.size.name === 'Facebook') ? 18 : 22;
+                return ($scope.size.name === 'Twitter') ? 22 : 18;
               },
               fontFamily: function() {
                 return $scope.theme.xrefFont;
@@ -588,7 +588,7 @@ angular.module('cardkitApp')
                 return $scope.theme.quote;
               },
               fontSize: function() {
-                return ($scope.size.name === 'Facebook') ? 26 : 32;
+                return ($scope.size.name === 'Twitter') ? 32 : 26;
               },
               fontFamily: function() {
                 return $scope.theme.creditFont;
@@ -736,7 +736,7 @@ angular.module('cardkitApp')
                 return $scope.theme.xref;
               },
               fontSize: function() {
-                return ($scope.size.name === 'Facebook') ? 14 : 18;
+                return ($scope.size.name === 'Twitter') ? 18 : 14;
               },
               fontFamily: function() {
                 return $scope.theme.xrefFont;
@@ -763,7 +763,7 @@ angular.module('cardkitApp')
                 return $scope.theme.xref;
               },
               fontSize: function() {
-                return ($scope.size.name === 'Facebook') ? 18 : 24;
+                return ($scope.size.name === 'Twitter') ? 24 : 18;
               },
               fontFamily: function() {
                 return $scope.theme.creditFont;
@@ -901,7 +901,7 @@ angular.module('cardkitApp')
                 return $scope.theme.xref;
               },
               fontSize: function() {
-                return ($scope.size.name === 'Facebook') ? 14 : 18;
+                return ($scope.size.name === 'Twitter') ? 18 : 14;
               },
               fontFamily: function() {
                 return $scope.theme.xrefFont;
@@ -928,7 +928,7 @@ angular.module('cardkitApp')
                 return $scope.theme.xref;
               },
               fontSize: function() {
-                return ($scope.size.name === 'Facebook') ? 18 : 24;
+                return ($scope.size.name === 'Twitter') ? 24 : 18;
               },
               fontFamily: function() {
                 return $scope.theme.creditFont;
@@ -950,6 +950,7 @@ angular.module('cardkitApp')
                 text: true,
                 fontSize: {
                   'Small (18px)': 18,
+                  'Medium (20px)': 20,
                   'Standard (24px)': 24,
                   'Large (34px)': 34,
                 }
@@ -1061,7 +1062,7 @@ angular.module('cardkitApp')
                 return $scope.theme.xref;
               },
               fontSize: function() {
-                return ($scope.size.name === 'Facebook') ? 14 : 18;
+                return ($scope.size.name === 'Twitter') ? 18 : 14;
               },
               fontFamily: function() {
                 return $scope.theme.xrefFont;
@@ -1214,7 +1215,7 @@ angular.module('cardkitApp')
                 return $scope.theme.xref;
               },
               fontSize: function() {
-                return ($scope.size.name === 'Facebook') ? 18 : 22;
+                return ($scope.size.name === 'Twitter') ? 22 : 18;
               },
               fontFamily: function() {
                 return $scope.theme.xrefFont;
@@ -1335,7 +1336,7 @@ angular.module('cardkitApp')
                 return $scope.theme.xref;
               },
               fontSize: function() {
-                return ($scope.size.name === 'Facebook') ? 18 : 24;
+                return ($scope.size.name === 'Twitter') ? 24 : 18;
               },
               fontFamily: function() {
                 return $scope.theme.creditFont;
@@ -1448,7 +1449,7 @@ angular.module('cardkitApp')
                 return $scope.theme.xref;
               },
               fontSize: function() {
-                return ($scope.size.name === 'Facebook') ? 18 : 24;
+                return ($scope.size.name === 'Twitter') ? 24 : 18;
               },
               fontFamily: function() {
                 return $scope.theme.xrefFont;
@@ -1479,7 +1480,7 @@ angular.module('cardkitApp')
                 return $scope.theme.quote;
               },
               fontSize: function() {
-                return ($scope.size.name === 'Facebook') ? 18 : 22;
+                return ($scope.size.name === 'Twitter') ? 22 : 18;
               },
               fontFamily: function() {
                 return $scope.theme.creditFont;
@@ -1510,7 +1511,7 @@ angular.module('cardkitApp')
                 return $scope.theme.highlightColor;
               },
               fontSize: function() {
-                return ($scope.size.name === 'Facebook') ? 14 : 18;
+                return ($scope.size.name === 'Twitter') ? 18 : 14;
               },
               fontFamily: function() {
                 return $scope.theme.creditFont;
@@ -1542,7 +1543,7 @@ angular.module('cardkitApp')
               },
               controlsOrder: 2,
               fontSize: function() {
-                return ($scope.size.name === 'Facebook') ? 34 : 44;
+                return ($scope.size.name === 'Twitter') ? 44 : 34;
               },
               fontFamily: function() {
                 return $scope.theme.headlineFont;
@@ -1652,7 +1653,7 @@ angular.module('cardkitApp')
                 return $scope.theme.xrefBackground;
               },
               fontSize: function() {
-                return ($scope.size.name === 'Facebook') ? 24 : 28;
+                return ($scope.size.name === 'Twitter') ? 28 : 24;
               },
               fontFamily: function() {
                 return $scope.theme.headlineFont;
@@ -1675,7 +1676,7 @@ angular.module('cardkitApp')
                 return $scope.theme.quote;
               },
               fontSize: function() {
-                return ($scope.size.name === 'Facebook') ? 16 : 22;
+                return ($scope.size.name === 'Twitter') ? 22 : 16;
               },
               fontFamily: function() {
                 return $scope.theme.creditFont;
@@ -1706,7 +1707,7 @@ angular.module('cardkitApp')
               },
               controlsOrder: 1,
               fontSize: function() {
-                return ($scope.size.name === 'Facebook') ? 26 : 32;
+                return ($scope.size.name === 'Twitter') ? 32 : 26;
               },
               fontFamily: function() {
                 return $scope.theme.headlineFont;
@@ -1823,7 +1824,7 @@ angular.module('cardkitApp')
                 return $scope.theme.xref;
               },
               fontSize: function() {
-                return ($scope.size.name === 'Facebook') ? 14 : 18;
+                return ($scope.size.name === 'Twitter') ? 18 : 14;
               },
               fontFamily: function() {
                 return $scope.theme.xrefFont;
@@ -1850,7 +1851,7 @@ angular.module('cardkitApp')
                 return $scope.theme.xref;
               },
               fontSize: function() {
-                return ($scope.size.name === 'Facebook') ? 18 : 24;
+                return ($scope.size.name === 'Twitter') ? 24 : 18;
               },
               fontFamily: 'financierdisplayweb',
               textAnchor: 'start',
@@ -1943,7 +1944,7 @@ angular.module('cardkitApp')
               text: 'FT Weekend',
               fill: 'white',
               fontSize: function() {
-                return ($scope.size.name === 'Facebook') ? 22 : 28;
+                return ($scope.size.name === 'Twitter') ? 28 : 22;
               },
               fontFamily: function() {
                 return $scope.theme.headlineFont;
@@ -1966,7 +1967,7 @@ angular.module('cardkitApp')
                 return $scope.theme.xref;
               },
               fontSize: function() {
-                return ($scope.size.name === 'Facebook') ? 14 : 18;
+                return ($scope.size.name === 'Twitter') ? 18 : 14;
               },
               fontFamily: function() {
                 return $scope.theme.xrefFont;
@@ -1993,7 +1994,7 @@ angular.module('cardkitApp')
                 return $scope.theme.xref;
               },
               fontSize: function() {
-                return ($scope.size.name === 'Facebook') ? 18 : 24;
+                return ($scope.size.name === 'Twitter') ? 24 : 18;
               },
               fontFamily: 'metricweb',
               textAnchor: 'start',
@@ -2026,7 +2027,7 @@ angular.module('cardkitApp')
                 return $scope.theme.xref;
               },
               fontSize: function() {
-                return ($scope.size.name === 'Facebook') ? 18 : 24;
+                return ($scope.size.name === 'Twitter') ? 24 : 18;
               },
               fontFamily: 'financierdisplayweb',
               fontStyle: 'italic',

@@ -27,6 +27,12 @@ angular.module('cardkitApp')
           width: 486,
           height: 254,
           gridSize: 12.15
+        },
+        {
+          name: 'FT Article',
+          width: 600,
+          height: 295,
+          gridSize: 15
         }
       ],
       themes: themeConfig,

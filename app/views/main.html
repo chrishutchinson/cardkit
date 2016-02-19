@@ -5,7 +5,7 @@
     <div ng-if="(config.themes.length > 0 && theme) || !config.themes">
 
       <div ng-repeat="(key, element) in config.svg.elements" ng-if="element.editable" class="panel">
-          
+
         <h3 ng-click="show[key] = !show[key]"><i class="fa fa-caret-down" ng-hide="show[key]"></i><i class="fa fa-caret-right" ng-hide="!show[key]"></i> {{element.name}}</h3>
         <div ng-if="element.type !== 'group'" ng-repeat="(type, field) in element.editable" ng-switch="type" ng-hide="show[key]">
           <!-- Text -->
@@ -16,19 +16,19 @@
 
           <!-- Font Size -->
           <fontsize-editor ng-switch-when="fontSize" element="element" field="field"></fontsize-editor>
-        
+
           <!-- Font Family -->
           <fontfamily-editor ng-switch-when="fontFamily" element="element" field="field"></fontfamily-editor>
 
           <!-- Source -->
-          <image-editor ng-switch-when="src" key="key" on-drop="onDrop" remove-image="removeImage"></image-editor>
-          
+          <image-editor ng-switch-when="src" key="key" on-drop="onDrop" remove-image="removeImage" file-changed="fileChanged" field="field" element="element"></image-editor>
+
           <!-- Width / Size -->
           <size-editor ng-switch-when="width" element="element"></size-editor>
-          
+
           <!-- Text Anchor -->
           <textanchor-editor ng-switch-when="textAnchor" element="element"></textanchor-editor>
-          
+
           <!-- Opacity -->
           <opacity-editor ng-switch-when="opacity" element="element"></opacity-editor>
 
@@ -47,16 +47,16 @@
 
             <!-- Font Size -->
             <fontsize-editor ng-switch-when="fontSize" element="e" field="f"></fontsize-editor>
-          
+
             <!-- Font Family -->
             <fontfamily-editor ng-switch-when="fontFamily" element="e" field="f"></fontfamily-editor>
-            
+
             <!-- Width / Size -->
             <size-editor ng-switch-when="width" element="e"></size-editor>
-            
+
             <!-- Text Anchor -->
             <textanchor-editor ng-switch-when="textAnchor" element="e"></textanchor-editor>
-            
+
             <!-- Opacity -->
             <opacity-editor ng-switch-when="opacity" element="e"></opacity-editor>
 
@@ -71,7 +71,7 @@
   <!-- SVG element -->
   <div class="svg" fixed-scroll>
     <div class="svg-wrapper" ng-if="((config.themes.length > 0 && theme) || !config.themes) && ((config.sizes.length > 0 && size) || !config.sizes)">
-      <snap-svg svg-config="config.svg" svg-theme="config.theme" filters="filters"></snap-svg>
+      <snap-svg svg-config="config.svg" svg-theme="config.theme" svg-output="config.output" filters="filters"></snap-svg>
       <button class="button" ng-click="downloadSvg()"><i class="fa fa-save"></i> Download Image</button>
       <button class="button button-danger pull-right" ng-click="resetSvg()"><i class="fa fa-times"></i> Reset</button>
     </div>

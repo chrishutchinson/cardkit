@@ -79,21 +79,27 @@ angular.module('cardkitApp')
             this.drag(dragMove, dragStart, dragEnd);
             return this;
           };
-              
+
           var dragStart = function () {
             this.data('ot', this.transform().local);
+            s.elementDragging = true;
           };
-       
+
           var dragMove = function(dx, dy) {
             var tdx, tdy;
             var snapInvMatrix = this.transform().diffMatrix.invert();
-            snapInvMatrix.e = snapInvMatrix.f = 0; 
+            snapInvMatrix.e = snapInvMatrix.f = 0;
             tdx = snapInvMatrix.x(dx, dy);
             tdy = snapInvMatrix.y(dx, dy);
             this.transform(this.data('ot') + 't' + [tdx, tdy]);
+
+            if(this.hoverRect) {
+              this.hoverRect.transform(this.data('ot') + 't' + [tdx, tdy]);
+            }
           };
 
           var dragEnd = function() {
+            s.elementDragging = false;
           };
         });
 
@@ -146,7 +152,7 @@ angular.module('cardkitApp')
               width: canvasData.width*4 + 'px',
               height: canvasData.height*4 + 'px'
             }),
-          };   
+          };
         }
         setupFilters();
 
@@ -157,6 +163,23 @@ angular.module('cardkitApp')
       	// The function that sets up the element with the required settings
       	function setupElement(element) {
       		var el;
+
+          // If elements should be attached on the Y axis
+          if(element.yAttach) {
+            if(angular.isObject(element.yAttach)) {
+              var attachElement = scope.svgConfig.elements[element.yAttach.element];
+              var attachOffset = element.yAttach.offset || 0;
+            } else {
+              var attachElement = scope.svgConfig.elements[element.yAttach];
+              var attachOffset = 0;
+            }
+
+            var attachText = attachElement.text.split('\n');
+            var attachY = attachElement.y;
+            var elementValue = (attachText.length*(attachElement.lineHeight || attachElement.fontSize)) + attachY + attachOffset;
+            element.y = elementValue;
+          }
+
           element = functionise(element);
 
       		switch(element.type) {
@@ -177,7 +200,7 @@ angular.module('cardkitApp')
       				angular.forEach(element.elements, function(e, k) {
       					gEl = setupElement(e);
                 setAttributes(gEl, e);
-      				
+
         			  if(k === 0) {
       						el = s.group(gEl);
     						} else {
@@ -185,7 +208,7 @@ angular.module('cardkitApp')
       					}
       				});
       				break;
-      			default: 
+      			default:
       				return false;
       		}
 
@@ -214,12 +237,12 @@ angular.module('cardkitApp')
           if(elementData.type === 'text') {
             elementData.text = elementData.text.split('\n');
           }
-          
+
           el.attr(elementData);
 
           if(elementData.type === 'text') {
             el.selectAll('tspan').forEach(function(tspan, i){
-              tspan.attr({x: elementData.x, y: elementData.y + (elementData.fontSize*i)});
+              tspan.attr({x: elementData.x, y: elementData.y + ((elementData.lineHeight || elementData.fontSize)*i)});
             });
           }
 
@@ -249,9 +272,9 @@ angular.module('cardkitApp')
 
               // If the type is image
               if(el.type === 'image') {
-                // Store matrix transformation, we'll need it later to prevent the image moving around the SVG when replaced 
+                // Store matrix transformation, we'll need it later to prevent the image moving around the SVG when replaced
                 matrix = el.matrix;
-                
+
                 // Create new element based on config
                 var newEl = setupElement(scope.svgConfig.elements[key]);
 
@@ -267,7 +290,7 @@ angular.module('cardkitApp')
 
                 // Destroy old element
                 el.remove();
-                
+
                 el = newEl;
 
                 // Add the created element to a list of elements
@@ -275,12 +298,12 @@ angular.module('cardkitApp')
               }
 
               if(el.type === 'g') {
-                // Store matrix transformation, we'll need it later to prevent the group moving around the SVG when replaced 
+                // Store matrix transformation, we'll need it later to prevent the group moving around the SVG when replaced
                 matrix = el.matrix;
 
                 // Destroy and recreate
                 el.remove();
-                
+
                 // Create new element based on config
                 el = setupElement(scope.svgConfig.elements[key]);
 
@@ -301,6 +324,22 @@ angular.module('cardkitApp')
 	      			if(el === false) {
 	      				return;
 	      			}
+
+              if(element.draggable) {
+                el.hover(function(e) {
+                  if(!s.elementDragging && element.showHoverArea) {
+                    var bBox = this.getBBox();
+                    this.hoverRect = s.rect(bBox.x, bBox.y, bBox.width, bBox.height, 0, 0).attr({
+                      fill: 'rgba(0, 0, 0, 0.05)'
+                    });
+                    this.before(this.hoverRect);
+                  }
+                }, function(e) {
+                  if(!s.elementDragging && element.showHoverArea) {
+                    this.hoverRect.remove();
+                  }
+                });
+              }
 
 	      			// Add the created element to a list of elements
 	      			elements.push(el);

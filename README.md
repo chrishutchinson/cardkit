@@ -2,13 +2,14 @@
 
 [![Join the chat at https://gitter.im/times/cardkit](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/times/cardkit?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-## Version 1.0.0
+## Version 1.1.0
 
-### 2015 [Chris Hutchinson](http://www.github.com/chrishutchinson) for The [Times and Sunday Times](http://www.github.com/times)
+### 2016 [Chris Hutchinson](http://www.github.com/chrishutchinson) for The [Times and Sunday Times](http://www.github.com/times)
 
 CardKit is flexible, SVG image / card creation tool, with simple configuration options, which is easy to extend.
 
-![CardKit Usage](http://fat.gfycat.com/FoolhardyGaseousCockroach.gif)
+![CardKit Usage](demo.gif)
+<!--![CardKit Usage](http://fat.gfycat.com/FoolhardyGaseousCockroach.gif)-->
 
 CardKit is aimed at newsrooms, however has many potential uses that extend beyond that:
 
@@ -38,3 +39,19 @@ See the [CardKit Wiki](https://github.com/times/cardkit/wiki) for guides on how 
 #### Push to `gh-pages`
 
 If you want to use [GitHub Pages](https://pages.github.com/) to host your build of CardKit, follow this to push your `/dist` folder: https://gist.github.com/cobyism/4730490
+
+## Version history
+
+**1.1.0** (February 22, 2016)
+
+- Add support for images to be editable via a drop down, as well as through file upload
+- Allow dragging to be locked to a single direction through configuration
+- Allow themes and sizes to have a default set
+- Enable element attaching on the Y-axis, so that elements can be attached to elements above them, and move as they expand
+- Add a configuration options to add a bounding-box when dragging elements, to give an understanding of their size
+- Add support for variable line height, defined in the configuration object
+
+
+**1.0.0**
+
+- Initial release

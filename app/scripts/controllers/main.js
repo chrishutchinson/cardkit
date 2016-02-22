@@ -128,7 +128,9 @@ angular.module('cardkitApp')
               return $scope.theme.headlineFont;
             },
             fontWeight: 300,
-            lineHeight: 52,
+            lineHeight: function() {
+              return this.fontSize*1.3;
+            },
             textAnchor: 'middle',
             x: '50%',
             y: 65,

@@ -94,12 +94,24 @@ angular.module('cardkitApp')
             this.transform(this.data('ot') + 't' + [tdx, tdy]);
 
             if(this.hoverRect) {
-              this.hoverRect.transform(this.data('ot') + 't' + [tdx, tdy]);
+              this.hoverRect.transform('t' + [0, 0] + 't' + [tdx, tdy]);
             }
           };
 
           var dragEnd = function() {
             s.elementDragging = false;
+
+            // We have to get the hover rectangle bounding box, store it, remove it, and add it again using the bounding box.
+            //  This prevents weird issues with the rectangle not positioning itself correctly if the user drags again without
+            //  un-hovering.
+            if(this.hoverRect) {
+              var hoverBBox = this.hoverRect.getBBox();
+              this.hoverRect.remove();
+              this.hoverRect = s.rect(hoverBBox.x, hoverBBox.y, hoverBBox.width, hoverBBox.height, 0, 0).attr({
+                fill: 'rgba(0, 0, 0, 0.05)'
+              });
+              this.before(this.hoverRect);
+            }
           };
         });
 
@@ -157,7 +169,7 @@ angular.module('cardkitApp')
         setupFilters();
 
       	// Setup some element variables
-      	var elements = [],
+      	var elements = {},
       		  el;
 
       	// The function that sets up the element with the required settings
@@ -176,7 +188,18 @@ angular.module('cardkitApp')
 
             var attachText = attachElement.text.split('\n');
             var attachY = attachElement.y;
-            var elementValue = (attachText.length*(attachElement.lineHeight || attachElement.fontSize)) + attachY + attachOffset;
+
+            var lineHeight;
+            switch(typeof attachElement.lineHeight) {
+              case 'function':
+                lineHeight = attachElement.lineHeight();
+                break;
+              default:
+                lineHeight = attachElement.lineHeight;
+                break;
+            }
+
+            var elementValue = (attachText.length*(lineHeight || attachElement.fontSize)) + attachY + attachOffset;
             element.y = elementValue;
           }
 
@@ -265,37 +288,34 @@ angular.module('cardkitApp')
 
           // Loop through all elements
 	      	angular.forEach(scope.svgConfig.elements, function(element, key) {
-          	// Check if we have setup the element already
+            // Check if we have setup the element already
 	      		if(typeof elements[key] !== 'undefined') {
 	      			// The element already exists
 	      			el = elements[key];
 
-              // If the type is image
-              if(el.type === 'image') {
-                // Store matrix transformation, we'll need it later to prevent the image moving around the SVG when replaced
-                matrix = el.matrix;
+              // Store matrix transformation, we'll need it later to prevent the image moving around the SVG when replaced
+              matrix = el.matrix;
 
-                // Create new element based on config
-                var newEl = setupElement(scope.svgConfig.elements[key]);
+              // Create new element based on config
+              var newEl = setupElement(scope.svgConfig.elements[key]);
 
-                if(newEl === false) {
-                  return;
-                }
-
-                // Place new element directly after old one
-                el.after(newEl);
-
-                // Apply matrix transformation from previous element
-                newEl.transform(matrix);
-
-                // Destroy old element
-                el.remove();
-
-                el = newEl;
-
-                // Add the created element to a list of elements
-                elements[key] = el;
+              if(newEl === false) {
+                return;
               }
+
+              // Place new element directly after old one
+              el.after(newEl);
+
+              // Apply matrix transformation from previous element
+              newEl.transform(matrix);
+
+              // Destroy old element
+              el.remove();
+
+              el = newEl;
+
+              // Add the created element to a list of elements
+              elements[key] = el;
 
               if(el.type === 'g') {
                 // Store matrix transformation, we'll need it later to prevent the group moving around the SVG when replaced
@@ -325,25 +345,25 @@ angular.module('cardkitApp')
 	      				return;
 	      			}
 
-              if(element.draggable) {
-                el.hover(function(e) {
-                  if(!s.elementDragging && element.showHoverArea) {
-                    var bBox = this.getBBox();
-                    this.hoverRect = s.rect(bBox.x, bBox.y, bBox.width, bBox.height, 0, 0).attr({
-                      fill: 'rgba(0, 0, 0, 0.05)'
-                    });
-                    this.before(this.hoverRect);
-                  }
-                }, function(e) {
-                  if(!s.elementDragging && element.showHoverArea) {
-                    this.hoverRect.remove();
-                  }
-                });
-              }
-
 	      			// Add the created element to a list of elements
-	      			elements.push(el);
+	      			elements[key] = el;
 	      		}
+
+            if(element.draggable) {
+              el.hover(function(e) {
+                if(!s.elementDragging && element.showHoverArea) {
+                  var bBox = this.getBBox();
+                  this.hoverRect = s.rect(bBox.x, bBox.y, bBox.width, bBox.height, 0, 0).attr({
+                    fill: 'rgba(0, 0, 0, 0.05)'
+                  });
+                  this.before(this.hoverRect);
+                }
+              }, function(e) {
+                if(!s.elementDragging && element.showHoverArea) {
+                  this.hoverRect.remove();
+                }
+              });
+            }
 
 	      		// Update the attributes (e.g. text and colours) based on config data
 	      		var elementData = element;

@@ -15,7 +15,7 @@ angular.module('cardkitApp')
 
               '<div class="fileInputWrapper button">' +
                 '<span>or select an image</span>' +
-                '<input onchange="fileChanged(this, event)" data-key="{{key}}" type="file" accept="image/*" />' +
+                '<input onchange="angular.element(this).scope().fileChanged(this, event)" data-key="{{key}}" type="file" accept="image/*" />' +
               '</div>' +
 
             '</div>' +
@@ -31,7 +31,7 @@ angular.module('cardkitApp')
         key: '=',
         onDrop: '=',
         removeImage: '=',
-        fileChanged: '=',
+        fileChanged: '=fileChanged',
         field: '=',
         element: '='
       },
@@ -41,8 +41,6 @@ angular.module('cardkitApp')
             scope.element.src = scope.field[Object.keys(scope.field)[0]];
           }
         }
-
-        console.log(scope.fileChanged);
       }
     };
   });

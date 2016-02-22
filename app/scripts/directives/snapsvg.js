@@ -75,8 +75,15 @@ angular.module('cardkitApp')
 
         // Custom SVG Drag function, given that we scale the SVG
         snapSVG.plugin(function(Snap, Element) {
-          Element.prototype.altDrag = function() {
-            this.drag(dragMove, dragStart, dragEnd);
+          Element.prototype.altDrag = function(x, y) {
+            if(x && y) {
+              this.drag(dragMoveAll, dragStart, dragEnd);
+            } else if(x && !y) {
+              this.drag(dragMoveX, dragStart, dragEnd);
+            } else if(!x && y) {
+              this.drag(dragMoveY, dragStart, dragEnd);
+            }
+
             return this;
           };
 
@@ -85,7 +92,7 @@ angular.module('cardkitApp')
             s.elementDragging = true;
           };
 
-          var dragMove = function(dx, dy) {
+          var dragMoveAll = function(dx, dy) {
             var tdx, tdy;
             var snapInvMatrix = this.transform().diffMatrix.invert();
             snapInvMatrix.e = snapInvMatrix.f = 0;
@@ -95,6 +102,32 @@ angular.module('cardkitApp')
 
             if(this.hoverRect) {
               this.hoverRect.transform('t' + [0, 0] + 't' + [tdx, tdy]);
+            }
+          };
+
+          var dragMoveX = function(dx, dy) {
+            var tdx, tdy;
+            var snapInvMatrix = this.transform().diffMatrix.invert();
+            snapInvMatrix.e = snapInvMatrix.f = 0;
+            tdx = snapInvMatrix.x(dx, dy);
+            tdy = snapInvMatrix.y(dx, dy);
+            this.transform(this.data('ot') + 't' + [tdx, 0]);
+
+            if(this.hoverRect) {
+              this.hoverRect.transform('t' + [0, 0] + 't' + [tdx, 0]);
+            }
+          };
+
+          var dragMoveY = function(dx, dy) {
+            var tdx, tdy;
+            var snapInvMatrix = this.transform().diffMatrix.invert();
+            snapInvMatrix.e = snapInvMatrix.f = 0;
+            tdx = snapInvMatrix.x(dx, dy);
+            tdy = snapInvMatrix.y(dx, dy);
+            this.transform(this.data('ot') + 't' + [0, tdy]);
+
+            if(this.hoverRect) {
+              this.hoverRect.transform('t' + [0, 0] + 't' + [0, tdy]);
             }
           };
 
@@ -136,7 +169,7 @@ angular.module('cardkitApp')
         var canvasData = functionise(data.canvas);
       	var background = s.rect(0, 0, canvasData.width, canvasData.height, 0, 0).attr(canvasData);
       	if(canvasData.draggable === true) {
-      		background.altDrag();
+      		background.altDrag(true, true);
       	}
 
         // Create us some filters for later use
@@ -249,7 +282,6 @@ angular.module('cardkitApp')
         	}
 
           return el;
-
         }
 
         // Setup our atrribtes on the specific element
@@ -259,6 +291,11 @@ angular.module('cardkitApp')
           delete elementData.$$hashKey;
           if(elementData.type === 'text') {
             elementData.text = elementData.text.split('\n');
+          }
+
+          if(angular.isObject(elementData.draggable)) {
+            elementData.draggablex = elementData.draggable.x;
+            elementData.draggabley = elementData.draggable.y;
           }
 
           el.attr(elementData);
@@ -359,7 +396,7 @@ angular.module('cardkitApp')
                   this.before(this.hoverRect);
                 }
               }, function(e) {
-                if(!s.elementDragging && element.showHoverArea) {
+                if(!s.elementDragging && element.showHoverArea && this.hoverRect) {
                   this.hoverRect.remove();
                 }
               });
@@ -373,12 +410,16 @@ angular.module('cardkitApp')
             setAttributes(el, element);
 
     				// Check if we're to enable dragging
-    				if(element.draggable === true) {
+    				if(element.draggable) {
     					// We have to 'undrag' the element here, because they can get choppy after a few redraws otherwise
     					el.undrag();
 
-    					// Drag dat
-    					el.altDrag();
+              if(angular.isObject(element.draggable)) {
+                // Drag dat
+                el.altDrag(element.draggable.x, element.draggable.y);
+              } else {
+                el.altDrag(true, true);
+              }
     				}
     			});
       	}

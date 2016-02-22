@@ -43,7 +43,8 @@ angular.module('cardkitApp')
           },
           width: function() {
             return $scope.size.width;
-          }
+          },
+          fill: 'transparent'
         },
         elements: {
           background: {
@@ -113,7 +114,10 @@ angular.module('cardkitApp')
               },
               width: true,
             },
-            draggable: true,
+            draggable: {
+              x: false,
+              y: true
+            },
             showHoverArea: true
           },
           headline: {
@@ -133,7 +137,7 @@ angular.module('cardkitApp')
             },
             textAnchor: 'middle',
             x: '50%',
-            y: 65,
+            y: 75,
             draggable: true,
             showHoverArea: true,
             editable: {
@@ -146,7 +150,7 @@ angular.module('cardkitApp')
                 'Large (32px)': 32,
                 'Extra Large (40px)': 40,
               },
-            },
+            }
           },
           subtext: {
             name: 'Subtext',
@@ -236,7 +240,9 @@ angular.module('cardkitApp')
       readFile(angular.element(file)[0].files[0], angular.element(file).data('key'));
     };
 
-    // Read the supplied file (from DataTransfer API)
+    /**
+     * Read the supplied file (from DataTransfer API)
+     */
     function readFile(file, key) {
       var reader = new FileReader();
 
@@ -248,20 +254,76 @@ angular.module('cardkitApp')
       reader.readAsDataURL(file);
     }
 
-    // Get the data transfer
+    /**
+     * Gets the data transfer
+     *
+     * @param   {Event}   The data transfer event
+     *
+     * @return  The event's data transfer or null
+     */
     function getDataTransfer(event) {
       event.stopPropagation();
       event.preventDefault();
       return event.dataTransfer || null;
     }
 
+    /**
+     * Slugifies the supplied string
+     *
+     * @param   {string}  text - The string to slugify
+     *
+     * @return  {string}  The slugified string
+     */
+    function slugify(text) {
+      return text.toString().toLowerCase()
+        .replace(/\s+/g, '-')           // Replace spaces with -
+        .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+        .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+        .replace(/^-+/, '')             // Trim - from start of text
+        .replace(/-+$/, '');            // Trim - from end of text
+    }
+
+    /**
+     * Finds the first element with 'useAsFilename' set to true, and returns the file name based on it's text value
+     *
+     * @return  string  The file name
+     */
+    function findFileName() {
+      // Map elements object to an array
+      var elementsArray = [];
+      angular.forEach($scope.config.svg.elements, function(value){
+        elementsArray.push(value);
+      });
+
+      // Filter to find the element that has `useAsFilename` set as true
+      var fileNameElement = $filter('filter')(elementsArray, {
+        useAsFilename: true,
+        type: 'text'
+      }, true)[0];
+
+      // Default the title to 'image.png'
+      var fileName = 'image.png';
+
+      // If we found an appropriate element, set that as the title instead
+      if(fileNameElement) {
+        // We run `slugify()` here to make it an acceptable file name
+        fileName = slugify(fileNameElement.text) + '.png';
+      }
+
+      // Return the filename
+      return fileName;
+    }
+
     $scope.removeImage = function(key) {
       $scope.config.svg.elements[key].src = '';
     };
 
-
     $scope.downloadSvg = function() {
-      saveSvgAsPng(document.getElementById('snap-svg'), 'image.png', {
+      // Get the file name
+      var fileName = findFileName();
+
+      // Run the conversion and download
+      saveSvgAsPng(document.getElementById('snap-svg'), fileName, {
         scale: $scope.config.output.scale
       });
     };

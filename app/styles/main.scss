@@ -57,15 +57,20 @@ a {
 
 // SVGs
 #svg, #snap-svg {
-  *[draggable="true"]{
-  	cursor: move;
+  [draggable="true"] {
+    cursor: move;
+  }
 
-    &:before {
-      background: rgba(0, 0, 0, 0.05);
-      width: 100%;
-      height: 100%;
-      position: absolute;
-    }
+  [draggablex="true"] {
+    cursor: ew-resize;
+  }
+
+  [draggabley="true"] {
+    cursor: ns-resize;
+  }
+
+  [draggablex="true"][draggabley="true"] {
+    cursor: move;
   }
 }
 

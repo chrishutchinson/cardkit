@@ -90,7 +90,6 @@ angular.module('cardkitApp')
           var dragStart = function () {
             this.data('ot', this.transform().local);
             s.elementDragging = true;
-            s.elementUnhoveringDuringDragging = false;
           };
 
           var dragMoveAll = function(dx, dy) {
@@ -150,9 +149,9 @@ angular.module('cardkitApp')
             // Elements, which have `draggablex = false`, can be unhovered by moving horizontally the cursor during dragging.
             // It is also true that `draggabley = false` and moving the cursor vertically/
             // At the moment, the hoverRect is not removed correctly. This prevents unexpected proliferations of hoverRect
-            if(s.elementUnhoveringDuringDragging){
+            if(this.unhoveringDuringDragging){
               this.hoverRect.remove();
-              s.elementUnhoveringDuringDragging = false;
+              this.unhoveringDuringDragging = false;
             }
           };
         });
@@ -404,12 +403,15 @@ angular.module('cardkitApp')
                   });
                   this.before(this.hoverRect);
                 }
+                if(s.elementDragging && element.showHoverArea) {
+                  this.unhoveringDuringDragging = false;
+                }
               }, function(e) {
                 if(!s.elementDragging && element.showHoverArea && this.hoverRect) {
                   this.hoverRect.remove();
                 }
-                if( element.showHoverArea && this.hoverRect) {
-                  s.elementUnhoveringDuringDragging = true;
+                if(s.elementDragging && element.showHoverArea && this.hoverRect) {
+                  this.unhoveringDuringDragging = true;
                 }
               });
             }

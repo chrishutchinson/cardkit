@@ -147,7 +147,7 @@ angular.module('cardkitApp')
             }
 
             // Elements, which have `draggablex = false`, can be unhovered by moving horizontally the cursor during dragging.
-            // It is also true that `draggabley = false` and moving the cursor vertically/
+            // It is also true that `draggabley = false` and moving the cursor vertically
             // At the moment, the hoverRect is not removed correctly. This prevents unexpected proliferations of hoverRect
             if(this.unhoveringDuringDragging){
               this.hoverRect.remove();

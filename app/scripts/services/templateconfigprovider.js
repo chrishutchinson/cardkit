@@ -490,6 +490,10 @@ angular.module('cardkitApp')
                   'Large (40px)': 40,
                   'X-Large (50px)': 50,
                 },
+                fontStyle :{
+                  'standard': 'normal',
+                  'italic': 'italic',
+                },
               },
             }];
           }

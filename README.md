@@ -2,7 +2,7 @@
 
 [![Join the chat at https://gitter.im/times/cardkit](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/times/cardkit?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-## Version 1.1.0
+## Version 1.1.1
 
 ### 2016 [Chris Hutchinson](http://www.github.com/chrishutchinson) for The [Times and Sunday Times](http://www.github.com/times)
 
@@ -41,6 +41,10 @@ See the [CardKit Wiki](https://github.com/times/cardkit/wiki) for guides on how 
 If you want to use [GitHub Pages](https://pages.github.com/) to host your build of CardKit, follow this to push your `/dist` folder: https://gist.github.com/cobyism/4730490
 
 ## Version history
+
+**1.1.1** (June 12, 2016)
+
+- Fix: Hover rectangle is now removed correctly in all cases (#45 - thanks @satotake)
 
 **1.1.0** (February 22, 2016)
 

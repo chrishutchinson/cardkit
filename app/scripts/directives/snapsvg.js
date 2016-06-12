@@ -145,6 +145,14 @@ angular.module('cardkitApp')
               });
               this.before(this.hoverRect);
             }
+
+            // Elements, which have `draggablex = false`, can be unhovered by moving horizontally the cursor during dragging.
+            // It is also true that `draggabley = false` and moving the cursor vertically
+            // At the moment, the hoverRect is not removed correctly. This prevents unexpected proliferations of hoverRect
+            if(this.unhoveringDuringDragging){
+              this.hoverRect.remove();
+              this.unhoveringDuringDragging = false;
+            }
           };
         });
 
@@ -395,9 +403,15 @@ angular.module('cardkitApp')
                   });
                   this.before(this.hoverRect);
                 }
+                if(s.elementDragging && element.showHoverArea) {
+                  this.unhoveringDuringDragging = false;
+                }
               }, function(e) {
                 if(!s.elementDragging && element.showHoverArea && this.hoverRect) {
                   this.hoverRect.remove();
+                }
+                if(s.elementDragging && element.showHoverArea && this.hoverRect) {
+                  this.unhoveringDuringDragging = true;
                 }
               });
             }

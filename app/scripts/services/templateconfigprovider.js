@@ -35,7 +35,8 @@ angular.module('cardkitApp')
                 return $scope.size.gridSize * 3;
               },
               width: function() {
-                return $scope.size.width;
+                var nikkeiLogoDeduct = $scope.theme.isNikkei ? $scope.size.gridSize * 9 : 0;
+                return $scope.size.width - nikkeiLogoDeduct;
               },
               y: function() {
                 return $scope.size.height - this.height();
@@ -47,22 +48,25 @@ angular.module('cardkitApp')
               name: 'Logo',
               type: 'image',
               controlsOrder: 6,
+              isNikkei: function() {
+               return $scope.theme.isNikkei
+              },
               width: function() {
-                return $scope.size.gridSize * 2;
+                return $scope.size.gridSize * (this.isNikkei()? 9 : 2);
               },
               height: function() {
-                return $scope.size.gridSize * 2;
+                return $scope.size.gridSize * (this.isNikkei() ? 3 : 2);
               },
               src: function() {
                 return $scope.theme.images.logoSrc;
               },
               opacity: 1,
               x: function() {
-                return $scope.size.width - ($scope.size.gridSize * 3);
+                return $scope.size.width - (this.isNikkei() ? this.width() : $scope.size.gridSize * 3);
               },
               y: function() {
-                var h = ($scope.size.gridSize) / 2;
-                return $scope.size.height - (this.height() + h);
+                var paddingTop = this.isNikkei() ? 0 : $scope.size.gridSize / 2;
+                return $scope.size.height - (this.height() + paddingTop);
               },
               // x: 500,
               // y: 150,
@@ -290,7 +294,8 @@ angular.module('cardkitApp')
               },
               controlsOrder: 1,
               fontSize: function() {
-                return ($scope.size.name === 'Twitter') ? 60 : 50;
+                return ($scope.size.name === 'Twitter' && !$scope.theme.isNikkei) ? 60 : 50;
+                // return ($scope.size.name === 'Twitter' ) ? 60 : 50;
               },
               fontFamily: function() {
                 return $scope.theme.headlineFont;

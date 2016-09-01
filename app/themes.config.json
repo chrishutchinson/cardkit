@@ -1,29 +1,5 @@
 [
   {
-    "name": "Nikkei Asia Review",
-    "background": "#D8D7D3",
-    "headline": "#595959",
-    "xrefBackground": "#2D5C9C",
-    "quote": "#595959",
-    "highlightColor": "#cc0033",
-    "xref": "#ffffff",
-    "headlineFont": "financierdisplayweb",
-    "creditFont": "metricweb",
-    "xrefFont": "metricweb",
-    "isNikkei": true,
-    "images": {
-      "logoSrc": "nikkeiAsianReviewLogoRectSrc",
-      "logoAltSrc": "logoAltSrc",
-      "headshotSrc": "headshotSrc",
-      "bookmark": "bookmark",
-      "graphSrc": "graphSrc",
-      "graphWideSrc": "graphWideSrc",
-      "promoSrc": "promoSrc",
-      "weekendSrc": "weekendSrc",
-      "illustrationSrc": "illustrationSrc"
-    }
-  },
-  {
     "name": "FT.com light blue",
     "background": "#fff1e0",
     "headline": "#333333",
@@ -155,6 +131,30 @@
     "xrefFont": "metricweb",
     "images": {
       "logoSrc": "logoSrc",
+      "logoAltSrc": "logoAltSrc",
+      "headshotSrc": "headshotSrc",
+      "bookmark": "bookmark",
+      "graphSrc": "graphSrc",
+      "graphWideSrc": "graphWideSrc",
+      "promoSrc": "promoSrc",
+      "weekendSrc": "weekendSrc",
+      "illustrationSrc": "illustrationSrc"
+    }
+  },
+  {
+    "name": "Nikkei Asia Review",
+    "background": "#D8D7D3",
+    "headline": "#595959",
+    "xrefBackground": "#2D5C9C",
+    "quote": "#595959",
+    "highlightColor": "#cc0033",
+    "xref": "#ffffff",
+    "headlineFont": "financierdisplayweb",
+    "creditFont": "metricweb",
+    "xrefFont": "metricweb",
+    "isNikkei": true,
+    "images": {
+      "logoSrc": "nikkeiAsianReviewLogoRectSrc",
       "logoAltSrc": "logoAltSrc",
       "headshotSrc": "headshotSrc",
       "bookmark": "bookmark",

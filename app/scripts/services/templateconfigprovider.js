@@ -294,8 +294,7 @@ angular.module('cardkitApp')
               },
               controlsOrder: 1,
               fontSize: function() {
-                return ($scope.size.name === 'Twitter' && !$scope.theme.isNikkei) ? 60 : 50;
-                // return ($scope.size.name === 'Twitter' ) ? 60 : 50;
+                return ($scope.size.name === 'Twitter' ) ? 60 : 50;
               },
               fontFamily: function() {
                 return $scope.theme.headlineFont;

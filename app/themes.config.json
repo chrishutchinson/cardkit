@@ -7,9 +7,9 @@
     "quote": "#595959",
     "highlightColor": "#cc0033",
     "xref": "#ffffff",
-    "headlineFont": "Georgia, Times New Roman, serif",
-    "creditFont": "Verdana, Arial, sans-serif",
-    "xrefFont": "Verdana, Arial, sans-serif",
+    "headlineFont": "financierdisplayweb",
+    "creditFont": "metricweb",
+    "xrefFont": "metricweb",
     "isNikkei": true,
     "images": {
       "logoSrc": "nikkeiAsianReviewLogoRectSrc",

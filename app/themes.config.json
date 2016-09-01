@@ -155,7 +155,8 @@
     "isNikkei": true,
     "images": {
       "logoSrc": "nikkeiAsianReviewLogoRectSrc",
-      "logoAltSrc": "logoAltSrc",
+      "logoWideSrc": "nikkeiAsianReviewLogoWideSrc",
+      "logoAltSrc": "nikkeiAsianReviewLogoRectSrc",
       "headshotSrc": "headshotSrc",
       "bookmark": "bookmark",
       "graphSrc": "graphSrc",

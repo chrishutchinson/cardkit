@@ -1,5 +1,27 @@
 'use strict';
-
+var templateHelper = {
+  logo: {
+    width: function($scope) {
+      return $scope.size.gridSize * ($scope.theme.isNikkei? 9 : 2);
+    },
+    height: function($scope) {
+      return $scope.size.gridSize * ($scope.theme.isNikkei ? 3 : 2);
+    },
+    x: function($scope) {
+      return $scope.size.width - ($scope.theme.isNikkei ? this.width($scope) : $scope.size.gridSize * 3);
+    },
+    y: function($scope) {
+      var paddingTop = $scope.theme.isNikkei ? 0 : $scope.size.gridSize / 2;
+      return $scope.size.height - (this.height($scope) + paddingTop);
+    }
+  },
+  crossReferenceBackground: {
+    width: function($scope) {
+      var nikkeiLogoDeduct = $scope.theme.isNikkei ? $scope.size.gridSize * 9 : 0;
+      return $scope.size.width - nikkeiLogoDeduct;
+    }
+  }
+}
 /**
  * @ngdoc provider
  * @name cardkitApp.templateConfigProvider
@@ -35,7 +57,7 @@ angular.module('cardkitApp')
                 return $scope.size.gridSize * 3;
               },
               width: function() {
-                return $scope.size.width;
+                return templateHelper.crossReferenceBackground.width($scope);
               },
               y: function() {
                 return $scope.size.height - this.height();
@@ -48,21 +70,20 @@ angular.module('cardkitApp')
               type: 'image',
               controlsOrder: 6,
               width: function() {
-                return $scope.size.gridSize * 2;
+                return templateHelper.logo.width($scope);
               },
               height: function() {
-                return $scope.size.gridSize * 2;
+                return templateHelper.logo.height($scope);
               },
               src: function() {
                 return $scope.theme.images.logoSrc;
               },
               opacity: 1,
               x: function() {
-                return $scope.size.width - ($scope.size.gridSize * 3);
+                return templateHelper.logo.x($scope);
               },
               y: function() {
-                var h = ($scope.size.gridSize) / 2;
-                return $scope.size.height - (this.height() + h);
+                return templateHelper.logo.y($scope);
               },
               // x: 500,
               // y: 150,
@@ -188,7 +209,7 @@ angular.module('cardkitApp')
                 return $scope.size.gridSize * 3;
               },
               width: function() {
-                return $scope.size.width;
+                return templateHelper.crossReferenceBackground.width($scope);
               },
               y: function() {
                 return $scope.size.height - this.height();
@@ -201,21 +222,20 @@ angular.module('cardkitApp')
               type: 'image',
               controlsOrder: 6,
               width: function() {
-                return $scope.size.gridSize * 2;
+                return templateHelper.logo.width($scope);
               },
               height: function() {
-                return $scope.size.gridSize * 2;
+                return templateHelper.logo.height($scope);
               },
               src: function() {
                 return $scope.theme.images.logoSrc;
               },
               opacity: 1,
               x: function() {
-                return $scope.size.width - ($scope.size.gridSize * 3);
+                return templateHelper.logo.x($scope);
               },
               y: function() {
-                var h = ($scope.size.gridSize) / 2;
-                return $scope.size.height - (this.height() + h);
+                return templateHelper.logo.y($scope);
               },
               preserveAspectRatio: 'xMinYMin meet',
               draggable: false
@@ -290,7 +310,7 @@ angular.module('cardkitApp')
               },
               controlsOrder: 1,
               fontSize: function() {
-                return ($scope.size.name === 'Twitter') ? 60 : 50;
+                return ($scope.size.name === 'Twitter' ) ? 60 : 50;
               },
               fontFamily: function() {
                 return $scope.theme.headlineFont;

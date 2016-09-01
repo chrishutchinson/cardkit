@@ -741,10 +741,10 @@ angular.module('cardkitApp')
               },
               opacity: 1,
               x: function() {
-                return $scope.size.width - ($scope.theme.isNikkei ? this.width($scope) : $scope.size.gridSize * 4);
+                return $scope.size.width - ($scope.theme.isNikkei ? this.width($scope) : $scope.size.gridSize * 3);
               },
               y: function() {
-                return templateHelper.logo.y($scope);
+                return $scope.size.height - $scope.size.gridSize * 3
               },
               preserveAspectRatio: 'xMinYMin meet',
               draggable: false
@@ -905,10 +905,10 @@ angular.module('cardkitApp')
               },
               opacity: 1,
               x: function() {
-                return $scope.size.width - ($scope.theme.isNikkei ? this.width($scope) : $scope.size.gridSize * 4);
+                return $scope.size.width - ($scope.theme.isNikkei ? this.width($scope) : $scope.size.gridSize * 3);
               },
               y: function() {
-                return templateHelper.logo.y($scope);
+                return $scope.size.height - $scope.size.gridSize * 3
               },
               preserveAspectRatio: 'xMinYMin meet',
               draggable: false

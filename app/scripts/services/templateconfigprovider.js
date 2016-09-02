@@ -304,7 +304,8 @@ angular.module('cardkitApp')
             }, {
               name: 'Quote',
               type: 'text',
-              text: '‘Bankers are just like\neverybody else.\nExcept richer’',
+
+              text: '‘Add text or quote here -\nyou can also drag it\naround’',
               fill: function() {
                 return $scope.theme.quote;
               },
@@ -450,7 +451,7 @@ angular.module('cardkitApp')
             }, {
               name: 'Credit',
               type: 'text',
-              text: 'Janan Ganesh on why\nLabour is Terrible',
+              text: 'Shakespeare\nMuch Ado About Nothing',
               controlsOrder: 3,
               fill: function() {
                 return $scope.theme.quote;
@@ -751,12 +752,13 @@ angular.module('cardkitApp')
             }, {
               name: 'Ref Text',
               type: 'text',
-              text: 'FT.COM',
+              text: 'FT.COM/\nCOMPANIES',
               controlsOrder: 3,
               fill: function() {
                 return  $scope.theme.xref;
               },
               fontSize: function() {
+                if ($scope.theme.isNikkei) return 0;
                 return ($scope.size.name === 'Twitter') ? 18 : 14;
               },
               fontFamily: function() {
@@ -915,12 +917,13 @@ angular.module('cardkitApp')
             }, {
               name: 'Reference Text',
               type: 'text',
-              text: 'FT.COM',
+              text: 'FT.COM/\nCOMPANIES',
               controlsOrder: 3,
               fill: function() {
                 return $scope.theme.xref;
               },
               fontSize: function() {
+                if ($scope.theme.isNikkei) return 0;
                 return ($scope.size.name === 'Twitter') ? 18 : 14;
               },
               fontFamily: function() {
@@ -1076,12 +1079,13 @@ angular.module('cardkitApp')
             }, {
               name: 'Reference Text',
               type: 'text',
-              text: 'FT.COM',
+              text: 'FT.COM/\nCOMPANIES',
               controlsOrder: 3,
               fill: function() {
                 return $scope.theme.xref;
               },
               fontSize: function() {
+                if ($scope.theme.isNikkei) return 0;
                 return ($scope.size.name === 'Twitter') ? 18 : 14;
               },
               fontFamily: function() {
@@ -1554,7 +1558,7 @@ angular.module('cardkitApp')
             }, {
               name: 'Quote',
               type: 'text',
-              text: '‘This would be a breaking news\nquote which looks like this and\ngoes here with black FT square’',
+              text: '‘This is love: to fly toward a\n secret sky, to cause a hundred\n veils to fall each moment’',
               fill: function() {
                 return $scope.theme.quote;
               },

@@ -1558,7 +1558,7 @@ angular.module('cardkitApp')
             }, {
               name: 'Quote',
               type: 'text',
-              text: '‘This is love: to fly toward a\n secret sky, to cause a hundred\n veils to fall each moment’',
+              text: '‘Add text here about the breaking\nnews event’',
               fill: function() {
                 return $scope.theme.quote;
               },

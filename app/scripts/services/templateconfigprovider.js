@@ -168,7 +168,9 @@ angular.module('cardkitApp')
             }, {
               name: 'Headline',
               type: 'text',
-              text: 'Add text or a quote here - you can also drag it\naround.\n\nMore text can go here - it can be one line or\nseveral.',
+              text: 'Add text or a quote here.\n' +
+              'You can drag it around.\n\n' +
+              'More text can go here',
               fill: function () {
                 return $scope.theme.quote;
               },
@@ -319,7 +321,8 @@ angular.module('cardkitApp')
               name: 'Quote',
               type: 'text',
 
-              text: '‘Add text or quote here -\nyou can also drag it\naround’',
+              text: 'Big quote here\n' +
+              'Can move',
               fill: function () {
                 return $scope.theme.quote;
               },
@@ -797,7 +800,7 @@ angular.module('cardkitApp')
             }, {
               name: 'Explanatory Text',
               type: 'text',
-              text: 'Add text here.\n\nYou can also\ndrag it around.\n\nIt can be over one\nline or several.',
+              text: 'Add text here.\n\nYou can also\ndrag it around.\n\nIt can be one\nline or several.',
               controlsOrder: 2,
               fill: function () {
                 return $scope.theme.xref;
@@ -962,7 +965,7 @@ angular.module('cardkitApp')
             }, {
               name: 'Explanatory Text',
               type: 'text',
-              text: 'Add text here.\n\nYou can also drag\nit around.\n\nIt can be over one\nline or several.',
+              text: 'Add text here.\n\nYou can drag\nit around.\n\nIt can be one\nline or several.',
               controlsOrder: 2,
               fill: function () {
                 return $scope.theme.xref;
@@ -1124,7 +1127,7 @@ angular.module('cardkitApp')
             }, {
               name: 'Explanatory Text',
               type: 'text',
-              text: 'Add text here.\n\nYou can also drag\nit around.\n\nIt can be over one\nline or several.',
+              text: 'Add text here.\n\nYou can drag\nit around.\n\nIt can be one\nline or several.',
               controlsOrder: 2,
               fill: function () {
                 return $scope.theme.xref;
@@ -1247,7 +1250,7 @@ angular.module('cardkitApp')
             }, {
               name: 'Cross Reference Text',
               type: 'text',
-              text: 'Promo A please go to ft.com/something-interesting',
+              text: 'Promo A please go to xyz.com/something',
               controlsOrder: 2,
               fill: function () {
                 return $scope.theme.xref;
@@ -1368,7 +1371,7 @@ angular.module('cardkitApp')
             }, {
               name: 'Explanatory Text',
               type: 'text',
-              text: 'Promo B\nplease go\nto ft.com/\nsomething-\ninteresting',
+              text: 'Promo B\nplease go\nto xyz.com/\nsomething-\ninteresting',
               controlsOrder: 2,
               fill: function () {
                 return $scope.theme.xref;
@@ -1575,7 +1578,7 @@ angular.module('cardkitApp')
             }, {
               name: 'Quote',
               type: 'text',
-              text: '‘Add text here about the breaking\nnews event’',
+              text: '‘Breaking news’',
               fill: function () {
                 return $scope.theme.quote;
               },
@@ -1856,7 +1859,7 @@ angular.module('cardkitApp')
             }, {
               name: 'Reference Text',
               type: 'text',
-              text: 'READ MORE AT\nFT.COM/XXX',
+              text: 'READ MORE AT\nXYZ.COM/ABC',
               controlsOrder: 3,
               fill: function () {
                 return $scope.theme.xref;

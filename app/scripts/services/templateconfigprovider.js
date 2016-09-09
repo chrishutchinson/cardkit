@@ -1,22 +1,36 @@
 'use strict';
 var templateHelper = {
   logo: {
-    width: function($scope) {
-      return $scope.size.gridSize * ($scope.theme.isNikkei? 9 : 2);
+    width: function ($scope) {
+      return $scope.size.gridSize * ($scope.theme.isNikkei ? 9 : 2);
     },
-    height: function($scope) {
+    height: function ($scope) {
       return $scope.size.gridSize * ($scope.theme.isNikkei ? 3 : 2);
     },
-    x: function($scope) {
+    x: function ($scope) {
       return $scope.size.width - ($scope.theme.isNikkei ? this.width($scope) : $scope.size.gridSize * 3);
     },
-    y: function($scope) {
+    y: function ($scope) {
       var paddingTop = $scope.theme.isNikkei ? 0 : $scope.size.gridSize / 2;
       return $scope.size.height - (this.height($scope) + paddingTop);
     }
   },
+  creditFontSize: function ($scope) {
+    if ($scope.size.name === 'Twitter') {
+      return $scope.theme.isNikkei ? 20 : 22;
+    } else {
+      return $scope.theme.isNikkei ? 16 : 18;
+    }
+  },
+  headLineFontSize: function ($scope) {
+    if ($scope.size.name === 'Twitter') {
+      return $scope.theme.isNikkei ? 30 : 32;
+    } else {
+      return $scope.theme.isNikkei ? 22 : 24;
+    }
+  },
   crossReferenceBackground: {
-    width: function($scope) {
+    width: function ($scope) {
       var nikkeiLogoDeduct = $scope.theme.isNikkei ? $scope.size.gridSize * 9 : 0;
       return $scope.size.width - nikkeiLogoDeduct;
     }
@@ -30,59 +44,59 @@ var templateHelper = {
  * Loads the available templates
  */
 angular.module('cardkitApp')
-  .provider('templateConfigProvider', function() {
+  .provider('templateConfigProvider', function () {
     return {
-      $get: function() {
+      $get: function () {
         return ([{
           name: 'Quote',
-          elements: function($scope) {
+          elements: function ($scope) {
             return [{
               name: 'Background Colour',
               type: 'rect',
               controlsOrder: 7,
-              height: function() {
+              height: function () {
                 return $scope.size.height;
               },
-              width: function() {
+              width: function () {
                 return $scope.size.width;
               },
-              fill: function() {
+              fill: function () {
                 return $scope.theme.background;
               }
             }, {
               name: 'Cross Reference Background',
               type: 'rect',
               controlsOrder: 5,
-              height: function() {
+              height: function () {
                 return $scope.size.gridSize * 3;
               },
-              width: function() {
+              width: function () {
                 return templateHelper.crossReferenceBackground.width($scope);
               },
-              y: function() {
+              y: function () {
                 return $scope.size.height - this.height();
               },
-              fill: function() {
+              fill: function () {
                 return $scope.theme.xrefBackground;
               }
             }, {
               name: 'Logo',
               type: 'image',
               controlsOrder: 6,
-              width: function() {
+              width: function () {
                 return templateHelper.logo.width($scope);
               },
-              height: function() {
+              height: function () {
                 return templateHelper.logo.height($scope);
               },
-              src: function() {
+              src: function () {
                 return $scope.theme.images.logoSrc;
               },
               opacity: 1,
-              x: function() {
+              x: function () {
                 return templateHelper.logo.x($scope);
               },
-              y: function() {
+              y: function () {
                 return templateHelper.logo.y($scope);
               },
               // x: 500,
@@ -94,20 +108,20 @@ angular.module('cardkitApp')
               type: 'text',
               text: 'Read more at: Insert name here',
               controlsOrder: 3,
-              fill: function() {
+              fill: function () {
                 return $scope.theme.xref;
               },
-              fontSize: function() {
-                return ($scope.size.name === 'Twitter') ? 22 : 18;
+              fontSize: function () {
+                return templateHelper.creditFontSize($scope)
               },
-              fontFamily: function() {
+              fontFamily: function () {
                 return $scope.theme.xrefFont;
               },
               textAnchor: 'start',
-              x: function() {
+              x: function () {
                 return $scope.size.gridSize;
               },
-              y: function() {
+              y: function () {
                 return $scope.size.height - ($scope.size.gridSize);
               },
               fontWeight: 500,
@@ -125,21 +139,21 @@ angular.module('cardkitApp')
               type: 'text',
               text: 'Credit: Insert name here',
               controlsOrder: 2,
-              fill: function() {
+              fill: function () {
                 return $scope.theme.quote;
               },
-              fontSize: function() {
-                return ($scope.size.name === 'Twitter') ? 22 : 16;
+              fontSize: function () {
+                return templateHelper.creditFontSize($scope)
               },
-              fontFamily: function() {
+              fontFamily: function () {
                 return $scope.theme.creditFont;
               },
               textAnchor: 'start',
               textTransform: 'uppercase',
-              x: function() {
+              x: function () {
                 return $scope.size.gridSize;
               },
-              y: function() {
+              y: function () {
                 return $scope.size.height - $scope.size.gridSize * 5;
               },
               fontWeight: 500,
@@ -155,21 +169,21 @@ angular.module('cardkitApp')
               name: 'Headline',
               type: 'text',
               text: 'Add text or a quote here - you can also drag it\naround.\n\nMore text can go here - it can be one line or\nseveral.',
-              fill: function() {
+              fill: function () {
                 return $scope.theme.quote;
               },
               controlsOrder: 1,
               fontSize: function () {
-                return ($scope.size.name === 'Twitter') ? 32 : 24;
+                return templateHelper.headLineFontSize($scope)
               },
-              fontFamily: function() {
+              fontFamily: function () {
                 return $scope.theme.headlineFont;
               },
               textAnchor: 'start',
-              x: function() {
+              x: function () {
                 return $scope.size.gridSize;
               },
-              y: function() {
+              y: function () {
                 return $scope.size.gridSize * 3;
               },
               fontWeight: 600,
@@ -187,54 +201,54 @@ angular.module('cardkitApp')
           }
         }, {
           name: 'Quote Big',
-          elements: function($scope) {
+          elements: function ($scope) {
             return [{
               name: 'Background Colour',
               type: 'rect',
               controlsOrder: 7,
-              height: function() {
+              height: function () {
                 return $scope.size.height;
               },
-              width: function() {
+              width: function () {
                 return $scope.size.width;
               },
-              fill: function() {
+              fill: function () {
                 return $scope.theme.background;
               }
             }, {
               name: 'Cross Reference Background',
               type: 'rect',
               controlsOrder: 5,
-              height: function() {
+              height: function () {
                 return $scope.size.gridSize * 3;
               },
-              width: function() {
+              width: function () {
                 return templateHelper.crossReferenceBackground.width($scope);
               },
-              y: function() {
+              y: function () {
                 return $scope.size.height - this.height();
               },
-              fill: function() {
+              fill: function () {
                 return $scope.theme.xrefBackground;
               }
             }, {
               name: 'Logo',
               type: 'image',
               controlsOrder: 6,
-              width: function() {
+              width: function () {
                 return templateHelper.logo.width($scope);
               },
-              height: function() {
+              height: function () {
                 return templateHelper.logo.height($scope);
               },
-              src: function() {
+              src: function () {
                 return $scope.theme.images.logoSrc;
               },
               opacity: 1,
-              x: function() {
+              x: function () {
                 return templateHelper.logo.x($scope);
               },
-              y: function() {
+              y: function () {
                 return templateHelper.logo.y($scope);
               },
               preserveAspectRatio: 'xMinYMin meet',
@@ -244,20 +258,20 @@ angular.module('cardkitApp')
               type: 'text',
               text: 'Read more at: Insert name here',
               controlsOrder: 3,
-              fill: function() {
+              fill: function () {
                 return $scope.theme.xref;
               },
-              fontSize: function() {
+              fontSize: function () {
                 return ($scope.size.name === 'Twitter') ? 22 : 18;
               },
-              fontFamily: function() {
+              fontFamily: function () {
                 return $scope.theme.xrefFont;
               },
               textAnchor: 'start',
-              x: function() {
+              x: function () {
                 return $scope.size.gridSize;
               },
-              y: function() {
+              y: function () {
                 return $scope.size.height - ($scope.size.gridSize);
               },
               fontWeight: 500,
@@ -275,22 +289,22 @@ angular.module('cardkitApp')
               type: 'text',
               text: 'Ogden Nash',
               controlsOrder: 2,
-              fill: function() {
+              fill: function () {
                 return $scope.theme.quote;
               },
-              fontSize: function() {
+              fontSize: function () {
                 return ($scope.size.name === 'Twitter') ? 22 : 16;
               },
-              fontFamily: function() {
+              fontFamily: function () {
                 return $scope.theme.creditFont;
               },
               textAnchor: 'start',
               textTransform: 'uppercase',
-              x: function() {
+              x: function () {
                 return $scope.size.gridSize;
               },
-              y: function() {
-                return $scope.size.height - $scope.size.gridSize*5;
+              y: function () {
+                return $scope.size.height - $scope.size.gridSize * 5;
               },
               fontWeight: 500,
               draggable: true,
@@ -306,22 +320,22 @@ angular.module('cardkitApp')
               type: 'text',
 
               text: '‘Add text or quote here -\nyou can also drag it\naround’',
-              fill: function() {
+              fill: function () {
                 return $scope.theme.quote;
               },
               controlsOrder: 1,
-              fontSize: function() {
+              fontSize: function () {
                 return ($scope.size.name === 'Twitter' ) ? 60 : 50;
               },
-              fontFamily: function() {
+              fontFamily: function () {
                 return $scope.theme.headlineFont;
               },
               textAnchor: 'start',
-              x: function() {
+              x: function () {
                 return $scope.size.gridSize;
               },
-              y: function() {
-                return $scope.size.gridSize*4;
+              y: function () {
+                return $scope.size.gridSize * 4;
               },
               fontWeight: 600,
               draggable: true,
@@ -335,43 +349,43 @@ angular.module('cardkitApp')
               },
             }];
           }
-        },{
+        }, {
           name: 'Quote With Headshot',
-          elements: function($scope) {
+          elements: function ($scope) {
             return [{
               name: 'Background Colour',
               type: 'rect',
               controlsOrder: 7,
-              height: function() {
+              height: function () {
                 return $scope.size.height;
               },
-              width: function() {
+              width: function () {
                 return $scope.size.width;
               },
-              fill: function() {
+              fill: function () {
                 return $scope.theme.background;
               }
             }, {
               name: 'Image',
               type: 'image',
-              width: function() {
+              width: function () {
                 return $scope.size.gridSize * 20;
               },
               controlsOrder: 2,
-              height: function() {
+              height: function () {
                 if (typeof this.width === 'function') {
                   return this.width();
                 }
                 return this.width;
               },
-              src: function() {
+              src: function () {
                 return $scope.theme.images.headshotSrc || '';
               },
               opacity: 1,
-              x: function() {
+              x: function () {
                 return $scope.size.gridSize * 20;
               },
-              y: function() {
+              y: function () {
                 return $scope.size.gridSize;
               },
               preserveAspectRatio: 'xMinYMin meet',
@@ -388,36 +402,36 @@ angular.module('cardkitApp')
               name: 'Cross Reference Background',
               type: 'rect',
               controlsOrder: 5,
-              height: function() {
+              height: function () {
                 return $scope.size.gridSize * 3;
               },
-              width: function() {
+              width: function () {
                 return templateHelper.crossReferenceBackground.width($scope);
               },
-              y: function() {
+              y: function () {
                 return $scope.size.height - this.height();
               },
-              fill: function() {
+              fill: function () {
                 return $scope.theme.xrefBackground;
               }
             }, {
               name: 'Logo',
               type: 'image',
               controlsOrder: 6,
-              width: function() {
+              width: function () {
                 return templateHelper.logo.width($scope);
               },
-              height: function() {
+              height: function () {
                 return templateHelper.logo.height($scope);
               },
-              src: function() {
+              src: function () {
                 return $scope.theme.images.logoSrc;
               },
               opacity: 1,
-              x: function() {
+              x: function () {
                 return templateHelper.logo.x($scope);
               },
-              y: function() {
+              y: function () {
                 return templateHelper.logo.y($scope);
               },
               preserveAspectRatio: 'xMinYMin meet',
@@ -427,20 +441,20 @@ angular.module('cardkitApp')
               type: 'text',
               text: 'Read more at: Insert name here',
               controlsOrder: 4,
-              fill: function() {
+              fill: function () {
                 return $scope.theme.xref;
               },
-              fontSize: function() {
+              fontSize: function () {
                 return ($scope.size.name === 'Twitter') ? 22 : 18;
               },
-              fontFamily: function() {
+              fontFamily: function () {
                 return $scope.theme.xrefFont;
               },
               textAnchor: 'start',
-              x: function() {
+              x: function () {
                 return $scope.size.gridSize;
               },
-              y: function() {
+              y: function () {
                 return $scope.size.height - ($scope.size.gridSize);
               },
               fontWeight: 500,
@@ -453,21 +467,21 @@ angular.module('cardkitApp')
               type: 'text',
               text: 'Shakespeare\nMuch Ado About Nothing',
               controlsOrder: 3,
-              fill: function() {
+              fill: function () {
                 return $scope.theme.quote;
               },
-              fontSize: function() {
+              fontSize: function () {
                 return ($scope.size.name === 'Twitter') ? 22 : 16;
               },
-              fontFamily: function() {
+              fontFamily: function () {
                 return $scope.theme.creditFont;
               },
               textAnchor: 'start',
               textTransform: 'uppercase',
-              x: function() {
+              x: function () {
                 return $scope.size.gridSize;
               },
-              y: function() {
+              y: function () {
                 return $scope.size.height - $scope.size.gridSize * 6;
               },
               fontWeight: 500,
@@ -483,21 +497,24 @@ angular.module('cardkitApp')
               name: 'Headline',
               type: 'text',
               text: 'Friendship is constant\nin all other things save in\nthe office and affairs of\nlove: Therefore, all hearts\nin love use their own',
-              fill: function() {
+              fill: function () {
                 return $scope.theme.quote;
               },
               controlsOrder: 1,
-              fontSize: function() {
+              fontSize: function () {
+                if ($scope.theme.isNikkei) {
+                  return ($scope.size.name === 'Twitter') ? 28 : 24;
+                }
                 return ($scope.size.name === 'Twitter') ? 32 : 26;
               },
-              fontFamily: function() {
+              fontFamily: function () {
                 return $scope.theme.headlineFont;
               },
               textAnchor: 'start',
-              x: function() {
+              x: function () {
                 return $scope.size.gridSize;
               },
-              y: function() {
+              y: function () {
                 return $scope.size.gridSize * 3;
               },
               fontWeight: 600,
@@ -510,7 +527,7 @@ angular.module('cardkitApp')
                   'Large (40px)': 40,
                   'X-Large (50px)': 50,
                 },
-                fontStyle :{
+                fontStyle: {
                   'standard': 'normal',
                   'italic': 'italic',
                 },
@@ -519,54 +536,54 @@ angular.module('cardkitApp')
           }
         }, {
           name: 'Big Number',
-          elements: function($scope) {
+          elements: function ($scope) {
             return [{
               name: 'Background Colour',
               type: 'rect',
               controlsOrder: 7,
-              height: function() {
+              height: function () {
                 return $scope.size.height;
               },
-              width: function() {
+              width: function () {
                 return $scope.size.width;
               },
-              fill: function() {
+              fill: function () {
                 return $scope.theme.background;
               }
             }, {
               name: 'Cross Reference Background',
               type: 'rect',
               controlsOrder: 5,
-              height: function() {
+              height: function () {
                 return $scope.size.gridSize * 3;
               },
-              width: function() {
+              width: function () {
                 return templateHelper.crossReferenceBackground.width($scope);
               },
-              y: function() {
+              y: function () {
                 return $scope.size.height - this.height();
               },
-              fill: function() {
+              fill: function () {
                 return $scope.theme.xrefBackground;
               }
             }, {
               name: 'Logo',
               type: 'image',
               controlsOrder: 6,
-              width: function() {
+              width: function () {
                 return templateHelper.logo.width($scope);
               },
-              height: function() {
+              height: function () {
                 return templateHelper.logo.height($scope);
               },
-              src: function() {
+              src: function () {
                 return $scope.theme.images.logoSrc;
               },
               opacity: 1,
-              x: function() {
+              x: function () {
                 return templateHelper.logo.x($scope);
               },
-              y: function() {
+              y: function () {
                 return templateHelper.logo.y($scope);
               },
               preserveAspectRatio: 'xMinYMin meet',
@@ -576,20 +593,20 @@ angular.module('cardkitApp')
               type: 'text',
               text: 'Read more at: Insert name here',
               controlsOrder: 3,
-              fill: function() {
+              fill: function () {
                 return $scope.theme.xref;
               },
-              fontSize: function() {
+              fontSize: function () {
                 return ($scope.size.name === 'Twitter') ? 22 : 18;
               },
-              fontFamily: function() {
+              fontFamily: function () {
                 return $scope.theme.xrefFont;
               },
               textAnchor: 'start',
-              x: function() {
+              x: function () {
                 return $scope.size.gridSize;
               },
-              y: function() {
+              y: function () {
                 return $scope.size.height - ($scope.size.gridSize);
               },
               fontWeight: 500,
@@ -607,20 +624,20 @@ angular.module('cardkitApp')
               type: 'text',
               text: 'Add text here - you can also drag it\naround. It can be one line or several.',
               controlsOrder: 2,
-              fill: function() {
+              fill: function () {
                 return $scope.theme.quote;
               },
-              fontSize: function() {
+              fontSize: function () {
                 return ($scope.size.name === 'Twitter') ? 32 : 26;
               },
-              fontFamily: function() {
+              fontFamily: function () {
                 return $scope.theme.creditFont;
               },
               textAnchor: 'start',
-              x: function() {
+              x: function () {
                 return $scope.size.gridSize;
               },
-              y: function() {
+              y: function () {
                 return $scope.size.gridSize * 13;
               },
               fontWeight: 500,
@@ -637,21 +654,21 @@ angular.module('cardkitApp')
               name: 'Big Number',
               type: 'text',
               text: 'Number',
-              fill: function() {
+              fill: function () {
                 return $scope.theme.highlightColor;
               },
               controlsOrder: 1,
-              fontSize: function() {
+              fontSize: function () {
                 return ($scope.size.name === 'Facebook') ? 80 : 100;
               },
-              fontFamily: function() {
+              fontFamily: function () {
                 return $scope.theme.headlineFont;
               },
               textAnchor: 'start',
-              x: function() {
+              x: function () {
                 return $scope.size.gridSize;
               },
-              y: function() {
+              y: function () {
                 return $scope.size.gridSize * 7;
               },
               fontWeight: 600,
@@ -663,26 +680,26 @@ angular.module('cardkitApp')
           }
         }, {
           name: 'Illustration',
-          elements: function($scope) {
+          elements: function ($scope) {
             return [{
               name: 'Background Colour',
               type: 'rect',
               controlsOrder: 10,
-              height: function() {
+              height: function () {
                 return $scope.size.height;
               },
-              width: function() {
+              width: function () {
                 return $scope.size.width;
               },
               fill: '#ffffff'
             }, {
               name: 'Illustration',
               type: 'image',
-              width: function() {
-                return $scope.size.width * 0.7 ;
+              width: function () {
+                return $scope.size.width * 0.7;
               },
               controlsOrder: 1,
-              height: function() {
+              height: function () {
                 var h;
                 if (typeof this.width === 'string') {
                   h = +this.width;
@@ -692,13 +709,13 @@ angular.module('cardkitApp')
 
                 return h;
               },
-              src: function() {
+              src: function () {
                 return $scope.theme.images.illustrationSrc;
               },
               opacity: 1,
               x: 0,
-              y: function() {
-                return $scope.size.gridSize*2;
+              y: function () {
+                return $scope.size.gridSize * 2;
               },
               preserveAspectRatio: 'xMinYMin meet',
               draggable: true,
@@ -714,37 +731,37 @@ angular.module('cardkitApp')
               name: 'Side Explanation Background',
               type: 'rect',
               controlsOrder: 10,
-              height: function() {
+              height: function () {
                 return $scope.size.height;
               },
-              width: function() {
+              width: function () {
                 return $scope.size.width * 0.3;
               },
               y: '0%',
-              x: function() {
+              x: function () {
                 return $scope.size.width - this.width();
               },
-              fill: function() {
+              fill: function () {
                 return $scope.theme.xrefBackground;
               }
             }, {
               name: 'Logo',
               type: 'image',
               controlsOrder: 6,
-              width: function() {
-                return $scope.size.gridSize * ($scope.theme.isNikkei? 12 : 2);
+              width: function () {
+                return $scope.size.gridSize * ($scope.theme.isNikkei ? 12 : 2);
               },
-              height: function() {
+              height: function () {
                 return templateHelper.logo.height($scope);
               },
-              src: function() {
+              src: function () {
                 return $scope.theme.isNikkei ? $scope.theme.images.logoWideSrc : $scope.theme.images.logoSrc;
               },
               opacity: 1,
-              x: function() {
+              x: function () {
                 return $scope.size.width - ($scope.theme.isNikkei ? this.width($scope) : $scope.size.gridSize * 3);
               },
-              y: function() {
+              y: function () {
                 return $scope.size.height - $scope.size.gridSize * 3
               },
               preserveAspectRatio: 'xMinYMin meet',
@@ -754,22 +771,22 @@ angular.module('cardkitApp')
               type: 'text',
               text: 'FT.COM/\nCOMPANIES',
               controlsOrder: 3,
-              fill: function() {
-                return  $scope.theme.xref;
+              fill: function () {
+                return $scope.theme.xref;
               },
-              fontSize: function() {
+              fontSize: function () {
                 if ($scope.theme.isNikkei) return 0;
                 return ($scope.size.name === 'Twitter') ? 18 : 14;
               },
-              fontFamily: function() {
+              fontFamily: function () {
                 return $scope.theme.xrefFont;
               },
               textAnchor: 'start',
-              x: function() {
+              x: function () {
                 var w = $scope.size.width;
-                return (w - w*0.3) + $scope.size.gridSize;
+                return (w - w * 0.3) + $scope.size.gridSize;
               },
-              y: function() {
+              y: function () {
                 return $scope.size.height - ($scope.size.gridSize * ($scope.theme.isNikkei ? 4 : 2) + 2);
               },
               fontWeight: 500,
@@ -782,25 +799,25 @@ angular.module('cardkitApp')
               type: 'text',
               text: 'Add text here.\n\nYou can also\ndrag it around.\n\nIt can be over one\nline or several.',
               controlsOrder: 2,
-              fill: function() {
+              fill: function () {
                 return $scope.theme.xref;
               },
-              fontSize: function() {
+              fontSize: function () {
                 return ($scope.size.name === 'Twitter') ? 24 : 18;
               },
-              fontFamily: function() {
+              fontFamily: function () {
                 return $scope.theme.creditFont;
               },
               textAnchor: 'start',
               width: function () {
                 return $scope.size.width * 0.3;
               },
-              x: function() {
+              x: function () {
                 var w = $scope.size.width;
-                return (w - w*0.3) + $scope.size.gridSize;
+                return (w - w * 0.3) + $scope.size.gridSize;
               },
-              y: function() {
-                return $scope.size.gridSize*2;
+              y: function () {
+                return $scope.size.gridSize * 2;
               },
               fontWeight: 500,
               draggable: true,
@@ -816,28 +833,28 @@ angular.module('cardkitApp')
           }
         }, {
           name: 'Chart: 1 Column',
-          elements: function($scope) {
+          elements: function ($scope) {
             return [{
               name: 'Background Colour',
               type: 'rect',
               controlsOrder: 10,
-              height: function() {
+              height: function () {
                 return $scope.size.height;
               },
-              width: function() {
+              width: function () {
                 return $scope.size.width;
               },
-              fill: function() {
+              fill: function () {
                 return $scope.theme.background;
               }
             }, {
               name: 'Graph',
               type: 'image',
-              width: function() {
+              width: function () {
                 return $scope.size.width * 0.6;
               },
               controlsOrder: 1,
-              height: function() {
+              height: function () {
                 var h;
                 if (typeof this.width === 'string') {
                   h = +this.width;
@@ -845,24 +862,24 @@ angular.module('cardkitApp')
                   h = this.width();
                 }
 
-                if (h > ($scope.size.height-$scope.size.gridSize*2)) {
-                  h = $scope.size.height-$scope.size.gridSize*2;
+                if (h > ($scope.size.height - $scope.size.gridSize * 2)) {
+                  h = $scope.size.height - $scope.size.gridSize * 2;
                 }
                 return h;
               },
-              src: function() {
+              src: function () {
                 return $scope.theme.images.graphSrc;
               },
               opacity: 1,
-              x: function() {
+              x: function () {
 
                 var areaW = $scope.size.width * 0.7;
                 var picW = $scope.size.width * 0.45;
-                var x = areaW/2 - picW/2;
+                var x = areaW / 2 - picW / 2;
 
                 return x;
               },
-              y: function() {
+              y: function () {
                 return $scope.size.gridSize;
               },
               preserveAspectRatio: 'xMinYMin meet',
@@ -879,37 +896,37 @@ angular.module('cardkitApp')
               name: 'Side Explanation Background',
               type: 'rect',
               controlsOrder: 10,
-              height: function() {
+              height: function () {
                 return $scope.size.height;
               },
-              width: function() {
+              width: function () {
                 return $scope.size.width * 0.3;
               },
               y: '0%',
-              x: function() {
+              x: function () {
                 return $scope.size.width - this.width();
               },
-              fill: function() {
+              fill: function () {
                 return $scope.theme.xrefBackground;
               }
             }, {
               name: 'Logo',
               type: 'image',
               controlsOrder: 6,
-              width: function() {
-                return $scope.size.gridSize * ($scope.theme.isNikkei? 12 : 2);
+              width: function () {
+                return $scope.size.gridSize * ($scope.theme.isNikkei ? 12 : 2);
               },
-              height: function() {
+              height: function () {
                 return templateHelper.logo.height($scope);
               },
-              src: function() {
+              src: function () {
                 return $scope.theme.isNikkei ? $scope.theme.images.logoWideSrc : $scope.theme.images.logoSrc;
               },
               opacity: 1,
-              x: function() {
+              x: function () {
                 return $scope.size.width - ($scope.theme.isNikkei ? this.width($scope) : $scope.size.gridSize * 3);
               },
-              y: function() {
+              y: function () {
                 return $scope.size.height - $scope.size.gridSize * 3
               },
               preserveAspectRatio: 'xMinYMin meet',
@@ -919,22 +936,22 @@ angular.module('cardkitApp')
               type: 'text',
               text: 'FT.COM/\nCOMPANIES',
               controlsOrder: 3,
-              fill: function() {
+              fill: function () {
                 return $scope.theme.xref;
               },
-              fontSize: function() {
+              fontSize: function () {
                 if ($scope.theme.isNikkei) return 0;
                 return ($scope.size.name === 'Twitter') ? 18 : 14;
               },
-              fontFamily: function() {
+              fontFamily: function () {
                 return $scope.theme.xrefFont;
               },
               textAnchor: 'start',
-              x: function() {
+              x: function () {
                 var w = $scope.size.width;
-                return (w - w*0.3) + $scope.size.gridSize;
+                return (w - w * 0.3) + $scope.size.gridSize;
               },
-              y: function() {
+              y: function () {
                 return $scope.size.height - ($scope.size.gridSize * ($scope.theme.isNikkei ? 4 : 2) + 2);
               },
               fontWeight: 500,
@@ -947,25 +964,25 @@ angular.module('cardkitApp')
               type: 'text',
               text: 'Add text here.\n\nYou can also drag\nit around.\n\nIt can be over one\nline or several.',
               controlsOrder: 2,
-              fill: function() {
+              fill: function () {
                 return $scope.theme.xref;
               },
-              fontSize: function() {
+              fontSize: function () {
                 return ($scope.size.name === 'Twitter') ? 24 : 18;
               },
-              fontFamily: function() {
+              fontFamily: function () {
                 return $scope.theme.creditFont;
               },
               textAnchor: 'start',
               width: function () {
                 return $scope.size.width * 0.3;
               },
-              x: function() {
+              x: function () {
                 var w = $scope.size.width;
-                return (w - w*0.3) + $scope.size.gridSize;
+                return (w - w * 0.3) + $scope.size.gridSize;
               },
-              y: function() {
-                return $scope.size.gridSize*2;
+              y: function () {
+                return $scope.size.gridSize * 2;
               },
               fontWeight: 500,
               draggable: true,
@@ -982,28 +999,28 @@ angular.module('cardkitApp')
           }
         }, {
           name: 'Chart: 2 Column',
-          elements: function($scope) {
+          elements: function ($scope) {
             return [{
               name: 'Background Colour',
               type: 'rect',
               controlsOrder: 7,
-              height: function() {
+              height: function () {
                 return $scope.size.height;
               },
-              width: function() {
+              width: function () {
                 return $scope.size.width;
               },
-              fill: function() {
+              fill: function () {
                 return $scope.theme.background;
               }
             }, {
               name: 'Graph',
               type: 'image',
-              width: function() {
+              width: function () {
                 return $scope.size.width * 0.7;
               },
               controlsOrder: 1,
-              height: function() {
+              height: function () {
                 var h;
                 if (typeof this.width === 'string') {
                   h = +this.width;
@@ -1011,19 +1028,19 @@ angular.module('cardkitApp')
                   h = this.width();
                 }
 
-                if (h > ($scope.size.height-$scope.size.gridSize*2)) {
-                  h = $scope.size.height-$scope.size.gridSize*2;
+                if (h > ($scope.size.height - $scope.size.gridSize * 2)) {
+                  h = $scope.size.height - $scope.size.gridSize * 2;
                 }
                 return h;
               },
-              src: function() {
+              src: function () {
                 return $scope.theme.images.graphWideSrc;
               },
               opacity: 1,
-              x: function() {
+              x: function () {
                 return $scope.size.gridSize;
               },
-              y: function() {
+              y: function () {
                 return $scope.size.gridSize;
               },
               preserveAspectRatio: 'xMinYMin meet',
@@ -1040,37 +1057,37 @@ angular.module('cardkitApp')
               name: 'Side Explanation Background',
               type: 'rect',
               controlsOrder: 5,
-              height: function() {
+              height: function () {
                 return $scope.size.height;
               },
-              width: function() {
+              width: function () {
                 return $scope.size.width * 0.25;
               },
               y: '0%',
-              x: function() {
+              x: function () {
                 return $scope.size.width - this.width();
               },
-              fill: function() {
+              fill: function () {
                 return $scope.theme.xrefBackground;
               }
             }, {
               name: 'Logo',
               type: 'image',
               controlsOrder: 6,
-              width: function() {
-                return $scope.size.gridSize * ($scope.theme.isNikkei? 10 : 2);
+              width: function () {
+                return $scope.size.gridSize * ($scope.theme.isNikkei ? 10 : 2);
               },
-              height: function() {
+              height: function () {
                 return $scope.size.gridSize * ($scope.theme.isNikkei ? 3 : 2);
               },
-              src: function() {
+              src: function () {
                 return $scope.theme.isNikkei ? $scope.theme.images.logoWideSrc : $scope.theme.images.logoSrc;
               },
               opacity: 1,
-              x: function() {
+              x: function () {
                 return $scope.size.width - ($scope.theme.isNikkei ? this.width($scope) : $scope.size.gridSize * 3);
               },
-              y: function() {
+              y: function () {
                 var paddingTop = $scope.theme.isNikkei ? 0 : $scope.size.gridSize;
                 return $scope.size.height - (this.height($scope) + paddingTop);
               },
@@ -1081,22 +1098,22 @@ angular.module('cardkitApp')
               type: 'text',
               text: 'FT.COM/\nCOMPANIES',
               controlsOrder: 3,
-              fill: function() {
+              fill: function () {
                 return $scope.theme.xref;
               },
-              fontSize: function() {
+              fontSize: function () {
                 if ($scope.theme.isNikkei) return 0;
                 return ($scope.size.name === 'Twitter') ? 18 : 14;
               },
-              fontFamily: function() {
+              fontFamily: function () {
                 return $scope.theme.xrefFont;
               },
               textAnchor: 'start',
-              x: function() {
+              x: function () {
                 var w = $scope.size.width;
-                return (w - w*0.25) + $scope.size.gridSize;
+                return (w - w * 0.25) + $scope.size.gridSize;
               },
-              y: function() {
+              y: function () {
                 return $scope.size.height - ($scope.size.gridSize * ($scope.theme.isNikkei ? 4 : 2) + 2);
               },
               fontWeight: 500,
@@ -1109,25 +1126,25 @@ angular.module('cardkitApp')
               type: 'text',
               text: 'Add text here.\n\nYou can also drag\nit around.\n\nIt can be over one\nline or several.',
               controlsOrder: 2,
-              fill: function() {
+              fill: function () {
                 return $scope.theme.xref;
               },
-              fontSize: function() {
+              fontSize: function () {
                 return ($scope.size.name === 'Facebook') ? 14 : 18;
               },
-              fontFamily: function() {
+              fontFamily: function () {
                 return $scope.theme.creditFont;
               },
               textAnchor: 'start',
               width: function () {
                 return $scope.size.width * 0.25;
               },
-              x: function() {
+              x: function () {
                 var w = $scope.size.width;
-                return (w - w*0.25) + $scope.size.gridSize;
+                return (w - w * 0.25) + $scope.size.gridSize;
               },
-              y: function() {
-                return $scope.size.gridSize*2;
+              y: function () {
+                return $scope.size.gridSize * 2;
               },
               fontWeight: 500,
               draggable: true,
@@ -1143,28 +1160,28 @@ angular.module('cardkitApp')
           }
         }, {
           name: 'Promo A',
-          elements: function($scope) {
+          elements: function ($scope) {
             return [{
               name: 'Background Colour',
               type: 'rect',
               controlsOrder: 7,
-              height: function() {
+              height: function () {
                 return $scope.size.height;
               },
-              width: function() {
+              width: function () {
                 return $scope.size.width;
               },
-              fill: function() {
+              fill: function () {
                 return $scope.theme.background;
               }
             }, {
               name: 'Promo Image',
               type: 'image',
-              width: function() {
+              width: function () {
                 return $scope.size.width;
               },
               controlsOrder: 1,
-              height: function() {
+              height: function () {
                 var h;
                 if (typeof this.width === 'string') {
                   h = +this.width;
@@ -1173,7 +1190,7 @@ angular.module('cardkitApp')
                 }
                 return h;
               },
-              src: function() {
+              src: function () {
                 return $scope.theme.images.promoSrc;
               },
               opacity: 1,
@@ -1193,36 +1210,36 @@ angular.module('cardkitApp')
               name: 'Cross Reference Background',
               type: 'rect',
               controlsOrder: 5,
-              height: function() {
+              height: function () {
                 return $scope.size.gridSize * 3;
               },
-              width: function() {
+              width: function () {
                 return templateHelper.crossReferenceBackground.width($scope);
               },
-              y: function() {
+              y: function () {
                 return $scope.size.height - this.height();
               },
-              fill: function() {
+              fill: function () {
                 return $scope.theme.xrefBackground;
               }
             }, {
               name: 'Logo',
               type: 'image',
               controlsOrder: 6,
-              width: function() {
+              width: function () {
                 return templateHelper.logo.width($scope);
               },
-              height: function() {
+              height: function () {
                 return templateHelper.logo.height($scope);
               },
-              src: function() {
+              src: function () {
                 return $scope.theme.images.logoSrc;
               },
               opacity: 1,
-              x: function() {
+              x: function () {
                 return templateHelper.logo.x($scope);
               },
-              y: function() {
+              y: function () {
                 return templateHelper.logo.y($scope);
               },
               preserveAspectRatio: 'xMinYMin meet',
@@ -1232,20 +1249,20 @@ angular.module('cardkitApp')
               type: 'text',
               text: 'Promo A please go to ft.com/something-interesting',
               controlsOrder: 2,
-              fill: function() {
+              fill: function () {
                 return $scope.theme.xref;
               },
-              fontSize: function() {
+              fontSize: function () {
                 return ($scope.size.name === 'Twitter') ? 22 : 18;
               },
-              fontFamily: function() {
+              fontFamily: function () {
                 return $scope.theme.xrefFont;
               },
               textAnchor: 'start',
-              x: function() {
+              x: function () {
                 return $scope.size.gridSize;
               },
-              y: function() {
+              y: function () {
                 return $scope.size.height - ($scope.size.gridSize);
               },
               fontWeight: 500,
@@ -1262,28 +1279,28 @@ angular.module('cardkitApp')
           }
         }, {
           name: 'Promo B',
-          elements: function($scope) {
+          elements: function ($scope) {
             return [{
               name: 'Background Colour',
               type: 'rect',
               controlsOrder: 7,
-              height: function() {
+              height: function () {
                 return $scope.size.height;
               },
-              width: function() {
+              width: function () {
                 return $scope.size.width;
               },
-              fill: function() {
+              fill: function () {
                 return $scope.theme.background;
               }
             }, {
               name: 'Promo Image',
               type: 'image',
-              width: function() {
+              width: function () {
                 return $scope.size.width * 0.75;
               },
               controlsOrder: 1,
-              height: function() {
+              height: function () {
                 var h;
                 if (typeof this.width === 'string') {
                   h = +this.width;
@@ -1292,7 +1309,7 @@ angular.module('cardkitApp')
                 }
                 return h;
               },
-              src: function() {
+              src: function () {
                 return $scope.theme.images.promoSrc;
               },
               opacity: 1,
@@ -1312,37 +1329,37 @@ angular.module('cardkitApp')
               name: 'Side Explanation Background',
               type: 'rect',
               controlsOrder: 5,
-              height: function() {
+              height: function () {
                 return $scope.size.height;
               },
-              width: function() {
+              width: function () {
                 return $scope.size.width * 0.25;
               },
               y: '0%',
-              x: function() {
+              x: function () {
                 return $scope.size.width - this.width();
               },
-              fill: function() {
+              fill: function () {
                 return $scope.theme.xrefBackground;
               }
             }, {
               name: 'Logo',
               type: 'image',
               controlsOrder: 6,
-              width: function() {
-                return $scope.size.gridSize * ($scope.theme.isNikkei? 10 : 2);
+              width: function () {
+                return $scope.size.gridSize * ($scope.theme.isNikkei ? 10 : 2);
               },
-              height: function() {
+              height: function () {
                 return $scope.size.gridSize * ($scope.theme.isNikkei ? 3 : 2);
               },
-              src: function() {
+              src: function () {
                 return $scope.theme.isNikkei ? $scope.theme.images.logoWideSrc : $scope.theme.images.logoSrc;
               },
               opacity: 1,
-              x: function() {
+              x: function () {
                 return $scope.size.width - ($scope.theme.isNikkei ? this.width($scope) : $scope.size.gridSize * 3);
               },
-              y: function() {
+              y: function () {
                 var paddingTop = $scope.theme.isNikkei ? 0 : $scope.size.gridSize;
                 return $scope.size.height - (this.height($scope) + paddingTop);
               },
@@ -1353,25 +1370,25 @@ angular.module('cardkitApp')
               type: 'text',
               text: 'Promo B\nplease go\nto ft.com/\nsomething-\ninteresting',
               controlsOrder: 2,
-              fill: function() {
+              fill: function () {
                 return $scope.theme.xref;
               },
-              fontSize: function() {
+              fontSize: function () {
                 return ($scope.size.name === 'Twitter') ? 24 : 18;
               },
-              fontFamily: function() {
+              fontFamily: function () {
                 return $scope.theme.creditFont;
               },
               textAnchor: 'start',
               width: function () {
                 return $scope.size.width * 0.25;
               },
-              x: function() {
+              x: function () {
                 var w = $scope.size.width;
-                return (w - w*0.25) + $scope.size.gridSize;
+                return (w - w * 0.25) + $scope.size.gridSize;
               },
-              y: function() {
-                return $scope.size.gridSize*2;
+              y: function () {
+                return $scope.size.gridSize * 2;
               },
               fontWeight: 500,
               draggable: true,
@@ -1387,52 +1404,52 @@ angular.module('cardkitApp')
           }
         }, {
           name: 'Breaking News',
-          elements: function($scope) {
+          elements: function ($scope) {
             return [{
               name: 'Background Colour',
               type: 'rect',
               controlsOrder: 17,
-              height: function() {
+              height: function () {
                 return $scope.size.height;
               },
-              width: function() {
+              width: function () {
                 return $scope.size.width;
               },
-              fill: function() {
+              fill: function () {
                 return $scope.theme.background;
               }
             }, {
               name: 'Header Background',
               type: 'rect',
               controlsOrder: 15,
-              height: function() {
+              height: function () {
                 return $scope.size.gridSize * 3;
               },
-              width: function() {
+              width: function () {
                 return $scope.size.width;
               },
               y: 0,
-              fill: function() {
+              fill: function () {
                 return $scope.theme.highlightColor;
               }
             }, {
               name: 'Logo',
               type: 'image',
               controlsOrder: 16,
-              width: function() {
+              width: function () {
                 return templateHelper.logo.width($scope);
               },
-              height: function() {
+              height: function () {
                 return templateHelper.logo.height($scope);
               },
-              src: function() {
+              src: function () {
                 return $scope.theme.images.logoAltSrc;
               },
               opacity: 1,
-              x: function() {
+              x: function () {
                 return templateHelper.logo.x($scope);
               },
-              y: function() {
+              y: function () {
                 var paddingTop = $scope.theme.isNikkei ? 0 : $scope.size.gridSize;
                 return $scope.size.height - (this.height($scope) + paddingTop);
               },
@@ -1442,21 +1459,21 @@ angular.module('cardkitApp')
               name: 'Bookmark',
               type: 'image',
               controlsOrder: 16,
-              width: function() {
+              width: function () {
                 return $scope.size.gridSize;
               },
-              height: function() {
-                return $scope.size.gridSize*2;
+              height: function () {
+                return $scope.size.gridSize * 2;
               },
-              src: function() {
+              src: function () {
                 return $scope.theme.images.bookmark;
               },
               opacity: 1,
-              x: function() {
+              x: function () {
                 return $scope.size.width - (this.width() + $scope.size.gridSize);
               },
-              y: function() {
-                return (($scope.size.gridSize*3.5) - this.height())/2;
+              y: function () {
+                return (($scope.size.gridSize * 3.5) - this.height()) / 2;
               },
               preserveAspectRatio: 'xMinYMin meet',
               draggable: false
@@ -1466,21 +1483,21 @@ angular.module('cardkitApp')
               text: 'Forex Scandal',
               textTransform: 'uppercase',
               controlsOrder: 1,
-              fill: function() {
+              fill: function () {
                 return $scope.theme.xref;
               },
-              fontSize: function() {
+              fontSize: function () {
                 return ($scope.size.name === 'Twitter') ? 24 : 18;
               },
-              fontFamily: function() {
+              fontFamily: function () {
                 return $scope.theme.xrefFont;
               },
               textAnchor: 'start',
-              x: function() {
+              x: function () {
                 return $scope.size.gridSize;
               },
-              y: function() {
-                return $scope.size.gridSize*2;
+              y: function () {
+                return $scope.size.gridSize * 2;
               },
               fontWeight: 500,
               draggable: true,
@@ -1497,22 +1514,22 @@ angular.module('cardkitApp')
               type: 'text',
               text: 'Name here in caps',
               controlsOrder: 3,
-              fill: function() {
+              fill: function () {
                 return $scope.theme.quote;
               },
-              fontSize: function() {
+              fontSize: function () {
                 return ($scope.size.name === 'Twitter') ? 22 : 18;
               },
-              fontFamily: function() {
+              fontFamily: function () {
                 return $scope.theme.creditFont;
               },
               textAnchor: 'start',
               textTransform: 'uppercase',
-              x: function() {
+              x: function () {
                 return $scope.size.gridSize;
               },
-              y: function() {
-                return $scope.size.height - $scope.size.gridSize*5;
+              y: function () {
+                return $scope.size.height - $scope.size.gridSize * 5;
               },
               fontWeight: 500,
               draggable: true,
@@ -1528,21 +1545,21 @@ angular.module('cardkitApp')
               type: 'text',
               text: 'Read more about the case on ft.com/xxxxx',
               controlsOrder: 4,
-              fill: function() {
+              fill: function () {
                 return $scope.theme.highlightColor;
               },
-              fontSize: function() {
+              fontSize: function () {
                 return ($scope.size.name === 'Twitter') ? 18 : 14;
               },
-              fontFamily: function() {
+              fontFamily: function () {
                 return $scope.theme.creditFont;
               },
               textAnchor: 'start',
               textTransform: 'uppercase',
-              x: function() {
+              x: function () {
                 return $scope.size.gridSize;
               },
-              y: function() {
+              y: function () {
                 return $scope.size.height - $scope.size.gridSize;
               },
               fontWeight: 500,
@@ -1559,22 +1576,22 @@ angular.module('cardkitApp')
               name: 'Quote',
               type: 'text',
               text: '‘Add text here about the breaking\nnews event’',
-              fill: function() {
+              fill: function () {
                 return $scope.theme.quote;
               },
               controlsOrder: 2,
-              fontSize: function() {
+              fontSize: function () {
                 return ($scope.size.name === 'Twitter') ? 44 : 34;
               },
-              fontFamily: function() {
+              fontFamily: function () {
                 return $scope.theme.headlineFont;
               },
               textAnchor: 'start',
-              x: function() {
+              x: function () {
                 return $scope.size.gridSize;
               },
-              y: function() {
-                return $scope.size.gridSize*6;
+              y: function () {
+                return $scope.size.gridSize * 6;
               },
               fontWeight: 600,
               draggable: true,
@@ -1588,40 +1605,40 @@ angular.module('cardkitApp')
               },
             }];
           }
-        },{
+        }, {
           name: 'FT Weekend -- Quote With Headshot',
-          elements: function($scope) {
+          elements: function ($scope) {
             return [{
               name: 'Background Colour',
               type: 'rect',
               controlsOrder: 7,
-              height: function() {
+              height: function () {
                 return $scope.size.height;
               },
-              width: function() {
+              width: function () {
                 return $scope.size.width;
               },
-              fill: function() {
+              fill: function () {
                 return $scope.theme.background;
               }
             }, {
               name: 'Image',
               type: 'image',
-              width: function() {
+              width: function () {
                 return $scope.size.gridSize * 20;
               },
               controlsOrder: 2,
-              height: function() {
+              height: function () {
                 if (typeof this.width === 'function') {
                   return this.width();
                 }
                 return this.width;
               },
-              src: function() {
+              src: function () {
                 return $scope.theme.images.headshotSrc || '';
               },
               opacity: 1,
-              x: function() {
+              x: function () {
                 var w;
                 if (typeof this.width === 'function') {
                   w = this.width();
@@ -1630,7 +1647,7 @@ angular.module('cardkitApp')
                 }
                 return $scope.size.width - (w + $scope.size.gridSize);
               },
-              y: function() {
+              y: function () {
                 return $scope.size.gridSize;
               },
               preserveAspectRatio: 'xMinYMin meet',
@@ -1647,43 +1664,43 @@ angular.module('cardkitApp')
               name: 'Cross Reference Background',
               type: 'rect',
               controlsOrder: 5,
-              height: function() {
+              height: function () {
                 return $scope.size.gridSize * 3 + 5;
               },
-              width: function() {
+              width: function () {
                 return $scope.size.width + 10;
               },
               x: -5,
-              y: function() {
+              y: function () {
                 return $scope.size.height - this.height() + 5;
               },
-              fill: function() {
+              fill: function () {
                 return $scope.theme.background;
               },
-              stroke: function() {
+              stroke: function () {
                 return $scope.theme.quote;
               }
             }, {
               name: 'Logo',
               type: 'text',
-              text: function() {
+              text: function () {
                 return $scope.theme.xrefText || 'FT Weekend';
               },
               controlsOrder: 4,
-              fill: function() {
+              fill: function () {
                 return $scope.theme.xrefBackground;
               },
-              fontSize: function() {
+              fontSize: function () {
                 return ($scope.size.name === 'Twitter') ? 28 : 24;
               },
-              fontFamily: function() {
+              fontFamily: function () {
                 return $scope.theme.headlineFont;
               },
               textAnchor: 'start',
-              x: function() {
+              x: function () {
                 return $scope.size.gridSize;
               },
-              y: function() {
+              y: function () {
                 return $scope.size.height - ($scope.size.gridSize);
               },
               fontWeight: 600,
@@ -1693,21 +1710,21 @@ angular.module('cardkitApp')
               type: 'text',
               text: 'Janan Ganesh on why\nLabour is Terrible',
               controlsOrder: 3,
-              fill: function() {
+              fill: function () {
                 return $scope.theme.quote;
               },
-              fontSize: function() {
+              fontSize: function () {
                 return ($scope.size.name === 'Twitter') ? 22 : 16;
               },
-              fontFamily: function() {
+              fontFamily: function () {
                 return $scope.theme.creditFont;
               },
               textAnchor: 'start',
               textTransform: 'uppercase',
-              x: function() {
+              x: function () {
                 return $scope.size.gridSize;
               },
-              y: function() {
+              y: function () {
                 return $scope.size.height - $scope.size.gridSize * 6;
               },
               fontWeight: 500,
@@ -1723,21 +1740,21 @@ angular.module('cardkitApp')
               name: 'Headline',
               type: 'text',
               text: 'Friendship is constant\nin all other things save in\nthe office and affairs of\nlove: Therefore, all hearts\nin love use their own',
-              fill: function() {
+              fill: function () {
                 return $scope.theme.quote;
               },
               controlsOrder: 1,
-              fontSize: function() {
+              fontSize: function () {
                 return ($scope.size.name === 'Twitter') ? 32 : 26;
               },
-              fontFamily: function() {
+              fontFamily: function () {
                 return $scope.theme.headlineFont;
               },
               textAnchor: 'start',
-              x: function() {
+              x: function () {
                 return $scope.size.gridSize;
               },
-              y: function() {
+              y: function () {
                 return $scope.size.gridSize * 3;
               },
               fontWeight: 600,
@@ -1753,30 +1770,30 @@ angular.module('cardkitApp')
               },
             }];
           }
-        },{
+        }, {
           name: 'FT Weekend -- Magazine Sidebar',
-          elements: function($scope) {
+          elements: function ($scope) {
             return [{
               name: 'Background Colour',
               type: 'rect',
               controlsOrder: 10,
-              height: function() {
+              height: function () {
                 return $scope.size.height;
               },
-              width: function() {
+              width: function () {
                 return $scope.size.width;
               },
-              fill: function() {
+              fill: function () {
                 return $scope.theme.background;
               }
             }, {
               name: 'Image',
               type: 'image',
-              width: function() {
+              width: function () {
                 return $scope.size.width * 0.6;
               },
               controlsOrder: 1,
-              height: function() {
+              height: function () {
                 var h;
                 if (typeof this.width === 'string') {
                   h = +this.width;
@@ -1803,14 +1820,14 @@ angular.module('cardkitApp')
               name: 'Side Explanation Background',
               type: 'rect',
               controlsOrder: 10,
-              height: function() {
+              height: function () {
                 return $scope.size.height;
               },
-              width: function() {
+              width: function () {
                 return $scope.size.width * 0.3;
               },
               y: '0%',
-              x: function() {
+              x: function () {
                 return $scope.size.width - this.width();
               },
               fill: 'rgb(30,75,115)'
@@ -1818,20 +1835,20 @@ angular.module('cardkitApp')
               name: 'Logo',
               type: 'image',
               controlsOrder: 10,
-              width: function() {
+              width: function () {
                 return $scope.size.width * 0.3 - ($scope.size.gridSize * 2);
               },
-              height: function() {
+              height: function () {
                 return $scope.size.gridSize * 4;
               },
-              src: function() {
+              src: function () {
                 return $scope.theme.images.weekendSrc || $scope.theme.images.logoSrc;
               },
               opacity: 1,
-              x: function() {
+              x: function () {
                 return $scope.size.width - ($scope.size.gridSize * 11);
               },
-              y: function() {
+              y: function () {
                 return $scope.size.gridSize;
               },
               preserveAspectRatio: 'xMinYMin meet',
@@ -1841,22 +1858,22 @@ angular.module('cardkitApp')
               type: 'text',
               text: 'READ MORE AT\nFT.COM/XXX',
               controlsOrder: 3,
-              fill: function() {
+              fill: function () {
                 return $scope.theme.xref;
               },
-              fontSize: function() {
+              fontSize: function () {
                 return ($scope.size.name === 'Twitter') ? 18 : 14;
               },
-              fontFamily: function() {
+              fontFamily: function () {
                 return $scope.theme.xrefFont;
               },
               textAnchor: 'start',
-              x: function() {
+              x: function () {
                 var w = $scope.size.width;
-                return (w - w*0.3) + $scope.size.gridSize;
+                return (w - w * 0.3) + $scope.size.gridSize;
               },
-              y: function() {
-                return $scope.size.height - ($scope.size.gridSize*2 + 2);
+              y: function () {
+                return $scope.size.height - ($scope.size.gridSize * 2 + 2);
               },
               fontWeight: 500,
               draggable: true,
@@ -1868,10 +1885,10 @@ angular.module('cardkitApp')
               type: 'text',
               text: 'Add text here -\nYou can also drag\nit around.\n\nIt can be over one\nline or several.',
               controlsOrder: 2,
-              fill: function() {
+              fill: function () {
                 return $scope.theme.xref;
               },
-              fontSize: function() {
+              fontSize: function () {
                 return ($scope.size.name === 'Twitter') ? 24 : 18;
               },
               fontFamily: 'financierdisplayweb',
@@ -1879,12 +1896,12 @@ angular.module('cardkitApp')
               width: function () {
                 return $scope.size.gridSize * 12;
               },
-              x: function() {
+              x: function () {
                 var w = $scope.size.width;
                 return (w - $scope.size.gridSize * 11);
               },
-              y: function() {
-                return $scope.size.gridSize*7;
+              y: function () {
+                return $scope.size.gridSize * 7;
               },
               fontWeight: 500,
               draggable: true,
@@ -1898,30 +1915,30 @@ angular.module('cardkitApp')
               },
             }];
           }
-        },{
+        }, {
           name: 'FT Weekend -- Recipe Card',
-          elements: function($scope) {
+          elements: function ($scope) {
             return [{
               name: 'Background Colour',
               type: 'rect',
               controlsOrder: 10,
-              height: function() {
+              height: function () {
                 return $scope.size.height;
               },
-              width: function() {
+              width: function () {
                 return $scope.size.width;
               },
-              fill: function() {
+              fill: function () {
                 return $scope.theme.background;
               }
             }, {
               name: 'Recipe Image',
               type: 'image',
-              width: function() {
+              width: function () {
                 return $scope.size.width * 0.6;
               },
               controlsOrder: 1,
-              height: function() {
+              height: function () {
                 var h;
                 if (typeof this.width === 'string') {
                   h = +this.width;
@@ -1948,14 +1965,14 @@ angular.module('cardkitApp')
               name: 'Side Explanation Background',
               type: 'rect',
               controlsOrder: 10,
-              height: function() {
+              height: function () {
                 return $scope.size.height;
               },
-              width: function() {
+              width: function () {
                 return $scope.size.width * 0.3;
               },
               y: '0%',
-              x: function() {
+              x: function () {
                 return $scope.size.width - this.width();
               },
               fill: 'rgb(67,20,95)'
@@ -1964,17 +1981,17 @@ angular.module('cardkitApp')
               type: 'text',
               text: 'FT Weekend',
               fill: 'white',
-              fontSize: function() {
+              fontSize: function () {
                 return ($scope.size.name === 'Twitter') ? 28 : 22;
               },
-              fontFamily: function() {
+              fontFamily: function () {
                 return $scope.theme.headlineFont;
               },
               textAnchor: 'start',
-              x: function() {
+              x: function () {
                 return $scope.size.width - ($scope.size.gridSize * 11);
               },
-              y: function() {
+              y: function () {
                 return ($scope.size.gridSize * 2);
               },
               fontWeight: 600,
@@ -1984,22 +2001,22 @@ angular.module('cardkitApp')
               type: 'text',
               text: 'READ THE RECIPE AT\nFT.COM/XXX',
               controlsOrder: 3,
-              fill: function() {
+              fill: function () {
                 return $scope.theme.xref;
               },
-              fontSize: function() {
+              fontSize: function () {
                 return ($scope.size.name === 'Twitter') ? 18 : 14;
               },
-              fontFamily: function() {
+              fontFamily: function () {
                 return $scope.theme.xrefFont;
               },
               textAnchor: 'start',
-              x: function() {
+              x: function () {
                 var w = $scope.size.width;
-                return (w - w*0.3) + $scope.size.gridSize;
+                return (w - w * 0.3) + $scope.size.gridSize;
               },
-              y: function() {
-                return $scope.size.height - ($scope.size.gridSize*2 + 2);
+              y: function () {
+                return $scope.size.height - ($scope.size.gridSize * 2 + 2);
               },
               fontWeight: 500,
               draggable: true,
@@ -2011,10 +2028,10 @@ angular.module('cardkitApp')
               type: 'text',
               text: 'Steak and\nkidney pudding',
               controlsOrder: 2,
-              fill: function() {
+              fill: function () {
                 return $scope.theme.xref;
               },
-              fontSize: function() {
+              fontSize: function () {
                 return ($scope.size.name === 'Twitter') ? 24 : 18;
               },
               fontFamily: 'metricweb',
@@ -2022,12 +2039,12 @@ angular.module('cardkitApp')
               width: function () {
                 return $scope.size.gridSize * 12;
               },
-              x: function() {
+              x: function () {
                 var w = $scope.size.width;
                 return (w - $scope.size.gridSize * 11);
               },
-              y: function() {
-                return $scope.size.gridSize*6.8;
+              y: function () {
+                return $scope.size.gridSize * 6.8;
               },
               fontWeight: 400,
               draggable: true,
@@ -2044,10 +2061,10 @@ angular.module('cardkitApp')
               type: 'text',
               text: 'Rowley Leigh',
               controlsOrder: 2,
-              fill: function() {
+              fill: function () {
                 return $scope.theme.xref;
               },
-              fontSize: function() {
+              fontSize: function () {
                 return ($scope.size.name === 'Twitter') ? 24 : 18;
               },
               fontFamily: 'financierdisplayweb',
@@ -2056,12 +2073,12 @@ angular.module('cardkitApp')
               width: function () {
                 return $scope.size.gridSize * 12;
               },
-              x: function() {
+              x: function () {
                 var w = $scope.size.width;
                 return (w - $scope.size.gridSize * 11);
               },
-              y: function() {
-                return $scope.size.gridSize*5.25;
+              y: function () {
+                return $scope.size.gridSize * 5.25;
               },
               fontWeight: 300,
               draggable: true,

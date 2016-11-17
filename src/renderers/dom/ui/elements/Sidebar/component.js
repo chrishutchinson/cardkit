@@ -18,8 +18,19 @@ class Sidebar extends React.Component {
   constructor (props) {
     super(props);
 
+    let defaultPanel;
+    if (this.props.templates) {
+      defaultPanel = 'template';
+    } else if (this.props.layouts) {
+      defaultPanel = 'layout';
+    } else if (this.props.themes) {
+      defaultPanel = 'theme';
+    } else {
+      defaultPanel = 'content';
+    }
+
     this.state = {
-      panel: 'template'
+      panel: defaultPanel
     }
 
     this.handleConfigurationChange = this.handleConfigurationChange.bind(this);
@@ -84,25 +95,41 @@ class Sidebar extends React.Component {
       <aside className={'sidebar' + (this.state.panel ? ' sidebar--open' : '')}>
 
         <main className="panels">
-          <Template templates={this.props.templates}
-            template={this.props.template}
-            active={this.isPanel('template')}
-            onTemplateChange={this.handleTemplateChange} />
+          {(() => {
+            if (this.props.templates) {
+              return (<Template templates={this.props.templates}
+                template={this.props.template}
+                active={this.isPanel('template')}
+                onTemplateChange={this.handleTemplateChange} />);
+            }
+          })()}
 
-          <Layout layouts={this.props.layouts}
-            layout={this.props.layout}
-            active={this.isPanel('layout')}
-            onLayoutChange={this.handleLayoutChange} />
+          {(() => {
+            if (this.props.layouts) {
+              return (<Layout layouts={this.props.layouts}
+                layout={this.props.layout}
+                active={this.isPanel('layout')}
+                onLayoutChange={this.handleLayoutChange} />);
+            }
+          })()}
 
-          <Theme themes={this.props.themes}
-            theme={this.props.theme}
-            configuration={this.props.configuration}
-            active={this.isPanel('theme')}
-            onThemeChange={this.handleThemeChange} />
+          {(() => {
+            if (this.props.themes) {
+              return (<Theme themes={this.props.themes}
+                theme={this.props.theme}
+                configuration={this.props.configuration}
+                active={this.isPanel('theme')}
+                onThemeChange={this.handleThemeChange} />);
+            }
+          })()}
 
-          <Content configuration={this.props.configuration}
-            active={this.isPanel('content')}
-            onConfigurationChange={this.handleConfigurationChange} />
+          {(() => {
+            if (this.props.configuration) {
+              return (<Content configuration={this.props.configuration}
+                active={this.isPanel('content')}
+                onConfigurationChange={this.handleConfigurationChange} />);
+            }
+          })()}
         </main>
 
         <ul className="buttons">
@@ -132,11 +159,20 @@ Sidebar.propTypes = {
   onTemplateChange: React.PropTypes.func.isRequired,
   onLayoutChange: React.PropTypes.func.isRequired,
   configuration: React.PropTypes.object.isRequired,
-  theme: React.PropTypes.string,
+  theme: React.PropTypes.oneOfType([
+    React.PropTypes.string,
+    React.PropTypes.bool
+  ]),
   themes: React.PropTypes.object,
-  template: React.PropTypes.string,
+  template: React.PropTypes.oneOfType([
+    React.PropTypes.string,
+    React.PropTypes.bool
+  ]),
   templates: React.PropTypes.object,
-  layout: React.PropTypes.string,
+  layout: React.PropTypes.oneOfType([
+    React.PropTypes.string,
+    React.PropTypes.bool
+  ]),
   layouts: React.PropTypes.object
 }
 

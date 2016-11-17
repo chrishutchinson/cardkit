@@ -7,6 +7,5 @@ docs/* linguist-vendored
 /.gitignore export-ignore
 /README.md export-ignore
 /jsdoc.config.json export-ignore
-/jsdoc.config.json export-ignore
 /webpack.config.js export-ignore
 /webpack export-ignore

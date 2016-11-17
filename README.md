@@ -10,6 +10,8 @@ CardKit 2 has three main parts:
 
 Additionally, a base class allows you to create your own renderers. See more in the [Custom Renderers](#custom-renderers) section.
 
+**For version 1, see the [`v1-master`](https://github.com/times/cardkit/tree/v1-master) branch**
+
 ## Installation
 
 `$ npm install cardkit --save`

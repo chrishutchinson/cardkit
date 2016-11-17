@@ -2,6 +2,8 @@
 
 [![Join the chat at https://gitter.im/times/cardkit](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/times/cardkit?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
+**This version of CardKit is now deprecated in favour of CardKit 2, which can be found on the `master` branch. For archived documentation on CardKit v1, please head [here])(https://github.com/times/cardkit/wiki/Home/7573c85bee5ccab7467a4eab0eea40c6b42f58a3)**
+
 ## Version 1.1.1
 
 ### 2016 [Chris Hutchinson](http://www.github.com/chrishutchinson) for The [Times and Sunday Times](http://www.github.com/times)

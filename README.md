@@ -19,19 +19,16 @@ Additionally, a base class allows you to create your own renderers. See more in 
 `$ npm install cardkit --save`
 
 
-## Running locally
-
-To run a sample UI locally, run: `$ npm start`
-
-You can optionally pass a port like so: `$ npm start -- --port=8080`
-
-
-## Configuring
-
-See the Wiki for all the available options for your configuration.
-
-
 ## Usage
+
+CardKit 2 requires a configuration object in order to render an image. Each renderer (CardKitDOM and CardKitServer) uses this configuration and converts it into an output. Below are simple implementations for CardKit depending on your use case.
+
+In addition to these, you may also want to try the [CardKit Yeoman Generator](https://www.github.com/times/generator-cardkit), which can help you scaffold an entire project in just a few moments. It brings with it the latest version of CardKit, a recommended directory structure, and a build process that helps you get your CardKit project deployed.
+
+#### Yeoman generator
+
+    $ npm install -g yo generator-cardkit
+    $ yo cardkit
 
 #### Browser with Webpack / Browserify usage
   
@@ -228,6 +225,13 @@ CardKit allows you to load in custom fonts for use on your cards, see the Wiki f
 ## Upgrading from v1.x
 
 Upgrading from v1.x to v2 should be a fairly straightforward process if you haven't made any major modifications to the v1.x user interface. Your configuration object from v1.x should be compatible with v2 with a few minor tweaks. Specific variations are available in the Wiki.
+
+
+## Running locally
+
+To run a sample UI locally, run: `$ npm start`
+
+You can optionally pass a port like so: `$ npm start -- --port=8080`
 
 
 ## Tests

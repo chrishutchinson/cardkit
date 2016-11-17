@@ -7,7 +7,7 @@ const jsdom = require('mocha-jsdom');
 chai.should();
 
 // Import SVGToImage
-const SVGToImage = require('../src/renderers/dom/SVGToImage');
+const SVGToImage = require('../src/renderers/dom/svgToImage');
 
 describe('SVGToImage', () => {
 

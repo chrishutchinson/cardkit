@@ -1,0 +1,31 @@
+.header {
+  background: #4da5bd;
+  height: 5.7rem;
+  display: flex;
+  position: relative;
+  z-index: 10;
+
+  img {
+    padding: 1rem;
+    margin: 0;
+    display: block;
+    width: 16.2rem;
+    height: 5.7rem;
+  }
+
+  a {
+    margin-right: 0;
+    margin-left: auto;
+    padding: 0 2rem;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+    height: 5.7rem;
+    line-height: 5.7rem;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.4);
+    }
+  }
+}

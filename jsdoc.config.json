@@ -1,0 +1,20 @@
+{
+  "tags": {
+    "allowUnknownTags": true,
+    "dictionaries": ["jsdoc","closure"]
+  },
+  "source": {
+    "include": [
+      "./src/renderers/dom/SVGToImage.js",
+      "./src/renderers/shared/Card.js",
+      "./src/renderers/server/server.js",
+      "./src/renderers/dom/dom.js",
+      "./src/cardkit.js"
+    ]
+  },
+  "plugins": [],
+  "templates": {
+    "cleverLinks": false,
+    "monospaceLinks": false
+  }
+}

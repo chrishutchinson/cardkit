@@ -1,0 +1,20 @@
+.panel.panel--layout {
+
+  .layout {
+    background: #333;
+    text-align: center;
+    padding: 2rem;
+    color: #FFF;
+    margin: 0 0 2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover,
+    &.layout--selected {
+      background: #111;
+    }
+  }
+
+}

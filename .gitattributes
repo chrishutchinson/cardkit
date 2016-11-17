@@ -1,1 +1,11 @@
-* text=auto
+docs/* linguist-documentation
+dist/* linguist-vendored
+docs/* linguist-vendored
+
+/tests export-ignore
+/.gitattributes export-ignore
+/.gitignore export-ignore
+/README.md export-ignore
+/jsdoc.config.json export-ignore
+/webpack.config.js export-ignore
+/webpack export-ignore

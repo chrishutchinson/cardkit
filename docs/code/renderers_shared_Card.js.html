@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>renderers/shared/Card.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Card.html">Card</a><ul class='methods'><li data-type='method'><a href="Card.html#calculateYPosition">calculateYPosition</a></li><li data-type='method'><a href="Card.html#computeFonts">computeFonts</a></li><li data-type='method'><a href="Card.html#computeGradients">computeGradients</a></li><li data-type='method'><a href="Card.html#computeLayers">computeLayers</a></li><li data-type='method'><a href="Card.html#getLayerValue">getLayerValue</a></li><li data-type='method'><a href="Card.html#render">render</a></li></ul></li><li><a href="CardKit.html">CardKit</a><ul class='methods'><li data-type='method'><a href="CardKit.html#_configureOptions">_configureOptions</a></li><li data-type='method'><a href="CardKit.html#_isValidConfiguration">_isValidConfiguration</a></li><li data-type='method'><a href="CardKit.html#_isValidLayoutsConfiguration">_isValidLayoutsConfiguration</a></li><li data-type='method'><a href="CardKit.html#_isValidRenderer">_isValidRenderer</a></li><li data-type='method'><a href="CardKit.html#_isValidTemplatesConfiguration">_isValidTemplatesConfiguration</a></li><li data-type='method'><a href="CardKit.html#_isValidThemesConfiguration">_isValidThemesConfiguration</a></li><li data-type='method'><a href="CardKit.html#addRenderer">addRenderer</a></li><li data-type='method'><a href="CardKit.html#computeConfiguration">computeConfiguration</a></li><li data-type='method'><a href="CardKit.html#getRenderers">getRenderers</a></li><li data-type='method'><a href="CardKit.html#updateConfiguration">updateConfiguration</a></li></ul></li><li><a href="CardKitDOM.html">CardKitDOM</a><ul class='methods'><li data-type='method'><a href="CardKitDOM.html#_isValidElement">_isValidElement</a></li><li data-type='method'><a href="CardKitDOM.html#download">download</a></li><li data-type='method'><a href="CardKitDOM.html#renderCard">renderCard</a></li><li data-type='method'><a href="CardKitDOM.html#renderUI">renderUI</a></li><li data-type='method'><a href="CardKitDOM.html#rerender">rerender</a></li></ul></li><li><a href="CardKitServer.html">CardKitServer</a><ul class='methods'><li data-type='method'><a href="CardKitServer.html#renderToImage">renderToImage</a></li><li data-type='method'><a href="CardKitServer.html#renderToString">renderToString</a></li></ul></li><li><a href="SVGToImage.html">SVGToImage</a><ul class='methods'><li data-type='method'><a href="SVGToImage.html#_inlineImages">_inlineImages</a></li><li data-type='method'><a href="SVGToImage.html#_isExternal">_isExternal</a></li><li data-type='method'><a href="SVGToImage.html#_isValidElement">_isValidElement</a></li><li data-type='method'><a href="SVGToImage.html#_toDataURI">_toDataURI</a></li><li data-type='method'><a href="SVGToImage.html#download">download</a></li></ul></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">renderers/shared/Card.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>// Libraries
+const React = require('react');
+
+// RVG Elements
+const {
+  SVG,
+  Text,
+  Rectangle,
+  Circle,
+  Ellipse,
+  Line,
+  Image,
+  Path,
+  LinearGradient
+} = require('rvg.js');
+
+/**
+ * @name Card
+ * @class The Card React element
+ */
+class Card extends React.Component {
+
+  /**
+   * Calculates the Y position of an element based on any attachments etc.
+   *
+   * @param {object} layers - The object of all layers
+   * @param {object} layer - The layer to calculate the Y position for
+   *
+   * @return {integer} The Y position
+   */
+  calculateYPosition (layers, layer) {
+    // Get the layer's currently configured Y position
+    let attachYLayerPosition = this.getLayerValue(layers, layer, 'y');
+
+    // If this is an object and has the attach property
+    if (typeof attachYLayerPosition === 'object' &amp;&amp; attachYLayerPosition.attach !== 'undefined') {
+      // Get the layer to attach to
+      let attachYLayer = layers[layer.y.attach];
+
+      // Calculate the Y offset
+      let attachYLayerHeight = 0;
+      switch (attachYLayer.type) {
+        case 'text':
+          let attachYLayerText = attachYLayer.text.split('\n');
+          if (attachYLayer.text !== '') {
+            attachYLayerHeight = (attachYLayerText.length * (this.getLayerValue(layers, attachYLayer, 'lineHeight') || this.getLayerValue(layers, attachYLayer, 'fontSize')));
+          }
+          break;
+        default:
+          if (typeof this.getLayerValue(layers, attachYLayer, 'height') !== 'undefined') {
+            attachYLayerHeight = this.getLayerValue(layers, attachYLayer, 'height');
+          }
+          break;
+      }
+
+      // Add any additionally configured offset value
+      let attachYLayerOffset = (layer.y.offset || 0);
+
+      // Add them together and recursively call this function if the next layer has an attachment
+      attachYLayerPosition = attachYLayerHeight + this.calculateYPosition(layers, attachYLayer) + attachYLayerOffset;
+    }
+
+    // Return the value
+    return attachYLayerPosition;
+  }
+
+  /**
+   * Returns the value for a given layer property
+   *
+   * @param {object} layers - The object of all layers
+   * @param {object} layer - The layer to get the value for
+   * @param {object} key - The key of the value to get from the layer
+   *
+   * @return {mixed} The value of the property on the layer
+   */
+  getLayerValue (layers, layer, key) {
+    if (typeof layer[key] === 'function') {
+      return layer[key](layers, this.refs.svg);
+    }
+
+    return layer[key];
+  }
+
+  /**
+   * Compute the gradient elements to render to the &lt;defs> element
+   *
+   * @param {object} layers - The configuration object representing the layers that may require gradients
+   *
+   * @return {array} An array of React elements to render to the &lt;defs> element
+   */
+  computeGradients (layers) {
+    const array = [];
+    let layer, gradient;
+
+    Object.keys(layers).forEach((key) => {
+      layer = layers[key];
+
+      if (this.getLayerValue(layers, layer, 'gradient')) {
+        gradient = this.getLayerValue(layers, layer, 'gradient');
+
+        array.push(&lt;LinearGradient key={key}
+          name={key}
+          x1={0} x2={0}
+          y1={0} y2={1}
+          stops={gradient} />);
+      }
+    });
+
+    return array;
+  }
+
+  /**
+   * Compute the layers to render on the Card
+   *
+   * @param {object} layers - The configuration object representing the layers to render
+   *
+   * @return {array} An array of React elements to render on the card
+   */
+  computeLayers (layers) {
+    const array = [];
+    let layer;
+
+    // Iterate over the layers
+    Object.keys(layers).forEach((key) => {
+      layer = layers[key];
+
+      // If the layer is hidden, ignore it
+      if (this.getLayerValue(layers, layer, 'hidden') === true) {
+        return;
+      };
+
+      // Setup an object to contain our layer data
+      const layerData = {};
+
+      // Iterate over the properties of the layer, and compute the value (handles getters, functions, and object implementations such as `y`)
+      Object.keys(layer).forEach((k) => {
+        layerData[k] = this.getLayerValue(layers, layer, k);
+      });
+
+      // Make the fill value map to a gradient name, if a gradient has been configured
+      // See computeGradients() for the creation of gradient definitions
+      if (this.getLayerValue(layer, 'gradient', layers)) {
+        layerData.fill = `url(#${key})`;
+      }
+
+      // Switch over the layer type to ensure we create the card correctly
+      switch (layer.type) {
+        case 'text':
+          // Split by newline
+          const text = layerData.text.split('\n');
+
+          array.push(&lt;Text x={layerData.x}
+            y={this.calculateYPosition(layers, layerData)}
+            fontFamily={layerData.fontFamily}
+            fontSize={layerData.fontSize}
+            lineHeight={layerData.lineHeight}
+            textAnchor={layerData.textAnchor}
+            fill={layerData.fill}
+            draggable={layerData.draggable}
+            transform={layerData.transform}
+            opacity={layerData.opacity}
+            smartQuotes={layerData.smartQuotes}
+            key={key}>
+            {text}
+          &lt;/Text>);
+          break;
+        case 'image':
+          array.push(&lt;Image x={layerData.x}
+            y={this.calculateYPosition(layers, layerData)}
+            href={layerData.src}
+            height={layerData.height}
+            width={layerData.width}
+            draggable={layerData.draggable}
+            transform={layerData.transform}
+            opacity={layerData.opacity}
+            key={key} />);
+          break;
+        case 'rectangle':
+          array.push(&lt;Rectangle x={layerData.x}
+            y={this.calculateYPosition(layers, layerData)}
+            fill={layerData.fill}
+            height={layerData.height}
+            width={layerData.width}
+            draggable={layerData.draggable}
+            transform={layerData.transform}
+            key={key} />);
+          break;
+        case 'circle':
+          array.push(&lt;Circle x={layerData.x}
+            y={this.calculateYPosition(layers, layerData)}
+            fill={layerData.fill}
+            radius={layerData.radius}
+            draggable={layerData.draggable}
+            transform={layerData.transform}
+            key={key} />);
+          break;
+        case 'ellipse':
+          array.push(&lt;Ellipse x={layerData.x}
+            y={this.calculateYPosition(layers, layerData)}
+            fill={layerData.fill}
+            radiusX={layerData.radiusX}
+            radiusY={layerData.radiusY}
+            draggable={layerData.draggable}
+            transform={layerData.transform}
+            key={key} />);
+          break;
+        case 'line':
+          array.push(&lt;Line x={[layerData.x1, layerData.x2]}
+            y={[layerData.y1, layerData.y2]}
+            stroke={layerData.stroke || layerData.fill}
+            draggable={layerData.draggable}
+            transform={layerData.transform}
+            key={key} />);
+          break;
+        case 'path':
+          array.push(&lt;Path d={layerData.path || layerData.d}
+            fill={layerData.fill}
+            draggable={layerData.draggable}
+            transform={layerData.transform}
+            key={key} />)
+          break;
+      }
+    });
+
+    return array;
+  }
+
+  /**
+   * Compute the fonts needed for the card
+   *
+   * @param {object} fonts - The fonts to use when rendering this card
+   *
+   * @return {array} An array of React elements to render in the &lt;defs /> element of the SVG
+   */
+  computeFonts (fonts = {}) {
+    const array = [];
+    let font;
+
+    Object.keys(fonts).forEach((key, index) => {
+      font = fonts[key];
+      array.push(
+        &lt;style key={index}>
+          {`@font-face {
+              font-family: "${key}";
+              src: url(${font}) format("woff");
+              font-weight: normal;
+              font-style: normal;
+          }`}
+        &lt;/style>
+        );
+    });
+
+    return array;
+  }
+
+  /**
+   * Renders the card
+   *
+   * @return {object} JSX for the React Component
+   */
+  render () {
+    // Grab our configuration
+    const { card, fonts, layers } = this.props.configuration;
+
+    // Compute layers, gradients and fonts
+    const layerArray = this.computeLayers(layers);
+    const gradientsArray = this.computeGradients(layers);
+    const fontsArray = this.computeFonts(fonts);
+
+    // Return
+    return (
+      &lt;div className="card" ref="svg" style={{maxWidth: card.width, maxHeight: card.height}}>
+        &lt;SVG height={card.height} width={card.width} fill={card.fill}>
+
+          &lt;defs>
+            {fontsArray}
+            {gradientsArray}
+          &lt;/defs>
+
+          {layerArray}
+
+        &lt;/SVG>
+      &lt;/div>
+    );
+  }
+
+}
+
+Card.propTypes = {
+  configuration: React.PropTypes.shape({
+    card: React.PropTypes.object,
+    fonts: React.PropTypes.object,
+    layers: React.PropTypes.object
+  })
+}
+
+// Export
+module.exports = Card;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.2</a> on Wed Nov 16 2016 18:42:02 GMT+0000 (GMT) using the Minami theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

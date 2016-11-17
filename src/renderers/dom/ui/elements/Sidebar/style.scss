@@ -1,0 +1,83 @@
+@import "../../settings";
+
+aside.sidebar {
+  background: #eee;
+  color: #FFF;
+  display: flex;
+  flex-direction: column;
+  transform: translateY(-40vh);
+  transition: transform 0.2s ease;
+
+  @media screen and (min-width: $mobile-breakpoint) {
+    flex-direction: row;
+    transform: translateX(-30rem);
+    min-width: 30rem;
+  }
+
+  &.sidebar--open {
+    transform: translateX(0);
+  }
+
+  .panels {
+    width: 100%;
+    box-sizing: border-box;
+    height: 40vh;
+    overflow: auto;
+
+    @media screen and (min-width: $mobile-breakpoint) {
+      height: initial;
+      width: 30rem;
+    }
+  }
+
+  .buttons {
+    margin: 0;
+    padding: 0;
+    background: #333;
+    list-style-type: none;
+    display: flex;
+    width: 100%;
+
+    @media screen and (min-width: $mobile-breakpoint) {
+      width: 7rem;
+      flex-direction: column;
+    }
+
+    button {
+      width: 7rem;
+      height: 7rem;
+      appearance: none;
+      -webkit-appearance: none;
+      border: 0;
+      border-radius: 0;
+      background: #333;
+      color: #FFF;
+      text-transform: uppercase;
+      font-size: 1rem;
+      letter-spacing: 0.1rem;
+      outline: none;
+      cursor: pointer;
+
+      &:hover, &.button--active {
+        background: #111;
+      }
+    }
+  }
+
+  .panel {
+    width: 100%;
+    display: none;
+    padding: 1.5rem;
+    color: #000;
+    height: 100%;
+    overflow: auto;
+
+    @media screen and (min-width: $mobile-breakpoint) {
+      width: 30rem;
+    }
+
+    &.panel--show {
+      display: block;
+    }
+  }
+}

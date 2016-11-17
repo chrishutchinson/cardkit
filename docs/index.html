@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CardKit</title>
+  <link rel="icon" type="image/png" href="./favicon.png" />
+
+  <style type="text/css">
+    body {
+      margin: 0;
+    }
+
+    #card {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    nav#parent {
+      width: 100%;
+      height: 40px;
+      background: #333333;
+    }
+
+    nav#parent ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      width: 100%;
+    }
+
+    nav#parent ul li {
+      display: inline-block;
+    }
+
+    nav#parent ul li a {
+      font-family: "Open Sans", Helvetica, sans-serif;
+      padding: 11px 15px;
+      color: #FFFFFF;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-decoration: none;
+      display: block;
+    }
+
+    nav#parent ul li.active a,
+    nav#parent ul li:hover a {
+      border-bottom: 2px solid #FFFFFF;
+    }
+  </style>
+</head>
+<body>
+
+<nav id="parent">
+  <ul>
+    <li class="active"><a href="./index.html">Demo</a></li>
+    <li><a href="https://github.com/times/cardkit/wiki">Configuration Docs</a></li>
+    <li><a href="./code/index.html">Code Reference</a></li>
+  </ul>
+</nav>
+
+<div id="ui"></div>
+
+<script type="text/javascript" src="./bundle.js"></script>
+</body>
+</html>

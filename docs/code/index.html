@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Home - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Card.html">Card</a><ul class='methods'><li data-type='method'><a href="Card.html#calculateYPosition">calculateYPosition</a></li><li data-type='method'><a href="Card.html#computeFonts">computeFonts</a></li><li data-type='method'><a href="Card.html#computeGradients">computeGradients</a></li><li data-type='method'><a href="Card.html#computeLayers">computeLayers</a></li><li data-type='method'><a href="Card.html#getLayerValue">getLayerValue</a></li><li data-type='method'><a href="Card.html#render">render</a></li></ul></li><li><a href="CardKit.html">CardKit</a><ul class='methods'><li data-type='method'><a href="CardKit.html#_configureOptions">_configureOptions</a></li><li data-type='method'><a href="CardKit.html#_isValidConfiguration">_isValidConfiguration</a></li><li data-type='method'><a href="CardKit.html#_isValidLayoutsConfiguration">_isValidLayoutsConfiguration</a></li><li data-type='method'><a href="CardKit.html#_isValidRenderer">_isValidRenderer</a></li><li data-type='method'><a href="CardKit.html#_isValidTemplatesConfiguration">_isValidTemplatesConfiguration</a></li><li data-type='method'><a href="CardKit.html#_isValidThemesConfiguration">_isValidThemesConfiguration</a></li><li data-type='method'><a href="CardKit.html#addRenderer">addRenderer</a></li><li data-type='method'><a href="CardKit.html#computeConfiguration">computeConfiguration</a></li><li data-type='method'><a href="CardKit.html#getRenderers">getRenderers</a></li><li data-type='method'><a href="CardKit.html#updateConfiguration">updateConfiguration</a></li></ul></li><li><a href="CardKitDOM.html">CardKitDOM</a><ul class='methods'><li data-type='method'><a href="CardKitDOM.html#_isValidElement">_isValidElement</a></li><li data-type='method'><a href="CardKitDOM.html#download">download</a></li><li data-type='method'><a href="CardKitDOM.html#renderCard">renderCard</a></li><li data-type='method'><a href="CardKitDOM.html#renderUI">renderUI</a></li><li data-type='method'><a href="CardKitDOM.html#rerender">rerender</a></li></ul></li><li><a href="CardKitServer.html">CardKitServer</a><ul class='methods'><li data-type='method'><a href="CardKitServer.html#renderToImage">renderToImage</a></li><li data-type='method'><a href="CardKitServer.html#renderToString">renderToString</a></li></ul></li><li><a href="SVGToImage.html">SVGToImage</a><ul class='methods'><li data-type='method'><a href="SVGToImage.html#_inlineImages">_inlineImages</a></li><li data-type='method'><a href="SVGToImage.html#_isExternal">_isExternal</a></li><li data-type='method'><a href="SVGToImage.html#_isValidElement">_isValidElement</a></li><li data-type='method'><a href="SVGToImage.html#_toDataURI">_toDataURI</a></li><li data-type='method'><a href="SVGToImage.html#download">download</a></li></ul></li></ul>
+</nav>
+
+<div id="main">
+    
+
+    
+
+
+
+    
+
+
+
+
+
+
+
+
+
+    
+
+
+    <section class="readme">
+        <article><h1>CardKit 2</h1><p>A simple, powerful and fully configurable image editor for web browers and servers. Optional UI included.</p>
+<p>CardKit 2 has three main parts:</p>
+<ul>
+<li><a href="#cardkit"><code>CardKit</code></a>: The core library, that manages and maintains the configuration object which defines the structure and options of a card</li>
+<li><a href="#cardkitdom"><code>CardKitDOM</code></a>: A DOM renderer, that takes an instance of CardKit and renders either a standalone image, or a pre-packaged UI for editing the image</li>
+<li><a href="#cardkitserver"><code>CardKitServer</code></a>: A server renderer, that allows you to take an instance of CardKit and render it into an image on a Node.js server</li>
+</ul>
+<p>Additionally, a base class allows you to create your own renderers. See more in the <a href="#custom-renderers">Custom Renderers</a> section.</p>
+<h2>Installation</h2><p><code>$ npm install cardkit --save</code></p>
+<h2>Running locally</h2><p>To run a sample UI locally, run: <code>$ npm start</code></p>
+<p>You can optionally pass a port like so: <code>$ npm start -- --port=8080</code></p>
+<h2>Configuring</h2><p>See the Wiki for all the available options for your configuration.</p>
+<h2>Usage</h2><h4>Browser with Webpack / Browserify usage</h4><pre class="prettyprint source"><code>// Load CardKit and CardKit DOM
+const CardKit = require('cardkit');
+const CardKitDOM = require('cardkit/dom');
+
+// Base configuration object - see `./examples/configurations` for examples
+var configuration = {};
+
+// Optional themes object - see `./examples/configurations` for examples
+var themes = {};
+
+// Optional layouts object - see `./examples/configurations` for examples
+var layouts = {};
+
+// Initialise CardKit
+var cardkit = new CardKit(configuration, {
+  themes: themes,
+  layouts: layouts
+});
+
+// Initialise Renderer
+var renderer = new CardKitDOM(cardkit);
+
+// To render the card only (with optional theme / layout overrides)
+renderer.renderCard('card', {
+  theme: 'Alt',
+  layout: 'Square'
+});
+
+// OR To render the editing UI
+renderer.renderUI('card');</code></pre><h4>Browser with <code>&lt;script&gt;</code> tag usage</h4><pre class="prettyprint source"><code>&lt;!-- Load in React from a CDN (or similar) -->
+&lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react.min.js&quot;>&lt;/script>
+&lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react-dom.min.js&quot;>&lt;/script>
+
+&lt;!-- Load in the CardKit and CardKitDOM Libraries -->
+&lt;script type=&quot;text/javascript&quot; src=&quot;url/to/cardkit.js&quot;>&lt;/script>
+&lt;script type=&quot;text/javascript&quot; src=&quot;url/to/cardkit-dom.js&quot;>&lt;/script>
+
+&lt;!-- Your container element to render into -->
+&lt;div id=&quot;card&quot;>&lt;/div>
+
+&lt;script type=&quot;text/javascript&quot;>
+  // Base configuration object - see `./examples/configurations` for examples
+  var configuration = {};
+
+  // Optional themes object - see `./examples/configurations` for examples
+  var themes = {};
+
+  // Optional layouts object - see `./examples/configurations` for examples
+  var layouts = {};
+
+  // Initialise CardKit
+  var cardkit = new CardKit(configuration, {
+    themes: themes,
+    layouts: layouts
+  });
+
+  // Initialise Renderer
+  var renderer = new CardKitDOM(cardkit);
+
+  // To render the card only (with optional theme / layout overrides)
+  renderer.renderCard('card', {
+    theme: 'Alt',
+    layout: 'Square'
+  });
+
+  // OR To render the editing UI
+  renderer.renderUI('card');
+&lt;/script></code></pre><h4>Server usage</h4><pre class="prettyprint source"><code>// Require CardKit and CardKitServer
+const CardKit = require('cardkit');
+const CardKitServer = require('cardkit/server');
+
+// Base configuration object - see `./examples/configurations` for examples
+const configuration = {};
+
+// Initialise CardKit
+const cardkit = new CardKit(configuration);
+
+// Initialise Renderer
+var renderer = new CardKitServer(cardkit);
+
+// Render to image
+renderer.renderToImage(2)
+       .then((image) => {
+          // Do what you want with the image here...
+          console.log('&lt;img src=&quot;data:image/png;base64,' + image + '&quot; />');
+          process.exit();
+       })
+       .catch((e) => {
+          console.log('[ERR]', e);
+          process.exit();
+       });</code></pre><h2>APIs</h2><h3>CardKit</h3><h4><code>new CardKit(configuration, options)</code></h4><blockquote>
+<p>Initialisation. Pass in a required configuration object, and optional themes, templates and layouts</p>
+</blockquote>
+<h4><code>cardkit.updateConfiguration(configuration, options, rerender)</code></h4><blockquote>
+<p>Updates the configuration in your instance of CardKit. Can optionally rerender with a flag if previously rendered (supported in CardKitDOM).</p>
+</blockquote>
+<h4><code>cardkit.computeConfiguration(options)</code></h4><blockquote>
+<p>Computes a configuaration object, optionally accepting a named template, theme and layout. These get merged into the base configuration and returned.</p>
+</blockquote>
+<h3>CardKitDOM</h3><h4><code>new CardKitDOM(cardkit)</code></h4><blockquote>
+<p>Accepts an instance of CardKit and initialises the renderer</p>
+</blockquote>
+<h4><code>cardkit.renderUI(id, overrides)</code></h4><blockquote>
+<p>Renders the include user interface to the specified DOM element</p>
+</blockquote>
+<h4><code>cardkit.renderCard(id)</code></h4><blockquote>
+<p>Renders just the card in it's SVG form to the specified DOM element</p>
+</blockquote>
+<h4><code>cardkit.rerender()</code></h4><blockquote>
+<p>Will re-render the existing UI or card</p>
+</blockquote>
+<h4><code>cardkit.download(scale, element)</code></h4><blockquote>
+<p>Downloads the image to your local machine. Accepts a scale (default=2), and an element to grab from. If not provided it will fall back to the existing card being rendererd (if <code>renderCard()</code> was used).</p>
+</blockquote>
+<h3>CardKitServer</h3><h4><code>new CardKitDOM(cardkit)</code></h4><blockquote>
+<p>Accepts an instance of CardKit and initialises the renderer</p>
+</blockquote>
+<h4><code>cardkit.renderToString()</code></h4><blockquote>
+<p>Renders the card to a HTML string (e.g. <code>&lt;svg...&gt;&lt;/svg&gt;</code>)</p>
+</blockquote>
+<h4><code>cardkit.renderToImage(scale)</code></h4><blockquote>
+<p>Renders the card to an image returning a Promise containing the image as a base64 string</p>
+</blockquote>
+<h2>Custom Renderers</h2><p>A base class <code>CardKitRenderer</code> allows you to create your own renderer for CardKit. For example, CardKitDOM currently uses SVG to create the card, and React to render the UI. You may, however, wish to render your card using HTML canvas, or build a UI using Vue.js. Creating a custom renderer is a good way to achieve this. Below is a brief example of how you might achieve this:</p>
+<pre class="prettyprint source"><code>class CardKitCanvas extends CardKitRenderer {
+
+  renderCard () {
+    // Canvas-specific code here
+  }
+
+  rerender () { // A method that `CardKit` calls if the base configuration object is updated
+    // Handle an update to the base configuration, e.g. you may want to re-render the canvas element here
+  }
+
+  yourCustomMethod () {
+    // You can implement any custom methods here, for example you may wish to expose or manipulate the &lt;canvas> element for other users to take advantage of
+  }
+
+}
+
+const cardkit = new CardKit(configuration);
+
+const renderer = new CardKitCanvas(cardkit);
+
+renderer.yourCustomMethod();</code></pre><h2>Custom Fonts</h2><p>CardKit allows you to load in custom fonts for use on your cards, see the Wiki for details. These need to be encoded into base64 format. If you wish to use a Google font, you can use the <a href="https://www.npmjs.com/package/googlefontcss64">googlefontcss64</a> library to generate a base64 version of any Google font.</p>
+<h2>Upgrading from v1.x</h2><p>Upgrading from v1.x to v2 should be a fairly straightforward process if you haven't made any major modifications to the v1.x user interface. Your configuration object from v1.x should be compatible with v2 with a few minor tweaks. Specific variations are available in the Wiki.</p>
+<h2>Tests</h2><p>To trigger the test suite, run <code>$ npm run test</code></p></article>
+    </section>
+
+
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.2</a> on Wed Nov 16 2016 18:42:02 GMT+0000 (GMT) using the Minami theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

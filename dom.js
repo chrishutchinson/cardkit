@@ -1660,8 +1660,19 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    var _this = _possibleConstructorReturn(this, (Sidebar.__proto__ || Object.getPrototypeOf(Sidebar)).call(this, props));
 
+	    var defaultPanel = void 0;
+	    if (_this.props.templates) {
+	      defaultPanel = 'template';
+	    } else if (_this.props.layouts) {
+	      defaultPanel = 'layout';
+	    } else if (_this.props.themes) {
+	      defaultPanel = 'theme';
+	    } else {
+	      defaultPanel = 'content';
+	    }
+
 	    _this.state = {
-	      panel: 'template'
+	      panel: defaultPanel
 	    };
 
 	    _this.handleConfigurationChange = _this.handleConfigurationChange.bind(_this);
@@ -1733,28 +1744,46 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var _this2 = this;
+
 	      return React.createElement(
 	        'aside',
 	        { className: 'sidebar' + (this.state.panel ? ' sidebar--open' : '') },
 	        React.createElement(
 	          'main',
 	          { className: 'panels' },
-	          React.createElement(Template, { templates: this.props.templates,
-	            template: this.props.template,
-	            active: this.isPanel('template'),
-	            onTemplateChange: this.handleTemplateChange }),
-	          React.createElement(Layout, { layouts: this.props.layouts,
-	            layout: this.props.layout,
-	            active: this.isPanel('layout'),
-	            onLayoutChange: this.handleLayoutChange }),
-	          React.createElement(Theme, { themes: this.props.themes,
-	            theme: this.props.theme,
-	            configuration: this.props.configuration,
-	            active: this.isPanel('theme'),
-	            onThemeChange: this.handleThemeChange }),
-	          React.createElement(Content, { configuration: this.props.configuration,
-	            active: this.isPanel('content'),
-	            onConfigurationChange: this.handleConfigurationChange })
+	          function () {
+	            if (_this2.props.templates) {
+	              return React.createElement(Template, { templates: _this2.props.templates,
+	                template: _this2.props.template,
+	                active: _this2.isPanel('template'),
+	                onTemplateChange: _this2.handleTemplateChange });
+	            }
+	          }(),
+	          function () {
+	            if (_this2.props.layouts) {
+	              return React.createElement(Layout, { layouts: _this2.props.layouts,
+	                layout: _this2.props.layout,
+	                active: _this2.isPanel('layout'),
+	                onLayoutChange: _this2.handleLayoutChange });
+	            }
+	          }(),
+	          function () {
+	            if (_this2.props.themes) {
+	              return React.createElement(Theme, { themes: _this2.props.themes,
+	                theme: _this2.props.theme,
+	                configuration: _this2.props.configuration,
+	                active: _this2.isPanel('theme'),
+	                onThemeChange: _this2.handleThemeChange });
+	            }
+	          }(),
+	          function () {
+	            if (_this2.props.configuration) {
+	              return React.createElement(Content, { configuration: _this2.props.configuration,
+	                active: _this2.isPanel('content'),
+	                onConfigurationChange: _this2.handleConfigurationChange });
+	            }
+	          }()
 	        ),
 	        React.createElement(
 	          'ul',
@@ -1788,11 +1817,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	  onTemplateChange: React.PropTypes.func.isRequired,
 	  onLayoutChange: React.PropTypes.func.isRequired,
 	  configuration: React.PropTypes.object.isRequired,
-	  theme: React.PropTypes.string,
+	  theme: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.bool]),
 	  themes: React.PropTypes.object,
-	  template: React.PropTypes.string,
+	  template: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.bool]),
 	  templates: React.PropTypes.object,
-	  layout: React.PropTypes.string,
+	  layout: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.bool]),
 	  layouts: React.PropTypes.object
 	};
 

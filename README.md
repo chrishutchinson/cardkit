@@ -1,5 +1,7 @@
 # CardKit 2
 
+[![Build Status](https://travis-ci.org/times/cardkit.svg?branch=master)](https://travis-ci.org/times/cardkit)
+
 [![Join the chat at https://gitter.im/times/cardkit](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/times/cardkit?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 > A simple, powerful and fully configurable image editor for web browers and servers. Optional UI included.

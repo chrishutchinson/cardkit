@@ -1,8 +1,16 @@
 {
   "name": "cardkit",
   "version": "2.0.0",
-  "description": "A simple, powerful and fully configurable image editor for web browers and servers. Optional UI included.",
+  "description": "A simple, powerful and fully configurable image editor for web browsers and servers. Optional UI included.",
   "main": "cardkit.js",
+  "homepage": "https://times.github.io/cardkit",
+  "bugs": {
+    "url" : "https://github.com/times/cardkit/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/times/cardkit.git"
+  },
   "scripts": {
     "test": "./node_modules/.bin/istanbul cover --dir test/coverage ./node_modules/.bin/_mocha -- --compilers js:babel-core/register --require ignore-styles",
     "jsdoc": "./node_modules/.bin/jsdoc -c ./jsdoc.config.json -d ./docs/code -t ./node_modules/minami --verbose -R ./README.md",

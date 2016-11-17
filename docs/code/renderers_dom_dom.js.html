@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>renderers/dom/dom.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Card.html">Card</a><ul class='methods'><li data-type='method'><a href="Card.html#calculateYPosition">calculateYPosition</a></li><li data-type='method'><a href="Card.html#computeFonts">computeFonts</a></li><li data-type='method'><a href="Card.html#computeGradients">computeGradients</a></li><li data-type='method'><a href="Card.html#computeLayers">computeLayers</a></li><li data-type='method'><a href="Card.html#getLayerValue">getLayerValue</a></li><li data-type='method'><a href="Card.html#render">render</a></li></ul></li><li><a href="CardKit.html">CardKit</a><ul class='methods'><li data-type='method'><a href="CardKit.html#_configureOptions">_configureOptions</a></li><li data-type='method'><a href="CardKit.html#_isValidConfiguration">_isValidConfiguration</a></li><li data-type='method'><a href="CardKit.html#_isValidLayoutsConfiguration">_isValidLayoutsConfiguration</a></li><li data-type='method'><a href="CardKit.html#_isValidRenderer">_isValidRenderer</a></li><li data-type='method'><a href="CardKit.html#_isValidTemplatesConfiguration">_isValidTemplatesConfiguration</a></li><li data-type='method'><a href="CardKit.html#_isValidThemesConfiguration">_isValidThemesConfiguration</a></li><li data-type='method'><a href="CardKit.html#addRenderer">addRenderer</a></li><li data-type='method'><a href="CardKit.html#computeConfiguration">computeConfiguration</a></li><li data-type='method'><a href="CardKit.html#getRenderers">getRenderers</a></li><li data-type='method'><a href="CardKit.html#updateConfiguration">updateConfiguration</a></li></ul></li><li><a href="CardKitDOM.html">CardKitDOM</a><ul class='methods'><li data-type='method'><a href="CardKitDOM.html#_isValidElement">_isValidElement</a></li><li data-type='method'><a href="CardKitDOM.html#download">download</a></li><li data-type='method'><a href="CardKitDOM.html#renderCard">renderCard</a></li><li data-type='method'><a href="CardKitDOM.html#renderUI">renderUI</a></li><li data-type='method'><a href="CardKitDOM.html#rerender">rerender</a></li></ul></li><li><a href="CardKitServer.html">CardKitServer</a><ul class='methods'><li data-type='method'><a href="CardKitServer.html#renderToImage">renderToImage</a></li><li data-type='method'><a href="CardKitServer.html#renderToString">renderToString</a></li></ul></li><li><a href="SVGToImage.html">SVGToImage</a><ul class='methods'><li data-type='method'><a href="SVGToImage.html#_inlineImages">_inlineImages</a></li><li data-type='method'><a href="SVGToImage.html#_isExternal">_isExternal</a></li><li data-type='method'><a href="SVGToImage.html#_isValidElement">_isValidElement</a></li><li data-type='method'><a href="SVGToImage.html#_toDataURI">_toDataURI</a></li><li data-type='method'><a href="SVGToImage.html#download">download</a></li></ul></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">renderers/dom/dom.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>// Dependencies
+const React = require('react');
+const ReactDOM = require('react-dom');
+const Card = require('../shared/Card');
+const CardKitRenderer = require('../shared/base');
+const UI = require('./ui/ui');
+const SVGToImage = require('./svgToImage');
+const { slugify } = require('../../helpers');
+
+/**
+ * @name CardKitDOM
+ * @class Additional CardKit class used for rendering in the DOM
+ */
+class CardKitDOM extends CardKitRenderer {
+
+  /**
+   * Constructor takes in an instance of CardKit and stores it for later use
+   *
+   * @param {CardKit} cardkit - An instance of CardKit
+   */
+  constructor (cardkit) {
+    // Ensure we're operating in a browser environment
+    if (typeof document === 'undefined') {
+      throw new Error('CardKitDOM can only be used in a browser environment');
+    }
+
+    super(cardkit);
+
+    // Store render IDs
+    this.renderedCardID = null;
+    this.renderedUIID = null;
+  }
+
+  /**
+   * Renders the built-in UI to the supplied element
+   *
+   * @param {string} id - The ID of the element to render the UI into
+   */
+  renderUI (id) {
+    if (!this._isValidElement(id)) {
+      throw new Error('Invalid element ID provided');
+    }
+
+    const element = document.getElementById(id);
+
+    const template = ((this.cardkit.templates) ? Object.keys(this.cardkit.templates)[0] : false);
+    const theme = ((this.cardkit.themes) ? Object.keys(this.cardkit.themes)[0] : false);
+    const layout = ((this.cardkit.layouts) ? Object.keys(this.cardkit.layouts)[0] : false);
+
+    this.renderedUIID = id;
+    ReactDOM.render(
+      React.createElement(UI, {
+        configuration: this.computeConfiguration({
+          template: template,
+          theme: theme,
+          layout: layout
+        }),
+        templates: this.cardkit.templates,
+        themes: this.cardkit.themes,
+        layouts: this.cardkit.layouts,
+        cardKit: this
+      }),
+      element
+    );
+  }
+
+  /**
+   * Renders just the Card as a React component to the supplied element
+   *
+   * @param {string} id - The ID of the element to render the card into
+   * @param {object} options - Any override data (e.g. theme, layout) to use when rendering the card
+   */
+  renderCard (id, options) {
+    if (!this._isValidElement(id)) {
+      throw new Error('Invalid element ID provided');
+    }
+
+    const element = document.getElementById(id);
+
+    this.renderedCardID = id;
+
+    ReactDOM.render(
+      React.createElement(Card, {configuration: this.computeConfiguration(options)}),
+      element
+    );
+  }
+
+  /**
+   * Checks if the ID provided is valid
+   *
+   * @param {string} id - The ID to validate
+   * @return {boolean} If the ID was valid
+   */
+  _isValidElement (id) {
+    if (!id) {
+      return false;
+    }
+
+    const element = document.getElementById(id);
+    if (!element) {
+      return false;
+    }
+
+    return true;
+  }
+
+  /**
+   * Re-renders the Card or UI
+   */
+  rerender () {
+    if (this.renderedUIID) {
+      this.renderUI(this.renderedUIID);
+    }
+
+    if (this.renderedCardID) {
+      this.renderCard(this.renderedCardID);
+    }
+  }
+
+  /**
+   * Downloads the card as an image in the browser
+   *
+   * @param {number} scale - The scale to output at
+   * @param {object} element - The element to use to generate the image
+   */
+  download (scale = 2, element) {
+    element = element.childNodes[0] || document.getElementById(this.renderedCardID).childNodes[0];
+
+    const svgToImage = new SVGToImage(element);
+
+    // Setup default filename
+    let filename = 'cardkit-default.jpg';
+
+    // Get the configuration
+    const configuration = this.computeConfiguration();
+
+    // If there's a layer that has the useAsFilename property, find it
+    const filenameLayerKey = Object.keys(configuration.layers)
+                                   .find((key) => {
+                                     const layer = configuration.layers[key];
+
+                                     return (layer.useAsFilename === true) &amp;&amp; // Has the useAsFilename property
+                                            (layer.hidden !== true) &amp;&amp; // Is not hidden
+                                            (layer.type === 'text'); // Is of type text
+                                   });
+
+    // Get the layer that has the filename on it
+    const filenameLayer = configuration.layers[filenameLayerKey];
+
+    // Update the filename
+    if (filenameLayer) {
+      filename = slugify(filenameLayer.text) + '.jpg';
+    }
+
+    // Trigger the download
+    svgToImage.download(filename, {
+      format: 'image/jpeg',
+      scale: scale
+    });
+  }
+}
+
+module.exports = CardKitDOM
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.2</a> on Wed Nov 16 2016 18:42:02 GMT+0000 (GMT) using the Minami theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

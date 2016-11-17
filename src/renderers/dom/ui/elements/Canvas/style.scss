@@ -1,0 +1,42 @@
+@import "../../settings";
+
+.canvas {
+  transition: transform 0.2s ease;
+  width: 100%;
+  padding: 2rem 0;
+  transform: translateY(-40vh);
+
+  @media screen and (min-width: $mobile-breakpoint) {
+    width: calc(100% - 37rem);
+    transform: translateX(-15rem);
+  }
+
+  &.canvas--with-sidebar {
+    transform: translateX(0rem);
+  }
+
+  div.card {
+    width: 100%;
+    padding: 0 1rem;
+    display: block;
+    height: 100%;
+    margin: 0 auto;
+    
+    svg:not(:root) {
+      overflow: hidden;
+    }
+
+    svg {
+      text {
+        cursor: default;
+        -webkit-user-select: none;
+           -moz-user-select: none;
+            -ms-user-select: none;
+                user-select: none;
+      }
+      text::selection {
+        background: none;
+      }
+    }
+  }
+}

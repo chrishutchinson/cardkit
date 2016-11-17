@@ -1,1 +1,2 @@
-* text=auto
+docs/* linguist-documentation
+dist/* linguist-vendored

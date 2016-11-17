@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CardKit</title>
+
+  <style type="text/css">
+    #card {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+
+<!--
+/**
+ * CardKit example: Browser using inline <script> tags
+ * 
+ * This bundle shows how to use CardKit in any HTML page using <script> tags
+ */
+-->
+
+<div id="ui"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react-dom.min.js"></script>
+<script type="text/javascript" src="../../dist/cardkit.js"></script>
+<script type="text/javascript" src="../../dist/dom.js"></script>
+
+<script type="text/javascript">
+var cardkit = new CardKit({
+  card: {
+    width: 1000,
+    height: 400,
+    fill: '#333333'
+  },
+  layers: {
+    text: {
+      type: 'text',
+      text: 'Some sample text',
+      x: 0,
+      y: 0,
+      fontSize: 20,
+      fill: '#FFF',
+      editable: {
+        text: true,
+        fill: true
+      }
+    }
+  }
+}, {
+  layouts: {
+    'Default': {
+      card: {
+        width: 1000,
+        height: 400
+      }
+    },
+    'Square': {
+      card: {
+        width: 1000,
+        height: 1000
+      }
+    }
+  }
+});
+
+var renderer = new CardKitDOM(cardkit);
+
+renderer.renderUI('ui');
+</script>
+
+</body>
+</html>

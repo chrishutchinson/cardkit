@@ -1,0 +1,23 @@
+.panel.panel--template {
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+
+    li.template-image {
+      margin: 0 0 2rem;
+      cursor: pointer;
+
+      &.template-image--selected {
+        img {
+          opacity: 1;
+        }
+      }
+    }
+  }
+  img {
+    max-width: 100%;
+    height: auto;
+    opacity: 0.6;
+  }
+}

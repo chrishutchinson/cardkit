@@ -1,0 +1,75 @@
+@import "settings";
+
+html { font-size: 62.5%; } 
+body {
+  font-size: 1.4rem; 
+  margin: 0;
+  font-family: "Open Sans", Helvetica, sans-serif;
+  font-weight: 400;
+}
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+main.main {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 5.7rem);
+
+  @media screen and (min-width: $mobile-breakpoint) {
+    flex-direction: row;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 800;
+  margin: 0 0 0.67rem;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+}
+
+hr {
+  border: 0;
+  border-bottom: 1px solid #bababa;
+  margin-bottom: 1.5rem;
+}
+
+.pull-bottom {
+  margin-left: auto;
+
+  @media screen and (min-width: $mobile-breakpoint) {
+    margin-top: auto;
+  }
+}
+
+input[type="text"],
+input[type="email"],
+input[type="number"],
+input[type="range"],
+input[type="file"],
+select,
+textarea {
+  width: 100%;
+  border: 1px solid #eaeaea;
+  background: #FFF;
+  font-family: "Open Sans", Helvetica, sans-serif;
+  font-size: 1.4rem;
+  padding: 0.8rem;
+  margin: 0.2rem 0 1.5rem;
+}
+
+input[type="range"],
+input[type="file"] {
+  padding: 0rem;
+  border: 0;
+}
+
+
+input[type="file"] {
+  background: transparent;
+}
+
+textarea {
+  min-height: 12rem;
+}

@@ -447,7 +447,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	        // Make the fill value map to a gradient name, if a gradient has been configured
 	        // See computeGradients() for the creation of gradient definitions
-	        if (_this3.getLayerValue(layer, 'gradient', layers)) {
+	        if (_this3.getLayerValue(layers, layer, 'gradient')) {
 	          layerData.fill = 'url(#' + key + ')';
 	        }
 

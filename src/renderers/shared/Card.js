@@ -153,6 +153,7 @@ class Card extends React.Component {
             y={this.calculateYPosition(layers, layerData)}
             fontFamily={layerData.fontFamily}
             fontSize={layerData.fontSize}
+            fontWeight={layerData.fontWeight}
             lineHeight={layerData.lineHeight}
             textAnchor={layerData.textAnchor}
             fill={layerData.fill}

@@ -1,6 +1,6 @@
 {
   "name": "cardkit",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "A simple, powerful and fully configurable image editor for web browsers and servers. Optional UI included.",
   "main": "cardkit.js",
   "homepage": "https://times.github.io/cardkit",

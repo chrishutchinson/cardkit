@@ -20,6 +20,14 @@ const {
  */
 class Card extends React.Component {
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      initialRenderComplete: false
+    }
+  }
+
   /**
    * Calculates the Y position of an element based on any attachments etc.
    *
@@ -41,9 +49,19 @@ class Card extends React.Component {
       let attachYLayerHeight = 0;
       switch (attachYLayer.type) {
         case 'text':
-          let attachYLayerText = attachYLayer.text.split('\n');
-          if (attachYLayer.text !== '') {
-            attachYLayerHeight = (attachYLayerText.length * (this.getLayerValue(layers, attachYLayer, 'lineHeight') || this.getLayerValue(layers, attachYLayer, 'fontSize')));
+          if(this.refs[layer.y.attach] && this.refs[layer.y.attach].props.wrapping && this.refs[layer.y.attach].props.width) {
+            console.log(this.refs[layer.y.attach].refs.text.childNodes);
+            let height = 0;
+            this.refs[layer.y.attach].refs.text.childNodes.forEach((node) => {
+              height += parseInt(window.getComputedStyle(node).height);
+            })
+            console.log(height);
+            attachYLayerHeight = height;
+          } else {
+            let attachYLayerText = attachYLayer.text.split('\n');
+            if (attachYLayer.text !== '') {
+              attachYLayerHeight = (attachYLayerText.length * (this.getLayerValue(layers, attachYLayer, 'lineHeight') || this.getLayerValue(layers, attachYLayer, 'fontSize')));
+            }
           }
           break;
         default:
@@ -161,6 +179,9 @@ class Card extends React.Component {
             transform={layerData.transform}
             opacity={layerData.opacity}
             smartQuotes={layerData.smartQuotes}
+            wrapping={layerData.wrapping}
+            width={layerData.width}
+            ref={key}
             key={key}>
             {text}
           </Text>);
@@ -252,6 +273,14 @@ class Card extends React.Component {
     });
 
     return array;
+  }
+
+  componentDidMount() {
+    if(this.state.initialRenderComplete === false) {
+      this.setState({
+        initialRenderComplete: true
+      });
+    }
   }
 
   /**

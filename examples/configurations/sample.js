@@ -53,16 +53,19 @@ var configuration = {
         return this.fontSize * 1.2;
       },
       useAsFilename: true,
-      text: 'CardKit is a powerful image creation\nlibrary for browsers and servers',
+      text: 'CardKit is a powerful image creation library for browsers and servers',
+      wrapping: true,
+      width: 500,
       fontFamily: 'Helvetica',
       fontWeight: 'bold',
       editable: {
-        text: {
-          options: [
-            'CardKit is a powerful image creation\nlibrary for browsers and servers',
-            'CardKit can be used to create images for social\nmedia, marketing, education and more'
-          ]
-        },
+        // text: {
+        //   options: [
+        //     'CardKit is a powerful image creation library for browsers and servers',
+        //     'CardKit can be used to create images for social media, marketing, education and more'
+        //   ]
+        // },
+        text: true,
         fontSize: {
           min: 10,
           max: 50,

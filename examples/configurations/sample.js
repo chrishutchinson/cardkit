@@ -55,6 +55,7 @@ var configuration = {
       useAsFilename: true,
       text: 'CardKit is a powerful image creation\nlibrary for browsers and servers',
       fontFamily: 'Helvetica',
+      fontWeight: 'bold',
       editable: {
         text: {
           options: [

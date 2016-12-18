@@ -42,6 +42,11 @@ class LayerConfig extends React.Component {
               layer={this.props.layer}
               onNewValue={this.handleChange} />
 
+            {/** Font Weight **/}
+            <SizeControl name="fontWeight"
+              layer={this.props.layer}
+              onNewValue={this.handleChange} />
+
             {/** Height **/}
             <SizeControl name="height"
               layer={this.props.layer}

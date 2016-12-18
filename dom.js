@@ -463,6 +463,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                y: _this3.calculateYPosition(layers, layerData),
 	                fontFamily: layerData.fontFamily,
 	                fontSize: layerData.fontSize,
+	                fontWeight: layerData.fontWeight,
 	                lineHeight: layerData.lineHeight,
 	                textAnchor: layerData.textAnchor,
 	                fill: layerData.fill,

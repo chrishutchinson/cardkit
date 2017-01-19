@@ -23,7 +23,7 @@ Additionally, a base class allows you to create your own renderers. See more in 
 
 CardKit 2 requires a configuration object in order to render an image. Each renderer (CardKitDOM and CardKitServer) uses this configuration and converts it into an output. Below are simple implementations for CardKit depending on your use case.
 
-In addition to these, you may also want to try the [CardKit Yeoman Generator](https://www.github.com/times/generator-cardkit), which can help you scaffold an entire project in just a few moments. It brings with it the latest version of CardKit, a recommended directory structure, and a build process that helps you get your CardKit project deployed. There is also a [JSFiddle](https://jsfiddle.net/chrishutchinson/16tLs2ta/) that you can fork and edit for quick in-browser testing without touching the command line.
+In addition to these, you may also want to try the [CardKit Yeoman Generator](https://www.github.com/times/generator-cardkit), which can help you scaffold an entire project in just a few moments. It brings with it the latest version of CardKit, a recommended directory structure, and a build process that helps you get your CardKit project deployed. There is also a [JSFiddle](https://jsfiddle.net/chrishutchinson/16tLs2ta/) or [Codepen](https://codepen.io/janzeteachesit/pen/XppEVX) that you can fork and edit for quick in-browser testing without touching the command line.
 
 #### Yeoman generator
 

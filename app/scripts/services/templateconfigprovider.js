@@ -1,17 +1,33 @@
 'use strict';
+
+function getOverride (theme, property, $scope) {
+  var hasOverrideTheme = $scope.theme.overrideConfigs.hasOwnProperty(theme);
+  if (hasOverrideTheme) {
+    return $scope.theme.overrideConfigs[theme].hasOwnProperty(property) !== null ? $scope.theme.overrideConfigs[theme][property] : null
+  } else {
+    return null
+  }
+}
+
 var templateHelper = {
   logo: {
     width: function ($scope) {
-      return $scope.size.gridSize * ($scope.theme.isNikkei ? 9 : 2);
+      var hasOverrideWidth = getOverride('templateHelperLogo', 'logoWidth', $scope)
+      var width = hasOverrideWidth ? hasOverrideWidth : 2
+      return $scope.size.gridSize * width;
     },
     height: function ($scope) {
-      return $scope.size.gridSize * ($scope.theme.isNikkei ? 3 : 2);
+      var hasOverrideHeight = getOverride('templateHelperLogo', 'logoHeight', $scope)
+      var height = hasOverrideHeight ? hasOverrideHeight : 2
+      return $scope.size.gridSize * height;
     },
     x: function ($scope) {
-      return $scope.size.width - ($scope.theme.isNikkei ? this.width($scope) : $scope.size.gridSize * 3);
+      var hasOverrideWidth = getOverride('templateHelperLogo', 'logoWidth', $scope)
+      return $scope.size.width - (hasOverrideWidth ? this.width($scope) : $scope.size.gridSize * 3);
     },
     y: function ($scope) {
-      var paddingTop = $scope.theme.isNikkei ? 0 : $scope.size.gridSize / 2;
+      var hasOverrideHeight = getOverride('templateHelperLogo', 'logoHeight', $scope)
+      var paddingTop = hasOverrideHeight ? 0 : $scope.size.gridSize / 2;
       return $scope.size.height - (this.height($scope) + paddingTop);
     }
   },
@@ -31,8 +47,10 @@ var templateHelper = {
   },
   crossReferenceBackground: {
     width: function ($scope) {
-      var nikkeiLogoDeduct = $scope.theme.isNikkei ? $scope.size.gridSize * 9 : 0;
-      return $scope.size.width - nikkeiLogoDeduct;
+      var hasOverrideWidth = getOverride('templateHelperLogo', 'logoWidth', $scope)
+      var width = hasOverrideWidth ? hasOverrideWidth : 2
+      var logoOverrideDeduct = hasOverrideWidth ? $scope.size.gridSize * width : 0;
+      return $scope.size.width - logoOverrideDeduct;
     }
   }
 }
@@ -752,17 +770,20 @@ angular.module('cardkitApp')
               type: 'image',
               controlsOrder: 6,
               width: function () {
-                return $scope.size.gridSize * ($scope.theme.isNikkei ? 12 : 2);
+                var override = getOverride('illustration', 'logoWidth', $scope)
+                var width = override ? override : 2
+                return $scope.size.gridSize * width;
               },
               height: function () {
                 return templateHelper.logo.height($scope);
               },
               src: function () {
-                return $scope.theme.isNikkei ? $scope.theme.images.logoWideSrc : $scope.theme.images.logoSrc;
+                return $scope.theme.images.logoWideSrc ? $scope.theme.images.logoWideSrc : $scope.theme.images.logoSrc;
               },
               opacity: 1,
               x: function () {
-                return $scope.size.width - ($scope.theme.isNikkei ? this.width($scope) : $scope.size.gridSize * 3);
+                var hasOverride = getOverride('illustration', 'logoWidth', $scope);
+                return $scope.size.width - (hasOverride ? this.width($scope) : $scope.size.gridSize * 3);
               },
               y: function () {
                 return $scope.size.height - $scope.size.gridSize * 3
@@ -790,7 +811,8 @@ angular.module('cardkitApp')
                 return (w - w * 0.3) + $scope.size.gridSize;
               },
               y: function () {
-                return $scope.size.height - ($scope.size.gridSize * ($scope.theme.isNikkei ? 4 : 2) + 2);
+                var hasOverride = getOverride('illustration', 'refYPos', $scope);
+                return $scope.size.height - ($scope.size.gridSize * (hasOverride ? hasOverride : 2) + 2);
               },
               fontWeight: 500,
               draggable: false,
@@ -917,17 +939,19 @@ angular.module('cardkitApp')
               type: 'image',
               controlsOrder: 6,
               width: function () {
-                return $scope.size.gridSize * ($scope.theme.isNikkei ? 12 : 2);
+                var override = getOverride('chart1', 'logoWidth', $scope);
+                return $scope.size.gridSize * (override ? override : 2);
               },
               height: function () {
                 return templateHelper.logo.height($scope);
               },
               src: function () {
-                return $scope.theme.isNikkei ? $scope.theme.images.logoWideSrc : $scope.theme.images.logoSrc;
+                return $scope.theme.images.logoWideSrc ? $scope.theme.images.logoWideSrc : $scope.theme.images.logoSrc;
               },
               opacity: 1,
               x: function () {
-                return $scope.size.width - ($scope.theme.isNikkei ? this.width($scope) : $scope.size.gridSize * 3);
+                var override = getOverride('chart1', 'logoWidth', $scope);
+                return $scope.size.width - (override ? this.width($scope) : $scope.size.gridSize * 3);
               },
               y: function () {
                 return $scope.size.height - $scope.size.gridSize * 3
@@ -955,7 +979,8 @@ angular.module('cardkitApp')
                 return (w - w * 0.3) + $scope.size.gridSize;
               },
               y: function () {
-                return $scope.size.height - ($scope.size.gridSize * ($scope.theme.isNikkei ? 4 : 2) + 2);
+                var override = getOverride('chart1', 'refYPos', $scope);
+                return $scope.size.height - ($scope.size.gridSize * (override ? override : 2) + 2);
               },
               fontWeight: 500,
               draggable: false,
@@ -1078,20 +1103,24 @@ angular.module('cardkitApp')
               type: 'image',
               controlsOrder: 6,
               width: function () {
-                return $scope.size.gridSize * ($scope.theme.isNikkei ? 10 : 2);
+                var override = getOverride('chart2', 'logoWidth', $scope)
+                return $scope.size.gridSize * (override ? override : 2);
               },
               height: function () {
-                return $scope.size.gridSize * ($scope.theme.isNikkei ? 3 : 2);
+                var override = getOverride('chart2', 'logoHeight', $scope)
+                return $scope.size.gridSize * (override ? override : 2);
               },
               src: function () {
-                return $scope.theme.isNikkei ? $scope.theme.images.logoWideSrc : $scope.theme.images.logoSrc;
+                return $scope.theme.images.logoWideSrc ? $scope.theme.images.logoWideSrc : $scope.theme.images.logoSrc;
               },
               opacity: 1,
               x: function () {
-                return $scope.size.width - ($scope.theme.isNikkei ? this.width($scope) : $scope.size.gridSize * 3);
+                var override = getOverride('chart2', 'logoWidth', $scope)
+                return $scope.size.width - (override ? this.width($scope) : $scope.size.gridSize * 3);
               },
               y: function () {
-                var paddingTop = $scope.theme.isNikkei ? 0 : $scope.size.gridSize;
+                var override = getOverride('chart2', 'logoWidth', $scope)
+                var paddingTop = override ? 0 : $scope.size.gridSize;
                 return $scope.size.height - (this.height($scope) + paddingTop);
               },
               preserveAspectRatio: 'xMidYMid slice',
@@ -1117,7 +1146,8 @@ angular.module('cardkitApp')
                 return (w - w * 0.25) + $scope.size.gridSize;
               },
               y: function () {
-                return $scope.size.height - ($scope.size.gridSize * ($scope.theme.isNikkei ? 4 : 2) + 2);
+                var override = getOverride('chart2', 'refYPos', $scope)
+                return $scope.size.height - ($scope.size.gridSize * (override ? override : 2) + 2);
               },
               fontWeight: 500,
               draggable: false,
@@ -1350,20 +1380,24 @@ angular.module('cardkitApp')
               type: 'image',
               controlsOrder: 6,
               width: function () {
-                return $scope.size.gridSize * ($scope.theme.isNikkei ? 10 : 2);
+                var override = getOverride('promoB', 'logoWidth', $scope)
+                return $scope.size.gridSize * (override ? override : 2);
               },
               height: function () {
-                return $scope.size.gridSize * ($scope.theme.isNikkei ? 3 : 2);
+                var override = getOverride('promoB', 'logoHeight', $scope)
+                return $scope.size.gridSize * (override ? override : 2);
               },
               src: function () {
-                return $scope.theme.isNikkei ? $scope.theme.images.logoWideSrc : $scope.theme.images.logoSrc;
+                return $scope.theme.images.logoWideSrc ? $scope.theme.images.logoWideSrc : $scope.theme.images.logoSrc;
               },
               opacity: 1,
               x: function () {
-                return $scope.size.width - ($scope.theme.isNikkei ? this.width($scope) : $scope.size.gridSize * 3);
+                var override = getOverride('promoB', 'logoWidth', $scope)
+                return $scope.size.width - (override ? this.width($scope) : $scope.size.gridSize * 3);
               },
               y: function () {
-                var paddingTop = $scope.theme.isNikkei ? 0 : $scope.size.gridSize;
+                var override = getOverride('promoB', 'logoHeight', $scope)
+                var paddingTop = override ? 0 : $scope.size.gridSize;
                 return $scope.size.height - (this.height($scope) + paddingTop);
               },
               preserveAspectRatio: 'xMidYMid slice',
@@ -1453,7 +1487,8 @@ angular.module('cardkitApp')
                 return templateHelper.logo.x($scope);
               },
               y: function () {
-                var paddingTop = $scope.theme.isNikkei ? 0 : $scope.size.gridSize;
+                var override = getOverride('breakingNews', 'logoYPos', $scope)
+                var paddingTop = override === 0 ? 0 : $scope.size.gridSize;
                 return $scope.size.height - (this.height($scope) + paddingTop);
               },
               preserveAspectRatio: 'xMinYMin meet',

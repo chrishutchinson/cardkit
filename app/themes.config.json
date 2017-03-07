@@ -10,6 +10,7 @@
     "headlineFont": "financierdisplayweb",
     "creditFont": "metricweb",
     "xrefFont": "metricweb",
+    "overrideConfigs": {},
     "images": {
       "logoSrc": "logoSrc",
       "logoAltSrc": "logoAltSrc",
@@ -33,6 +34,7 @@
     "headlineFont": "financierdisplayweb",
     "creditFont": "metricweb",
     "xrefFont": "metricweb",
+    "overrideConfigs": {},
     "images": {
       "logoSrc": "logoSrc",
       "logoAltSrc": "logoAltSrc",
@@ -57,6 +59,7 @@
     "headlineFont": "financierdisplayweb",
     "creditFont": "metricweb",
     "xrefFont": "metricweb",
+    "overrideConfigs": {},
     "images": {
       "logoSrc": "logoSrc",
       "logoAltSrc": "logoAltSrc",
@@ -81,6 +84,7 @@
     "headlineFont": "financierdisplayweb",
     "creditFont": "metricweb",
     "xrefFont": "metricweb",
+    "overrideConfigs": {},
     "images": {
       "logoSrc": "logoSrc",
       "logoAltSrc": "logoAltSrc",
@@ -105,6 +109,7 @@
     "headlineFont": "financierdisplayweb",
     "creditFont": "metricweb",
     "xrefFont": "metricweb",
+    "overrideConfigs": {},
     "images": {
       "logoSrc": "logoSrc",
       "logoAltSrc": "logoAltSrc",
@@ -129,9 +134,64 @@
     "headlineFont": "financierdisplayweb",
     "creditFont": "metricweb",
     "xrefFont": "metricweb",
+    "overrideConfigs": {},
     "images": {
       "logoSrc": "logoSrc",
       "logoAltSrc": "logoAltSrc",
+      "headshotSrc": "headshotSrc",
+      "bookmark": "bookmark",
+      "graphSrc": "graphSrc",
+      "graphWideSrc": "graphWideSrc",
+      "promoSrc": "promoSrc",
+      "weekendSrc": "weekendSrc",
+      "illustrationSrc": "illustrationSrc"
+    }
+  },
+  {
+    "name": "FT Confidential Research",
+    "xrefText": "FT Confidential Research",
+    "background": "#fff1e0",
+    "headline": "#333333",
+    "xrefBackground": "#007b92",
+    "quote": "#333333",
+    "highlightColor": "#cc0033",
+    "xref": "#ffffff",
+    "headlineFont": "financierdisplayweb",
+    "creditFont": "metricweb",
+    "xrefFont": "metricweb",
+    "overrideConfigs": {
+      "templateHelperLogo" : {
+        "logoWidth": 9,
+        "logoHeight": 3
+      },
+      "illustration" : {
+        "logoWidth": 12,
+        "logoHeight": 3,
+        "hideRef" : true,
+        "refYPos" : 5
+      },
+      "chart1" : {
+        "logoWidth" : 12,
+        "refYPos" : 5
+      },
+      "chart2" : {
+        "logoWidth" : 10,
+        "logoHeight" : 3,
+        "refYPos" : 5
+      },
+      "promoB" : {
+        "logoWidth" : 10,
+        "logoHeight" : 3,
+        "refYPos" : 4
+      },
+      "breakingNews" : {
+        "logoYPos": 0
+      }
+    },
+    "images": {
+      "logoSrc": "logoConfidentials",
+      "logoWideSrc": "logoConfidentialsWideSrc",
+      "logoAltSrc": "logoConfidentialsTransparent",
       "headshotSrc": "headshotSrc",
       "bookmark": "bookmark",
       "graphSrc": "graphSrc",
@@ -153,6 +213,35 @@
     "creditFont": "Arial, sans-serif",
     "xrefFont": "Arial, sans-serif",
     "isNikkei": true,
+    "overrideConfigs": {
+      "templateHelperLogo" : {
+        "logoWidth": 9,
+        "logoHeight": 3
+      },
+      "illustration" : {
+        "logoWidth": 12,
+        "logoHeight": 3,
+        "hideRef" : true,
+        "refYPos" : 4
+      },
+      "chart1" : {
+        "logoWidth" : 12,
+        "refYPos" : 4
+      },
+      "chart2" : {
+        "logoWidth" : 10,
+        "logoHeight" : 3,
+        "refYPos" : 4
+      },
+      "promoB" : {
+        "logoWidth" : 10,
+        "logoHeight" : 3,
+        "refYPos" : 4
+      },
+      "breakingNews" : {
+        "logoYPos": 0
+      }
+    },
     "images": {
       "logoSrc": "nikkeiAsianReviewLogoRectSrc",
       "logoWideSrc": "nikkeiAsianReviewLogoWideSrc",

@@ -35,6 +35,14 @@ See `ROADMAP.md`.
 
 See the [CardKit Wiki](https://github.com/times/cardkit/wiki) for guides on how to build with CardKit
 
+### Troubleshooting
+- Use node version 2
+`nvm use 2.0`
+- Install Compass
+`Sudo gem install compass` or `Sudo gem install -n /user/local/bin compass`
+- Update Gems and retry the above
+`Sudo gem update --system`
+
 #### Push to `gh-pages`
 
 If you want to use [GitHub Pages](https://pages.github.com/) to host your build of CardKit, follow this to push your `/dist` folder: https://gist.github.com/cobyism/4730490

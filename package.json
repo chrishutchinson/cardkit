@@ -12,7 +12,7 @@
     "url": "https://github.com/times/cardkit.git"
   },
   "scripts": {
-    "test": "./node_modules/.bin/istanbul cover --dir test/coverage ./node_modules/.bin/_mocha -- --compilers js:babel-core/register --require ignore-styles",
+    "test": "./node_modules/.bin/istanbul cover --dir test/coverage ./node_modules/.bin/_mocha test/**/*.spec.js -- --compilers js:babel-core/register --require ignore-styles",
     "jsdoc": "./node_modules/.bin/jsdoc -c ./jsdoc.config.json -d ./docs/code -t ./node_modules/minami --verbose -R ./README.md",
     "demo": "./node_modules/webpack/bin/webpack.js --env=dist-docs",
     "docs": "npm run jsdoc; npm run demo",

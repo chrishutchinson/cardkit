@@ -61,8 +61,8 @@ SizeControl.propTypes = {
   layer: React.PropTypes.object.isRequired,
   min: React.PropTypes.number,
   max: React.PropTypes.number,
-  step: React.PropTypes.number,
-  type: React.PropTypes.string
+  step: React.PropTypes.number
+  // type: React.PropTypes.string
 }
 
 // Export

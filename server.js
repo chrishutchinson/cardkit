@@ -19653,6 +19653,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                y: _this3.calculateYPosition(layers, layerData),
 	                fontFamily: layerData.fontFamily,
 	                fontSize: layerData.fontSize,
+	                fontWeight: layerData.fontWeight,
 	                lineHeight: layerData.lineHeight,
 	                textAnchor: layerData.textAnchor,
 	                fill: layerData.fill,
@@ -19738,19 +19739,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: function computeFonts() {
 	      var fonts = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 
-	      var array = [];
-	      var font = void 0;
+	      return Object.keys(fonts).map(function (key, index) {
+	        var src = fonts[key];
+	        var format = 'svg';
+	        if (_typeof(fonts[key]) === 'object') {
+	          src = fonts[key].src;
+	          format = fonts[key].format || 'svg';
+	        }
 
-	      Object.keys(fonts).forEach(function (key, index) {
-	        font = fonts[key];
-	        array.push(React.createElement(
+	        return React.createElement(
 	          'style',
 	          { key: index },
-	          '@font-face {\n              font-family: "' + key + '";\n              src: url(' + font + ') format("woff");\n              font-weight: normal;\n              font-style: normal;\n          }'
-	        ));
+	          '@font-face {\n              font-family: \'' + key + '\';\n              src: url("' + src + '") format("' + format + '");\n              font-weight: normal;\n              font-style: normal;\n          }'
+	        );
 	      });
-
-	      return array;
 	    }
 
 	    /**

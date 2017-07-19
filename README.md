@@ -74,8 +74,8 @@ renderer.renderUI('card');
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react-dom.min.js"></script>
 
 <!-- Load in the CardKit and CardKitDOM Libraries -->
-<script type="text/javascript" src="https://cdn.rawgit.com/times/cardkit/v2.0.4/dist/cardkit.js"></script>
-<script type="text/javascript" src="https://cdn.rawgit.com/times/cardkit/v2.0.4/dist/dom.js"></script>
+<script type="text/javascript" src="https://cdn.rawgit.com/times/cardkit/v2.0.6/dist/cardkit.js"></script>
+<script type="text/javascript" src="https://cdn.rawgit.com/times/cardkit/v2.0.6/dist/dom.js"></script>
 
 <!-- Your container element to render into -->
 <div id="card"></div>

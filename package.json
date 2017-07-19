@@ -3,6 +3,7 @@
   "version": "2.0.0",
   "dependencies": {},
   "devDependencies": {
+    "@financial-times/secret-squirrel": "^2.5.16",
     "grunt": "^1.0.1",
     "grunt-autoprefixer": "^3.0.4",
     "grunt-build-control": "^0.7.1",
@@ -26,6 +27,7 @@
     "grunt-svgmin": "^5.0.0",
     "grunt-usemin": "^3.1.1",
     "grunt-wiredep": "^3.0.1",
+    "husky": "^0.14.3",
     "jasmine-core": "^2.8.0",
     "jshint-stylish": "^2.2.1",
     "karma": "^1.7.1",
@@ -41,6 +43,8 @@
     "test": "grunt test",
     "deploy": "grunt deploy",
     "build": "grunt build",
-    "start": "grunt serve"
+    "start": "grunt serve",
+    "precommit": "node_modules/.bin/secret-squirrel",
+    "commitmsg": "node_modules/.bin/secret-squirrel-commitmsg"
   }
 }

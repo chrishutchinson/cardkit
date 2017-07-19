@@ -32,107 +32,113 @@ In addition to these, you may also want to try the [CardKit Yeoman Generator](ht
 
 #### Browser with Webpack / Browserify usage
   
-    // Load CardKit and CardKit DOM
-    const CardKit = require('cardkit');
-    const CardKitDOM = require('cardkit/dom');
-    
-    // Base configuration object - see `./examples/configurations` for examples
-    var configuration = {};
+```js
+// Load CardKit and CardKit DOM
+const CardKit = require('cardkit');
+const CardKitDOM = require('cardkit/dom');
 
-    // Optional themes object - see `./examples/configurations` for examples
-    var themes = {};
+// Base configuration object - see `./examples/configurations` for examples
+var configuration = {};
 
-    // Optional layouts object - see `./examples/configurations` for examples
-    var layouts = {};
+// Optional themes object - see `./examples/configurations` for examples
+var themes = {};
 
-    // Initialise CardKit
-    var cardkit = new CardKit(configuration, {
-      themes: themes,
-      layouts: layouts
-    });
+// Optional layouts object - see `./examples/configurations` for examples
+var layouts = {};
 
-    // Initialise Renderer
-    var renderer = new CardKitDOM(cardkit);
+// Initialise CardKit
+var cardkit = new CardKit(configuration, {
+  themes: themes,
+  layouts: layouts
+});
 
-    // To render the card only (with optional theme / layout overrides)
-    renderer.renderCard('card', {
-      theme: 'Alt',
-      layout: 'Square'
-    });
+// Initialise Renderer
+var renderer = new CardKitDOM(cardkit);
 
-    // OR To render the editing UI
-    renderer.renderUI('card');
+// To render the card only (with optional theme / layout overrides)
+renderer.renderCard('card', {
+  theme: 'Alt',
+  layout: 'Square'
+});
+
+// OR To render the editing UI
+renderer.renderUI('card');
+```
 
 
 #### Browser with `<script>` tag usage
   
-    <!-- Load in React from a CDN (or similar) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react-dom.min.js"></script>
+```html
+<!-- Load in React from a CDN (or similar) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react-dom.min.js"></script>
 
-    <!-- Load in the CardKit and CardKitDOM Libraries -->
-    <script type="text/javascript" src="https://cdn.rawgit.com/times/cardkit/v2.0.4/dist/cardkit.js"></script>
-    <script type="text/javascript" src="https://cdn.rawgit.com/times/cardkit/v2.0.4/dist/dom.js"></script>
+<!-- Load in the CardKit and CardKitDOM Libraries -->
+<script type="text/javascript" src="https://cdn.rawgit.com/times/cardkit/v2.0.4/dist/cardkit.js"></script>
+<script type="text/javascript" src="https://cdn.rawgit.com/times/cardkit/v2.0.4/dist/dom.js"></script>
 
-    <!-- Your container element to render into -->
-    <div id="card"></div>
+<!-- Your container element to render into -->
+<div id="card"></div>
 
-    <script type="text/javascript">
-      // Base configuration object - see `./examples/configurations` for examples
-      var configuration = {};
+<script type="text/javascript">
+  // Base configuration object - see `./examples/configurations` for examples
+  var configuration = {};
 
-      // Optional themes object - see `./examples/configurations` for examples
-      var themes = {};
+  // Optional themes object - see `./examples/configurations` for examples
+  var themes = {};
 
-      // Optional layouts object - see `./examples/configurations` for examples
-      var layouts = {};
+  // Optional layouts object - see `./examples/configurations` for examples
+  var layouts = {};
 
-      // Initialise CardKit
-      var cardkit = new CardKit(configuration, {
-        themes: themes,
-        layouts: layouts
-      });
+  // Initialise CardKit
+  var cardkit = new CardKit(configuration, {
+    themes: themes,
+    layouts: layouts
+  });
 
-      // Initialise Renderer
-      var renderer = new CardKitDOM(cardkit);
+  // Initialise Renderer
+  var renderer = new CardKitDOM(cardkit);
 
-      // To render the card only (with optional theme / layout overrides)
-      renderer.renderCard('card', {
-        theme: 'Alt',
-        layout: 'Square'
-      });
+  // To render the card only (with optional theme / layout overrides)
+  renderer.renderCard('card', {
+    theme: 'Alt',
+    layout: 'Square'
+  });
 
-      // OR To render the editing UI
-      renderer.renderUI('card');
-    </script>
+  // OR To render the editing UI
+  renderer.renderUI('card');
+</script>
+```
 
 
 #### Server usage
 
-    // Require CardKit and CardKitServer
-    const CardKit = require('cardkit');
-    const CardKitServer = require('cardkit/server');
+```js
+// Require CardKit and CardKitServer
+const CardKit = require('cardkit');
+const CardKitServer = require('cardkit/server');
 
-    // Base configuration object - see `./examples/configurations` for examples
-    const configuration = {};
+// Base configuration object - see `./examples/configurations` for examples
+const configuration = {};
 
-    // Initialise CardKit
-    const cardkit = new CardKit(configuration);
+// Initialise CardKit
+const cardkit = new CardKit(configuration);
 
-    // Initialise Renderer
-    var renderer = new CardKitServer(cardkit);
+// Initialise Renderer
+var renderer = new CardKitServer(cardkit);
 
-    // Render to image
-    renderer.renderToImage(2)
-           .then((image) => {
-              // Do what you want with the image here...
-              console.log('<img src="data:image/png;base64,' + image + '" />');
-              process.exit();
-           })
-           .catch((e) => {
-              console.log('[ERR]', e);
-              process.exit();
-           });
+// Render to image
+renderer.renderToImage(2)
+       .then((image) => {
+          // Do what you want with the image here...
+          console.log('<img src="data:image/png;base64,' + image + '" />');
+          process.exit();
+       })
+       .catch((e) => {
+          console.log('[ERR]', e);
+          process.exit();
+       });
+```
 
 
 ## APIs
@@ -194,32 +200,73 @@ In addition to these, you may also want to try the [CardKit Yeoman Generator](ht
 
 A base class `CardKitRenderer` allows you to create your own renderer for CardKit. For example, CardKitDOM currently uses SVG to create the card, and React to render the UI. You may, however, wish to render your card using HTML canvas, or build a UI using Vue.js. Creating a custom renderer is a good way to achieve this. Below is a brief example of how you might achieve this:
 
-    class CardKitCanvas extends CardKitRenderer {
+```js
+class CardKitCanvas extends CardKitRenderer {
 
-      renderCard () {
-        // Canvas-specific code here
-      }
+  renderCard () {
+    // Canvas-specific code here
+  }
 
-      rerender () { // A method that `CardKit` calls if the base configuration object is updated
-        // Handle an update to the base configuration, e.g. you may want to re-render the canvas element here
-      }
+  rerender () { // A method that `CardKit` calls if the base configuration object is updated
+    // Handle an update to the base configuration, e.g. you may want to re-render the canvas element here
+  }
 
-      yourCustomMethod () {
-        // You can implement any custom methods here, for example you may wish to expose or manipulate the <canvas> element for other users to take advantage of
-      }
+  yourCustomMethod () {
+    // You can implement any custom methods here, for example you may wish to expose or manipulate the <canvas> element for other users to take advantage of
+  }
 
-    }
+}
 
-    const cardkit = new CardKit(configuration);
+const cardkit = new CardKit(configuration);
 
-    const renderer = new CardKitCanvas(cardkit);
+const renderer = new CardKitCanvas(cardkit);
 
-    renderer.yourCustomMethod();
+renderer.yourCustomMethod();
+```
 
 
 ## Custom Fonts
 
-CardKit allows you to load in custom fonts for use on your cards, see the Wiki for details. These need to be encoded into base64 format. If you wish to use a Google font, you can use the [googlefontcss64](https://www.npmjs.com/package/googlefontcss64) library to generate a base64 version of any Google font.
+CardKit allows you to load in custom fonts for use on your cards, see the Wiki for details. These need to be encoded into base64 format. 
+
+_If you wish to use a Google font, you can use the [googlefontcss64](https://www.npmjs.com/package/googlefontcss64) library to generate a base64 version of any Google font. You can use [this](https://gist.github.com/chrishutchinson/4a9f7bffddfec376e9d71e8666d5955d) Node.js script to get all the details you need._
+
+Once you have the base64 encoded version of your font, you can register it in your configuration object, like so:
+
+```js
+var configuration = {
+  // ...
+  fonts: {
+    'MyCustomFontName': base64encodedFont
+  },
+  layers: {
+    text: {
+      fontFamily: 'MyCustomFontName'
+    }
+  }
+  // ...
+}
+```
+
+If you need to provide a specific format for your font, you can do the following:
+
+```js
+var configuration = {
+  // ...
+  fonts: {
+    'MyCustomFontName': {
+      src: base64encodedFont,
+      format: 'woff'
+    }
+  },
+  layers: {
+    text: {
+      fontFamily: 'MyCustomFontName'
+    }
+  }
+  // ...
+}
+```
 
 
 ## Upgrading from v1.x

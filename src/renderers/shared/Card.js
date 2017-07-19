@@ -234,24 +234,25 @@ class Card extends React.Component {
    * @return {array} An array of React elements to render in the <defs /> element of the SVG
    */
   computeFonts (fonts = {}) {
-    const array = [];
-    let font;
+    return Object.keys(fonts).map((key, index) => {
+      let src = fonts[key];
+      let format = 'svg';
+      if (typeof fonts[key] === 'object') {
+        src = fonts[key].src;
+        format = fonts[key].format || 'svg';
+      }
 
-    Object.keys(fonts).forEach((key, index) => {
-      font = fonts[key];
-      array.push(
+      return (
         <style key={index}>
           {`@font-face {
-              font-family: "${key}";
-              src: url(${font}) format("woff");
+              font-family: '${key}';
+              src: url("${src}") format("${format}");
               font-weight: normal;
               font-style: normal;
           }`}
         </style>
-        );
+      );
     });
-
-    return array;
   }
 
   /**

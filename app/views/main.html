@@ -45,8 +45,10 @@
 
           <!-- Filter -->
           <filter-editor ng-switch-when="filters" filters="element.editable.filters" element="element"></filter-editor>
-        </div>
 
+         <!-- Show / Hide -->
+         <showhide-editor ng-switch-when="display" element="element" field="field" ></showhide-editor>
+       </div>
         <!-- Groups -->
         <div ng-if="element.type === 'group' && element.elements[k].editable" ng-repeat="(k, e) in element.elements" ng-switch="e.editable" ng-hide="show[key]">
           <div ng-repeat="(t, f) in e.editable" ng-switch="t">
@@ -76,6 +78,9 @@
 
             <!-- Filter -->
             <filter-editor ng-switch-when="filters" filters="e.editable.filters" element="e"></filter-editor>
+
+            <!-- Show / Hide -->
+            <showhide-editor ng-switch-when="display" element="element" field="field"></showhide-editor>
           </div>
         </div>
       </div>

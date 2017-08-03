@@ -148,6 +148,12 @@ angular.module('cardkitApp')
               width: canvasData.width*4 + 'px',
               height: canvasData.height*4 + 'px'
             }),
+            'FTPink': s.paper.filter('<feColorMatrix type="matrix" in="SourceGraphic" result="blackAndWhiteFilter" values="0.2126 0.7152 0.0722 0 0 0.2126 0.7152 0.0722 0 0 0.2126 0.7152 0.0722 0 0 0 0 0 1 0" />' +
+            '<feFlood result="pinkFilter" flood-color="#ffc99f"></feFlood><feBlend mode="multiply" in="pinkFilter" in2="blackAndWhiteFilter"></feBlend>').attr({
+              width: canvasData.width*4 + 'px',
+              height: canvasData.height*4 + 'px',
+              'background-blend-mode': 'multiply'
+            }),
             'Grayscale': s.paper.filter(snapSVG.filter.grayscale(1)).attr({
               width: canvasData.width*4 + 'px',
               height: canvasData.height*4 + 'px'
@@ -163,7 +169,7 @@ angular.module('cardkitApp')
             'Blur': s.paper.filter(snapSVG.filter.blur(4, 4)).attr({
               width: canvasData.width*4 + 'px',
               height: canvasData.height*4 + 'px'
-            }),
+            })
           };
         }
 

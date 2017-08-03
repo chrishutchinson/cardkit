@@ -33,6 +33,12 @@ angular.module('cardkitApp')
           width: 600,
           height: 295,
           gridSize: 15
+        },
+        {
+          name: 'Video',
+          width: 1024,
+          height: 576,
+          gridSize: 16.25
         }
       ],
       themes: themeConfig,
@@ -129,6 +135,10 @@ angular.module('cardkitApp')
     $scope.removeImage = function() {
       this.element.src = '';
     };
+
+    $scope.display = function() {
+      return 'block'
+    }
 
     $scope.downloadSvg = function() {
       $analytics.eventTrack($scope.template.name, {

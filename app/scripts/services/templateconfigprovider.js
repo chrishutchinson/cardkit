@@ -2130,6 +2130,202 @@ angular.module('cardkitApp')
               },
             }];
           }
+        },
+        {
+          name: 'Video ',
+          elements: function ($scope) {
+            return [{
+              name: 'Background Colour',
+              type: 'rect',
+              height: function () {
+                return $scope.size.height;
+              },
+              width: function () {
+                return $scope.size.width;
+              },
+              fill: function () {
+                return $scope.theme.background;
+              }
+            }, {
+              name: 'Background Image',
+              type: 'image',
+              width: function () {
+                return $scope.size.width;
+              },
+              controlsOrder: 3,
+              height: function () {
+                var h;
+                if (typeof this.width === 'string') {
+                  h = +this.width;
+                } else {
+                  h = this.width();
+                }
+
+                return h;
+              },
+              src: function () {
+                return $scope.theme.images.videoBackgroundImage;
+              },
+              opacity: 1,
+              x: function () {
+                return 0;
+              },
+              y: function () {
+                return 0;
+              },
+              preserveAspectRatio: 'xMinYMin meet',
+              draggable: false,
+              defaultFilter: '',
+              enabled:true,
+              editable: {
+                src: true,
+                filters: [
+                  'Grayscale',
+                  'FTPink'
+                ],
+              }
+            }, {
+              name: 'Text Background',
+              type: 'rect',
+              height: function () {
+                // Standard video preview size
+                return $scope.size.name === "Video" ? 95 : $scope.size.gridSize * 3;
+              },
+              width: function () {
+                return $scope.size.width;
+              },
+              y: function () {
+                return $scope.size.height - this.height();
+              },
+              fill: function () {
+                return $scope.theme.xrefBackground;
+              }
+            }, {
+              name: 'Logo',
+              type: 'image',
+              controlsOrder: 6,
+              width: function () {
+                return $scope.size.name === "Video" ? templateHelper.logo.width($scope) : $scope.size.gridSize * 3;
+              },
+              height: function () {
+                return $scope.size.name === "Video" ? templateHelper.logo.height($scope) : $scope.size.gridSize * 3;
+              },
+              src: function () {
+                return $scope.theme.images.logoSrc;
+              },
+              opacity: 0.85,
+              x: function () {
+                return $scope.size.name === "Video" ? $scope.size.gridSize * 2 : $scope.size.gridSize * 1.5;
+              },
+              y: function () {
+                return $scope.size.name === "Video" ? $scope.size.gridSize * 2 : $scope.size.gridSize * 1.5;
+              },
+              preserveAspectRatio: 'xMaxYMax meet',
+              draggable: false
+            }, {
+              name: 'Text',
+              type: 'text',
+              text: '',
+              controlsOrder: 1,
+              fill: function () {
+                return $scope.theme.xref;
+              },
+              fontSize: function () {
+                // Standard video preview font size
+                switch($scope.size.name){
+                  case 'Twitter':
+                    return 22;
+                  case 'Video':
+                    return 79;
+                  default :
+                    return 18;
+                }
+              },
+              lineHeight : function () {
+                return 30
+              },
+              fontFamily: function () {
+                return $scope.theme.font;
+              },
+              textAnchor: 'start',
+              x: function () {
+                return $scope.size.height * 0.05;
+              },
+              y: function () {
+                return $scope.size.name === "Video" ? $scope.size.height - 30 : $scope.size.height - ($scope.size.gridSize);
+              },
+              fontWeight: 500,
+              draggable: false,
+              editable: {
+                text: true
+              },
+              }, {
+                name: 'Headshot',
+                type: 'image',
+                width: function () {
+                  return $scope.size.name === "Video" ? $scope.size.gridSize * 28 : $scope.size.gridSize * 15;
+                },
+                controlsOrder: 4,
+                height: function () {
+                  if (typeof this.width === 'function') {
+                    return this.width();
+                  }
+                  return this.width;
+                },
+                src: function () {
+                  return $scope.theme.images.headshotSrc || '';
+                },
+                opacity: 1,
+                x: function () {
+                  return $scope.size.width - this.width();
+                },
+                y: function () {
+                  return $scope.size.height - this.height() + 1
+                },
+                preserveAspectRatio: 'xMaxYMax meet',
+                draggable: true,
+                defaultFilter: '',
+                editable: {
+                  src: true,
+                  filters: [
+                    'Grayscale'
+                  ]
+                }
+            },{
+              name: 'Reuters Logo',
+              type: 'image',
+              defaultDisplay: function() {
+                return 'none'
+              },
+              width: function () {
+                return $scope.size.name === "Video" ? $scope.size.gridSize * 18 : $scope.size.gridSize * 10;
+              },
+              controlsOrder: 2,
+              height: function () {
+                if (typeof this.width === 'function') {
+                  return this.width();
+                }
+                return this.width;
+              },
+              src: function () {
+                return $scope.theme.images.reutersLogo || '';
+              },
+              opacity: 1,
+              x: function () {
+                return $scope.size.height * 0.05;
+              },
+              y: function () {
+                return $scope.size.name === "Video" ? $scope.size.height - this.width() - 14 : $scope.size.height - this.width() - 4;
+              },
+              preserveAspectRatio: 'xMaxYMax meet',
+              editable: {
+                display: {
+                 'Hide': 'none',
+                 'Show': 'block'
+                }
+              }
+          }];
+          }
         }
         ]);
       }

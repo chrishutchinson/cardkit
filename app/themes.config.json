@@ -254,5 +254,30 @@
       "weekendSrc": "weekendSrc",
       "illustrationSrc": "illustrationSrc"
     }
+  },
+  {
+    "name": "Video Clarret red",
+    "background": "#fff1e0",
+    "headline": "#333333",
+    "xrefBackground": "#9D2E50",
+    "quote": "#333333",
+    "highlightColor": "#9D2E50",
+    "xref": "#ffffff",
+    "font": "MetricWebRegular",
+    "display": "block",
+    "overrideConfigs": {
+      "templateHelperLogo" : {
+        "logoWidth": 6,
+        "logoHeight": 6
+      }
+    },
+    "images": {
+      "logoSrc": "videoFTLogo",
+      "logoAltSrc": "videoFTLogo",
+      "headshotSrc": "headshotSrc",
+      "reutersLogo":"reutersLogo",
+      "videoBackgroundImage": "videoBackgroundImage",
+      "videoBackgroundImageOverlay": "videoBackgroundImageOverlay"
+    }
   }
 ]

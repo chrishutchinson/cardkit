@@ -11,7 +11,7 @@ angular.module('cardkitApp')
     return {
       template: '<div class="showhideEditor">' +
           '<label ng-repeat="(name, value) in field" ng-init="element.display=element.defaultDisplay()">' +
-            '<input type="radio" ng-model="element.display" ng-value="value" name="element.name"> {{name}}' +
+            '<input type="radio" ng-model="element.display" ng-value="value" name="{{element.name}}">{{name}}' +
           '</label>' +
       '</div>',
       restrict: 'E',

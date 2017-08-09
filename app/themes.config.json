@@ -266,10 +266,7 @@
     "font": "MetricWebRegular",
     "display": "block",
     "overrideConfigs": {
-      "templateHelperLogo" : {
-        "logoWidth": 6,
-        "logoHeight": 6
-      }
+
     },
     "images": {
       "logoSrc": "videoFTLogo",

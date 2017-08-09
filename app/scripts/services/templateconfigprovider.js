@@ -2152,7 +2152,7 @@ angular.module('cardkitApp')
               width: function () {
                 return $scope.size.width;
               },
-              controlsOrder: 3,
+              controlsOrder: 4,
               height: function () {
                 var h;
                 if (typeof this.width === 'string') {
@@ -2201,27 +2201,36 @@ angular.module('cardkitApp')
                 return $scope.theme.xrefBackground;
               }
             }, {
-              name: 'Logo',
+              name: 'FT Logo',
               type: 'image',
-              controlsOrder: 6,
+              controlsOrder: 2,
+              defaultDisplay: function() {
+                return 'block'
+              },
               width: function () {
-                return $scope.size.name === "Video" ? templateHelper.logo.width($scope) : $scope.size.gridSize * 3;
+                return $scope.size.name === "Video" ? $scope.size.gridSize * 5.8 : $scope.size.gridSize * 3;
               },
               height: function () {
-                return $scope.size.name === "Video" ? templateHelper.logo.height($scope) : $scope.size.gridSize * 3;
+                return $scope.size.name === "Video" ? $scope.size.gridSize * 5.8 : $scope.size.gridSize * 3;
               },
               src: function () {
                 return $scope.theme.images.logoSrc;
               },
               opacity: 0.85,
               x: function () {
-                return $scope.size.name === "Video" ? $scope.size.gridSize * 2 : $scope.size.gridSize * 1.5;
+                return $scope.size.name === "Video" ? $scope.size.gridSize * 1.8 : $scope.size.gridSize * 1.5;
               },
               y: function () {
-                return $scope.size.name === "Video" ? $scope.size.gridSize * 2 : $scope.size.gridSize * 1.5;
+                return $scope.size.name === "Video" ? $scope.size.gridSize * 1.8 : $scope.size.gridSize * 1.5;
               },
               preserveAspectRatio: 'xMaxYMax meet',
-              draggable: false
+              draggable: false,
+              editable: {
+                display: {
+                 'Hide': 'none',
+                 'Show': 'block'
+                }
+              }
             }, {
               name: 'Text',
               type: 'text',
@@ -2236,7 +2245,7 @@ angular.module('cardkitApp')
                   case 'Twitter':
                     return 22;
                   case 'Video':
-                    return 79;
+                    return 76;
                   default :
                     return 18;
                 }
@@ -2249,10 +2258,10 @@ angular.module('cardkitApp')
               },
               textAnchor: 'start',
               x: function () {
-                return $scope.size.height * 0.05;
+                return $scope.size.height * 0.055;
               },
               y: function () {
-                return $scope.size.name === "Video" ? $scope.size.height - 30 : $scope.size.height - ($scope.size.gridSize);
+                return $scope.size.name === "Video" ? $scope.size.height - 29 : $scope.size.height - ($scope.size.gridSize);
               },
               fontWeight: 500,
               draggable: false,
@@ -2265,7 +2274,7 @@ angular.module('cardkitApp')
                 width: function () {
                   return $scope.size.name === "Video" ? $scope.size.gridSize * 28 : $scope.size.gridSize * 15;
                 },
-                controlsOrder: 4,
+                controlsOrder: 5,
                 height: function () {
                   if (typeof this.width === 'function') {
                     return this.width();
@@ -2300,7 +2309,7 @@ angular.module('cardkitApp')
               width: function () {
                 return $scope.size.name === "Video" ? $scope.size.gridSize * 18 : $scope.size.gridSize * 10;
               },
-              controlsOrder: 2,
+              controlsOrder: 3,
               height: function () {
                 if (typeof this.width === 'function') {
                   return this.width();
@@ -2312,7 +2321,7 @@ angular.module('cardkitApp')
               },
               opacity: 1,
               x: function () {
-                return $scope.size.height * 0.05;
+                return $scope.size.height * 0.055;
               },
               y: function () {
                 return $scope.size.name === "Video" ? $scope.size.height - this.width() - 14 : $scope.size.height - this.width() - 4;

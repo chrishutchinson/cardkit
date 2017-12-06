@@ -11,4 +11,4 @@ deployment:
       - npm run deploy
 machine:
   node:
-    version: v0.10.33
+    version: v6.11.1

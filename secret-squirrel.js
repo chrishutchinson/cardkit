@@ -64,7 +64,7 @@ module.exports = {
 			'6vuXWtr2Wtxzz73hhrlzM', // app/resources.json:6
 			'FPX0vXHggEFITJyWj0eapg6vXhyreM7c', // app/resources.json:6
 			'3yCIOlTGW0eO5PjN9TUbmLKLF8xZE17UoSK6urpy', // app/resources.json:6
-			'\\/9h1Oyil32Xv\\/rvJ6rZWFJOfe\\+\\+NaIXmf33Xta\\+\\/', // app/resources.json:7
+			'/9h1Oyil32Xv/rvJ6rZWFJOfe\\+\\+NaIXmf33Xta+/', // app/resources.json:7
 			'9l7B7Ph8iCsgMCCYXpKkq', // app/resources.json:7
 			'dXW2pd7j4GxElgwYFV1zyTnxBPZWb9PJ', // app/resources.json:7
 			'bK19qfcYYH0EFsxYVd0yyeOTPDyLL0hmNc7P4it3', // app/resources.json:7
@@ -93,6 +93,14 @@ module.exports = {
 			'xaHrakWfpIY5ReHrth4Pj', // app/resources.json:16
 			'7GzI3r0MZJtysyUDGtF4qtHX0b37VpuP', // app/resources.json:16
 			'VsXJpaY5caFkJHElHfb1ow5BPTuTqtIL6cGbtwgq', // app/resources.json:16
+			'3/r0b2EcR5c7e2xbglYqHXGXXgX993oO4fwJYSfH', // app/resources.json:18
+			'M0mDHrQbgcPSTqk1jgSuH', // app/resources.json:18
+			'fnHyRH5ABXufudZlZpAQB3PxZ4BjguzbTm3N5Gim', // app/resources.json:18
+			'/zCO1FpeemH8r3yYMDzklYfjb5jCCQR2lwbFkbsE', // app/resources.json:20
+			'JLPTHYDN5xzp3nnFvbNf8', // app/resources.json:20
+			'jCxmOI0lySO0LnJlxSffLpQovT7yqhxA', // app/resources.json:20
+			'iMqw2dXIWEziE2AF0lWlBwdjWBkZPvdS3vqjAzga', // app/resources.json:20
+			'ffTlb42eiOKhsWnIoEmTDbgPVfdFDcU9qW4ERTmV2vpe9TYcfpUS1fgCMiTvwr8p4c303T5vloNm9Baa', // app/resources.json:20
 			'7t2zzitkIUXf051fU65/zP9z6FalNKTVadarFq+/', // app/styles/_fonts.scss:3
 			'b0cffz67xf807d3fvvRwn', // app/styles/_fonts.scss:3
 			'baD3Zw306Q2bSGDPYZPYCRrZrRxCd4hC', // app/styles/_fonts.scss:3
@@ -103,7 +111,7 @@ module.exports = {
 			'4ueOVCsN39bzJini4PmIDgMhvl9FMTAC', // app/styles/_fonts.scss:10
 			'R11BT5L0RFYKZEVgykZx6YlHT8SvNmlckswoWLcK', // app/styles/_fonts.scss:10
 			'CpWelsQDLJfr8GUyz9NmHbQZvsgKzpYoMybcZ0hIyWYDRitlltnCnkZqaQdDiDVr0adGnxRu06NOiT4s', // app/styles/_fonts.scss:10
-			'\\+455953L1IjIkvka\\/JNWbi\\/59ARafjTM6+8Kq39f', // app/styles/_fonts.scss:17|24
+			'\\+455953L1IjIkvka/JNWbi/59ARafjTM6\\+8Kq39f', // app/styles/_fonts.scss:17|24
 			'8VCeVDqpNF968qat6Py0V', // app/styles/_fonts.scss:17|24
 			'N4dqUPr9ZQraHVlYVYauLemcE4aC3fIr', // app/styles/_fonts.scss:17|24
 			'JSbs56CeRfMUzDPuFF2TIZpZ5S2x6jnhvOf0zyjo', // app/styles/_fonts.scss:17|24
@@ -117,12 +125,12 @@ module.exports = {
 			'CUZSKBu0TcuIDUdV3uurf', // app/styles/_fonts.scss:45
 			'wdbwy4H1yuwZkq4xsR7FpwGH4HfwafgB', // app/styles/_fonts.scss:45
 			'sCCHhlcQ2JXHpFH6QTaA7AzuYji4sdtlnxzWoywArAl5VnQWF5QMjnP8SiHZmHA3zFH60AZAGQrLEJxB', // app/styles/_fonts.scss:45
-			'\\+WH\\/Xw889QAfA\\+gAAAAA0L3lgwAAAADQvk3z\\/3D\\/', // app/styles/_fonts.scss:108
+			'\\+WH/Xw889QAfA\\+gAAAAA0L3lgwAAAADQvk3z/3D/', // app/styles/_fonts.scss:108
 			'JdV8pS8xGlWyzOskWdZK8', // app/styles/_fonts.scss:108
 			'GAAAADoAAAA6iv6UsUdQT1MAAL9UAAAo', // app/styles/_fonts.scss:108
 			'clWGlTHyu5BaDodou42K9M8KskykbfXZSDkvNgzv', // app/styles/_fonts.scss:108
 			'8U8CPf58yC6Hj1PHgSnZDw0rVmXCAG00AWDzgGNEyr4CKEGoAIPUAGHPkl5cAoPore5AyiENoIuQfRvm', // app/styles/_fonts.scss:108
-			'\\+dq05xa7HZ1Q5118u2C+nSOsRrlkTl7S9vCbm23\\+', // app/styles/_fonts.scss:115
+			'\\+dq05xa7HZ1Q5118u2C\\+nSOsRrlkTl7S9vCbm23\\+', // app/styles/_fonts.scss:115
 			'QWWeau68jh2rEuJv12JVW', // app/styles/_fonts.scss:115
 			'7XJzqY37IxqQoc22Ndpan8yfprxn9RKO', // app/styles/_fonts.scss:115
 			'DsOve1iOUzVjPD0v1fZ4PaiO7pGVdjgeuGYLVd33', // app/styles/_fonts.scss:115

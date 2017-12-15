@@ -11,7 +11,7 @@ angular.module('cardkitApp')
     return {
       template: '<div>' +
             '<label>Size</label>' +
-            '<input type="range" min="10" max="1000" ng-model="element.width" />' +
+            '<input type="range" min="10" max="2000" ng-model="element.width" />' + 
           '</div>',
       restrict: 'E',
       replace: true,

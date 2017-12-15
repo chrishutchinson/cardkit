@@ -2152,7 +2152,7 @@ angular.module('cardkitApp')
               width: function () {
                 return $scope.size.width;
               },
-              controlsOrder: 4,
+              controlsOrder: 5,
               height: function () {
                 var h;
                 if (typeof this.width === 'string') {
@@ -2174,11 +2174,12 @@ angular.module('cardkitApp')
                 return 0;
               },
               preserveAspectRatio: 'xMinYMin meet',
-              draggable: false,
+              draggable: true,
               defaultFilter: '',
               enabled:true,
               editable: {
                 src: true,
+                width: true,
                 filters: [
                   'Grayscale',
                   'FTPink'
@@ -2187,6 +2188,10 @@ angular.module('cardkitApp')
             }, {
               name: 'Text Background',
               type: 'rect',
+              controlsOrder: 4,
+              defaultDisplay: function() {
+                return 'block'
+              },
               height: function () {
                 // Standard video preview size
                 return $scope.size.name === "Video" ? 95 : $scope.size.gridSize * 3;
@@ -2199,6 +2204,12 @@ angular.module('cardkitApp')
               },
               fill: function () {
                 return $scope.theme.xrefBackground;
+              },
+              editable: {
+                display: {
+                 'Hide': 'none',
+                 'Show': 'block'
+                }
               }
             }, {
               name: 'FT Logo',
@@ -2274,7 +2285,7 @@ angular.module('cardkitApp')
                 width: function () {
                   return $scope.size.name === "Video" ? $scope.size.gridSize * 28 : $scope.size.gridSize * 15;
                 },
-                controlsOrder: 5,
+                controlsOrder: 6,
                 height: function () {
                   if (typeof this.width === 'function') {
                     return this.width();

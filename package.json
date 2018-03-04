@@ -1,7 +1,8 @@
 {
   "name": "cardkit",
   "version": "2.0.6",
-  "description": "A simple, powerful and fully configurable image editor for web browsers and servers. Optional UI included.",
+  "description":
+    "A simple, powerful and fully configurable image editor for web browsers and servers. Optional UI included.",
   "main": "cardkit.js",
   "homepage": "https://times.github.io/cardkit",
   "bugs": {
@@ -12,13 +13,16 @@
     "url": "https://github.com/times/cardkit.git"
   },
   "scripts": {
-    "test": "istanbul cover --dir test/coverage _mocha -- --compilers js:babel-core/register --require ignore-styles",
-    "jsdoc": "jsdoc -c ./jsdoc.config.json -d ./docs/code -t ./node_modules/minami --verbose -R ./README.md",
+    "test":
+      "istanbul cover --dir test/coverage _mocha -- --require babel-core/register --require ignore-styles",
+    "jsdoc":
+      "jsdoc -c ./jsdoc.config.json -d ./docs/code -t ./node_modules/minami --verbose -R ./README.md",
     "demo": "webpack --env=dist-docs",
     "docs": "npm run jsdoc; npm run demo",
     "start": "webpack-dev-server -d --content-base ./src --hot --open",
     "dist": "npm run build",
-    "build": "echo \"[NOTICE] This task will build ALL CardKit versions\"; echo \"[LOG] Building DOM library\"; npm run build-dom; echo \"[LOG] Building server library\"; npm run build-server; echo \"[LOG] Building core library\"; npm run build-core; echo \"[LOG] Building DOM <script> library\"; npm run build-dom-script; echo \"[LOG] Building core <script> library\"; npm run build-core-script",
+    "build":
+      "echo \"[NOTICE] This task will build ALL CardKit versions\"; echo \"[LOG] Building DOM library\"; npm run build-dom; echo \"[LOG] Building server library\"; npm run build-server; echo \"[LOG] Building core library\"; npm run build-core; echo \"[LOG] Building DOM <script> library\"; npm run build-dom-script; echo \"[LOG] Building core <script> library\"; npm run build-core-script",
     "build-dom": "webpack --env=dist-dom",
     "build-server": "webpack --env=dist-server",
     "build-core": "webpack --env=dist-core",

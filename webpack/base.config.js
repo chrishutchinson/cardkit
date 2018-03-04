@@ -47,7 +47,9 @@ let config = {
     fs: "empty"
   },
 
-  plugins: []
+  plugins: [],
+
+  mode: "production"
 };
 
 module.exports = config;

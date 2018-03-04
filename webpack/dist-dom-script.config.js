@@ -11,9 +11,9 @@ const base = require("./base.config");
 
 // Merge with base
 let config = _.merge(base, {
-  entry: "./src/renderers/dom/dom.js",
+  entry: path.resolve(__dirname, "../src/renderers/dom/dom.js"),
   output: {
-    path: "./dist",
+    path: path.resolve(__dirname, "../dist"),
     filename: "dom.js",
     libraryTarget: "umd",
     library: "CardKitDOM"
@@ -35,7 +35,11 @@ let config = _.merge(base, {
 });
 
 // Uglify our JS
-config.plugins.push(new webpack.optimize.UglifyJsPlugin());
+config.plugins.push(
+  new webpack.LoaderOptionsPlugin({
+    minimize: true
+  })
+);
 
 // Set process.env.NODE_ENV to production
 config.plugins.push(

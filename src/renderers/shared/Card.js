@@ -43,7 +43,7 @@ class Card extends React.Component {
       // Calculate the Y offset
       let attachYLayerHeight = 0;
       switch (attachYLayer.type) {
-        case "text":
+        case "text": // eslint-disable-line no-case-declarations
           let attachYLayerText = attachYLayer.text.split("\n");
           if (attachYLayer.text !== "") {
             attachYLayerHeight =
@@ -167,7 +167,7 @@ class Card extends React.Component {
 
       // Switch over the layer type to ensure we create the card correctly
       switch (layer.type) {
-        case "text":
+        case "text": // eslint-disable-line no-case-declarations
           // Split by newline
           const text = layerData.text.split("\n");
 

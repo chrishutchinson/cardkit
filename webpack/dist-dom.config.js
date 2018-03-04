@@ -11,9 +11,9 @@ const base = require("./base.config");
 
 // Merge with base
 let config = _.merge(base, {
-  entry: "./src/renderers/dom/dom.js",
+  entry: path.resolve(__dirname, "../src/renderers/dom/dom.js"),
   output: {
-    path: "./",
+    path: path.resolve(__dirname, "../"),
     filename: "dom.js",
     libraryTarget: "umd",
     library: "CardKitDOM"

@@ -11,9 +11,9 @@ const base = require("./base.config");
 
 // Merge with base
 let config = _.merge(base, {
-  entry: "./docs/cardkit.js",
+  entry: path.resolve(__dirname, "../docs/cardkit.js"),
   output: {
-    path: "./docs",
+    path: path.resolve(__dirname, "../docs"),
     filename: "bundle.js"
   },
   eslint: null

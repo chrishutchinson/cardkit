@@ -11,9 +11,9 @@ const base = require("./base.config");
 
 // Merge with base
 let config = _.merge(base, {
-  entry: "./src/cardkit.js",
+  entry: path.resolve(__dirname, "../src/cardkit.js"),
   output: {
-    path: "./dist",
+    path: path.resolve(__dirname, "../dist"),
     filename: "cardkit.js",
     libraryTarget: "umd",
     library: "CardKit"
@@ -35,7 +35,11 @@ let config = _.merge(base, {
 });
 
 // Uglify our JS
-config.plugins.push(new webpack.optimize.UglifyJsPlugin());
+config.plugins.push(
+  new webpack.LoaderOptionsPlugin({
+    minimize: true
+  })
+);
 
 // Set process.env.NODE_ENV to production
 config.plugins.push(

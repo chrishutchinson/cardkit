@@ -16,7 +16,8 @@ const config = _.merge(base, {
     port: args.port || 8000,
     inline: true
   },
-  devtool: "source-map"
+  devtool: "source-map",
+  mode: "development"
 });
 
 module.exports = config;

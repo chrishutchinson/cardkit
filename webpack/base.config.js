@@ -15,7 +15,7 @@ let config = {
     rules: [
       {
         test: /\.js$/,
-        exclude: /node_modules/,
+        exclude: /node_modules|rvg.js/,
         use: ["babel-loader", "eslint-loader"]
       },
       {

@@ -15,6 +15,17 @@ const {
   LinearGradient
 } = require("rvg.js");
 
+const omit = (obj, fields) =>
+  Object.keys(obj)
+    .filter(k => !fields.includes(k))
+    .reduce(
+      (acc, k) => ({
+        ...acc,
+        [k]: obj[k]
+      }),
+      {}
+    );
+
 /**
  * @name Card
  * @class The Card React element
@@ -90,10 +101,8 @@ class Card extends React.Component {
    * @return {mixed} The value of the property on the layer
    */
   getLayerValue(layers, layer, key) {
-    if (typeof layer[key] === "function") {
+    if (typeof layer[key] === "function")
       return layer[key](layers, this.refs.svg);
-    }
-
     return layer[key];
   }
 
@@ -105,16 +114,16 @@ class Card extends React.Component {
    * @return {array} An array of React elements to render to the <defs> element
    */
   computeGradients(layers) {
-    const array = [];
-    let layer, gradient;
+    return Object.keys(layers)
+      .filter(key => {
+        const layer = layers[key];
+        return this.getLayerValue(layers, layer, "gradient");
+      })
+      .map(key => {
+        const layer = layers[key];
+        const gradient = this.getLayerValue(layers, layer, "gradient");
 
-    Object.keys(layers).forEach(key => {
-      layer = layers[key];
-
-      if (this.getLayerValue(layers, layer, "gradient")) {
-        gradient = this.getLayerValue(layers, layer, "gradient");
-
-        array.push(
+        return (
           <LinearGradient
             key={key}
             name={key}
@@ -125,10 +134,7 @@ class Card extends React.Component {
             stops={gradient}
           />
         );
-      }
-    });
-
-    return array;
+      });
   }
 
   /**
@@ -139,25 +145,21 @@ class Card extends React.Component {
    * @return {array} An array of React elements to render on the card
    */
   computeLayers(layers) {
-    const array = [];
-    let layer;
-
     // Iterate over the layers
-    Object.keys(layers).forEach(key => {
-      layer = layers[key];
+    return Object.keys(layers).map(key => {
+      const layer = layers[key];
 
       // If the layer is hidden, ignore it
-      if (this.getLayerValue(layers, layer, "hidden") === true) {
-        return;
-      }
+      if (this.getLayerValue(layers, layer, "hidden") === true) return;
 
       // Setup an object to contain our layer data
-      const layerData = {};
-
-      // Iterate over the properties of the layer, and compute the value (handles getters, functions, and object implementations such as `y`)
-      Object.keys(layer).forEach(k => {
-        layerData[k] = this.getLayerValue(layers, layer, k);
-      });
+      const layerData = Object.keys(layer).reduce(
+        (acc, k) => ({
+          ...acc,
+          [k]: this.getLayerValue(layers, layer, k)
+        }),
+        {}
+      );
 
       // Make the fill value map to a gradient name, if a gradient has been configured
       // See computeGradients() for the creation of gradient definitions
@@ -171,109 +173,64 @@ class Card extends React.Component {
           // Split by newline
           const text = layerData.text.split("\n");
 
-          array.push(
+          return (
             <Text
-              x={layerData.x}
+              {...omit(layerData, ["useAsFilename", "text", "editable"])}
               y={this.calculateYPosition(layers, layerData)}
-              fontFamily={layerData.fontFamily}
-              fontSize={layerData.fontSize}
-              fontWeight={layerData.fontWeight}
-              lineHeight={layerData.lineHeight}
-              textAnchor={layerData.textAnchor}
-              fill={layerData.fill}
-              draggable={layerData.draggable}
-              transform={layerData.transform}
-              opacity={layerData.opacity}
-              smartQuotes={layerData.smartQuotes}
               key={key}
             >
               {text}
             </Text>
           );
-          break;
         case "image":
-          array.push(
+          return (
             <Image
-              x={layerData.x}
+              {...layerData}
               y={this.calculateYPosition(layers, layerData)}
               href={layerData.src}
-              height={layerData.height}
-              width={layerData.width}
-              draggable={layerData.draggable}
-              transform={layerData.transform}
-              opacity={layerData.opacity}
               key={key}
             />
           );
-          break;
         case "rectangle":
-          array.push(
+          return (
             <Rectangle
-              x={layerData.x}
+              {...layerData}
               y={this.calculateYPosition(layers, layerData)}
-              fill={layerData.fill}
-              height={layerData.height}
-              width={layerData.width}
-              draggable={layerData.draggable}
-              transform={layerData.transform}
               key={key}
             />
           );
-          break;
         case "circle":
-          array.push(
+          return (
             <Circle
-              x={layerData.x}
+              {...layerData}
               y={this.calculateYPosition(layers, layerData)}
-              fill={layerData.fill}
-              radius={layerData.radius}
-              draggable={layerData.draggable}
-              transform={layerData.transform}
               key={key}
             />
           );
-          break;
         case "ellipse":
-          array.push(
+          return (
             <Ellipse
-              x={layerData.x}
+              {...layerData}
               y={this.calculateYPosition(layers, layerData)}
-              fill={layerData.fill}
-              radiusX={layerData.radiusX}
-              radiusY={layerData.radiusY}
-              draggable={layerData.draggable}
-              transform={layerData.transform}
               key={key}
             />
           );
-          break;
         case "line":
-          array.push(
+          return (
             <Line
+              {...layerData}
               x={[layerData.x1, layerData.x2]}
               y={[layerData.y1, layerData.y2]}
               stroke={layerData.stroke || layerData.fill}
-              draggable={layerData.draggable}
-              transform={layerData.transform}
               key={key}
             />
           );
-          break;
         case "path":
-          array.push(
-            <Path
-              d={layerData.path || layerData.d}
-              fill={layerData.fill}
-              draggable={layerData.draggable}
-              transform={layerData.transform}
-              key={key}
-            />
+          return (
+            <Path {...layerData} d={layerData.path || layerData.d} key={key} />
           );
-          break;
       }
     });
-
-    return array;
   }
 
   /**

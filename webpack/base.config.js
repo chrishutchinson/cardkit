@@ -1,19 +1,17 @@
-const path = require('path');
+const path = require("path");
 
 let config = {
-
   entry: {},
 
   output: {
-    path: './',
-    filename: '[name].js',
-    library: 'CardKit[name]',
-    libraryTarget: 'umd',
+    path: "./",
+    filename: "[name].js",
+    library: "CardKit[name]",
+    libraryTarget: "umd",
     umdNamedDefine: true
   },
 
   module: {
-
     preLoaders: [
       {
         test: /\.js$/,
@@ -24,57 +22,55 @@ let config = {
 
     loaders: [
       {
-        test: /\.js$/i, 
+        test: /\.js$/i,
         exclude: /(node_modules)/,
-        loader: 'babel-loader',
+        loader: "babel-loader",
         query: {
-          presets: ['es2015', 'react']
+          presets: ["es2015", "react"]
         }
       },
       {
-        test: /\.js$/i, 
+        test: /\.js$/i,
         include: /(node_modules\/svg2png)/,
-        loader: 'babel-loader',
+        loader: "babel-loader",
         query: {
-          presets: ['es2015']
+          presets: ["es2015"]
         }
       },
       {
         test: /\.scss$/,
-        loaders: ['style', 'css', 'sass']
+        loaders: ["style", "css", "sass"]
       },
       {
         test: /\.(jpe?g|png|gif)$/i,
-        loader: 'url-loader?limit=50000'
+        loader: "url-loader?limit=50000"
       },
       {
         test: /\.svg$/,
         exclude: /(node_modules)/,
-        loader: 'svg-inline'
+        loader: "svg-inline"
       }
     ]
-
   },
 
   resolve: {
-    root: path.resolve('./src'),
-    extensions: ['', '.js'],
+    root: path.resolve("./src"),
+    extensions: ["", ".js"],
     alias: {
-      react: path.resolve('./node_modules/react'),
+      react: path.resolve("./node_modules/react")
     }
   },
 
   node: {
-    child_process: 'empty',
-    fs: 'empty'
+    child_process: "empty",
+    fs: "empty"
   },
 
   plugins: [],
 
   eslint: {
-    configFile: path.resolve('./eslintrc.json'),
+    configFile: path.resolve("./eslintrc.json")
   }
-
-}
+};
 
 module.exports = config;

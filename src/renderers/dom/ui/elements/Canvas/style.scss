@@ -21,7 +21,7 @@
     display: block;
     height: 100%;
     margin: 0 auto;
-    
+
     svg:not(:root) {
       overflow: hidden;
     }
@@ -30,9 +30,9 @@
       text {
         cursor: default;
         -webkit-user-select: none;
-           -moz-user-select: none;
-            -ms-user-select: none;
-                user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
       }
       text::selection {
         background: none;

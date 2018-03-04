@@ -1,55 +1,56 @@
 // Libraries
-const React = require('react');
+const React = require("react");
+const PropTypes = require("prop-types");
 
 // SizeControl class
 class SizeControl extends React.Component {
-
-  constructor (props) {
+  constructor(props) {
     super(props);
     this.handleSelectChange = this.handleSelectChange.bind(this);
     this.handleFileChange = this.handleFileChange.bind(this);
     this._processFile = this._processFile.bind(this);
   }
 
-  handleSelectChange (e) {
+  handleSelectChange(e) {
     const value = e.target.value;
-    this.props.onNewValue('src', value);
+    this.props.onNewValue("src", value);
   }
 
-  handleFileChange (e) {
+  handleFileChange(e) {
     e.stopPropagation();
     e.preventDefault();
     const file = e.target.files[0];
     this._processFile(file);
   }
 
-  _processFile (file) {
+  _processFile(file) {
     const reader = new window.FileReader();
 
     reader.onload = () => {
       let layer = this.props.layer;
-      layer['src'] = reader.result;
+      layer["src"] = reader.result;
 
-      this.props.onNewValue('src', reader.result);
+      this.props.onNewValue("src", reader.result);
     };
 
     reader.readAsDataURL(file);
   }
 
-  render () {
+  render() {
     if (!this.props.layer.editable.src) return null;
 
     // If an object of options is given, create a dropdown
-    if (typeof this.props.layer.editable.src === 'object') {
+    if (typeof this.props.layer.editable.src === "object") {
       return (
         <div>
           <strong>Source</strong>
           <select onChange={this.handleSelectChange}>
             {Object.keys(this.props.layer.editable.src).map((index, key) => {
-              return (<option key={key}
-                value={this.props.layer.editable.src[index]}>
-                {index}
-              </option>);
+              return (
+                <option key={key} value={this.props.layer.editable.src[index]}>
+                  {index}
+                </option>
+              );
             })}
           </select>
         </div>
@@ -61,19 +62,17 @@ class SizeControl extends React.Component {
       return (
         <div>
           <strong>Source</strong>
-          <input type="file"
-            onChange={this.handleFileChange} />
+          <input type="file" onChange={this.handleFileChange} />
         </div>
       );
     }
   }
-
 }
 
 SizeControl.propTypes = {
-  onNewValue: React.PropTypes.func.isRequired,
-  layer: React.PropTypes.object.isRequired
-}
+  onNewValue: PropTypes.func.isRequired,
+  layer: PropTypes.object.isRequired
+};
 
 // Export
 module.exports = SizeControl;

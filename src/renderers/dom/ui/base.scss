@@ -1,14 +1,18 @@
 @import "settings";
 
-html { font-size: 62.5%; } 
+html {
+  font-size: 62.5%;
+}
 body {
-  font-size: 1.4rem; 
+  font-size: 1.4rem;
   margin: 0;
   font-family: "Open Sans", Helvetica, sans-serif;
   font-weight: 400;
 }
 
-*, *:before, *:after {
+*,
+*:before,
+*:after {
   box-sizing: border-box;
 }
 
@@ -22,7 +26,12 @@ main.main {
   }
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-weight: 800;
   margin: 0 0 0.67rem;
   letter-spacing: 0.1rem;
@@ -52,7 +61,7 @@ select,
 textarea {
   width: 100%;
   border: 1px solid #eaeaea;
-  background: #FFF;
+  background: #fff;
   font-family: "Open Sans", Helvetica, sans-serif;
   font-size: 1.4rem;
   padding: 0.8rem;
@@ -64,7 +73,6 @@ input[type="file"] {
   padding: 0rem;
   border: 0;
 }
-
 
 input[type="file"] {
   background: transparent;

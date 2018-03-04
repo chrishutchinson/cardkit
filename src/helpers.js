@@ -5,14 +5,15 @@ module.exports = {
    * @param {string} string - The string to slugify
    * @return {string} The slugified string
    */
-  slugify: (string) => {
-    return string.toString()                // Convert to a string
-                  .toLowerCase()            // Convert to lowercase
-                  .replace(/\s+/g, '-')     // Replace spaces with -
-                  .replace(/[^\w-]+/g, '')  // Remove all non-word chars
-                  .replace(/--+/g, '-')     // Replace multiple - with single -
-                  .replace(/^-+/, '')       // Trim - from start of text
-                  .replace(/-+$/, '');      // Trim - from end of text
+  slugify: string => {
+    return string
+      .toString() // Convert to a string
+      .toLowerCase() // Convert to lowercase
+      .replace(/\s+/g, "-") // Replace spaces with -
+      .replace(/[^\w-]+/g, "") // Remove all non-word chars
+      .replace(/--+/g, "-") // Replace multiple - with single -
+      .replace(/^-+/, "") // Trim - from start of text
+      .replace(/-+$/, ""); // Trim - from end of text
   },
 
   /**
@@ -34,7 +35,7 @@ module.exports = {
    *
    * @return {string} The string with its first letter capitalised
    */
-  capitaliseFirstLetter: (string) => {
+  capitaliseFirstLetter: string => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
-}
+};

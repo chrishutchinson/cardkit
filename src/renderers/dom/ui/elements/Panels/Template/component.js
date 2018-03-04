@@ -21,7 +21,7 @@ class TemplatePanel extends React.Component {
     this.props.onTemplateChange(element.value);
   }
 
-  handleUpdateFromImage(name, e) {
+  handleUpdateFromImage(name) {
     this.props.onTemplateChange(name);
   }
 
@@ -29,7 +29,7 @@ class TemplatePanel extends React.Component {
     if (!this.props.templates) return null;
 
     let allHavePreviewImages = true;
-    Object.keys(this.props.templates).forEach((name, index) => {
+    Object.keys(this.props.templates).forEach(name => {
       if (!this.props.templates[name].previewImage) {
         allHavePreviewImages = false;
       }

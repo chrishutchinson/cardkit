@@ -38,7 +38,7 @@ class Sidebar extends React.Component {
     this.renderButton = this.renderButton.bind(this);
   }
 
-  updateConfiguration(e) {
+  updateConfiguration() {
     const configuration = this.props.configuration;
 
     this.props.onConfigurationChange(configuration);

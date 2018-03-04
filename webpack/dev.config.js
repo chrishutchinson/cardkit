@@ -4,12 +4,12 @@ const args = require("minimist")(process.argv.slice(2));
 
 const base = require("./base.config");
 
-let srcPath = path.join(__dirname, "./app");
+const srcPath = path.join(__dirname, "./app");
 
-let config = _.merge(base, {
-  entry: "./src/demo-dom.js",
+const config = _.merge(base, {
+  entry: path.resolve(__dirname, "../src/demo-dom.js"),
   output: {
-    path: "./src",
+    path: path.resolve(__dirname, "../src"),
     filename: "demo-dom-bundle.js"
   },
   devServer: {

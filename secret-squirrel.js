@@ -151,7 +151,8 @@ module.exports = {
 			'a5cf7c36-550e-4d47-b346-c38e9476daab', // bower_components/angulartics/samples/loggly.html:14
 			'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx', // bower_components/angulartics/samples/loggly.tracker.js:10
 			'some@email.com', // bower_components/angulartics/samples/marketo.html:36|39|42|44
-			'82846d4a839f20a2a616b30ca30b6298' // bower_components/angulartics/samples/mixpanel.html:14|14
+			'82846d4a839f20a2a616b30ca30b6298', // bower_components/angulartics/samples/mixpanel.html:14|14
+			'cm901q07nc633n4p5he6fpjg7bhivc59', // app/scripts/controllers/login.js
 		]
 	}
 };

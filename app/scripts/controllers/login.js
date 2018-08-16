@@ -7,7 +7,7 @@ angular.module('cardkitApp')
   .controller('LoginCtrl',
     ['$rootScope', '$scope', '$location', 'googleAuth',
     function($rootScope, $scope, $location, jrgGoogleAuth) {
-      var googleClientId ='991906554139-pn6gc09ch9jb2iric7tms4jmg7gp8lur.apps.googleusercontent.com';		//hardcoded
+      var googleClientId ='1099049241800-cm901q07nc633n4p5he6fpjg7bhivc59.apps.googleusercontent.com';		//hardcoded
       var evtGoogleLogin ='evtGoogleLogin';
 
       $scope.trouble = function(setHeight) {

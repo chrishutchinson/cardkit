@@ -26,7 +26,7 @@ angular.module('angular-google-auth', [])
       },
 
       login: function(profile, params) {
-        var regexp = /^.*\@ft\.com$/gi;
+        var regexp = /^.*\@(ft|nex\.nikkei)\.com$/gi;
         var email = profile.getEmail();
         if (email.match(regexp)) {
           if (email !== 'localhost@ft.com'){

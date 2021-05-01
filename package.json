@@ -47,7 +47,7 @@
     "ignore-styles": "^5.0.1",
     "istanbul": "^1.1.0-alpha.1",
     "jsdoc": "^3.4.2",
-    "jsdom": "^9.5.0",
+    "jsdom": "^10.1.0",
     "lodash": "^4.16.3",
     "minami": "^1.1.1",
     "minimist": "^1.2.0",

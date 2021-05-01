@@ -232,7 +232,6 @@ describe('cardkit/dom', () => {
       renderer = new CardKitDOM(card);
     });
 
-
     it('should render the UI when called', () => {
       // Setup valid container element
       const appElement = document.createElement('div');
@@ -249,7 +248,7 @@ describe('cardkit/dom', () => {
       ReactDOM.render.calledOnce.should.be.true;
 
       // Assert ReactDOM.render() gets the DOM element passed in
-      ReactDOM.render.calledWithMatch(appElement).should.be.true;
+      ReactDOM.render.calledWithMatch(sinon.match.object, appElement).should.be.true;
 
       // Unwrap ReactDOM.render() for use later
       ReactDOM.render.restore();
@@ -334,7 +333,8 @@ describe('cardkit/dom', () => {
       ReactDOM.render.calledOnce.should.be.true;
 
       // Assert ReactDOM.render() gets the DOM element passed in
-      ReactDOM.render.calledWithMatch(appElement).should.be.true;
+      ReactDOM.render.calledWithMatch(sinon.match.object, appElement).should.be
+        .true;
 
       // Unwrap ReactDOM.render() for use later
       ReactDOM.render.restore();

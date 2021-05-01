@@ -1,27 +1,26 @@
 // Dependencies
-const btoa = require('btoa');
-const svg2png = require('svg2png');
-const React = require('react');
-const ReactDOMServer = require('react-dom/server');
-const Card = require('../shared/Card');
-const CardKitRenderer = require('../shared/base');
-const helpers = require('../../helpers');
+const btoa = require("btoa");
+const svg2png = require("svg2png");
+const React = require("react");
+const ReactDOMServer = require("react-dom/server");
+const Card = require("../shared/Card");
+const CardKitRenderer = require("../shared/base");
+const helpers = require("../../helpers");
 
 /**
  * @name CardKitServer
  * @class Additional CardKit class used for rendering on the server
  */
 class CardKitServer extends CardKitRenderer {
-
   /**
    * Constructor takes in an instance of CardKit and stores it for later user
    *
    * @param {CardKit} cardkit - An instance of CardKit
    */
-  constructor (cardkit) {
+  constructor(cardkit) {
     // Ensure we're operating in a server environment
-    if (typeof document !== 'undefined') {
-      throw new Error('CardKitServer can only be used in a server environment');
+    if (typeof document !== "undefined") {
+      throw new Error("CardKitServer can only be used in a server environment");
     }
 
     super(cardkit);
@@ -32,13 +31,13 @@ class CardKitServer extends CardKitRenderer {
    *
    * @return {string} The SVG string representation of the image
    */
-  renderToString () {
+  renderToString() {
     const string = ReactDOMServer.renderToString(
-                      React.createFactory(Card)({
-                        configuration: this.computeConfiguration()
-                      }),
-                      {}
-                    );
+      React.createFactory(Card)({
+        configuration: this.computeConfiguration(),
+      }),
+      {}
+    );
 
     return string;
   }
@@ -48,7 +47,7 @@ class CardKitServer extends CardKitRenderer {
    *
    * @param {number} scale - The scale to output at
    */
-  renderToImage (scale = 2) {
+  renderToImage(scale = 2) {
     // Get the SVG in string-form
     const string = this.renderToString();
 
@@ -58,13 +57,11 @@ class CardKitServer extends CardKitRenderer {
     // Convert to png and fulfill promise
     return svg2png(uri, {
       width: this.computeConfiguration().card.width * scale,
-      height: this.computeConfiguration().card.height * scale
-    })
-    .then((buffer) => {
-      return buffer.toString('base64');
+      height: this.computeConfiguration().card.height * scale,
+    }).then((buffer) => {
+      return buffer.toString("base64");
     });
   }
-
 }
 
 module.exports = CardKitServer;

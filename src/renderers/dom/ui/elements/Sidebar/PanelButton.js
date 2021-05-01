@@ -1,38 +1,41 @@
 // Libraries
-const React = require('react');
+const React = require("react");
+const PropTypes = require("prop-types");
 
 // PanelButton class
 class PanelButton extends React.Component {
-
-  constructor (props) {
+  constructor(props) {
     super(props);
 
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick () {
+  handleClick() {
     this.props.onClick(this.props.name);
   }
 
-  render () {
+  render() {
     const { title, active } = this.props;
 
-    return (<li>
-      <button onClick={this.handleClick}
-        className={'button' + (active ? ' button--active' : '')}>
-        {title}
-      </button>
-    </li>);
+    return (
+      <li>
+        <button
+          onClick={this.handleClick}
+          className={"button" + (active ? " button--active" : "")}
+        >
+          {title}
+        </button>
+      </li>
+    );
   }
-
 }
 
 PanelButton.propTypes = {
-  name: React.PropTypes.string.isRequired,
-  title: React.PropTypes.string.isRequired,
-  active: React.PropTypes.bool,
-  onClick: React.PropTypes.func.isRequired
-}
+  name: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  active: PropTypes.bool,
+  onClick: PropTypes.func.isRequired,
+};
 
 // Export
 module.exports = PanelButton;

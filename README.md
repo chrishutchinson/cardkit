@@ -276,6 +276,10 @@ Upgrading from v1.x to v2 should be a fairly straightforward process if you have
 
 ## Running locally
 
+CardKit currently requires Node.js 8, which you can install using `nvm` and running:
+
+    $ nvm use
+
 To run a sample UI locally, run: `$ npm start`
 
 You can optionally pass a port like so: `$ npm start -- --port=8080`

@@ -53,7 +53,7 @@
     "minimist": "^1.2.0",
     "mocha": "^3.1.0",
     "mocha-jsdom": "^1.1.0",
-    "node-sass": "^3.10.0",
+    "node-sass": "^4.13.1",
     "sass-loader": "^4.0.2",
     "sinon": "^1.17.6",
     "style-loader": "^0.13.1",

@@ -7,7 +7,7 @@
 		exports["CardKit"] = factory(require("deep-extend"));
 	else
 		root["CardKit"] = factory(root["deep-extend"]);
-})(window, function(__WEBPACK_EXTERNAL_MODULE__1__) {
+})(this, function(__WEBPACK_EXTERNAL_MODULE__1__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};

@@ -9,6 +9,7 @@ const config = {
     library: "CardKit[name]",
     libraryTarget: "umd",
     umdNamedDefine: true,
+    globalObject: "this",
   },
 
   mode: "development",

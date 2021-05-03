@@ -1,16 +1,18 @@
 // Load some dependencies
 const path = require("path");
-const _ = require("lodash");
 const webpack = require("webpack");
+const _ = require("lodash");
+const { merge } = require("webpack-merge");
+const ESLintPlugin = require("eslint-webpack-plugin");
 
-var fs = require("fs"),
-  node_modules = fs.readdirSync("node_modules");
+const fs = require("fs");
+const node_modules = fs.readdirSync("node_modules");
 
 // Get the base config
 const base = require("./base.config");
 
 // Merge with base
-let config = _.merge(base, {
+const config = merge(base, {
   entry: path.resolve(__dirname, "../src/cardkit.js"),
   output: {
     path: path.resolve(__dirname, "../"),
@@ -33,16 +35,15 @@ let config = _.merge(base, {
       commonjs2: "react-dom",
     },
   }),
+  plugins: [
+    new webpack.DefinePlugin({
+      "process.env": {
+        NODE_ENV: JSON.stringify("production"),
+      },
+    }),
+    new ESLintPlugin(),
+  ],
 });
-
-// Set process.env.NODE_ENV to production
-config.plugins.push(
-  new webpack.DefinePlugin({
-    "process.env": {
-      NODE_ENV: JSON.stringify("production"),
-    },
-  })
-);
 
 // Export config
 module.exports = config;

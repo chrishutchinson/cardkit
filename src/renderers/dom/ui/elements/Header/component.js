@@ -14,10 +14,10 @@ class Header extends React.Component {
   render() {
     return (
       <header className="header">
-        <img src={images.logo} />
+        <img src={images.logo.default} />
 
         <a
-          href="http://github.com/times/cardkit"
+          href="https://www.github.com/chrishutchinson/cardkit"
           target="_blank"
           rel="noreferrer"
         >

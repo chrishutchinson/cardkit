@@ -14,7 +14,7 @@ class UI extends React.Component {
     super(props);
 
     this.canvasRef = React.createRef();
-    this.svgRef = null;
+    this.svgRef = React.createRef();
 
     this.state = {
       configuration: this.props.configuration,
@@ -84,7 +84,7 @@ class UI extends React.Component {
       return;
     }
 
-    this.props.cardKit.download(2, this.svgRef);
+    this.props.cardKit.download(2, this.svgRef.current);
   }
 
   handleSidebarChange(state) {
@@ -95,10 +95,6 @@ class UI extends React.Component {
 
   UNSAFE_componentWillReceiveProps(nextProps) {
     this.updateConfiguration(nextProps.configuration);
-  }
-
-  handleMount(svgRef) {
-    this.svgRef = svgRef;
   }
 
   render() {
@@ -125,7 +121,7 @@ class UI extends React.Component {
 
           <Canvas
             ref={this.canvasRef}
-            onMount={this.handleMount}
+            svgRef={this.svgRef}
             sidebarOpen={this.state.sidebarOpen}
             configuration={this.state.configuration}
           />

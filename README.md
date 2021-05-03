@@ -1,7 +1,5 @@
 # CardKit
 
-[![Join the chat at https://gitter.im/times/cardkit](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/times/cardkit?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
 > A simple, powerful and fully configurable image editor for web browers and servers. Optional UI included.
 
 CardKit has three main parts:
@@ -12,7 +10,7 @@ CardKit has three main parts:
 
 Additionally, a base class allows you to create your own renderers. See more in the [Custom Renderers](#custom-renderers) section.
 
-**For version 1, see the [`v1-master`](https://github.com/times/cardkit/tree/v1-master) branch**
+**For version 1, see the [`v1-master`](https://github.com/chrishutchinson/cardkit/tree/v1-master) branch**
 
 ## Installation
 
@@ -74,11 +72,11 @@ renderer.renderUI("card");
 <!-- Load in the CardKit and CardKitDOM Libraries -->
 <script
   type="text/javascript"
-  src="https://cdn.rawgit.com/times/cardkit/v2.0.6/dist/cardkit.js"
+  src="https://cdn.rawgit.com/chrishutchinson/cardkit/v2.0.6/dist/cardkit.js"
 ></script>
 <script
   type="text/javascript"
-  src="https://cdn.rawgit.com/times/cardkit/v2.0.6/dist/dom.js"
+  src="https://cdn.rawgit.com/chrishutchinson/cardkit/v2.0.6/dist/dom.js"
 ></script>
 
 <!-- Your container element to render into -->

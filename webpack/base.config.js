@@ -1,7 +1,6 @@
 const path = require("path");
-const ESLintPlugin = require("eslint-webpack-plugin");
 
-let config = {
+const config = {
   entry: {},
 
   output: {
@@ -66,7 +65,7 @@ let config = {
     fs: "empty",
   },
 
-  plugins: [new ESLintPlugin()],
+  plugins: [],
 };
 
 module.exports = config;

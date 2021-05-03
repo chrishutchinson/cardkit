@@ -264,13 +264,9 @@ var configuration = {
 };
 ```
 
-## Upgrading from v1.x
-
-Upgrading from v1.x to v2 should be a fairly straightforward process if you haven't made any major modifications to the v1.x user interface. Your configuration object from v1.x should be compatible with v2 with a few minor tweaks. Specific variations are available in the Wiki.
-
 ## Running locally
 
-CardKit currently requires Node.js 8, which you can install using `nvm` and running:
+CardKit currently requires Node.js 14, which you can install using `nvm` and running:
 
     $ nvm use
 

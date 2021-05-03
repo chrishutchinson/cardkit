@@ -2,9 +2,13 @@ name: Run tests and build
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
+      - v3-main
   pull_request:
-    branches: [main]
+    branches:
+      - main
+      - v3-main
 
 jobs:
   run:

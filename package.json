@@ -1,31 +1,35 @@
 {
   "name": "cardkit",
-  "version": "2.0.6",
+  "version": "3.0.0",
   "description": "A simple, powerful and fully configurable image editor for web browsers and servers. Optional UI included.",
   "main": "cardkit.js",
-  "homepage": "https://times.github.io/cardkit",
+  "homepage": "https://chrishutchinson.github.io/cardkit",
   "bugs": {
-    "url": "https://github.com/times/cardkit/issues"
+    "url": "https://github.com/chrishutchinson/cardkit/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/times/cardkit.git"
+    "url": "https://github.com/chrishutchinson/cardkit.git"
+  },
+  "engines": {
+    "node": ">14"
   },
   "scripts": {
-    "test": "./node_modules/.bin/istanbul cover --dir test/coverage ./node_modules/.bin/_mocha -- --require @babel/register --require ignore-styles",
-    "jsdoc": "./node_modules/.bin/jsdoc -c ./jsdoc.config.json -d ./docs/code -t ./node_modules/minami --verbose -R ./README.md",
-    "demo": "./node_modules/webpack/bin/webpack.js --env=dist-docs",
-    "docs": "npm run jsdoc; npm run demo",
-    "start": "./node_modules/webpack-dev-server/bin/webpack-dev-server.js -d --content-base ./src --hot --open",
+    "test": "istanbul cover --dir test/coverage _mocha -- --require @babel/register --require ignore-styles",
+    "jsdoc": "jsdoc -c ./jsdoc.config.json -d ./docs/code -t ./node_modules/minami --verbose -R ./README.md",
+    "demo": "webpack --env=dist-docs",
+    "docs": "npm run jsdoc",
+    "start": "webpack-dev-server -d --content-base ./src --hot --open",
     "dist": "npm run build",
     "build": "echo \"[NOTICE] This task will build ALL CardKit versions\"; echo \"[LOG] Building DOM library\"; npm run build-dom; echo \"[LOG] Building server library\"; npm run build-server; echo \"[LOG] Building core library\"; npm run build-core; echo \"[LOG] Building DOM <script> library\"; npm run build-dom-script; echo \"[LOG] Building core <script> library\"; npm run build-core-script",
-    "build-dom": "./node_modules/webpack/bin/webpack.js --env=dist-dom",
-    "build-server": "./node_modules/webpack/bin/webpack.js --env=dist-server",
-    "build-core": "./node_modules/webpack/bin/webpack.js --env=dist-core",
-    "build-dom-script": "./node_modules/webpack/bin/webpack.js --env=dist-dom-script",
-    "build-core-script": "./node_modules/webpack/bin/webpack.js --env=dist-core-script"
+    "build-dom": "webpack --env=dist-dom",
+    "build-server": "webpack --env=dist-server",
+    "build-core": "webpack --env=dist-core",
+    "build-dom-script": "webpack --env=dist-dom-script",
+    "build-core-script": "webpack --env=dist-core-script",
+    "test-and-build-all": "npm test; npm run build; npm run demo; npm run docs"
   },
-  "author": "Chris Hutchinson <chris.hutchinson@thetimes.co.uk>",
+  "author": "Chris Hutchinson <chris_hutchinson@me.com>",
   "license": "MIT",
   "devDependencies": {
     "@babel/cli": "^7.13.16",
@@ -63,7 +67,8 @@
     "url-loader": "^4.1.1",
     "webpack": "^4.46.0",
     "webpack-cli": "^3.3.12",
-    "webpack-dev-server": "^3.11.2"
+    "webpack-dev-server": "^3.11.2",
+    "webpack-merge": "^5.7.3"
   },
   "dependencies": {
     "btoa": "^1.1.2",
@@ -72,7 +77,6 @@
     "react": "^17.0.2",
     "react-color": "^2.3.2",
     "react-dom": "^17.0.2",
-    "rvg.js": "^1.1.0",
     "svg2png": "4.0.0"
   }
 }

@@ -2,15 +2,14 @@
 const path = require("path");
 const _ = require("lodash");
 const webpack = require("webpack");
-
-var fs = require("fs"),
-  node_modules = fs.readdirSync("node_modules");
+const { merge } = require("webpack-merge");
+const ESLintPlugin = require("eslint-webpack-plugin");
 
 // Get the base config
 const base = require("./base.config");
 
 // Merge with base
-let config = _.merge(base, {
+const config = merge(base, {
   entry: path.resolve(__dirname, "../src/renderers/dom/dom.js"),
   output: {
     path: path.resolve(__dirname, "../dist"),
@@ -36,16 +35,15 @@ let config = _.merge(base, {
   optimization: {
     minimize: true,
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      "process.env": {
+        NODE_ENV: JSON.stringify("production"),
+      },
+    }),
+    new ESLintPlugin(),
+  ],
 });
-
-// Set process.env.NODE_ENV to production
-config.plugins.push(
-  new webpack.DefinePlugin({
-    "process.env": {
-      NODE_ENV: JSON.stringify("production"),
-    },
-  })
-);
 
 // Export config
 module.exports = config;

@@ -1,7 +1,6 @@
 const path = require("path");
-const ESLintPlugin = require("eslint-webpack-plugin");
 
-let config = {
+const config = {
   entry: {},
 
   output: {
@@ -10,9 +9,14 @@ let config = {
     library: "CardKit[name]",
     libraryTarget: "umd",
     umdNamedDefine: true,
+    globalObject: "this",
   },
 
   mode: "development",
+
+  optimization: {
+    minimize: false,
+  },
 
   module: {
     rules: [
@@ -62,7 +66,7 @@ let config = {
     fs: "empty",
   },
 
-  plugins: [new ESLintPlugin()],
+  plugins: [],
 };
 
 module.exports = config;

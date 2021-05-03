@@ -4,7 +4,7 @@ const ReactDOM = require("react-dom");
 const Card = require("../shared/Card");
 const CardKitRenderer = require("../shared/base");
 const UI = require("./ui/ui");
-const SVGToImage = require("./svgToImage");
+const SVGToImage = require("./SVGToImage");
 const { slugify } = require("../../helpers");
 
 /**

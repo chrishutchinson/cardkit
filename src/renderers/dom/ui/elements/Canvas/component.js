@@ -10,16 +10,6 @@ const Card = require("../../../../shared/Card");
 
 // Canvas class
 class Canvas extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.handleMount = this.handleMount.bind(this);
-  }
-
-  handleMount(svgRef) {
-    this.props.onMount(svgRef);
-  }
-
   render() {
     return (
       <div
@@ -29,7 +19,7 @@ class Canvas extends React.Component {
       >
         <Card
           configuration={this.props.configuration}
-          onMount={this.handleMount}
+          svgRef={this.props.svgRef}
         />
       </div>
     );
@@ -39,7 +29,7 @@ class Canvas extends React.Component {
 Canvas.propTypes = {
   sidebarOpen: PropTypes.bool,
   configuration: PropTypes.object.isRequired,
-  onMount: PropTypes.func,
+  svgRef: PropTypes.any.isRequired,
 };
 
 // Export

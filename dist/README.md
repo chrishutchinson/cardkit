@@ -4,8 +4,9 @@ The files in here can be used in `<script>` tags in any HTML page. `React` and `
 
 ### Example
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react-dom.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.7.2/prop-types.min.js" integrity="sha512-ssNhh7jlzc+K93ckIlSXFHHz6fSFv0l619WOv8xbFNRbFOujbasb42LVMOggDrQR1ScJncoWb+KAJx1uF3ipjw==" crossorigin="anonymous"></script>
     <script type="text/javascript" src="/path/to/dist/cardkit.js"></script>
     <script type="text/javascript" src="/path/to/dist/dom.js"></script>
 

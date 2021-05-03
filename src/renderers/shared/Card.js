@@ -13,7 +13,7 @@ const {
   Image,
   Path,
   LinearGradient,
-} = require("rvg.js");
+} = require("../../rvg/elements");
 
 /**
  * @name Card
@@ -22,11 +22,6 @@ const {
 class Card extends React.Component {
   constructor(props) {
     super(props);
-    this.svgRef = React.createRef();
-  }
-
-  componentDidMount() {
-    this.props.onMount(this.svgRef);
   }
 
   /**
@@ -101,7 +96,7 @@ class Card extends React.Component {
    */
   getLayerValue(layers, layer, key) {
     if (typeof layer[key] === "function") {
-      return layer[key](layers, this.svgRef);
+      return layer[key](layers, this.props.svgRef);
     }
 
     return layer[key];
@@ -334,7 +329,7 @@ class Card extends React.Component {
     return (
       <div
         className="card"
-        ref={this.svgRef}
+        ref={this.props.svgRef}
         style={{ maxWidth: card.width, maxHeight: card.height }}
       >
         <SVG height={card.height} width={card.width} fill={card.fill}>
@@ -356,7 +351,7 @@ Card.propTypes = {
     fonts: PropTypes.object,
     layers: PropTypes.object,
   }),
-  onMount: PropTypes.func,
+  svgRef: PropTypes.any,
 };
 
 // Export

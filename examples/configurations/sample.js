@@ -89,8 +89,7 @@ var configuration = {
         text: true,
         fontSize: true,
       },
-      text:
-        "Created by The Times of London, available on GitHub at github.com/times/cardkit",
+      text: "Available on GitHub at github.com/chrishutchinson/cardkit",
     },
     features: {
       type: "text",

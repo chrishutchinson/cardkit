@@ -17,7 +17,6 @@ let config = _.merge(base, {
     filename: "bundle.js",
   },
   mode: "production",
-  eslint: null,
 });
 
 // Set process.env.NODE_ENV to production

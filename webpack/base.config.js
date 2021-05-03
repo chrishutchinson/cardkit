@@ -14,6 +14,10 @@ let config = {
 
   mode: "development",
 
+  optimization: {
+    minimize: false,
+  },
+
   module: {
     rules: [
       {

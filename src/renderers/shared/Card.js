@@ -351,7 +351,7 @@ Card.propTypes = {
     fonts: PropTypes.object,
     layers: PropTypes.object,
   }),
-  svgRef: PropTypes.any.isRequired,
+  svgRef: PropTypes.any,
 };
 
 // Export

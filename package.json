@@ -11,6 +11,9 @@
     "type": "git",
     "url": "https://github.com/chrishutchinson/cardkit.git"
   },
+  "engines": {
+    "node": ">14"
+  },
   "scripts": {
     "test": "istanbul cover --dir test/coverage _mocha -- --require @babel/register --require ignore-styles",
     "jsdoc": "jsdoc -c ./jsdoc.config.json -d ./docs/code -t ./node_modules/minami --verbose -R ./README.md",
@@ -23,7 +26,8 @@
     "build-server": "webpack --env=dist-server",
     "build-core": "webpack --env=dist-core",
     "build-dom-script": "webpack --env=dist-dom-script",
-    "build-core-script": "webpack --env=dist-core-script"
+    "build-core-script": "webpack --env=dist-core-script",
+    "prepare": "npm test; npm run build; npm run demo; npm run docs"
   },
   "author": "Chris Hutchinson <chris_hutchinson@me.com>",
   "license": "MIT",

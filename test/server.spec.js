@@ -1,30 +1,28 @@
 // Import assertion + helper libs
-const chai = require('chai');
-const sinon = require('sinon');
-const jsdom = require('mocha-jsdom');
+const chai = require("chai");
+const sinon = require("sinon");
+const jsdom = require("mocha-jsdom");
 
 // Import React libs
-const React = require('react');
-const ReactDOM = require('react-dom');
-const ReactDOMServer = require('react-dom/server');
+const React = require("react");
+const ReactDOM = require("react-dom");
+const ReactDOMServer = require("react-dom/server");
 
 // Tell chai that we'll be using the "should" style assertions.
 chai.should();
 
-function requireUncached(module){
-  delete require.cache[require.resolve(module)]
-  return require(module)
+function requireUncached(module) {
+  delete require.cache[require.resolve(module)];
+  return require(module);
 }
 
 // Import CardKit
-const CardKit = require('../src/cardkit');
-const CardKitServer = require('../src/renderers/server/server');
+const CardKit = require("../src/cardkit");
+const CardKitServer = require("../src/renderers/server/server");
 
-describe('cardkit/server', () => {
-
-  describe('#constructor()', () => {
-
-    it('requires a valid instance of CardKit', () => {
+describe("cardkit/server", () => {
+  describe("#constructor()", () => {
+    it("requires a valid instance of CardKit", () => {
       // Nothing provided
       (() => {
         new CardKit();
@@ -37,7 +35,7 @@ describe('cardkit/server', () => {
 
       // String provided
       (() => {
-        new CardKit('string');
+        new CardKit("string");
       }).should.throw(Error);
 
       // Empty object provided
@@ -48,7 +46,7 @@ describe('cardkit/server', () => {
       // Invalid object provided #1
       (() => {
         new CardKit({
-          card: 'string'
+          card: "string",
         });
       }).should.throw(Error);
 
@@ -56,8 +54,8 @@ describe('cardkit/server', () => {
       (() => {
         new CardKit({
           card: {
-            width: 1000
-          }
+            width: 1000,
+          },
         });
       }).should.throw(Error);
 
@@ -65,8 +63,8 @@ describe('cardkit/server', () => {
       (() => {
         new CardKit({
           card: {
-            height: 1000
-          }
+            height: 1000,
+          },
         });
       }).should.throw(Error);
 
@@ -76,132 +74,128 @@ describe('cardkit/server', () => {
           card: {
             width: 800,
             height: 600,
-            fill: '#FFF'
-          }
+            fill: "#FFF",
+          },
         });
       }).should.not.throw(Error);
     });
 
-    it('should store the supplied CardKit object', () => {
+    it("should store the supplied CardKit object", () => {
       const configuration = {
         card: {
           width: 800,
           height: 600,
-          fill: '#FFF'
-        }
+          fill: "#FFF",
+        },
       };
 
       const cardKit = new CardKit(configuration);
 
       cardKit.configuration.should.equal(configuration);
     });
-
   });
 
-
-  describe('#computeConfiguration()', () => {
+  describe("#computeConfiguration()", () => {
     let card,
-        renderer,
-        configuration = {
-          card: {
-            width: 1000,
-            height: 462,
-            fill: '#4da5bd'
-          }
-        };
+      renderer,
+      configuration = {
+        card: {
+          width: 1000,
+          height: 462,
+          fill: "#4da5bd",
+        },
+      };
 
-    it('should return the base configuration when no options are provided', () => {
+    it("should return the base configuration when no options are provided", () => {
       card = new CardKit(configuration);
       renderer = new CardKitServer(card);
 
       renderer.computeConfiguration().should.deep.equal(configuration);
     });
 
-    it('should return the extended configuration when theme overrides are provided', () => {
+    it("should return the extended configuration when theme overrides are provided", () => {
       card = new CardKit(configuration, {
         themes: {
-          'Alt': {
+          Alt: {
             card: {
-              fill: '#FFF'
-            }
-          }
-        }
+              fill: "#FFF",
+            },
+          },
+        },
       });
 
       const returnedConfiguration = card.computeConfiguration({
-        theme: 'Alt'
+        theme: "Alt",
       });
 
-      returnedConfiguration.card.fill.should.equal('#FFF');
+      returnedConfiguration.card.fill.should.equal("#FFF");
     });
 
-    it('should return the extended configuration when layout overrides are provided', () => {
+    it("should return the extended configuration when layout overrides are provided", () => {
       card = new CardKit(configuration, {
         layouts: {
-          'Large': {
+          Large: {
             card: {
-              height: 1000
-            }
-          }
-        }
+              height: 1000,
+            },
+          },
+        },
       });
 
       const returnedConfiguration = card.computeConfiguration({
-        layout: 'Large'
+        layout: "Large",
       });
 
       returnedConfiguration.card.height.should.equal(1000);
     });
 
-    it('should return the extended configuration when both theme and layout overrides are provided', () => {
+    it("should return the extended configuration when both theme and layout overrides are provided", () => {
       card = new CardKit(configuration, {
         layouts: {
-          'Large': {
+          Large: {
             card: {
-              height: 1000
-            }
-          }
+              height: 1000,
+            },
+          },
         },
         themes: {
-          'Alt': {
+          Alt: {
             card: {
-              fill: '#FFF'
-            }
-          }
-        }
+              fill: "#FFF",
+            },
+          },
+        },
       });
 
       const returnedConfiguration = card.computeConfiguration({
-        layout: 'Large',
-        theme: 'Alt'
+        layout: "Large",
+        theme: "Alt",
       });
 
       returnedConfiguration.card.height.should.equal(1000);
-      returnedConfiguration.card.fill.should.equal('#FFF');
+      returnedConfiguration.card.fill.should.equal("#FFF");
     });
-
   });
 
-
-  describe('#renderToString()', () => {
+  describe("#renderToString()", () => {
     let card,
-        renderer,
-        configuration = {
-          card: {
-            width: 1000,
-            height: 462,
-            fill: '#4da5bd'
-          }
-        };
-    
+      renderer,
+      configuration = {
+        card: {
+          width: 1000,
+          height: 462,
+          fill: "#4da5bd",
+        },
+      };
+
     beforeEach(() => {
       // Create a new CardKit object before every test.
       card = new CardKit(configuration);
       renderer = new CardKitServer(card);
     });
 
-    it('should return call ReactDOMServer.renderToString', () => {
-      sinon.stub(ReactDOMServer, 'renderToString');
+    it("should return call ReactDOMServer.renderToString", () => {
+      sinon.stub(ReactDOMServer, "renderToString");
 
       renderer.renderToString();
 
@@ -210,18 +204,15 @@ describe('cardkit/server', () => {
       ReactDOMServer.renderToString.restore();
     });
 
-    it('should return a string', () => {
-      const stub = sinon.stub(ReactDOMServer, 'renderToString');
-      stub.returns('string');
+    it("should return a string", () => {
+      const stub = sinon.stub(ReactDOMServer, "renderToString");
+      stub.returns("string");
 
       const string = renderer.renderToString();
 
-      string.should.equal('string');
-      
+      string.should.equal("string");
+
       ReactDOMServer.renderToString.restore();
     });
-
   });
-
-
 });

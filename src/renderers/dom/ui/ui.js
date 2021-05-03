@@ -1,28 +1,29 @@
 // Libraries
-const React = require('react');
+const React = require("react");
+const PropTypes = require("prop-types");
 
 // Styles
-require('./base.scss');
+require("./base.scss");
 
 // Elements
-const {
-  Header,
-  Sidebar,
-  Canvas
-} = require('./elements');
+const { Header, Sidebar, Canvas } = require("./elements");
 
 // UI class
 class UI extends React.Component {
-
-  constructor (props) {
+  constructor(props) {
     super(props);
+
+    this.canvasRef = React.createRef();
+    this.svgRef = null;
 
     this.state = {
       configuration: this.props.configuration,
-      template: ((this.props.templates) ? Object.keys(this.props.templates)[0] : false),
-      theme: ((this.props.themes) ? Object.keys(this.props.themes)[0] : false),
-      layout: ((this.props.layouts) ? Object.keys(this.props.layouts)[0] : false),
-      sidebarOpen: true
+      template: this.props.templates
+        ? Object.keys(this.props.templates)[0]
+        : false,
+      theme: this.props.themes ? Object.keys(this.props.themes)[0] : false,
+      layout: this.props.layouts ? Object.keys(this.props.layouts)[0] : false,
+      sidebarOpen: true,
     };
 
     this.updateConfiguration = this.updateConfiguration.bind(this);
@@ -33,111 +34,114 @@ class UI extends React.Component {
     this.handleSidebarChange = this.handleSidebarChange.bind(this);
   }
 
-  updateConfiguration (configuration) {
+  updateConfiguration(configuration) {
     this.setState({
-      configuration: configuration
+      configuration: configuration,
     });
   }
 
-  updateTemplate (template) {
+  updateTemplate(template) {
     const configuration = this.props.cardKit.computeConfiguration({
       template: template,
       theme: this.state.theme,
-      layout: this.state.layout
+      layout: this.state.layout,
     });
 
     this.setState({
       configuration: configuration,
-      template: template
+      template: template,
     });
   }
 
-  updateLayout (layout) {
+  updateLayout(layout) {
     const configuration = this.props.cardKit.computeConfiguration({
       template: this.state.template,
       theme: this.state.theme,
-      layout: layout
+      layout: layout,
     });
 
     this.setState({
       configuration: configuration,
-      layout: layout
+      layout: layout,
     });
   }
 
-  updateTheme (theme) {
+  updateTheme(theme) {
     const configuration = this.props.cardKit.computeConfiguration({
       template: this.state.template,
       theme: theme,
-      layout: this.state.layout
+      layout: this.state.layout,
     });
 
     this.setState({
       configuration: configuration,
-      theme: theme
+      theme: theme,
     });
   }
 
-  downloadCard () {
-    // This is dumb, but allows us to get at the SVG element on the DOM, which we can then send off for download
-    this.props.cardKit.download(2, this.refs.canvas.refs.card.refs.svg);
+  downloadCard() {
+    if (!this.svgRef) {
+      return;
+    }
+
+    this.props.cardKit.download(2, this.svgRef);
   }
 
-  handleSidebarChange (state) {
+  handleSidebarChange(state) {
     this.setState({
-      sidebarOpen: state
+      sidebarOpen: state,
     });
   }
 
-  componentWillReceiveProps (nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     this.updateConfiguration(nextProps.configuration);
   }
 
-  render () {
+  handleMount(svgRef) {
+    this.svgRef = svgRef;
+  }
+
+  render() {
     return (
       <div>
         <Header />
 
         <main className="main">
-
-          <Sidebar configuration={this.state.configuration}
-
+          <Sidebar
+            configuration={this.state.configuration}
             template={this.state.template}
             templates={this.props.templates}
-
             theme={this.state.theme}
             themes={this.props.themes}
-
             layout={this.state.layout}
             layouts={this.props.layouts}
-
             onConfigurationChange={this.updateConfiguration}
             onTemplateChange={this.updateTemplate}
             onThemeChange={this.updateTheme}
             onLayoutChange={this.updateLayout}
-
             onRequestDownload={this.downloadCard}
-            onSidebarChange={this.handleSidebarChange} />
+            onSidebarChange={this.handleSidebarChange}
+          />
 
-          <Canvas ref="canvas"
+          <Canvas
+            ref={this.canvasRef}
+            onMount={this.handleMount}
             sidebarOpen={this.state.sidebarOpen}
-            configuration={this.state.configuration} />
-
+            configuration={this.state.configuration}
+          />
         </main>
-
       </div>
     );
   }
-
 }
 
 UI.propTypes = {
-  templates: React.PropTypes.object,
-  layouts: React.PropTypes.object,
-  themes: React.PropTypes.object,
-  cardKit: React.PropTypes.object.isRequired,
-  configuration: React.PropTypes.object.isRequired
-}
+  templates: PropTypes.object,
+  layouts: PropTypes.object,
+  themes: PropTypes.object,
+  cardKit: PropTypes.object.isRequired,
+  configuration: PropTypes.object.isRequired,
+};
 
 // Export
 module.exports = UI;

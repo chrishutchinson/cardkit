@@ -27,7 +27,7 @@
     "build-core": "webpack --env=dist-core",
     "build-dom-script": "webpack --env=dist-dom-script",
     "build-core-script": "webpack --env=dist-core-script",
-    "prepare": "npm test; npm run build; npm run demo; npm run docs"
+    "test-and-build-all": "npm test; npm run build; npm run demo; npm run docs"
   },
   "author": "Chris Hutchinson <chris_hutchinson@me.com>",
   "license": "MIT",

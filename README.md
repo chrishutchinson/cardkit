@@ -10,8 +10,6 @@ CardKit has three main parts:
 
 Additionally, a base class allows you to create your own renderers. See more in the [Custom Renderers](#custom-renderers) section.
 
-**For version 1, see the [`v1-master`](https://github.com/chrishutchinson/cardkit/tree/v1-master) branch**
-
 ## Installation
 
 `$ npm install cardkit --save`
@@ -21,6 +19,12 @@ Additionally, a base class allows you to create your own renderers. See more in 
 CardKit requires a configuration object in order to render an image. Each renderer (CardKitDOM and CardKitServer) uses this configuration and converts it into an output. Below are simple implementations for CardKit depending on your use case.
 
 In addition to these, you may also want to try the [CardKit Yeoman Generator](https://www.github.com/times/generator-cardkit), which can help you scaffold an entire project in just a few moments. It brings with it the latest version of CardKit, a recommended directory structure, and a build process that helps you get your CardKit project deployed. There is also a [JSFiddle](https://jsfiddle.net/chrishutchinson/16tLs2ta/) that you can fork and edit for quick in-browser testing without touching the command line.
+
+### Previous versions
+
+For **version 1**, see the [`v1-main`](https://github.com/chrishutchinson/cardkit/tree/v1-main) branch.
+
+For **version 2**, see the [`v2-main`](https://github.com/chrishutchinson/cardkit/tree/v2-main) branch.
 
 #### Yeoman generator
 
@@ -264,13 +268,9 @@ var configuration = {
 };
 ```
 
-## Upgrading from v1.x
-
-Upgrading from v1.x to v2 should be a fairly straightforward process if you haven't made any major modifications to the v1.x user interface. Your configuration object from v1.x should be compatible with v2 with a few minor tweaks. Specific variations are available in the Wiki.
-
 ## Running locally
 
-CardKit currently requires Node.js 8, which you can install using `nvm` and running:
+CardKit currently requires Node.js 14, which you can install using `nvm` and running:
 
     $ nvm use
 

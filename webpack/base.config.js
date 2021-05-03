@@ -1,68 +1,80 @@
-const path = require("path");
-const ESLintPlugin = require("eslint-webpack-plugin");
+const path = require('path');
 
 let config = {
+
   entry: {},
 
   output: {
-    path: path.resolve(__dirname, "../"),
-    filename: "[name].js",
-    library: "CardKit[name]",
-    libraryTarget: "umd",
-    umdNamedDefine: true,
+    path: './',
+    filename: '[name].js',
+    library: 'CardKit[name]',
+    libraryTarget: 'umd',
+    umdNamedDefine: true
   },
 
-  mode: "development",
-
   module: {
-    rules: [
+
+    preLoaders: [
       {
-        test: /\.js$/i,
+        test: /\.js$/,
+        loader: 'eslint-loader?{rules:{semi:0,"jsx-quotes":0}}',
+        exclude: /node_modules/
+      }
+    ],
+
+    loaders: [
+      {
+        test: /\.js$/i, 
         exclude: /(node_modules)/,
-        use: {
-          loader: "babel-loader",
-          options: {
-            presets: ["@babel/preset-env", "@babel/preset-react"],
-          },
-        },
+        loader: 'babel-loader',
+        query: {
+          presets: ['es2015', 'react']
+        }
       },
       {
-        test: /\.js$/i,
+        test: /\.js$/i, 
         include: /(node_modules\/svg2png)/,
-        use: {
-          loader: "babel-loader",
-          options: {
-            presets: ["@babel/preset-env"],
-          },
-        },
+        loader: 'babel-loader',
+        query: {
+          presets: ['es2015']
+        }
       },
       {
         test: /\.scss$/,
-        use: ["style-loader", "css-loader", "sass-loader"],
+        loaders: ['style', 'css', 'sass']
       },
       {
         test: /\.(jpe?g|png|gif)$/i,
-        use: {
-          loader: "url-loader",
-          options: {
-            limit: 50000,
-          },
-        },
+        loader: 'url-loader?limit=50000'
       },
       {
         test: /\.svg$/,
         exclude: /(node_modules)/,
-        use: "svg-inline-loader",
-      },
-    ],
+        loader: 'svg-inline'
+      }
+    ]
+
+  },
+
+  resolve: {
+    root: path.resolve('./src'),
+    extensions: ['', '.js'],
+    alias: {
+      react: path.resolve('./node_modules/react'),
+    }
   },
 
   node: {
-    child_process: "empty",
-    fs: "empty",
+    child_process: 'empty',
+    fs: 'empty'
   },
 
-  plugins: [new ESLintPlugin()],
-};
+  plugins: [],
+
+  eslint: {
+    configFile: path.resolve('./eslintrc.json'),
+  }
+
+}
 
 module.exports = config;

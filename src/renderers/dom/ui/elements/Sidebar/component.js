@@ -1,32 +1,37 @@
 // Libraries
-const React = require("react");
-const PropTypes = require("prop-types");
+const React = require('react');
 
 // Styles
-require("./style.scss");
+require('./style.scss');
 
-const { Content, Template, Theme, Layout } = require("../panels");
-const PanelButton = require("./PanelButton");
+const {
+  Content,
+  Template,
+  Theme,
+  Layout
+} = require('../panels');
+const PanelButton = require('./PanelButton');
 
 // Sidebar class
 class Sidebar extends React.Component {
-  constructor(props) {
+
+  constructor (props) {
     super(props);
 
     let defaultPanel;
     if (this.props.templates) {
-      defaultPanel = "template";
+      defaultPanel = 'template';
     } else if (this.props.layouts) {
-      defaultPanel = "layout";
+      defaultPanel = 'layout';
     } else if (this.props.themes) {
-      defaultPanel = "theme";
+      defaultPanel = 'theme';
     } else {
-      defaultPanel = "content";
+      defaultPanel = 'content';
     }
 
     this.state = {
-      panel: defaultPanel,
-    };
+      panel: defaultPanel
+    }
 
     this.handleConfigurationChange = this.handleConfigurationChange.bind(this);
     this.handleTemplateChange = this.handleTemplateChange.bind(this);
@@ -38,13 +43,13 @@ class Sidebar extends React.Component {
     this.renderButton = this.renderButton.bind(this);
   }
 
-  updateConfiguration() {
+  updateConfiguration (e) {
     const configuration = this.props.configuration;
 
     this.props.onConfigurationChange(configuration);
   }
 
-  openPanel(panel) {
+  openPanel (panel) {
     if (panel === this.state.panel) {
       this.props.onSidebarChange(false);
     } else {
@@ -52,130 +57,124 @@ class Sidebar extends React.Component {
     }
 
     this.setState({
-      panel: panel === this.state.panel ? false : panel,
+      panel: (panel === this.state.panel ? false : panel)
     });
   }
 
-  isPanel(panel) {
-    return this.state.panel === panel;
+  isPanel (panel) {
+    return (this.state.panel === panel);
   }
 
-  handleConfigurationChange(configuration) {
+  handleConfigurationChange (configuration) {
     this.props.onConfigurationChange(configuration);
   }
 
-  handleTemplateChange(template) {
+  handleTemplateChange (template) {
     this.props.onTemplateChange(template);
   }
 
-  handleThemeChange(theme) {
+  handleThemeChange (theme) {
     this.props.onThemeChange(theme);
   }
 
-  handleLayoutChange(layout) {
+  handleLayoutChange (layout) {
     this.props.onLayoutChange(layout);
   }
 
-  renderButton(panelName, panelTitle, options) {
+  renderButton (panelName, panelTitle, options) {
     if (!options) return null;
 
-    return (
-      <PanelButton
-        name={panelName}
-        title={panelTitle}
-        onClick={this.openPanel}
-        active={this.isPanel(panelName)}
-      />
-    );
+    return (<PanelButton name={panelName}
+      title={panelTitle}
+      onClick={this.openPanel}
+      active={this.isPanel(panelName)} />);
   }
 
-  render() {
+  render () {
     return (
-      <aside className={"sidebar" + (this.state.panel ? " sidebar--open" : "")}>
+      <aside className={'sidebar' + (this.state.panel ? ' sidebar--open' : '')}>
+
         <main className="panels">
           {(() => {
             if (this.props.templates) {
-              return (
-                <Template
-                  templates={this.props.templates}
-                  template={this.props.template}
-                  active={this.isPanel("template")}
-                  onTemplateChange={this.handleTemplateChange}
-                />
-              );
+              return (<Template templates={this.props.templates}
+                template={this.props.template}
+                active={this.isPanel('template')}
+                onTemplateChange={this.handleTemplateChange} />);
             }
           })()}
 
           {(() => {
             if (this.props.layouts) {
-              return (
-                <Layout
-                  layouts={this.props.layouts}
-                  layout={this.props.layout}
-                  active={this.isPanel("layout")}
-                  onLayoutChange={this.handleLayoutChange}
-                />
-              );
+              return (<Layout layouts={this.props.layouts}
+                layout={this.props.layout}
+                active={this.isPanel('layout')}
+                onLayoutChange={this.handleLayoutChange} />);
             }
           })()}
 
           {(() => {
             if (this.props.themes) {
-              return (
-                <Theme
-                  themes={this.props.themes}
-                  theme={this.props.theme}
-                  configuration={this.props.configuration}
-                  active={this.isPanel("theme")}
-                  onThemeChange={this.handleThemeChange}
-                />
-              );
+              return (<Theme themes={this.props.themes}
+                theme={this.props.theme}
+                configuration={this.props.configuration}
+                active={this.isPanel('theme')}
+                onThemeChange={this.handleThemeChange} />);
             }
           })()}
 
           {(() => {
             if (this.props.configuration) {
-              return (
-                <Content
-                  configuration={this.props.configuration}
-                  active={this.isPanel("content")}
-                  onConfigurationChange={this.handleConfigurationChange}
-                />
-              );
+              return (<Content configuration={this.props.configuration}
+                active={this.isPanel('content')}
+                onConfigurationChange={this.handleConfigurationChange} />);
             }
           })()}
         </main>
 
         <ul className="buttons">
-          {this.renderButton("template", "Template", this.props.templates)}
-          {this.renderButton("layout", "Layouts", this.props.layouts)}
-          {this.renderButton("theme", "Themes", this.props.themes)}
-          {this.renderButton("content", "Content", this.props.configuration)}
+
+          {this.renderButton('template', 'Template', this.props.templates)}
+          {this.renderButton('layout', 'Layouts', this.props.layouts)}
+          {this.renderButton('theme', 'Themes', this.props.themes)}
+          {this.renderButton('content', 'Content', this.props.configuration)}
 
           <li className="pull-bottom">
             <button onClick={this.props.onRequestDownload}>Save</button>
           </li>
+
         </ul>
+
       </aside>
     );
   }
+
 }
 
 Sidebar.propTypes = {
-  onRequestDownload: PropTypes.func.isRequired,
-  onConfigurationChange: PropTypes.func.isRequired,
-  onSidebarChange: PropTypes.func.isRequired,
-  onThemeChange: PropTypes.func.isRequired,
-  onTemplateChange: PropTypes.func.isRequired,
-  onLayoutChange: PropTypes.func.isRequired,
-  configuration: PropTypes.object.isRequired,
-  theme: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
-  themes: PropTypes.object,
-  template: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
-  templates: PropTypes.object,
-  layout: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
-  layouts: PropTypes.object,
-};
+  onRequestDownload: React.PropTypes.func.isRequired,
+  onConfigurationChange: React.PropTypes.func.isRequired,
+  onSidebarChange: React.PropTypes.func.isRequired,
+  onThemeChange: React.PropTypes.func.isRequired,
+  onTemplateChange: React.PropTypes.func.isRequired,
+  onLayoutChange: React.PropTypes.func.isRequired,
+  configuration: React.PropTypes.object.isRequired,
+  theme: React.PropTypes.oneOfType([
+    React.PropTypes.string,
+    React.PropTypes.bool
+  ]),
+  themes: React.PropTypes.object,
+  template: React.PropTypes.oneOfType([
+    React.PropTypes.string,
+    React.PropTypes.bool
+  ]),
+  templates: React.PropTypes.object,
+  layout: React.PropTypes.oneOfType([
+    React.PropTypes.string,
+    React.PropTypes.bool
+  ]),
+  layouts: React.PropTypes.object
+}
 
 // Export
 module.exports = Sidebar;

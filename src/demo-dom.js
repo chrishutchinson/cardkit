@@ -7,26 +7,21 @@
  */
 
 // Load dependencies
-const CardKit = require("./cardkit");
-const CardKitDOM = require("./renderers/dom/dom");
+const CardKit = require('./cardkit');
+const CardKitDOM = require('./renderers/dom/dom');
 
 // Import configuration
-const {
-  configuration,
-  templates,
-  themes,
-  layouts,
-} = require("../examples/configurations/sample");
+const { configuration, templates, themes, layouts } = require('../examples/configurations/sample');
 
 // Initialise
 const cardkit = new CardKit(configuration, {
   templates: templates,
   themes: themes,
-  layouts: layouts,
+  layouts: layouts
 });
 
 // Start the renderer
 const renderer = new CardKitDOM(cardkit);
 
 // Render the UI
-renderer.renderUI("ui");
+renderer.renderUI('ui');

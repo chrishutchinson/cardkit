@@ -1,46 +1,29 @@
 // Libraries
-const React = require("react");
-const PropTypes = require("prop-types");
+const React = require('react');
 
 // Styles
-require("./style.scss");
+require('./style.scss');
 
 // Card
-const Card = require("../../../../shared/Card");
+const Card = require('../../../../shared/Card');
 
 // Canvas class
 class Canvas extends React.Component {
-  constructor(props) {
-    super(props);
 
-    this.handleMount = this.handleMount.bind(this);
-  }
-
-  handleMount(svgRef) {
-    this.props.onMount(svgRef);
-  }
-
-  render() {
+  render () {
     return (
-      <div
-        className={
-          "canvas" + (this.props.sidebarOpen ? " canvas--with-sidebar" : "")
-        }
-      >
-        <Card
-          configuration={this.props.configuration}
-          onMount={this.handleMount}
-        />
+      <div className={'canvas' + (this.props.sidebarOpen ? ' canvas--with-sidebar' : '')}>
+        <Card ref="card" configuration={this.props.configuration} />
       </div>
     );
   }
+
 }
 
 Canvas.propTypes = {
-  sidebarOpen: PropTypes.bool,
-  configuration: PropTypes.object.isRequired,
-  onMount: PropTypes.func,
-};
+  sidebarOpen: React.PropTypes.bool,
+  configuration: React.PropTypes.object.isRequired
+}
 
 // Export
 module.exports = Canvas;

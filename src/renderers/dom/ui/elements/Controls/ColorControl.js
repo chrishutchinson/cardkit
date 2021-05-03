@@ -1,54 +1,46 @@
 // Libraries
-const React = require("react");
-const { ChromePicker, CirclePicker } = require("react-color");
-const PropTypes = require("prop-types");
-
-const helpers = require("../../../../../helpers");
+const React = require('react');
+const { ChromePicker, CirclePicker } = require('react-color');
+const helpers = require('../../../../../helpers');
 
 // ColorControl class
 class ColorControl extends React.Component {
-  constructor(props) {
+
+  constructor (props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
     this.handleColorChange = this.handleColorChange.bind(this);
   }
 
-  handleChange(e) {
+  handleChange (e) {
     let element = e.target;
     this.props.onNewValue(this.props.name, element.value);
   }
 
-  handleColorChange(color) {
+  handleColorChange (color) {
     this.props.onNewValue(this.props.name, color.hex);
   }
 
-  render() {
+  render () {
     if (!this.props.layer.editable[this.props.name]) return null;
 
-    if (
-      typeof this.props.layer.editable[this.props.name] === "object" &&
-      this.props.layer.editable[this.props.name].options
-    ) {
+    if (typeof this.props.layer.editable[this.props.name] === 'object' && this.props.layer.editable[this.props.name].options) {
       return (
         <div>
           <strong>Fill</strong>
-          <CirclePicker
-            color={this.props.layer[this.props.name]}
+          <CirclePicker color={this.props.layer[this.props.name]}
             colors={this.props.layer.editable[this.props.name].options}
-            onChange={this.handleColorChange}
-          />
+            onChange={this.handleColorChange} />
         </div>
       );
     }
 
-    if (this.props.layer.editable[this.props.name] === "picker") {
+    if (this.props.layer.editable[this.props.name] === 'picker') {
       return (
         <div>
           <strong>{helpers.capitaliseFirstLetter(this.props.name)}</strong>
-          <ChromePicker
-            color={this.props.layer[this.props.name]}
-            onChange={this.handleColorChange}
-          />
+          <ChromePicker color={this.props.layer[this.props.name]}
+            onChange={this.handleColorChange} />
         </div>
       );
     }
@@ -57,24 +49,23 @@ class ColorControl extends React.Component {
       return (
         <div>
           <strong>{helpers.capitaliseFirstLetter(this.props.name)}</strong>
-          <input
-            type="text"
+          <input type="text"
             value={this.props.layer[this.props.name]}
-            onChange={this.handleChange}
-          />
+            onChange={this.handleChange} />
         </div>
       );
     }
 
     return null;
   }
+
 }
 
 ColorControl.propTypes = {
-  name: PropTypes.string.isRequired,
-  onNewValue: PropTypes.func.isRequired,
-  layer: PropTypes.object.isRequired,
-};
+  name: React.PropTypes.string.isRequired,
+  onNewValue: React.PropTypes.func.isRequired,
+  layer: React.PropTypes.object.isRequired
+}
 
 // Export
 module.exports = ColorControl;

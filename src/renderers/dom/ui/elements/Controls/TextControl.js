@@ -1,39 +1,33 @@
 // Libraries
-const React = require("react");
-const PropTypes = require("prop-types");
+const React = require('react');
 
 // TextControl class
 class TextControl extends React.Component {
-  constructor(props) {
+
+  constructor (props) {
     super(props);
 
     this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange(e) {
+  handleChange (e) {
     let element = e.target;
-    this.props.onNewValue("text", element.value);
+    this.props.onNewValue('text', element.value);
   }
 
-  render() {
+  render () {
     if (!this.props.layer.editable.text) return null;
 
-    if (typeof this.props.layer.editable.text === "object") {
+    if (typeof this.props.layer.editable.text === 'object') {
       if (this.props.layer.editable.text.options) {
         // We have a select instead of a free-input
         return (
           <div>
             <strong>Text</strong>
-            <select
-              defaultValue={this.props.layer.text}
-              onChange={this.handleChange}
-            >
+            <select defaultValue={this.props.layer.text}
+              onChange={this.handleChange}>
               {this.props.layer.editable.text.options.map((option, index) => {
-                return (
-                  <option key={index} value={option}>
-                    {option}
-                  </option>
-                );
+                return (<option key={index} value={option}>{option}</option>);
               })}
             </select>
           </div>
@@ -42,17 +36,15 @@ class TextControl extends React.Component {
 
       // We have some config
       const config = {
-        maxLength: this.props.layer.editable.text.max || null,
+        maxLength: this.props.layer.editable.text.max || null
       };
 
       return (
         <div>
           <strong>Text</strong>
-          <textarea
-            {...config}
+          <textarea {...config}
             value={this.props.layer.text}
-            onChange={this.handleChange}
-          />
+            onChange={this.handleChange} />
         </div>
       );
     }
@@ -61,20 +53,19 @@ class TextControl extends React.Component {
       return (
         <div>
           <strong>Text</strong>
-          <textarea
-            value={this.props.layer.text}
-            onChange={this.handleChange}
-          />
+          <textarea value={this.props.layer.text}
+            onChange={this.handleChange} />
         </div>
       );
     }
   }
+
 }
 
 TextControl.propTypes = {
-  onNewValue: PropTypes.func.isRequired,
-  layer: PropTypes.object.isRequired,
-};
+  onNewValue: React.PropTypes.func.isRequired,
+  layer: React.PropTypes.object.isRequired
+}
 
 // Export
 module.exports = TextControl;

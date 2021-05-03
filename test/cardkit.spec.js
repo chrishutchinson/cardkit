@@ -1,29 +1,31 @@
 // Import assertion + helper libs
-const chai = require("chai");
-const sinon = require("sinon");
-const jsdom = require("mocha-jsdom");
+const chai = require('chai');
+const sinon = require('sinon');
+const jsdom = require('mocha-jsdom');
 
 // Import React libs
-const React = require("react");
-const ReactDOM = require("react-dom");
-const ReactDOMServer = require("react-dom/server");
+const React = require('react');
+const ReactDOM = require('react-dom');
+const ReactDOMServer = require('react-dom/server');
 
 // Tell chai that we'll be using the "should" style assertions.
 chai.should();
 
-function requireUncached(module) {
-  delete require.cache[require.resolve(module)];
-  return require(module);
+function requireUncached(module){
+  delete require.cache[require.resolve(module)]
+  return require(module)
 }
 
 // Import CardKit
-const CardKit = require("../src/cardkit");
-const CardKitDOM = require("../src/renderers/dom/dom");
-const CardKitServer = require("../src/renderers/server/server");
+const CardKit = require('../src/cardkit');
+const CardKitDOM = require('../src/renderers/dom/dom');
+const CardKitServer = require('../src/renderers/server/server');
 
-describe("cardkit", () => {
-  describe("#constructor()", () => {
-    it("requires a valid configuration object", () => {
+describe('cardkit', () => {
+
+  describe('#constructor()', () => {
+
+    it('requires a valid configuration object', () => {
       // Nothing provided
       (() => {
         new CardKit();
@@ -36,7 +38,7 @@ describe("cardkit", () => {
 
       // String provided
       (() => {
-        new CardKit("string");
+        new CardKit('string');
       }).should.throw(Error);
 
       // Empty object provided
@@ -47,7 +49,7 @@ describe("cardkit", () => {
       // Invalid object provided #1
       (() => {
         new CardKit({
-          card: "string",
+          card: 'string'
         });
       }).should.throw(Error);
 
@@ -55,8 +57,8 @@ describe("cardkit", () => {
       (() => {
         new CardKit({
           card: {
-            width: 1000,
-          },
+            width: 1000
+          }
         });
       }).should.throw(Error);
 
@@ -64,8 +66,8 @@ describe("cardkit", () => {
       (() => {
         new CardKit({
           card: {
-            height: 1000,
-          },
+            height: 1000
+          }
         });
       }).should.throw(Error);
 
@@ -75,50 +77,50 @@ describe("cardkit", () => {
           card: {
             width: 800,
             height: 600,
-            fill: "#FFF",
-          },
+            fill: '#FFF'
+          }
         });
       }).should.not.throw(Error);
     });
 
-    it("only accepts valid theme, template and layout objects", () => {
+    it('only accepts valid theme, template and layout objects', () => {
       const validConfiguration = {
         card: {
           width: 800,
           height: 600,
-          fill: "#FFF",
-        },
+          fill: '#FFF'
+        }
       };
 
       // Invalid themes object provided
       (() => {
         new CardKit(validConfiguration, {
-          themes: "invalid-themes",
+          themes: 'invalid-themes'
         });
       }).should.throw(Error, /Invalid themes configuration object provided/);
 
       // Invalid templates object provided
       (() => {
         new CardKit(validConfiguration, {
-          templates: "invalid-templates",
+          templates: 'invalid-templates'
         });
       }).should.throw(Error, /Invalid templates configuration object provided/);
 
       // Invalid layouts object provided
       (() => {
         new CardKit(validConfiguration, {
-          layouts: "invalid-layouts",
+          layouts: 'invalid-layouts'
         });
       }).should.throw(Error, /Invalid layouts configuration object provided/);
     });
 
-    it("should store the supplied configuration object", () => {
+    it('should store the supplied configuration object', () => {
       const configuration = {
         card: {
           width: 800,
           height: 600,
-          fill: "#FFF",
-        },
+          fill: '#FFF'
+        }
       };
 
       const cardKit = new CardKit(configuration);
@@ -126,147 +128,155 @@ describe("cardkit", () => {
       cardKit.configuration.should.equal(configuration);
     });
 
-    it("should store the themes object if one is supplied", () => {
+
+    it('should store the themes object if one is supplied', () => {
       const configuration = {
         card: {
           width: 800,
           height: 600,
-          fill: "#FFF",
-        },
+          fill: '#FFF'
+        }
       };
 
       const themes = {
-        Alt: {
+        'Alt': {
           card: {
-            fill: "#000",
-          },
-        },
+            fill: '#000'
+          }
+        }
       };
 
       const cardKit = new CardKit(configuration, {
-        themes: themes,
+        themes: themes
       });
 
       cardKit.themes.should.equal(themes);
     });
 
-    it("should store the layouts object if one is supplied", () => {
+
+    it('should store the layouts object if one is supplied', () => {
       const configuration = {
         card: {
           width: 800,
           height: 600,
-          fill: "#FFF",
-        },
+          fill: '#FFF'
+        }
       };
 
       const layouts = {
-        Alt: {
+        'Alt': {
           card: {
-            width: 800,
-          },
-        },
+            width: 800
+          }
+        }
       };
 
       const cardKit = new CardKit(configuration, {
-        layouts: layouts,
+        layouts: layouts
       });
 
       cardKit.layouts.should.equal(layouts);
     });
+
   });
 
-  describe("#computeConfiguration()", () => {
-    let card,
-      configuration = {
-        card: {
-          width: 1000,
-          height: 462,
-          fill: "#4da5bd",
-        },
-      };
 
-    it("should return the base configuration when no overrides are provided", () => {
+  describe('#computeConfiguration()', () => {
+    let card,
+        configuration = {
+          card: {
+            width: 1000,
+            height: 462,
+            fill: '#4da5bd'
+          }
+        };
+
+
+    it('should return the base configuration when no overrides are provided', () => {
       card = new CardKit(configuration);
 
       card.computeConfiguration().should.deep.equal(configuration);
     });
 
-    it("should return the extended configuration when theme overrides are provided", () => {
+    it('should return the extended configuration when theme overrides are provided', () => {
       card = new CardKit(configuration, {
         themes: {
-          Alt: {
+          'Alt': {
             card: {
-              fill: "#FFF",
-            },
-          },
-        },
+              fill: '#FFF'
+            }
+          }
+        }
       });
 
       const returnedConfiguration = card.computeConfiguration({
-        theme: "Alt",
+        theme: 'Alt'
       });
 
-      returnedConfiguration.card.fill.should.equal("#FFF");
+      returnedConfiguration.card.fill.should.equal('#FFF');
     });
 
-    it("should return the extended configuration when layout overrides are provided", () => {
+    it('should return the extended configuration when layout overrides are provided', () => {
       card = new CardKit(configuration, {
         layouts: {
-          Large: {
+          'Large': {
             card: {
-              height: 1000,
-            },
-          },
-        },
+              height: 1000
+            }
+          }
+        }
       });
 
       const returnedConfiguration = card.computeConfiguration({
-        layout: "Large",
+        layout: 'Large'
       });
 
       returnedConfiguration.card.height.should.equal(1000);
     });
 
-    it("should return the extended configuration when both theme and layout overrides are provided", () => {
+    it('should return the extended configuration when both theme and layout overrides are provided', () => {
       card = new CardKit(configuration, {
         layouts: {
-          Large: {
+          'Large': {
             card: {
-              height: 1000,
-            },
-          },
+              height: 1000
+            }
+          }
         },
         themes: {
-          Alt: {
+          'Alt': {
             card: {
-              fill: "#FFF",
-            },
-          },
-        },
+              fill: '#FFF'
+            }
+          }
+        }
       });
 
       const returnedConfiguration = card.computeConfiguration({
-        layout: "Large",
-        theme: "Alt",
+        layout: 'Large',
+        theme: 'Alt'
       });
 
       returnedConfiguration.card.height.should.equal(1000);
-      returnedConfiguration.card.fill.should.equal("#FFF");
+      returnedConfiguration.card.fill.should.equal('#FFF');
     });
+
   });
 
-  describe("#getRenderers()", () => {
+
+  describe('#getRenderers()', () => {
+
     let card,
-      configuration = {
-        card: {
-          width: 1000,
-          height: 462,
-          fill: "#4da5bd",
-        },
-      };
+        configuration = {
+          card: {
+            width: 1000,
+            height: 462,
+            fill: '#4da5bd'
+          }
+        };
 
     jsdom({
-      useEach: true,
+      useEach: true
     });
 
     beforeEach(() => {
@@ -274,36 +284,38 @@ describe("cardkit", () => {
       card = new CardKit(configuration);
     });
 
-    it("returns an empty array of renderers if none are set", () => {
+    it('returns an empty array of renderers if none are set', () => {
       card.getRenderers().should.be.instanceof(Array).and.empty;
-    });
+    }); 
 
-    it("returns the renderers", () => {
+    it('returns the renderers', () => {
       const renderer = new CardKitDOM(card);
 
       card.getRenderers().should.be.instanceof(Array).and.have.lengthOf(1);
-    });
+    }); 
 
-    it("returns the renderers #2", () => {
+    it('returns the renderers #2', () => {
       document = undefined;
       const serverRenderer = new CardKitServer(card);
 
       card.getRenderers().should.be.instanceof(Array).and.have.lengthOf(1);
-    });
+    }); 
+
   });
 
-  describe("#addRenderer()", () => {
+
+  describe('#addRenderer()', () => {
     let card,
-      configuration = {
-        card: {
-          width: 1000,
-          height: 462,
-          fill: "#4da5bd",
-        },
-      };
+        configuration = {
+          card: {
+            width: 1000,
+            height: 462,
+            fill: '#4da5bd'
+          }
+        };
 
     jsdom({
-      useEach: true,
+      useEach: true
     });
 
     beforeEach(() => {
@@ -311,7 +323,7 @@ describe("cardkit", () => {
       card = new CardKit(configuration);
     });
 
-    it("should add a valid renderer", () => {
+    it('should add a valid renderer', () => {
       const renderer = new CardKitDOM(card);
       card.renderers = [];
 
@@ -322,7 +334,7 @@ describe("cardkit", () => {
       card.getRenderers().should.be.instanceof(Array).and.have.length(1);
     });
 
-    it("should throw an error when adding a renderer tied to another instance of CardKit", () => {
+    it('should throw an error when adding a renderer tied to another instance of CardKit', () => {
       const otherCard = new CardKit(configuration);
 
       const renderer = new CardKitDOM(otherCard);
@@ -334,92 +346,93 @@ describe("cardkit", () => {
       }).should.throw(Error, /Invalid renderer object provided/);
     });
 
-    it("should throw an error when adding an invalid renderer", () => {
+    it('should throw an error when adding an invalid renderer', () => {
       (() => {
         card.addRenderer({
-          cardkit: "not-a-cardkit-object",
+          cardkit: 'not-a-cardkit-object'
         });
       }).should.throw(Error, /Invalid renderer object provided/);
     });
   });
 
-  describe("#updateConfiguration()", () => {
+
+  describe('#updateConfiguration()', () => {
     let card,
-      configuration = {
-        card: {
-          width: 1000,
-          height: 462,
-          fill: "#4da5bd",
+        configuration = {
+          card: {
+            width: 1000,
+            height: 462,
+            fill: '#4da5bd'
+          }
         },
-      },
-      newConfiguration = {
-        card: {
-          width: 500,
-          height: 100,
-          fill: "#FFF",
+        newConfiguration = {
+          card: {
+            width: 500,
+            height: 100,
+            fill: '#FFF'
+          },
+          layers: {
+            text: {
+              type: 'text',
+              name: 'Text',
+              text: '12345',
+              x: 0,
+              y: 0,
+              fill: '#000000'
+            }
+          }
         },
-        layers: {
-          text: {
-            type: "text",
-            name: "Text",
-            text: "12345",
-            x: 0,
-            y: 0,
-            fill: "#000000",
-          },
-        },
-      },
-      newOverrides = {
-        themes: {
-          One: {
-            layers: {
-              text: {
-                fill: "#FFFFFF",
-              },
+        newOverrides = {
+          themes: {
+            'One': {
+              layers: {
+                text: {
+                  fill: '#FFFFFF'
+                }
+              }
             },
+            'Two': {
+              layers: {
+                text: {
+                  fill: '#333333'
+                }
+              }
+            }
           },
-          Two: {
-            layers: {
-              text: {
-                fill: "#333333",
-              },
+          templates: {
+            'Template #1': {
+              layers: {
+                text: {
+                  hidden: false
+                }
+              }
             },
+            'Template #2': {
+              layers: {
+                text: {
+                  hidden: true
+                }
+              }
+            }
           },
-        },
-        templates: {
-          "Template #1": {
-            layers: {
-              text: {
-                hidden: false,
-              },
+          layouts: {
+            'Rectangle': {
+              card: {
+                height: 450,
+                width: 1000
+              }
             },
-          },
-          "Template #2": {
-            layers: {
-              text: {
-                hidden: true,
-              },
-            },
-          },
-        },
-        layouts: {
-          Rectangle: {
-            card: {
-              height: 450,
-              width: 1000,
-            },
-          },
-          Square: {
-            card: {
-              height: 1000,
-              width: 1000,
-            },
-          },
-        },
-      };
+            'Square': {
+              card: {
+                height: 1000,
+                width: 1000
+              }
+            }
+          }
+        }
 
     jsdom({
-      useEach: true,
+      useEach: true
     });
 
     beforeEach(() => {
@@ -427,7 +440,8 @@ describe("cardkit", () => {
       card = new CardKit(configuration);
     });
 
-    it("should change the configuration when called", () => {
+
+    it('should change the configuration when called', () => {
       // Call updateConfiguration() providing the new configuration
       card.updateConfiguration(newConfiguration);
 
@@ -435,7 +449,8 @@ describe("cardkit", () => {
       card.configuration.should.equal(newConfiguration);
     });
 
-    it("should change the overrides when called", () => {
+
+    it('should change the overrides when called', () => {
       // Call updateConfiguration() providing the new configuration
       card.updateConfiguration(newConfiguration, newOverrides);
 
@@ -449,13 +464,14 @@ describe("cardkit", () => {
       card.layouts.should.equal(newOverrides.layouts);
     });
 
-    it("should rerender each of its attached DOM renderers", () => {
+
+    it('should rerender each of its attached DOM renderers', () => {
       const domRenderer = new CardKitDOM(card);
 
       const renderers = card.getRenderers();
 
       renderers.forEach((renderer) => {
-        sinon.stub(renderer, "rerender");
+        sinon.stub(renderer, 'rerender');
 
         // Call updateConfiguration() providing the new configuration
         card.updateConfiguration(newConfiguration);
@@ -467,7 +483,8 @@ describe("cardkit", () => {
       });
     });
 
-    it("should not rerender its attached server renderers", () => {
+
+    it('should not rerender its attached server renderers', () => {
       // Provide a fake method to verify it doesn't get called
       CardKitServer.prototype.rerender = () => {};
 
@@ -478,7 +495,7 @@ describe("cardkit", () => {
       const renderers = card.getRenderers();
 
       renderers.forEach((renderer) => {
-        sinon.stub(renderer, "rerender");
+        sinon.stub(renderer, 'rerender');
 
         // Call updateConfiguration() providing the new configuration
         card.updateConfiguration(newConfiguration);
@@ -493,13 +510,14 @@ describe("cardkit", () => {
       CardKitServer.prototype.rerender = null;
     });
 
-    it("should not rerender when the renderer flag is set to false", () => {
+
+    it('should not rerender when the renderer flag is set to false', () => {
       const domRenderer = new CardKitDOM(card);
 
       const renderers = card.getRenderers();
 
       renderers.forEach((renderer) => {
-        sinon.stub(renderer, "rerender");
+        sinon.stub(renderer, 'rerender');
 
         // Call updateConfiguration() providing the new configuration
         card.updateConfiguration(newConfiguration, false, false);
@@ -510,5 +528,7 @@ describe("cardkit", () => {
         renderer.rerender.restore();
       });
     });
+
   });
+
 });

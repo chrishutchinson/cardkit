@@ -12,22 +12,21 @@
     "url": "https://github.com/chrishutchinson/cardkit.git"
   },
   "engines": {
-    "node": ">14"
+    "node": ">=14"
   },
   "scripts": {
     "test": "istanbul cover --dir test/coverage _mocha -- --require @babel/register --require ignore-styles",
-    "jsdoc": "jsdoc -c ./jsdoc.config.json -d ./docs/code -t ./node_modules/minami --verbose -R ./README.md",
     "demo": "webpack --env=dist-docs",
-    "docs": "npm run jsdoc",
+    "docs": "jsdoc -c ./jsdoc.config.json -d ./docs/code -t ./node_modules/minami --verbose -R ./README.md",
     "start": "webpack-dev-server -d --content-base ./src --hot --open",
-    "dist": "npm run build",
-    "build": "echo \"[NOTICE] This task will build ALL CardKit versions\"; echo \"[LOG] Building DOM library\"; npm run build-dom; echo \"[LOG] Building server library\"; npm run build-server; echo \"[LOG] Building core library\"; npm run build-core; echo \"[LOG] Building DOM <script> library\"; npm run build-dom-script; echo \"[LOG] Building core <script> library\"; npm run build-core-script",
+    "dist": "yarn build",
+    "build": "echo \"[NOTICE] This task will build ALL CardKit versions\"; echo \"[LOG] Building DOM library\"; yarn build-dom; echo \"[LOG] Building server library\"; yarn build-server; echo \"[LOG] Building core library\"; yarn build-core; echo \"[LOG] Building DOM <script> library\"; yarn build-dom-script; echo \"[LOG] Building core <script> library\"; yarn build-core-script",
     "build-dom": "webpack --env=dist-dom",
     "build-server": "webpack --env=dist-server",
     "build-core": "webpack --env=dist-core",
     "build-dom-script": "webpack --env=dist-dom-script",
     "build-core-script": "webpack --env=dist-core-script",
-    "test-and-build-all": "npm test; npm run build; npm run demo; npm run docs"
+    "test-and-build-all": "yarn test; yarn build; yarn demo; yarn docs"
   },
   "author": "Chris Hutchinson <chris_hutchinson@me.com>",
   "license": "MIT",

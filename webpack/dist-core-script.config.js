@@ -1,52 +1,51 @@
 // Load some dependencies
-const path = require('path');
-const _ = require('lodash');
-const webpack = require('webpack');
+const path = require("path");
+const webpack = require("webpack");
+const { merge } = require("webpack-merge");
+const ESLintPlugin = require("eslint-webpack-plugin");
 
-var fs = require('fs'), node_modules = fs.readdirSync('node_modules');
-
+const fs = require("fs");
+const node_modules = fs.readdirSync("node_modules");
 
 // Get the base config
-const base = require('./base.config');
-
+const base = require("./base.config");
 
 // Merge with base
-let config = _.merge(base, {
-  entry: './src/cardkit.js',
+const config = merge(base, {
+  entry: path.resolve(__dirname, "../src/cardkit.js"),
   output: {
-    path: './dist',
-    filename: 'cardkit.js',
-    libraryTarget: 'umd',
-    library: 'CardKit',
+    path: path.resolve(__dirname, "../dist"),
+    filename: "cardkit.js",
+    libraryTarget: "umd",
+    library: "CardKit",
   },
+  mode: "production",
   externals: {
     react: {
-      amd: 'react',
-      root: 'React',
-      commonjs: 'react',
-      commonjs2: 'react'
+      amd: "react",
+      root: "React",
+      commonjs: "react",
+      commonjs2: "react",
     },
-    'react-dom': {
-      amd: 'react-dom',
-      root: 'ReactDOM',
-      commonjs: 'react-dom',
-      commonjs2: 'react-dom'
-    }
-  }
+    "react-dom": {
+      amd: "react-dom",
+      root: "ReactDOM",
+      commonjs: "react-dom",
+      commonjs2: "react-dom",
+    },
+  },
+  optimization: {
+    minimize: true,
+  },
+  plugins: [
+    new webpack.DefinePlugin({
+      "process.env": {
+        NODE_ENV: JSON.stringify("production"),
+      },
+    }),
+    new ESLintPlugin(),
+  ],
 });
-
-
-// Uglify our JS
-config.plugins.push(new webpack.optimize.UglifyJsPlugin());
-
-
-// Set process.env.NODE_ENV to production
-config.plugins.push(new webpack.DefinePlugin({
-  'process.env': {
-    'NODE_ENV': JSON.stringify('production')
-  }
-}));
-
 
 // Export config
 module.exports = config;

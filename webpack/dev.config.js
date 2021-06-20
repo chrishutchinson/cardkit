@@ -1,23 +1,24 @@
-const path = require('path');
-const _ = require('lodash');
-const args = require('minimist')(process.argv.slice(2));
+const path = require("path");
+const args = require("minimist")(process.argv.slice(2));
+const { merge } = require("webpack-merge");
+const ESLintPlugin = require("eslint-webpack-plugin");
 
-const base = require('./base.config');
+const base = require("./base.config");
 
-let srcPath = path.join(__dirname, './app');
+const srcPath = path.join(__dirname, "./app");
 
-let config = _.merge(base, {
-  entry: './src/demo-dom.js',
+const config = merge(base, {
+  entry: path.resolve(__dirname, "../src/demo-dom.js"),
   output: {
-    path: './src',
-    filename: 'demo-dom-bundle.js'
+    path: path.resolve(__dirname, "../src"),
+    filename: "demo-dom-bundle.js",
   },
   devServer: {
     port: args.port || 8000,
-    inline: true
+    inline: true,
   },
-  devtool: 'source-map',
+  devtool: "source-map",
+  plugins: [new ESLintPlugin()],
 });
-
 
 module.exports = config;

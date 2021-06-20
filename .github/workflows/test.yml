@@ -1,18 +1,22 @@
-name: Run tests
+name: Run tests and build
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
+      - v3-main
   pull_request:
-    branches: [main]
+    branches:
+      - main
+      - v3-main
 
 jobs:
-  build:
+  run:
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: [8.x]
+        node-version: [14.x]
 
     steps:
       - uses: actions/checkout@v2
@@ -21,4 +25,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm install
-      - run: npm test
+      - run: npm run test
+      - run: npm run build
+      - run: npm run docs
+      - run: npm run demo
